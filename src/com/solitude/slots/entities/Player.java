@@ -1,5 +1,6 @@
 package com.solitude.slots.entities;
 
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -27,6 +28,8 @@ public class Player extends AbstractGAEPersistent {
 	private boolean isMale = false;
 	/** birthday as a timestamp */
 	private long birthday = 0L;
+	/** user's language locale (default english) */
+	private Locale locale = Locale.ENGLISH;
 	
 	/** @return moco access token */
 	public String getAccessToken() { return accessToken; }
@@ -67,6 +70,11 @@ public class Player extends AbstractGAEPersistent {
 	public long getBirthday() {	return birthday; }
 	/** param birthday of the user as a long timestamp */
 	public void setBirthday(long birthday) { this.birthday = birthday; }
+	
+	/** @return user's language locale */
+	public Locale getLocale() { return this.locale; }
+	/** @param locale for user's language in string form */
+	public void setLocale(Locale locale) { this.locale = locale; }
 
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {
@@ -79,6 +87,7 @@ public class Player extends AbstractGAEPersistent {
 		this.mocoId = (Integer)inputMap.get("mocoId");
 		this.name = (String)inputMap.get("name");
 		this.xp = (Integer)inputMap.get("xp");
+		this.locale = createLocaleFromString((String)inputMap.get("locale"));
 	}
 
 	@Override
@@ -92,9 +101,37 @@ public class Player extends AbstractGAEPersistent {
 		map.put("mocoId", this.mocoId);
 		map.put("name", this.name);
 		map.put("xp", this.xp);
+		map.put("locale", this.locale.getLanguage());
 		return map;
 	}
 
 	@Override
 	public int getCurrentVersion() { return CURRENT_VERSION; }
+	
+	/**
+	 * Gets the locale for a string.
+	 * @param localeString locale string
+	 * @return locale object
+	 */
+	public static Locale createLocaleFromString(String localeString) {
+		if (localeString == null) return null;
+
+		Locale locale = null;
+		String[] parts = localeString.split("_");
+		switch (parts.length) {
+			case 1:
+				// Only language
+				locale = new Locale(parts[0]);
+				break;
+			case 2:
+				// Language and country
+				locale = new Locale(parts[0], parts[1]);
+				break;
+			case 3:
+				// Language, variant (could be blank), country
+				locale = new Locale(parts[0], parts[1], parts[2]);
+				break;
+		}
+		return locale;
+	}
 }

@@ -152,6 +152,31 @@ public class OpenSocialService {
 	}
 	
 	/**
+	 * Retrieves player's moco oauth token.  Must use game admin oauth token
+	 * 
+	 * @param userId of user
+	 * @param oauthToken of game admin
+	 * @return user's oauth token
+	 * @throws ApiException on API error
+	 * @throws IOException on connection error
+	 * @throws ParseException for invalid JSON
+	 */
+	public String fetchOAuthToken(int userId, String accessToken) throws ApiException, IOException, ParseException {
+		String url = API_END_POINT+"/featureOAuth/"+userId;
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("oauth_token", accessToken);
+		String response = doHttpRequest(
+				url,
+				"GET",
+				params,
+				2000,	// connect timeout
+				2000);
+		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
+		JSONObject responseObject = (JSONObject)new JSONParser().parse(response); 	// read timeout
+		return (String)responseObject.get("entry");
+	}
+	
+	/**
 	 * Sends an HTTP request to a URL. The URL may contain a port number and parameters
 	 * @param url URL that may contain a port number and parameters
 	 * @param method HTTP method (currently supported: GET, POST, DELETE)

@@ -11,6 +11,10 @@
   <!-- Configure java.util.logging -->
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+    <property name="game.admin.token" value="m1mnjpru2k7o"/>
+    <property name="game.gold.secret" value=""/>
+    <property name="redirect.validate.enabled" value="false"/>
+    <property name="game.moco.id" value="1234"/>
   </system-properties>
 
   <!--
