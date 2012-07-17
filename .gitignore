@@ -6,6 +6,10 @@
 #eclipse muck
 .metadata
 
+#local project settings
+.project
+.settings
+
 # Package Files #
 #*.jar
 #*.war
