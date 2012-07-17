@@ -21,6 +21,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.solitude.slots.opensocial.Activity;
+import com.solitude.slots.opensocial.Message;
 import com.solitude.slots.opensocial.Person;
 import com.solitude.slots.opensocial.RestfulCollection;
 import com.solitude.slots.opensocial.Score;
@@ -293,7 +295,7 @@ public class OpenSocialService {
 	 */
 	@SuppressWarnings("unchecked")
 	public String doDirectDebit(int userId, int amount, String description) throws GoldTopupRequiredException, ApiException, IOException, ParseException {
-		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"gold/"+userId+"?oauth_token="+GameUtils.getGameAdminToken();		
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/gold/"+userId+"?oauth_token="+GameUtils.getGameAdminToken();		
 		JSONObject json = new JSONObject();
 		json.put("amount", amount);
 		json.put("name", description);
@@ -326,6 +328,48 @@ public class OpenSocialService {
 	}
 	
 	/**
+	 * Send user game notification
+	 * 
+	 * @param userId recipient
+	 * @param subject of notification
+	 * @param body of notification
+	 * @throws ApiException on API error or unexpected content
+	 * @throws IOException on connection error
+	 */
+	@SuppressWarnings("unchecked")
+	public void sendNotification(int userId, String subject, String body) throws IOException, ApiException {
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/messages?oauth_token="+GameUtils.getGameAdminToken();
+		JSONObject json = new JSONObject();
+		JSONArray recipientsArray = new JSONArray();
+		recipientsArray.add(userId);
+		json.put(Message.Field.RECIPIENTS.toString(), recipientsArray);
+		json.put(Message.Field.TITLE.toString(), subject);
+		json.put(Message.Field.BODY.toString(), body);
+		json.put(Message.Field.TYPE.toString(), Message.Type.NOTIFICATION.toString());
+		doHttpPost(url,json.toJSONString());		
+	}
+	
+	/**
+	 * Set game status for a player
+	 * 
+	 * @param userId of player
+	 * @param status text to appear
+	 * @param statusUrl for params to go to game from status text (optional)
+	 * @param statusUrlText text of link next to status (optional, keep short!)
+	 * @throws ApiException on API error or unexpected content
+	 * @throws IOException on connection error
+	 */
+	@SuppressWarnings("unchecked")
+	public void setGameStatus(int userId, String status, String statusUrl, String statusUrlText) throws IOException, ApiException {
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/activities?oauth_token="+GameUtils.getGameAdminToken();
+		JSONObject json = new JSONObject();
+		json.put(Activity.Field.TITLE.toString(), status);
+		if (statusUrl != null) json.put(Activity.Field.STREAM_URL.toString(), statusUrl);
+		if (statusUrlText != null) json.put(Activity.Field.STREAM_TITLE.toString(), statusUrlText);
+		doHttpPost(url,json.toJSONString());
+	}
+	
+	/**
 	 * Sends a POST request setting body
 	 * 
 	 * @param url URL that may contain a port number and parameters
@@ -335,6 +379,7 @@ public class OpenSocialService {
 	 * @throws ApiException on API error
 	 */
 	private static String doHttpPost(String url, String body) throws IOException, ApiException {
+		log.log(Level.INFO,url+","+body);
 		return doHttpRequest(url,"POST",null,body,
 				Integer.parseInt(System.getProperty("url.connect.timeout","2000")),
 				Integer.parseInt(System.getProperty("url.read.timeout","2000")));
@@ -398,7 +443,7 @@ public class OpenSocialService {
 			if (readTimeout > -1)
 				c.setReadTimeout(readTimeout);
 			
-			if ("post".equalsIgnoreCase(method) && params != null && !params.isEmpty()) {
+			if ("post".equalsIgnoreCase(method) && ((params != null && !params.isEmpty()) || postBody != null)) {
 				c.setDoOutput(true);
 				c.setUseCaches(false);
 			}			

@@ -34,13 +34,17 @@ if (playerId != null) {
     <h1>Hello App Engine!</h1>
 	
 	<h3>Self</h3>
-    <%=
-    		OpenSocialService.getInstance().fetchSelf(player.getAccessToken())
-    %>
+    <%= OpenSocialService.getInstance().fetchSelf(player.getAccessToken()) %>
     
     <h3>Friends</h3>
-    <%=
-    		com.solitude.slots.service.OpenSocialService.getInstance().fetchFriends(player.getAccessToken(),0,10)
-    %>
+    <%= OpenSocialService.getInstance().fetchFriends(player.getAccessToken(),0,10) %>
+    
+    <h3>Leaderboard</h3>
+    <%= OpenSocialService.getInstance().getLeaderboard(
+    		(short)1,
+    		player.getMocoId(),
+    		OpenSocialService.LEADERBOARD_DATE_RANGE.ALL,
+    		OpenSocialService.LEADERBOARD_FILTER.ALL,
+    		0,10) %>
   </body>
 </html>

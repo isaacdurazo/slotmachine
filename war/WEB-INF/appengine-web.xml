@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-  <application></application>
+  <application>solitudeslots</application>
   <version>1</version>
 
   <!-- Allows App Engine to send multiple requests to one instance in parallel: -->
@@ -10,7 +10,7 @@
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     <property name="game.admin.token" value="m1mnjpru2k7o"/>
-    <property name="game.gold.secret" value=""/>
+    <property name="game.gold.secret" value="secret"/>
     <property name="redirect.validate.enabled" value="false"/>
     <property name="game.moco.id" value="1234"/>
     <property name="mocospace.main.url" value="http://www.mocospace.com"/>  
