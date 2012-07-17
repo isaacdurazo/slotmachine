@@ -1,13 +1,12 @@
 package com.solitude.slots.service;
 
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.json.simple.parser.ParseException;
 
 import com.solitude.slots.cache.CacheStoreException;
 import com.solitude.slots.cache.GAECacheManager;
@@ -16,7 +15,6 @@ import com.solitude.slots.data.GAEDataManager;
 import com.solitude.slots.data.QueryCondition;
 import com.solitude.slots.entities.Player;
 import com.solitude.slots.opensocial.Person;
-import com.solitude.slots.service.OpenSocialService.ApiException;
 
 /**
  * Manages player data
@@ -60,6 +58,18 @@ public class PlayerManager {
 			player = new Player();
 			Person person = OpenSocialService.getInstance().fetchSelf(accessToken, Person.Field.BIRTHDAY.toString(), 
 					Person.Field.GENDER.toString(), Person.Field.LOCALE.toString());
+			player.setAccessToken(accessToken);
+			if (person.getFieldValue(Person.Field.BIRTHDAY.toString()) != null) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				player.setBirthday(sdf.parse((String)person.getFieldValue(Person.Field.BIRTHDAY.toString())).getTime());
+			}
+			player.setImage((String)person.getFieldValue(Person.Field.THUMBNAIL_URL.toString()));
+			player.setLocale(Player.createLocaleFromString((String)person.getFieldValue(Person.Field.LOCALE.toString())));
+			player.setMale("male".equals((String)person.getFieldValue(Person.Field.GENDER.toString())));
+			player.setMocoId(Integer.parseInt((String)person.getFieldValue(Person.Field.ID.toString())));
+			player.setName((String)person.getFieldValue(Person.Field.DISPLAY_NAME.toString()));
+			// store player
+			GAEDataManager.getInstance().store(player);
 		}
 		return player;
 	}
@@ -105,11 +115,39 @@ public class PlayerManager {
 	}
 	
 	/**
+	 * Fetch player by id
+	 * 
+	 * @param playerId to be returned
+	 * @return player if exists and not null
+	 * @throws CacheStoreException for cache issues
+	 * @throws DataStoreException for data issues
+	 */
+	public Player getPlayer(int playerId) throws CacheStoreException, DataStoreException {
+		Player player = GAECacheManager.getInstance().get(playerId, Player.class);
+		if (player != null) return player.isDeleted() ? null : player;
+		player = GAEDataManager.getInstance().load(playerId, Player.class);
+		GAECacheManager.getInstance().put(player);
+		return player;
+	}
+	
+	/**
+	 * Store player in DB and cache
+	 * 
+	 * @param player to be stored
+	 * @throws DataStoreException for data issues
+	 * @throws CacheStoreException for cache issues
+	 */
+	public void storePlayer(Player player) throws DataStoreException, CacheStoreException {
+		GAEDataManager.getInstance().store(player);
+		GAECacheManager.getInstance().put(player);
+	}
+	
+	/**
 	 * Indicates an unauthorized action has occurred
 	 * @author kwright
 	 */
 	@SuppressWarnings("serial")
-	static class UnAuthorizedException extends Exception {
+	public static class UnAuthorizedException extends Exception {
 		
 		/** @param message with detail */
 		public UnAuthorizedException(String message) {

@@ -3,9 +3,7 @@
   <application></application>
   <version>1</version>
 
-  <!--
-    Allows App Engine to send multiple requests to one instance in parallel:
-  -->
+  <!-- Allows App Engine to send multiple requests to one instance in parallel: -->
   <threadsafe>true</threadsafe>
 
   <!-- Configure java.util.logging -->
@@ -15,10 +13,11 @@
     <property name="game.gold.secret" value=""/>
     <property name="redirect.validate.enabled" value="false"/>
     <property name="game.moco.id" value="1234"/>
+    <property name="mocospace.main.url" value="http://www.mocospace.com"/>  
+    <property name="mocospace.opensocial.api.endpoint" value="https://apps.mocospace.com/social"/> 
   </system-properties>
 
-  <!--
-    HTTP Sessions are disabled by default. To enable HTTP sessions specify: -->
+  <!-- HTTP Sessions are disabled by default. To enable HTTP sessions specify: -->
 
       <sessions-enabled>true</sessions-enabled>
 

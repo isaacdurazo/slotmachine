@@ -3,6 +3,8 @@ package com.solitude.slots.data;
 import java.util.List;
 import java.util.Set;
 
+import com.solitude.slots.cache.CacheStoreException;
+
 /**
  * Interface for backend agnostic data store access
  * @author keith
@@ -12,14 +14,16 @@ public interface DataManager<T  extends Persistent> {
 	/**
 	 * @param persistent object to be stored
 	 * @throws DataStoreException for access issues
+	 * @throws CacheStoreException for cache issues
 	 */
-	public void store(T t) throws DataStoreException;
+	public void store(T t) throws DataStoreException, CacheStoreException;
 	
 	/**
 	 * @param persistent object to be marked as deleted
 	 * @throws DataStoreException for access issues
+	 * @throws CacheStoreException for cache issues
 	 */
-	public void delete(T t) throws DataStoreException;
+	public void delete(T t) throws DataStoreException, CacheStoreException;
 	
 	/**
 	 * @param id of persistent to load

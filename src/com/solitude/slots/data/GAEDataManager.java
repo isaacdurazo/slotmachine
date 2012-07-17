@@ -17,6 +17,8 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.solitude.slots.cache.CacheStoreException;
+import com.solitude.slots.cache.GAECacheManager;
 import com.solitude.slots.entities.AbstractGAEPersistent;
 
 /**
@@ -56,7 +58,7 @@ public class GAEDataManager implements DataManager<AbstractGAEPersistent> {
 	}
 	
 	@Override
-	public void delete(AbstractGAEPersistent persistent) throws DataStoreException {
+	public void delete(AbstractGAEPersistent persistent) throws DataStoreException, CacheStoreException {
 		if (persistent == null) throw new IllegalArgumentException("persistent is null?!");
 		persistent.setDeleted();
 		try {
@@ -64,6 +66,7 @@ public class GAEDataManager implements DataManager<AbstractGAEPersistent> {
 		} catch (DatastoreFailureException e) {
 			throw new DataStoreException(e);
 		}
+		GAECacheManager.getInstance().removePeristent(persistent);
 	}
 	
 	@Override
@@ -96,10 +99,13 @@ public class GAEDataManager implements DataManager<AbstractGAEPersistent> {
 	}
 	
 	@Override
-	public void store(AbstractGAEPersistent persistent) throws DataStoreException {
+	public void store(AbstractGAEPersistent persistent) throws DataStoreException, CacheStoreException {
 		if (persistent == null) throw new IllegalArgumentException("persistent is null?!");
 		persistent.setUpdatetime();
-		if (persistent.getId() == 0) persistent.setId(GAEUtil.getEntityKey(persistent));
+		if (persistent.getId() == 0) {
+			persistent.setId(GAEUtil.getEntityKey(persistent));
+			GAECacheManager.getInstance().put(persistent);
+		}
 		Entity storedEntity = new Entity(GAEUtil.getEntityName(persistent.getClass()), persistent.getId());
 		for (Map.Entry<String, Object> entry : persistent.serialize().entrySet()) {
 			if (entry.getKey().equals(AbstractGAEPersistent.ENTITY_ID_KEY)) continue;

@@ -1,0 +1,11 @@
+<!-- Indices written at Tue, 17 Jul 2012 15:19:09 UTC -->
+
+<datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Player" ancestor="false" source="auto">
+        <property name="accessToken" direction="asc"/>
+        <property name="creationtime" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>

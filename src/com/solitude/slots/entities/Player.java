@@ -12,6 +12,9 @@ public class Player extends AbstractGAEPersistent {
 	/** current version of the object */
 	private static final int CURRENT_VERSION = 1;
 	
+	/** default constructor */
+	public Player() {}
+	
 	/** moco access token */
 	private String accessToken;
 	/** moco user name */
@@ -81,12 +84,12 @@ public class Player extends AbstractGAEPersistent {
 		super.deserialize(inputMap);
 		this.accessToken = (String)inputMap.get("accessToken");
 		this.birthday = (Long)inputMap.get("birthday");
-		this.coins = (Integer)inputMap.get("coins");
+		this.coins = ((Long)inputMap.get("coins")).intValue();
 		this.image = (String)inputMap.get("image");
 		this.isMale = (Boolean)inputMap.get("isMale");
-		this.mocoId = (Integer)inputMap.get("mocoId");
+		this.mocoId = ((Long)inputMap.get("mocoId")).intValue();
 		this.name = (String)inputMap.get("name");
-		this.xp = (Integer)inputMap.get("xp");
+		this.xp = ((Long)inputMap.get("xp")).intValue();
 		this.locale = createLocaleFromString((String)inputMap.get("locale"));
 	}
 

@@ -15,12 +15,15 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.solitude.slots.opensocial.Person;
 import com.solitude.slots.opensocial.RestfulCollection;
+import com.solitude.slots.opensocial.Score;
 
 /**
  * Makes requests to the MocoSpace opensocial API
@@ -29,9 +32,6 @@ import com.solitude.slots.opensocial.RestfulCollection;
 public class OpenSocialService {
 	/** logging level */
 	private static final Level LOG_LEVEL = Level.INFO;
-	
-	/** moco opensocial api url */
-	private static final String API_END_POINT = "https://apps.mocospace.com/social";
 	
 	/** singleton instance */
 	private static final OpenSocialService instance = new OpenSocialService();
@@ -83,7 +83,7 @@ public class OpenSocialService {
 	 */
 	public RestfulCollection fetchPeople(String accessToken, int[] userIds, String... additionalFields) throws ApiException, IOException, ParseException {
 		if (userIds == null || userIds.length == 0) return new RestfulCollection();
-		String url = API_END_POINT+"/people/";
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/people/";
 		if (userIds.length == 0 || userIds[0] <= 0) {
 			url += "@me";
 		} else {
@@ -103,12 +103,7 @@ public class OpenSocialService {
 			}
 			params.put("fields",fields);
 		}
-		String response = doHttpRequest(
-				url,
-				"GET",
-				params,
-				2000,	// connect timeout
-				2000);
+		String response = doHttpRequest(url,"GET",params);
 		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
 		JSONObject responseObject = (JSONObject)new JSONParser().parse(response); 	// read timeout
 		return new RestfulCollection(responseObject);
@@ -127,7 +122,7 @@ public class OpenSocialService {
 	 * @throws ParseException for invalid JSON
 	 */
 	public RestfulCollection fetchFriends(String accessToken, int index, int resultsPerPage, String... additionalFields) throws ApiException, IOException, ParseException {
-		String url = API_END_POINT+"/people/@me/@friends";
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/people/@me/@friends";
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("oauth_token", accessToken);
 		params.put("count",Integer.toString(resultsPerPage));
@@ -140,15 +135,29 @@ public class OpenSocialService {
 			}
 			params.put("fields",fields);
 		}
-		String response = doHttpRequest(
-				url,
-				"GET",
-				params,
-				2000,	// connect timeout
-				2000);
+		String response = doHttpRequest(url,"GET",params);
 		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
 		JSONObject responseObject = (JSONObject)new JSONParser().parse(response); 	// read timeout
 		return new RestfulCollection(responseObject);
+	}
+	
+	/**
+	 * @param userId of other user
+	 * @param accessToken of requesting user
+	 * @return if requesting user and other user are friends
+	 * @throws ApiException on API error
+	 * @throws IOException on connection error
+	 * @throws ParseException for invalid JSON
+	 */
+	public boolean areFriends(int userId, String accessToken) throws ApiException, IOException, ParseException {
+		if (userId <= 0) return false;
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/people/@me/@areFriends";
+		Map<String,String> params = new HashMap<String,String>(1);
+		params.put("oauth_token",accessToken);
+		String response = doHttpRequest(url,"GET",params);
+		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
+		JSONObject responseObject = (JSONObject)new JSONParser().parse(response); 	// read timeout
+	    return (Boolean)((JSONArray)responseObject.get("entry")).get(0);
 	}
 	
 	/**
@@ -162,18 +171,189 @@ public class OpenSocialService {
 	 * @throws ParseException for invalid JSON
 	 */
 	public String fetchOAuthToken(int userId, String accessToken) throws ApiException, IOException, ParseException {
-		String url = API_END_POINT+"/featureOAuth/"+userId;
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/featureOAuth/"+userId;
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("oauth_token", accessToken);
-		String response = doHttpRequest(
-				url,
-				"GET",
-				params,
-				2000,	// connect timeout
-				2000);
+		String response = doHttpRequest(url,"GET",params);
 		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
 		JSONObject responseObject = (JSONObject)new JSONParser().parse(response); 	// read timeout
 		return (String)responseObject.get("entry");
+	}
+	
+	/**
+	 * Set a player's score on a leaderboard
+	 * 
+	 * @param type specifying the leaderboard
+	 * @param userId of user whose score is set
+	 * @param score to be set
+	 * @param forceOverride if true then update score event if new score is lower than what is in leaderboard
+	 * @throws ApiException on API error
+	 * @throws IOException on connection error
+	 */
+	@SuppressWarnings("unchecked")
+	public void setScore(short type, int userId, long score, boolean forceOverride) throws IOException, ApiException {
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/leaderboard?oauth_token="+GameUtils.getGameAdminToken();		
+		JSONObject scores = new JSONObject();		
+		scores.put("userId",userId);
+		scores.put(type,score);
+		if (forceOverride) {
+			JSONArray overrideTypes = new JSONArray();
+			overrideTypes.add(type);
+			scores.put("forceOverride",type);
+		}
+		doHttpPost(url,scores.toJSONString());		
+	}
+	
+	/**
+	 * How leaderboard users should be filtered
+	 */
+	public static enum LEADERBOARD_FILTER {
+		/** all the players */
+		ALL,
+		/** only player's friends */
+		FRIENDS,
+		/** players in player's area */
+		NEAR
+	}
+	
+	/**
+	 * Within what range of update times should be included
+	 */
+	public static enum LEADERBOARD_DATE_RANGE {
+		/** include scores updated within the last day */
+		DAY((short)1),
+		/** include scores updated within the last week */
+		WEEK((short)7),
+		/** include all scores */
+		ALL((short)-1);
+		/** days value*/
+		private final short days;
+		/**
+		 * Default constructor
+		 * @param days value associated
+		 */
+		private LEADERBOARD_DATE_RANGE(short days) {this.days = days;}
+		/** @return days associated with enum */
+		public short getDays() { return this.days; }
+	}
+
+	/**
+	 * Get a user's leaderboard score
+	 * 
+	 * @param type specifying the leaderboard
+	 * @param userId of user 
+	 * @return user's score on leaderboard or null if not present
+	 * @throws ApiException on API error
+	 * @throws IOException on connection error
+	 * @throws ParseException for invalid JSON
+	 */
+	public Score getScore(short type, int userId) throws ApiException, IOException, ParseException {		
+		RestfulCollection restfulCollection = getLeaderboard(type, userId, LEADERBOARD_DATE_RANGE.ALL, LEADERBOARD_FILTER.ALL, 0, 0);
+		if (restfulCollection.getTotalResults() == 0 || restfulCollection.getEntries() == null || restfulCollection.getEntries().isEmpty()) return null;
+		return new Score((JSONObject)restfulCollection.getEntries().get(0));
+	}
+	
+	/**
+	 * Get a leaderboard
+	 * 
+	 * @param type specifying the leaderboard
+	 * @param userId of user 
+	 * @param timeRange all, week, or daily
+	 * @param filter all, near, or friends
+	 * @param index from top of leaderboard
+	 * @param itemsPerPage items per page to return
+	 * @return restful collection of scores
+	 * @throws ApiException on API error
+	 * @throws IOException on connection error
+	 * @throws ParseException for invalid JSON
+	 */
+	public RestfulCollection getLeaderboard(short type, int userId, LEADERBOARD_DATE_RANGE timeRange, LEADERBOARD_FILTER filter, int index, int itemsPerPage) throws ApiException, IOException, ParseException {	
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/leaderboard/"+userId+"/"+type+"/"+filter+"/"+timeRange;
+		Map<String, String> params = new HashMap<String, String>(3,1f);
+		params.put("oauth_token", GameUtils.getGameAdminToken());
+		params.put("count", Integer.toString(itemsPerPage));
+		params.put("startIndex", Integer.toString(index));
+		
+		String response = doHttpRequest(url,"GET",params);
+		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
+		return new RestfulCollection((JSONObject)new JSONParser().parse(response));
+	}
+	
+	/**
+	 * Direct debit gold 
+	 * 
+	 * @param userId of user to be billed
+	 * @param amount of gold to bill
+	 * @param description of item being purchased with gold
+	 * @return unique id for transaction
+	 * @throws GoldTopupRequiredException if user does not have sufficient gold, will include redirect url for top-up
+	 * @throws ApiException on API error or unexpected content
+	 * @throws IOException on connection error
+	 * @throws ParseException for invalid JSON
+	 */
+	@SuppressWarnings("unchecked")
+	public String doDirectDebit(int userId, int amount, String description) throws GoldTopupRequiredException, ApiException, IOException, ParseException {
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"gold/"+userId+"?oauth_token="+GameUtils.getGameAdminToken();		
+		JSONObject json = new JSONObject();
+		json.put("amount", amount);
+		json.put("name", description);
+		json.put("secret", GameUtils.getGameGoldSecret());
+		
+		String response = doHttpPost(url,json.toJSONString());			
+		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
+		JSONObject jsonContent = (JSONObject)new JSONParser().parse(response);
+		// get as string and parse to work around server bug
+		JSONObject jsonPayload = (JSONObject)jsonContent.get("entry");
+		String redirectUrl = (String)jsonPayload.get("redirectUrl");
+		JSONArray transactionArray = (JSONArray)jsonPayload.get("GamePlatformPointsTransaction");
+		if (redirectUrl != null) {
+			throw new GoldTopupRequiredException(redirectUrl);
+		} else if (transactionArray != null) {
+			// verify transaction
+			jsonPayload = (JSONObject)transactionArray.get(0);
+			String token = (String)jsonPayload.get("token");
+			String id = (String)jsonPayload.get("id");
+			int amountReply = (Integer)jsonPayload.get("amount");
+			long timestamp = (Long)jsonPayload.get("timestamp");
+			if (token != null && token.equals(DigestUtils.md5Hex(id + amountReply + timestamp + GameUtils.getGameGoldSecret())) && amountReply == amount) {
+				return id;
+			} else {
+				throw new ApiException(HttpServletResponse.SC_OK, "invalid response from debit");
+			}
+		} else {
+			throw new ApiException(HttpServletResponse.SC_OK, "unexpected entry payload: " + response);
+		}			
+	}
+	
+	/**
+	 * Sends a POST request setting body
+	 * 
+	 * @param url URL that may contain a port number and parameters
+	 * @param body to be sent
+	 * @return response content
+	 * @throws IOException exception that may be thrown during connection
+	 * @throws ApiException on API error
+	 */
+	private static String doHttpPost(String url, String body) throws IOException, ApiException {
+		return doHttpRequest(url,"POST",null,body,
+				Integer.parseInt(System.getProperty("url.connect.timeout","2000")),
+				Integer.parseInt(System.getProperty("url.read.timeout","2000")));
+	}
+	
+	/**
+	 * Sends an HTTP request to a URL using default connect/read timeout. The URL may contain a port number and parameters
+	 * 
+	 * @param url URL that may contain a port number and parameters
+	 * @param method HTTP method (currently supported: GET, POST, DELETE)
+	 * @param params parameters to be appended to the URL or header for POST
+	 * @return response content
+	 * @throws IOException exception that may be thrown during connection
+	 * @throws ApiException on API error
+	 */
+	private static String doHttpRequest(String url, String method, Map<?,?> params) throws IOException, ApiException {
+		return doHttpRequest(url,method,params,null,
+				Integer.parseInt(System.getProperty("url.connect.timeout","2000")),
+				Integer.parseInt(System.getProperty("url.read.timeout","2000")));
 	}
 	
 	/**
@@ -181,13 +361,14 @@ public class OpenSocialService {
 	 * @param url URL that may contain a port number and parameters
 	 * @param method HTTP method (currently supported: GET, POST, DELETE)
 	 * @param params parameters to be appended to the URL or header for POST
+	 * @param postBody if set will write direct to post.  Use INSTEAD of params
 	 * @param connectTimeout timeout for estabilishing a TCP connection
 	 * @param readTimeout timeout for reading input
 	 * @return response content
 	 * @throws IOException exception that may be thrown during connection
 	 * @throws ApiException on API error
 	 */
-	private static String doHttpRequest(String url, String method, Map<?,?> params, int connectTimeout, int readTimeout) throws IOException, ApiException {		
+	private static String doHttpRequest(String url, String method, Map<?,?> params, String postBody, int connectTimeout, int readTimeout) throws IOException, ApiException {		
 		BufferedReader in = null;
 		Writer out = null;
 		try {			
@@ -225,25 +406,29 @@ public class OpenSocialService {
 				c.setRequestMethod(method);
 			}
 
-			if ("post".equalsIgnoreCase(method) && params != null && !params.isEmpty()) {
+			if ("post".equalsIgnoreCase(method) && ((params != null && !params.isEmpty()) || postBody != null)) {
 				out = new BufferedWriter(new OutputStreamWriter(c.getOutputStream()));
-				
-				boolean amp = false;
-				for(Map.Entry<?,?> entry : params.entrySet()){
-					
-					if(amp) out.write('&');
-					
-					
-					if(entry.getValue() != null){
-					
-						out.write(entry.getKey().toString());
-						out.write('=');
-						out.write(entry.getValue().toString());
+				// prioritize post body over params
+				if (postBody != null) {
+					out.write(postBody);
+				} else {
+					boolean amp = false;
+					for(Map.Entry<?,?> entry : params.entrySet()){
 						
-						if(!amp) amp = true;
-					
-					}
-				}				
+						if(amp) out.write('&');
+						
+						
+						if(entry.getValue() != null){
+						
+							out.write(entry.getKey().toString());
+							out.write('=');
+							out.write(entry.getValue().toString());
+							
+							if(!amp) amp = true;
+						
+						}
+					}		
+				}
 				out.flush();
 				out.close();
 			}
@@ -294,7 +479,7 @@ public class OpenSocialService {
 	 * @author kwright
 	 */
 	@SuppressWarnings("serial")
-	static class ApiException extends Exception {
+	public static class ApiException extends Exception {
 		/** response status code */
 		private int statusCode;
 		
@@ -309,5 +494,23 @@ public class OpenSocialService {
 		
 		/** @return response status code from server */
 		public int getStatusCode() { return this.statusCode; }
+	}
+	
+	/**
+	 * Indicates that a gold debit failed as the user has insufficient funds
+	 * @author kwright
+	 */
+	@SuppressWarnings("serial")
+	public static class GoldTopupRequiredException extends Exception {
+		/** redirect url for top-up */
+		private String redirectUrl;
+		
+		/** @param redirectUrl for top-up */
+		public GoldTopupRequiredException(String redirectUrl) {
+			this.redirectUrl = redirectUrl;
+		}
+		
+		/** @return redirectUrl for top-up */
+		public String getRedirectUrl() { return this.redirectUrl; }
 	}
 } 
