@@ -1,5 +1,11 @@
 *.class
 
+# Apple muck
+.DS_Store
+
+#eclipse muck
+.metadata
+
 # Package Files #
 #*.jar
 #*.war
