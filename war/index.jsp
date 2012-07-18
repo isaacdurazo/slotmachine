@@ -49,7 +49,7 @@ if ("credit".equals(action)) {
 
   <body>
     <h1>Hello <%= player.getName() %>!</h1>
-    <h2>Coins: <%= player.getCoins() %></h2>
+    <h2>XP: <%= player.getXp() %>, Coins: <%= player.getCoins() %></h2>
     <% if (coinsAwarded > 0) { %>
     	<div>
     		Welcome back, you've been awarded <%= coinsAwarded %><% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
