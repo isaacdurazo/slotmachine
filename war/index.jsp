@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <%@ page import="com.solitude.slots.*,com.solitude.slots.service.*,com.solitude.slots.entities.*,java.util.logging.*" %>
 <%
-Integer playerId = (Integer)request.getSession().getAttribute("playerId");
+Long playerId = (Long)request.getSession().getAttribute("playerId");
 Player player = null;
 if (playerId != null) {
 	player = PlayerManager.getInstance().getPlayer(playerId);
@@ -13,6 +13,7 @@ if (playerId != null) {
 			ServletUtils.getInt(request,"userId"), 
 			ServletUtils.getLong(request,"timestamp"), 
 			request.getParameter("verifier"));
+		request.getSession().setAttribute("playerId",player.getId());
 	} catch (PlayerManager.UnAuthorizedException e) { 
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Invalid verification: "+request.getQueryString());
 		response.sendRedirect(GameUtils.getMocoSpaceHome());
@@ -23,6 +24,14 @@ if (playerId != null) {
 		return;
 	}
 }
+String action = request.getParameter("action");
+SpinResult spinResult = null;
+if ("credit".equals(action)) {
+	player.setCoins(player.getCoins()+10);
+	PlayerManager.getInstance().storePlayer(player);
+} else if ("spin".equals(action)) {
+	spinResult = SlotMachineManager.getInstance().spin(player, 1);
+}
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -31,20 +40,29 @@ if (playerId != null) {
   </head>
 
   <body>
-    <h1>Hello App Engine!</h1>
+    <h1>Hello <%= player.getName() %>!</h1>
+    <h2>Coins: <%= player.getCoins() %></h2>
 	
-	<h3>Self</h3>
-    <%= OpenSocialService.getInstance().fetchSelf(player.getAccessToken()) %>
+	<% if (spinResult != null) { %>
+		<h3>You <%= spinResult.getCoins() > 0 ? ("WON "+spinResult.getCoins()+" COINS!") : "LOST" %></h3>
+		<div>
+			Symbols:
+			<ul>
+				<% for (int symbol : spinResult.getSymbols()) { %>
+					<li><%= symbol %></li>
+				<% } %>
+			</ul>
+		</div>
+		
+	<% } %>
+	
+	<div>
+		<a href="<%= response.encodeURL("/?action=spin") %>">SPIN!</a>
+	</div>
     
-    <h3>Friends</h3>
-    <%= OpenSocialService.getInstance().fetchFriends(player.getAccessToken(),0,10) %>
+    <div>
+        <a href="<%= response.encodeURL("/?action=credit") %>">Credit 10 coins</a>
+    </div>
     
-    <h3>Leaderboard</h3>
-    <%= OpenSocialService.getInstance().getLeaderboard(
-    		(short)1,
-    		player.getMocoId(),
-    		OpenSocialService.LEADERBOARD_DATE_RANGE.ALL,
-    		OpenSocialService.LEADERBOARD_FILTER.ALL,
-    		0,10) %>
   </body>
 </html>

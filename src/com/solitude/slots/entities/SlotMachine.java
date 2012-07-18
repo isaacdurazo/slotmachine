@@ -14,8 +14,6 @@ public class SlotMachine extends AbstractGAEPersistent {
 	private String name;
 	/** image associated with the machine */
 	private String image;
-	/** id of payout table object */
-	private long payOutTableId = 0L;
 	/** xp required to unlock machine */
 	private int xpRequired = 0;
 	
@@ -32,11 +30,6 @@ public class SlotMachine extends AbstractGAEPersistent {
 	/** @param image associated with the machine */
 	public void setImage(String image) { this.image = image; }
 
-	/** @param payOutTableId id of payout table object */
-	public long getPayOutTableId() { return payOutTableId; }
-	/** @return id of payout table object (0 if none set) */
-	public void setPayOutTableId(long payOutTableId) { this.payOutTableId = payOutTableId; }
-
 	/** @return xp required to unlock machine */
 	public int getXpRequired() { return xpRequired; }
 	/** @param xpRequired to unlock machine */
@@ -47,7 +40,6 @@ public class SlotMachine extends AbstractGAEPersistent {
 		super.deserialize(inputMap);
 		this.name = (String)inputMap.get("name");
 		this.image = (String)inputMap.get("image");
-		this.payOutTableId = (Long)inputMap.get("payOutTableId");
 		this.xpRequired = ((Long)inputMap.get("xpRequired")).intValue();
 	}
 
@@ -56,7 +48,6 @@ public class SlotMachine extends AbstractGAEPersistent {
 		Map<String, Object> map = super.serialize();
 		map.put("name", this.name);
 		map.put("image", this.image);
-		map.put("payOutTableId", this.payOutTableId);
 		map.put("xpRequired", this.xpRequired);
 		return map;
 	}

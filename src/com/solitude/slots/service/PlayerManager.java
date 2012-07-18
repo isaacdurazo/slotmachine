@@ -122,7 +122,7 @@ public class PlayerManager {
 	 * @throws CacheStoreException for cache issues
 	 * @throws DataStoreException for data issues
 	 */
-	public Player getPlayer(int playerId) throws CacheStoreException, DataStoreException {
+	public Player getPlayer(long playerId) throws CacheStoreException, DataStoreException {
 		Player player = GAECacheManager.getInstance().get(playerId, Player.class);
 		if (player != null) return player.isDeleted() ? null : player;
 		player = GAEDataManager.getInstance().load(playerId, Player.class);

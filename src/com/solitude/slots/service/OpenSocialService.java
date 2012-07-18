@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -96,7 +97,7 @@ public class OpenSocialService {
 		}
 		url += "/@self";
 		Map<String,String> params = new HashMap<String,String>();
-		params.put("oauth_token", accessToken);
+		params.put("oauth_token", URLEncoder.encode(accessToken,"UTF-8"));
 		if (additionalFields != null && additionalFields.length > 0) {
 			String fields = null;
 			for (String field : additionalFields) {
@@ -126,7 +127,7 @@ public class OpenSocialService {
 	public RestfulCollection fetchFriends(String accessToken, int index, int resultsPerPage, String... additionalFields) throws ApiException, IOException, ParseException {
 		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/people/@me/@friends";
 		Map<String,String> params = new HashMap<String,String>();
-		params.put("oauth_token", accessToken);
+		params.put("oauth_token", URLEncoder.encode(accessToken,"UTF-8"));
 		params.put("count",Integer.toString(resultsPerPage));
 		params.put("startIndex",Integer.toString(index));
 		if (additionalFields != null && additionalFields.length > 0) {
@@ -155,7 +156,7 @@ public class OpenSocialService {
 		if (userId <= 0) return false;
 		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/people/@me/@areFriends";
 		Map<String,String> params = new HashMap<String,String>(1);
-		params.put("oauth_token",accessToken);
+		params.put("oauth_token",URLEncoder.encode(accessToken,"UTF-8"));
 		String response = doHttpRequest(url,"GET",params);
 		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
 		JSONObject responseObject = (JSONObject)new JSONParser().parse(response); 	// read timeout
@@ -175,7 +176,7 @@ public class OpenSocialService {
 	public String fetchOAuthToken(int userId, String accessToken) throws ApiException, IOException, ParseException {
 		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/featureOAuth/"+userId;
 		Map<String,String> params = new HashMap<String,String>();
-		params.put("oauth_token", accessToken);
+		params.put("oauth_token", URLEncoder.encode(accessToken,"UTF-8"));
 		String response = doHttpRequest(url,"GET",params);
 		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
 		JSONObject responseObject = (JSONObject)new JSONParser().parse(response); 	// read timeout
@@ -194,7 +195,7 @@ public class OpenSocialService {
 	 */
 	@SuppressWarnings("unchecked")
 	public void setScore(short type, int userId, long score, boolean forceOverride) throws IOException, ApiException {
-		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/leaderboard?oauth_token="+GameUtils.getGameAdminToken();		
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/leaderboard?oauth_token="+URLEncoder.encode(GameUtils.getGameAdminToken(),"UTF-8");		
 		JSONObject scores = new JSONObject();		
 		scores.put("userId",userId);
 		scores.put(type,score);
@@ -272,7 +273,7 @@ public class OpenSocialService {
 	public RestfulCollection getLeaderboard(short type, int userId, LEADERBOARD_DATE_RANGE timeRange, LEADERBOARD_FILTER filter, int index, int itemsPerPage) throws ApiException, IOException, ParseException {	
 		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/leaderboard/"+userId+"/"+type+"/"+filter+"/"+timeRange;
 		Map<String, String> params = new HashMap<String, String>(3,1f);
-		params.put("oauth_token", GameUtils.getGameAdminToken());
+		params.put("oauth_token", URLEncoder.encode(GameUtils.getGameAdminToken(),"UTF-8"));
 		params.put("count", Integer.toString(itemsPerPage));
 		params.put("startIndex", Integer.toString(index));
 		
@@ -295,7 +296,7 @@ public class OpenSocialService {
 	 */
 	@SuppressWarnings("unchecked")
 	public String doDirectDebit(int userId, int amount, String description) throws GoldTopupRequiredException, ApiException, IOException, ParseException {
-		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/gold/"+userId+"?oauth_token="+GameUtils.getGameAdminToken();		
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/gold/"+userId+"?oauth_token="+URLEncoder.encode(GameUtils.getGameAdminToken(),"UTF-8");		
 		JSONObject json = new JSONObject();
 		json.put("amount", amount);
 		json.put("name", description);
@@ -338,7 +339,7 @@ public class OpenSocialService {
 	 */
 	@SuppressWarnings("unchecked")
 	public void sendNotification(int userId, String subject, String body) throws IOException, ApiException {
-		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/messages?oauth_token="+GameUtils.getGameAdminToken();
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/messages?oauth_token="+URLEncoder.encode(GameUtils.getGameAdminToken(),"UTF-8");
 		JSONObject json = new JSONObject();
 		JSONArray recipientsArray = new JSONArray();
 		recipientsArray.add(userId);
@@ -361,7 +362,7 @@ public class OpenSocialService {
 	 */
 	@SuppressWarnings("unchecked")
 	public void setGameStatus(int userId, String status, String statusUrl, String statusUrlText) throws IOException, ApiException {
-		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/activities?oauth_token="+GameUtils.getGameAdminToken();
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/activities?oauth_token="+URLEncoder.encode(GameUtils.getGameAdminToken(),"UTF-8");
 		JSONObject json = new JSONObject();
 		json.put(Activity.Field.TITLE.toString(), status);
 		if (statusUrl != null) json.put(Activity.Field.STREAM_URL.toString(), statusUrl);
