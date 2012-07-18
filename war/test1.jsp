@@ -28,14 +28,14 @@
 		
 		<table style="margin:auto;">
 			<tr align="center" >
-				<td style="width: 20px; border: 1px solid grey;">
-					<img height="16" width="16" src="images/img-1.gif"/>
+				<td style="width:33%; border: 0px solid grey;">
+					<img src="images/big1.gif"/>
 				</td>
-				<td style="width: 20px; border: 1px solid grey;">
-					<img height="16" width="16" src="images/img-2.gif"/>
+				<td style="width: 33%; border: 0px solid grey;">
+					<img  src="images/big2.gif"/>
 				</td>
-				<td style="width: 20px; border: 1px solid grey;">
-					<img height="16" width="16" src="images/img-3.gif"/>
+				<td style="width: 20px; border: 0px solid grey;">
+					<img  src="images/big3.gif"/>
 				</td>
 			</tr>
 		</table>
