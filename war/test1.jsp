@@ -34,7 +34,11 @@
 				<td style="width: 33%; border: 0px solid grey;">
 					<img  src="images/big2.gif"/>
 				</td>
+<<<<<<< HEAD
 				<td style="width: 33%; border: 0px solid grey;">
+=======
+				<td style="width: 20px; border: 0px solid grey;">
+>>>>>>> 5d45c4b1bfe358beb0a346eaa4e8756d26a87a1e
 					<img  src="images/big3.gif"/>
 				</td>
 			</tr>
