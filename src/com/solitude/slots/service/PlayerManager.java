@@ -13,6 +13,7 @@ import com.solitude.slots.cache.GAECacheManager;
 import com.solitude.slots.data.DataStoreException;
 import com.solitude.slots.data.GAEDataManager;
 import com.solitude.slots.data.QueryCondition;
+import com.solitude.slots.entities.Pair;
 import com.solitude.slots.entities.Player;
 import com.solitude.slots.opensocial.Person;
 
@@ -36,14 +37,14 @@ public class PlayerManager {
 	 * Called on start of game player which will verify redirect parameters (set by system 
 	 * property "redirect.validate.enabled") and load player.  If new user  
 	 * 
-	 * @param userId
-	 * @param timestamp
-	 * @param verifier
-	 * @return
-	 * @throws UnAuthorizedException
-	 * @throws Exception 
+	 * @param userId of user
+	 * @param timestamp for verification
+	 * @param verifier token
+	 * @return pair of player (will create if new) and coins awarded as part of consecutive play
+	 * @throws UnAuthorizedException if verifier is invalid
+	 * @throws Exception on unexpected error
 	 */
-	public Player startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
+	public Pair<Player,Integer> startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
 		if (Boolean.valueOf(System.getProperty("redirect.validate.enabled"))) {
 			// validate redirect parameters from moco
 			String expectedVerifier = DigestUtils.md5Hex(userId+Long.toString(timestamp)+GameUtils.getGameGoldSecret());
@@ -68,10 +69,17 @@ public class PlayerManager {
 			player.setMale("male".equals((String)person.getFieldValue(Person.Field.GENDER.toString())));
 			player.setMocoId(Integer.parseInt((String)person.getFieldValue(Person.Field.ID.toString())));
 			player.setName((String)person.getFieldValue(Person.Field.DISPLAY_NAME.toString()));
-			// store player
-			GAEDataManager.getInstance().store(player);
 		}
-		return player;
+		// award coins if consecutive days greater than 0 and last consecutive days increment last than 100 ms (just happened)
+		int coinsAwarded = 0;
+		if (System.currentTimeMillis()-player.getConsecutiveDaysTimestamp() < 100) {
+			coinsAwarded = Integer.parseInt(System.clearProperty("consecutive.days.coin.award.per.day"))*
+					(1+Math.min(player.getConsecutiveDays(),Integer.parseInt(System.clearProperty("consecutive.days.coin.award.day.cap"))));
+			player.setCoins(player.getCoins()+coinsAwarded);
+		}
+		// store player (if new or to track consecutive days)
+		GAEDataManager.getInstance().store(player);
+		return new Pair<Player, Integer>(player,coinsAwarded);
 	}
 	
 	/**
@@ -98,6 +106,7 @@ public class PlayerManager {
 			playerIds = new ArrayList<Long>(players.size());
 			Player result = null;
 			for (Player player : players) { 
+				if (player == null) continue;
 				playerIds.add(player.getId());
 				if (result == null && !player.isDeleted()) result = player;
 			}
@@ -123,10 +132,12 @@ public class PlayerManager {
 	 * @throws DataStoreException for data issues
 	 */
 	public Player getPlayer(long playerId) throws CacheStoreException, DataStoreException {
+		if (playerId < 0) return null;
 		Player player = GAECacheManager.getInstance().get(playerId, Player.class);
 		if (player != null) return player.isDeleted() ? null : player;
 		player = GAEDataManager.getInstance().load(playerId, Player.class);
-		GAECacheManager.getInstance().put(player);
+		if (player == null) GAECacheManager.getInstance().putNull(playerId, Player.class);
+		else GAECacheManager.getInstance().put(player);
 		return player;
 	}
 	

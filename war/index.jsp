@@ -4,15 +4,18 @@
 <%
 Long playerId = (Long)request.getSession().getAttribute("playerId");
 Player player = null;
+int coinsAwarded = 0;
 if (playerId != null) {
 	player = PlayerManager.getInstance().getPlayer(playerId);
 } else {
 	// verify and create player as needed
 	try {
-		player = PlayerManager.getInstance().startGamePlayer(
+		Pair<Player,Integer> gameStartPair = PlayerManager.getInstance().startGamePlayer(
 			ServletUtils.getInt(request,"uid"), 
 			ServletUtils.getLong(request,"timestamp"), 
 			request.getParameter("verify"));
+		player = gameStartPair.getElement1();
+		coinsAwarded = gameStartPair.getElement2();
 		request.getSession().setAttribute("playerId",player.getId());
 	} catch (PlayerManager.UnAuthorizedException e) { 
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Invalid verification: "+request.getQueryString());
@@ -31,6 +34,11 @@ if ("credit".equals(action)) {
 	PlayerManager.getInstance().storePlayer(player);
 } else if ("spin".equals(action)) {
 	spinResult = SlotMachineManager.getInstance().spin(player, 1);
+} else if ("maxspin".equals(action)) {
+	spinResult = SlotMachineManager.getInstance().spin(player, Integer.parseInt(System.getProperty("max.bet.coins")));
+} else if ("invite".equals(action)) {
+	response.sendRedirect(OpenSocialService.getInstance().getInviteRedirectUrl(null, null, null, null, null, null));
+	return;
 }
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -42,6 +50,11 @@ if ("credit".equals(action)) {
   <body>
     <h1>Hello <%= player.getName() %>!</h1>
     <h2>Coins: <%= player.getCoins() %></h2>
+    <% if (coinsAwarded > 0) { %>
+    	<div>
+    		Welcome back, you've been awarded <%= coinsAwarded %><% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
+    	</div>
+    <% } %>
 	
 	<% if (spinResult != null) { %>
 		<h3>You <%= spinResult.getCoins() > 0 ? ("WON "+spinResult.getCoins()+" COINS!") : "LOST" %></h3>
@@ -58,10 +71,13 @@ if ("credit".equals(action)) {
 	
 	<div>
 		<a href="<%= response.encodeURL("/?action=spin") %>">SPIN!</a>
+		<a style="margin-left:5px;" href="<%= response.encodeURL("/?action=maxspin") %>">Max bet (<%= System.getProperty("max.bet.coins") %> coins)!</a>
 	</div>
     
     <div>
         <a href="<%= response.encodeURL("/?action=credit") %>">Credit 10 coins</a>
+        <a style="margin-left:5px;" href="<%= response.encodeURL("/?action=invite") %>">Invite Friends</a>
+        <a style="margin-left:5px;" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a>
     </div>
     
   </body>

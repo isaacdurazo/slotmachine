@@ -26,6 +26,9 @@ public abstract class Model {
 		return this.jsonObject.get(fieldName);
 	}
 	
+	/** @return json for object */
+	public String toJSONString() { return this.jsonObject.toJSONString(); }
+	
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName()+" - "+(this.jsonObject == null ? "null": this.jsonObject.toJSONString());

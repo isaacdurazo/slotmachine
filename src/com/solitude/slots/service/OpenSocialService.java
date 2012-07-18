@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -369,6 +370,45 @@ public class OpenSocialService {
 		if (statusUrlText != null) json.put(Activity.Field.STREAM_TITLE.toString(), statusUrlText);
 		doHttpPost(url,json.toJSONString());
 	}
+
+	/**
+	 * Builds url to MocoSpace to show invite widget
+	 * 
+	 * @param redirectParams to be included in link back to the game after completing invite flow (optional)
+	 * @param subject of invite (optional)
+	 * @param content of invite (optional)
+	 * @param urlText of link to start playing from invite (optional)
+	 * @param urlParams add to the link to start playing from invite (optional)
+	 * @param recipientUserIds  user id of user's to get invite (optional)
+	 * @return url for redirect
+	 */
+	public String getInviteRedirectUrl(String redirectParams,String subject, String content, String urlText, String urlParams, int[] recipientUserIds) {
+		try {
+			StringBuilder redirectURL = new StringBuilder(GameUtils.getMocoSpaceHome());
+			redirectURL.append("/wap2/game/platform/invite_widget.jsp?timestamp=");
+			long timestamp = System.currentTimeMillis();
+			redirectURL.append(timestamp);
+			redirectURL.append("&gid=").append(GameUtils.getGameMocoId());
+			redirectURL.append("&verifier=").append(URLEncoder.encode(DigestUtils.md5Hex(timestamp+GameUtils.getGameGoldSecret()),"UTF-8"));
+			if (recipientUserIds != null && recipientUserIds.length > 0) {
+				redirectURL.append("&userIDs=");
+				boolean first = true;
+				for (int recipientUserId : recipientUserIds) {
+					if (first) first = false;
+					else redirectURL.append(",");
+					redirectURL.append(recipientUserId);
+				}
+			}
+			if (redirectParams != null ) redirectURL.append("&redirectParams=").append(URLEncoder.encode(redirectParams,"UTF-8"));
+			if (subject != null) redirectURL.append("&subject=").append(URLEncoder.encode(subject,"UTF-8"));
+			if (content != null) redirectURL.append("&message=").append(URLEncoder.encode(content,"UTF-8"));
+			if (urlText != null) redirectURL.append("&urlText=").append(URLEncoder.encode(urlText,"UTF-8"));
+			if (urlParams != null) redirectURL.append("&urlParams=").append(URLEncoder.encode(urlParams,"UTF-8"));
+			return redirectURL.toString();
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 	/**
 	 * Sends a POST request setting body
@@ -380,7 +420,6 @@ public class OpenSocialService {
 	 * @throws ApiException on API error
 	 */
 	private static String doHttpPost(String url, String body) throws IOException, ApiException {
-		log.log(Level.INFO,url+","+body);
 		return doHttpRequest(url,"POST",null,body,
 				Integer.parseInt(System.getProperty("url.connect.timeout","2000")),
 				Integer.parseInt(System.getProperty("url.read.timeout","2000")));

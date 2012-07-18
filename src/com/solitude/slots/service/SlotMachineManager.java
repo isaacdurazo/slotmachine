@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.appengine.api.ThreadManager;
 import com.solitude.slots.cache.CacheStoreException;
 import com.solitude.slots.data.DataStoreException;
 import com.solitude.slots.entities.Player;
@@ -37,7 +38,7 @@ public class SlotMachineManager {
 		 * */
 		try {			
 			Properties properties = new Properties();
-			properties.load(new FileReader("pay-out-table.properties"));
+			properties.load(new FileReader("WEB-INF/pay-out-table.properties"));
 			String coinsStr = null;
 			int index = 0;
 			while ((coinsStr = properties.getProperty("table.result.coins."+index)) != null) {
@@ -82,15 +83,38 @@ public class SlotMachineManager {
 	 * @throws CacheStoreException 
 	 * @throws DataStoreException 
 	 */
-	public SpinResult spin(Player player, int coins) throws InsufficientFundsException, DataStoreException, CacheStoreException {
+	public SpinResult spin(final Player player, int coins) throws InsufficientFundsException, DataStoreException, CacheStoreException {
 		if (player.getCoins() < coins) throw new InsufficientFundsException();
 		// spin!
 		SpinResult spinResult = null;
 		int attempts = 0;
 		while ((spinResult = spinResults[random.nextInt(spinResults.length)]) == null && attempts++ < 10);
 		// debit and credit player coins
+		if (coins == 3 && spinResult.getCoins() > 0) {
+			spinResult = new SpinResult(
+					spinResult.getCoins()*Integer.parseInt(System.getProperty("max.bet.coin.multiplier")),
+							spinResult.getSymbols());
+		}
 		player.setCoins(player.getCoins()-coins+spinResult.getCoins());
+		// increment xp with # of coins spent and update leaderboard (do this with batching later?)
+		player.setXp(player.getXp()+coins);
 		PlayerManager.getInstance().storePlayer(player);
+		if (Boolean.getBoolean(System.getProperty("xp.leaderboard.enabled"))) {
+			Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
+				public void run() {
+					try {
+						OpenSocialService.getInstance().setScore(
+								(short)1, 
+								player.getMocoId(), 
+								player.getXp(), 
+								false);				// forceOverride
+					} catch (Exception ex) {
+						throw new RuntimeException(ex);
+					}
+				}
+			});
+		thread.start();
+		}
 		log.log(Level.INFO,spinResult+", player: "+player);
 		return spinResult;
 	}

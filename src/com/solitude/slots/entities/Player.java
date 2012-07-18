@@ -33,6 +33,10 @@ public class Player extends AbstractGAEPersistent {
 	private long birthday = 0L;
 	/** user's language locale (default english) */
 	private Locale locale = Locale.ENGLISH;
+	/** consecutive days of play */
+	private int consecutiveDays = 0;
+	/** timestamp of last play time for consecutive days calculation */
+	private long consecutiveDaysTimestamp = System.currentTimeMillis();
 	
 	/** @return moco access token */
 	public String getAccessToken() { return accessToken; }
@@ -78,7 +82,29 @@ public class Player extends AbstractGAEPersistent {
 	public Locale getLocale() { return this.locale; }
 	/** @param locale for user's language in string form */
 	public void setLocale(Locale locale) { this.locale = locale; }
-
+	
+	
+	@Override
+	public void setUpdatetime() {
+		super.setUpdatetime();
+		// see if consecutive days needs to be updated
+		if (System.currentTimeMillis()-consecutiveDaysTimestamp > 24*60*60*1000) {
+			if (System.currentTimeMillis()-consecutiveDaysTimestamp < 48*60*60*1000) {
+				// it has been more than a day but less than 48 so increment
+				this.consecutiveDays++;
+			} else {
+				// more than 48 hours so do nothing
+				this.consecutiveDays=0;
+			}
+			this.consecutiveDaysTimestamp = System.currentTimeMillis();
+		}
+	}
+	
+	/** @return consecutive days of game play (0 indicating user did not play yesterday, 1 meaning they did...) */
+	public int getConsecutiveDays() { return consecutiveDays; }
+	/** @return timestamp of consecutive days */
+	public long getConsecutiveDaysTimestamp() { return consecutiveDaysTimestamp; }
+	
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {
 		super.deserialize(inputMap);
@@ -91,6 +117,8 @@ public class Player extends AbstractGAEPersistent {
 		this.name = (String)inputMap.get("name");
 		this.xp = ((Long)inputMap.get("xp")).intValue();
 		this.locale = createLocaleFromString((String)inputMap.get("locale"));
+		this.consecutiveDays = ((Long)inputMap.get("consecutiveDays")).intValue();
+		this.consecutiveDaysTimestamp = (Long)inputMap.get("consecutiveDaysTimestamp");
 	}
 
 	@Override
@@ -105,6 +133,8 @@ public class Player extends AbstractGAEPersistent {
 		map.put("name", this.name);
 		map.put("xp", this.xp);
 		map.put("locale", this.locale.getLanguage());
+		map.put("consecutiveDays", this.consecutiveDays);
+		map.put("consecutiveDaysTimestamp", this.consecutiveDaysTimestamp);
 		return map;
 	}
 

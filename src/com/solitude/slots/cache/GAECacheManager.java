@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import org.datanucleus.util.StringUtils;
 
+import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.solitude.slots.data.DataStoreException;
 import com.solitude.slots.data.GAEDataManager;
@@ -152,5 +153,15 @@ public class GAECacheManager implements CacheManager<AbstractGAEPersistent> {
 	@Override
 	public void putNull(long id, Class<?> persistentClass) throws CacheStoreException {
 		MemcacheServiceFactory.getAsyncMemcacheService().put(GAEUtil.getEntityName(persistentClass), "null");
+	}
+	
+	@Override
+	public String getCustom(String region, String key) throws CacheStoreException {
+		return (String)MemcacheServiceFactory.getMemcacheService(region).get(key);
+	}
+	
+	@Override
+	public void putCustom(String region, String key, String data, int ttlSeconds) throws CacheStoreException {
+		MemcacheServiceFactory.getMemcacheService().put(key, data, Expiration.byDeltaSeconds(ttlSeconds));
 	}
 }

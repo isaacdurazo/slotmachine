@@ -78,4 +78,25 @@ public interface CacheManager <T  extends Persistent> {
 	 * @throws CacheStoreException for low-level issues
 	 */
 	public void putIds(String region, String key, List<Long> ids) throws CacheStoreException;
+	
+	/**
+	 * Fetch custom string data
+	 * 
+	 * @param region holding cache keys
+	 * @param key of item
+	 * @return string if present, null otherwise
+	 * @throws CacheStoreException for low-level issues
+	 */
+	public String getCustom(String region, String key) throws CacheStoreException;
+	
+	/**
+	 * Put custom data in cache
+	 * 
+	 * @param region holding cache keys
+	 * @param key of item
+	 * @param data as string
+	 * @param ttlSeconds for expiration in seconds
+	 * @throws CacheStoreException for low-level issues
+	 */
+	public void putCustom(String region, String key, String data, int ttlSeconds) throws CacheStoreException;
 }

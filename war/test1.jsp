@@ -23,19 +23,19 @@
   </head>
 
   <body>
-    <div style="text-align: center;">
+    <div style="text-align: center;" align="center">
     	<div>Solitude Slot 1</div>
 		
 		<table style="margin:auto;">
 			<tr align="center" >
-				<td style="width: 20px; border: 1px solid grey;">
-					<img height="16" width="16" src="images/img-1.gif"/>
+				<td style="width:33%; border: 0px solid grey;">
+					<img src="images/big1.gif"/>
 				</td>
-				<td style="width: 20px; border: 1px solid grey;">
-					<img height="16" width="16" src="images/img-2.gif"/>
+				<td style="width: 33%; border: 0px solid grey;">
+					<img  src="images/big2.gif"/>
 				</td>
-				<td style="width: 20px; border: 1px solid grey;">
-					<img height="16" width="16" src="images/img-3.gif"/>
+				<td style="width: 33%; border: 0px solid grey;">
+					<img  src="images/big3.gif"/>
 				</td>
 			</tr>
 		</table>
@@ -56,6 +56,21 @@
 		<div>
 			<b><a href="test2.jsp" style="color:green">play</a></b>
 		</div>
+	</div>
+
+    
+    <div id="wrapper" style="border-top:1px solid white; margin-top:20px; text-align: center;">
+    	<div>Solitude Slot 3</div>
+		<div style: width:100%>
+			<img width="30%" src="images/big1.gif"/>
+			<img width="30%" src="images/big2.gif"/>
+			<img width="30%" src="images/big3.gif"/>
+		</div>	
+		
+		<div>
+			<b><a href="test2.jsp" style="color:green">play</a></b>
+		</div>
+		
 	</div>
     
   </body>
