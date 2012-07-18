@@ -10,9 +10,9 @@ if (playerId != null) {
 	// verify and create player as needed
 	try {
 		player = PlayerManager.getInstance().startGamePlayer(
-			ServletUtils.getInt(request,"userId"), 
+			ServletUtils.getInt(request,"uid"), 
 			ServletUtils.getLong(request,"timestamp"), 
-			request.getParameter("verifier"));
+			request.getParameter("verify"));
 		request.getSession().setAttribute("playerId",player.getId());
 	} catch (PlayerManager.UnAuthorizedException e) { 
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Invalid verification: "+request.getQueryString());
