@@ -6,7 +6,7 @@ Misc general initialization, authentication, imports
 
  -->
 
-<%@ page import="com.solitude.slots.*,com.solitude.slots.service.*,com.solitude.slots.entities.*,java.util.logging.*" %>
+<%@ page import="com.solitude.slots.*,com.solitude.slots.service.*,com.solitude.slots.entities.*,com.solitude.slots.service.SlotMachineManager.InsufficientFundsException,java.util.logging.*" %>
 <%
 int coinsAwarded = 0;
 Long playerId = (Long)request.getSession().getAttribute("playerId");
