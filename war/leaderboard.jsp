@@ -6,7 +6,7 @@ String cacheRegion = "lb.cache", cacheKey = "global";
 Long playerId = (Long)request.getSession().getAttribute("playerId");
 Player player = null;
 if (playerId == null || (player = PlayerManager.getInstance().getPlayer(playerId)) == null) {
-	response.sendRedirect(GameUtils.getMocoSpaceHome());
+	response.sendRedirect(GameUtils.getVisitorHome());
 	return;
 }
 // load global leaderboard first going to cache
@@ -37,7 +37,7 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
     	<% } %>
     </ul>
 	
-	<div>
+	<div class="menu">
 		<a href="<%= response.encodeURL("/") %>">Main</a>
 	</div>
   </body>

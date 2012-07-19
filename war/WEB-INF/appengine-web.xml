@@ -13,9 +13,10 @@
     <property name="game.admin.token" value="94ou1phjs74v|ur48w"/>
     <property name="game.admin.user.id" value="51653696"/>
     <property name="game.gold.secret" value="nrrwb0r1"/>
-    <property name="redirect.validate.enabled" value="true"/>
+    <property name="redirect.validate.enabled" value="false"/>
     <property name="game.moco.id" value="1252"/>
-    <property name="mocospace.main.url" value="http://www.mocospace.com"/>  
+    <property name="game.visitor.url" value="/landing.jsp"/>  
+    <property name="mocospace.main.url" value="http://www.mocospace.com/wap2/games?gid=1252"/>  
     <property name="mocospace.opensocial.api.endpoint" value="https://apps.mocospace.com/social"/> 
     
     <!-- game play properties -->

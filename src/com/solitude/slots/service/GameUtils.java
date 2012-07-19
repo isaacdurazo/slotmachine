@@ -17,6 +17,9 @@ public class GameUtils {
 	
 	/** @return full path to mocospace home (use to redirect on error) */
 	public static String getMocoSpaceHome() { return System.getProperty("mocospace.main.url"); }
+
+	/** @return full path to mocospace home (use to redirect on error) */
+	public static String getVisitorHome() { return System.getProperty("game.visitor.url"); }
 	
 	/** @return start path to mocospace opensocial API */
 	public static String getMocoSpaceOpensocialAPIEndPoint() { return System.getProperty("mocospace.opensocial.api.endpoint"); }
