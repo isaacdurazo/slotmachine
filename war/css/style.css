@@ -1,0 +1,77 @@
+body { 
+	font-family: Arial;
+	background-color: #000;
+	color:#FFF;
+	margin:0;
+}
+
+.wrapper {
+	width: 120px;
+	text-align:center;
+}
+    	
+a {
+}
+
+table {
+	border-collapse:collapse;
+}
+
+.header-logo {
+	background-color: #c70304;
+	padding:4px 5px 0px;
+	border: 2px solid #950405;
+	width: 106px;
+	text-align: center;
+	color: #fccb05;
+	margin-bottom:3px;
+}
+
+.coins {
+	padding-left:5px;
+}
+
+.bet {
+	background-color: #07a107;
+	padding:3px;
+	width:106px;
+	border: 2px solid #367219;
+	padding: 5px;
+	text-align:center;
+	font-size:10px;
+}
+
+a.bet {
+	color:#FFF;	
+	
+}
+
+.play {
+	background-color: #07a107;
+	padding:3px 0;
+	border: 2px solid #367219;
+	margin: 10px 0;
+	width:116px;
+	text-align:center;
+}
+
+.play a {
+	color: #FFF;
+	
+}
+
+.subheader {
+	font-size:11px
+}
+
+.payout, .menu {
+	padding: 10px 10px 0 5px;
+}
+
+.payout a, .menu a{
+	color: #c70304;
+}
+
+.results {
+	color: #07a107;
+}

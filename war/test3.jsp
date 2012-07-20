@@ -25,6 +25,8 @@
 				</td>
 			</tr>
 		</table>
+    	
+    	<div class="results">You WON: 123 Coins</div>
 		
 		<table>
 			<tr align="center" >

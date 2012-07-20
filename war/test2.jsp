@@ -6,46 +6,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
-    <title>Solitude Slots</title>
-    <style type="text/css">
-    	body { 
-			font-family: Arial;
-			background-color: #000;
-			color:#FFF;
-		}
-    	
-    	a {
-    		text-decoration: none;
-    	}
-    </style>
+    <meta http-equiv="refresh" content="1;url=test3.jsp">
+    <title>SLOTMANIA</title>
+    <link rel="stylesheet" href="css/style.css" />
     
   </head>
 
   <body>
-    <div style="text-align: center;">
-    	<div style="color:grey;">Animated Gif</div>
-    	<div>Solitude Slot</div>
+    <div class="wrapper">
+    	<div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
 		
-		<table style="margin:auto;">
-			<tr align="center" >
-				<td style="width: 20px; border: 1px solid grey;">
-					<img height="16" width="16" src="images/animation.gif"/>
+		<table class="subheader">
+			<tr>
+				<td class="xp">
+					<b>XP:</b>10
 				</td>
-				<td style="width: 20px; border: 1px solid grey;">
-					<img height="16" width="16" src="images/animation.gif"/>
-				</td>
-				<td style="width: 20px; border: 1px solid grey;">
-					<img height="16" width="16" src="images/animation.gif"/>
+				<td class="coins">
+					<b>COINS:</b>1000
 				</td>
 			</tr>
 		</table>
 		
-		<div>
-			<b><a href="test1.jsp" style="color:green">Return</a></b>
-		</div>
+		<table>
+			<tr align="center" >
+				<td>
+					<img width="38" height="64" src="images/spin-animation.gif"/>
+				</td>
+				<td>
+					<img width="38" height="64" src="images/spin-animation.gif"/>
+				</td>
+				<td>
+					<img width="38" height="64" src="images/spin-animation.gif"/>
+				</td>
+			</tr>
+		</table>
 		
+		<div class="bets"><a href="#" class="bet">BET ONE</a><a href="#" class="bet">BET MAX</a></div>
+	
+		<div class="payout"><a href="#">Payout Table</a></div>
+		<div class="menu"><a href="#">Menu</a></div>
 	</div>
 
-    
   </body>
 </html>

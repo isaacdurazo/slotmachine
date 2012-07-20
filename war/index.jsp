@@ -24,17 +24,21 @@ if ("credit".equals(action)) {
     <h3>Hello <%= player.getName() %>!</h3>    
     <% if (coinsAwarded > 0) { %>
     	<div class="bonus">
-    		Your daily bonus: <%= coinsAwarded %> <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %> coins!
-    	</div>
+    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
+    	</div> 
     <% } %>
-	
-	<div class="sponmenu">
+	<div class="jackpotteaser">
+	Jackpot value: <%=System.getProperty("weekly.coin.prize")%> Moco Gold!
+	</div>
+	<div class="spanmenu">
 		<a href="<%= response.encodeURL("spin.jsp") %>">Play Now</a>
 	</div>
 
     <div class="menu">
         <a href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a>
         <a href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a>
+        <a href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a>
+        
     </div>
 	<br/>Admin Tools<br/>
 	<div class="menu">

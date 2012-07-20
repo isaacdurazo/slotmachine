@@ -16,7 +16,7 @@ if (json == null) {
 	restfulCollection = OpenSocialService.getInstance().getLeaderboard((short)1, player.getMocoId(), 
 		OpenSocialService.LEADERBOARD_DATE_RANGE.ALL, OpenSocialService.LEADERBOARD_FILTER.ALL, 0, 5);
 	// cache for one day
-	GAECacheManager.getInstance().putCustom(cacheRegion, cacheKey, restfulCollection.toJSONString(), 3600*24);
+	GAECacheManager.getInstance().putCustom(cacheRegion, cacheKey, restfulCollection.toJSONString(),Integer.parseInt(System.getProperty("game.leaderboardcached.sec")));
 } else {
 	restfulCollection = new RestfulCollection((org.json.simple.JSONObject)new org.json.simple.parser.JSONParser().parse(json));
 }
@@ -30,6 +30,7 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 
   <body>
     <h1>Global Leaderboard</h1>
+    <small>(updated every 4 hrs)</small>
     <ul>
         <% for (int i=0;i<jsonArray.size();i++) { 
         	org.json.simple.JSONObject entry = (org.json.simple.JSONObject)jsonArray.get(i); %>

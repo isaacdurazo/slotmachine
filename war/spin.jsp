@@ -1,9 +1,12 @@
+<%@page import="com.sun.java_cup.internal.runtime.Symbol"%>
 <%@ include file="header.jsp" %>
+<%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException" %>
  
 
 <%
 String action = request.getParameter("action");
 SpinResult spinResult = new SpinResult(-1,new int[]{-1,-1,-1});
+int symbol[];
 boolean fSpinOK = false;
 
 try {
@@ -12,10 +15,15 @@ try {
 	} else if ("maxspin".equals(action)) {
 		spinResult = SlotMachineManager.getInstance().spin(player, Integer.parseInt(System.getProperty("max.bet.coins")));
 	}
+	
 	fSpinOK=true;
 } catch (InsufficientFundsException ife) {
 	fSpinOK=false;
 }
+
+symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
+
+
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -45,12 +53,22 @@ try {
 	<% } %>
 	
 		<div>
-			Symbols:
-			<ul>
-				<% for (int symbol : spinResult.getSymbols()) { %>
-					<li><%= symbol %></li>
-				<% } %>
-			</ul>
+		<table>
+			<tr align="center" >
+				<td>
+					<img width="38" height="64" src="images/comb-<%=symbol[0] %>.gif"/>
+					<br/>(<%=symbol[0] %>)
+				</td>
+				<td>
+					<img width="38" height="64" src="images/comb-<%=symbol[1] %>.gif"/>
+					<br/>(<%=symbol[1] %>)
+				</td>
+				<td>
+					<img width="38" height="64" src="images/comb-<%=symbol[2] %>.gif"/>
+					<br/>(<%=symbol[2] %>)
+				</td>
+			</tr>
+		</table>
 		</div>
 	<% if (fSpinOK==true) { %>
 	<div class="menu">
