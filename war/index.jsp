@@ -30,7 +30,7 @@ if ("credit".equals(action)) {
 	<div class="jackpotteaser">
 	Jackpot value: <%=System.getProperty("weekly.coin.prize")%> Moco Gold!
 	</div>
-	<div class="spanmenu">
+	<div class="spanmenu" style="color:red">
 		<a href="<%= response.encodeURL("spin.jsp") %>">Play Now</a>
 	</div>
 
