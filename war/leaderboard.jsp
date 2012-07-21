@@ -25,21 +25,27 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
-    <title>Solitude Slots</title>
+    <title>Slot Mania</title>
+    <link rel="stylesheet" href="css/style.css" />    
   </head>
 
   <body>
-    <h1>Global Leaderboard</h1>
-    <small>(updated every 4 hrs)</small>
-    <ul>
-        <% for (int i=0;i<jsonArray.size();i++) { 
-        	org.json.simple.JSONObject entry = (org.json.simple.JSONObject)jsonArray.get(i); %>
-    	<li><%= entry.get("rank") %>. <%= entry.get("userName") %> - <%= entry.get("score") %> XP</li>
-    	<% } %>
-    </ul>
-	
-	<div class="menu">
-		<a href="<%= response.encodeURL("/") %>">Main</a>
+  	<div id="container">
+	  	<div class="wrapper">
+		    <div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
+		    <div>Global Leaderboard</div>
+		    <small>(updated every 4 hrs)</small>
+		    <ul>
+		        <% for (int i=0;i<jsonArray.size();i++) { 
+		        	org.json.simple.JSONObject entry = (org.json.simple.JSONObject)jsonArray.get(i); %>
+		    	<li><%= entry.get("rank") %>. <%= entry.get("userName") %> - <%= entry.get("score") %> XP</li>
+		    	<% } %>
+		    </ul>
+			
+			<div class="menu">
+				<a href="<%= response.encodeURL("/") %>">Main</a>
+			</div>
+		</div>
 	</div>
   </body>
 </html>
