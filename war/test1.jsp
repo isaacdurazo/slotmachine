@@ -17,7 +17,7 @@
 				
 		<table class="subheader">
 			<tr>
-				<td class="xp">
+				<td class="xp" style="red">
 					<b>XP:</b>10
 				</td>
 				<td class="coins">
