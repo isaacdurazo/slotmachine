@@ -106,3 +106,7 @@ a.bet {
 	margin: 10px 0;
 	font-size: 13px;
 }
+
+.payout-table {
+	text-align:left;
+}

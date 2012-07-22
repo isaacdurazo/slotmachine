@@ -4,9 +4,9 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Slot Mania</title>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Slot Mania</title>
+    <link rel="stylesheet" href="css/style.css" />    
 </head>
 <body>
 	<div id="container">
@@ -21,16 +21,18 @@
 					<li><b>Weekly Moco Gold JACKPOT:</b> One player guaranteed to win the Gold jackpot. The more you spin the more likely you win!</li><br />
 				</ul>
 				
-				<div>Payout Table</div>
-				<div>
-				3x diamonds: 500 <br/>
-				3x 7: 100 <br/>
-				3x bars: 50 <br/> 
-				3x bells: 20 <br/>
-				3x watermelon: 15 <br/>
-				3x cherry: 10 <br/>
-				2x cherry: 5 <br/>
-				1x cherry: 2 <br/>
+				<div class="payout-table">
+					<div>Payout Table</div>
+					<div class="payout-table">
+						3x <img width="16" height="16" src="images/individual/diamond.gif"/>: 500 <br/>
+						3x <img width="16" height="16" src="images/individual/seven.gif"/>: 100 <br/>
+						3x <img width="16" height="16" src="images/individual/bar.gif"/>: 50 <br/> 
+						3x <img width="16" height="16" src="images/individual/bell.gif"/>: 20 <br/>
+						3x <img width="16" height="16" src="images/individual/watermelon.gif"/>: 15 <br/>
+						3x <img width="16" height="16" src="images/individual/cherry.gif"/>: 10 <br/>
+						2x <img width="16" height="16" src="images/individual/cherry.gif"/>: 5 <br/>
+						1x <img width="16" height="16" src="images/individual/cherry.gif"/>: 2 <br/>
+					</div>
 				</div>
 			</div>
 	</div>
