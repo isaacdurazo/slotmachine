@@ -58,7 +58,9 @@ public class SlotMachineManager {
 							continue;
 						}
 						spinResults[i] = sprinResult;
+						
 					}
+					log.log(Level.INFO,"Loaded table "+index+" min="+minRange+", max="+maxRange+" symbols="+(String)properties.get("table.result.symbols."+index));
 				} catch (Exception e) {
 					log.log(Level.WARNING,"Unable to load pay out table index: "+index,e);
 				}
