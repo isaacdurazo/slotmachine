@@ -56,7 +56,7 @@ String message = request.getParameter("message");
 	  	<div class="wrapper">
 		    <div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
 		    <% if (message != null) { %><div style="color:red"><%= message %></div><% } %>
-			<form method="get">
+			<form action="<%= response.encodeURL("/topup.jsp") %>" method="get">
 				<input type="hidden" name="verify" value="<%= formValidation %>"/>
 				<input type="submit" name="topup" value="Buy 10 Coins for 99 gold"/>
 				<input type="submit" name="topup" value="Buy 50 Coins for 299 gold"/>
