@@ -28,7 +28,7 @@
 				3x bars: 50 <br/> 
 				3x bells: 20 <br/>
 				3x watermelon: 15 <br/>
-				3x chrry: 10 <br/>
+				3x cherry: 10 <br/>
 				2x cherry: 5 <br/>
 				1x cherry: 2 <br/>
 				</div>
