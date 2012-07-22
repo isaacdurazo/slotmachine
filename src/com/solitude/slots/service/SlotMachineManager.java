@@ -76,7 +76,7 @@ public class SlotMachineManager {
 		} catch (IOException e) {
 			log.log(Level.SEVERE,"Unable to load pay out table!");
 		}
-		// start thread that will update user's in LB
+		/* start thread that will update user's in LB
 		ThreadManager.createBackgroundThread(new Runnable() {
 			public void run() {
 				try {
@@ -94,7 +94,7 @@ public class SlotMachineManager {
 			  public void shutdown() {
 				  flushLBMap();
 			  }
-		});
+		});*/
 	}
 	
 	/** random generator (nextInt is thread-safe) */
