@@ -30,13 +30,14 @@ if (coin > 0 && gold > 0) {
 	if (formValidation.equals((String)request.getSession().getAttribute("topUpValidation"))) {
 		try {
 			// valid transaction so debit and go back to main page
-			OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,topupAction);
+			OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,coin+" coins");
 			player.setCoins(player.getCoins()+coin);
 			PlayerManager.getInstance().storePlayer(player);
 			pageContext.forward("/");
 			return;
 		} catch (OpenSocialService.GoldTopupRequiredException e) {
 			// redirect 
+			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup required: "+e.getRedirectUrl());
 			response.sendRedirect(e.getRedirectUrl());
 			return;
 		} catch (Exception e) {
