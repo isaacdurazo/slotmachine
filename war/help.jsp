@@ -4,26 +4,37 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Slot Mania</title>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Slot Mania</title>
+    <link rel="stylesheet" href="css/style.css" />    
 </head>
 <body>
-<h1>About Slot Mania</h1>
-<div>
-<ul>
-<li>Come back daily to get FREE coins and spin to win!</li>
-<li>Weekly Coin Prize: Gain eXPerience as you play and become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li>
-<li>Weekly Moco Gold JACKPOT: One player guaranteed to win the Gold jackpot. The more you spin the more likely you win!</li>
-</ul>
-</div>
-<h1>Payout Table</h1>
-<div>
-List graphics</div>
-<a href="index.jsp?uid=<%=(String)request.getParameter("uid")%>">My Moco Info</a><br/>
-
-uid=<%=(String)request.getParameter("uid")%><br/> 
-timestamp=<%=(String)request.getParameter("timestamp")%><br/> 
-verify=<%=(String)request.getParameter("verify")%><br/> 
+	<div id="container">
+			<div class="wrapper">
+				 <div class="header-logo">
+			   		<h3>About</h3>
+			    	<img width="103" height="18" src="images/logo.gif"/>
+			    </div>
+				<ul  class="list">
+					<li>Come back daily to get <b>FREE</b> coins and spin to win!</li><br />
+					<li><b>Weekly Coin Prize:</b> Gain eXPerience as you play and become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
+					<li><b>Weekly Moco Gold JACKPOT:</b> One player guaranteed to win the Gold jackpot. The more you spin the more likely you win!</li><br />
+				</ul>
+				
+				<div class="payout-table">
+					<div>Payout Table</div>
+					<div class="payout-table">
+						3x <img width="16" height="16" src="images/individual/diamond.gif"/>: 500 <br/>
+						3x <img width="16" height="16" src="images/individual/seven.gif"/>: 100 <br/>
+						3x <img width="16" height="16" src="images/individual/bar.gif"/>: 50 <br/> 
+						3x <img width="16" height="16" src="images/individual/bell.gif"/>: 20 <br/>
+						3x <img width="16" height="16" src="images/individual/watermelon.gif"/>: 15 <br/>
+						3x <img width="16" height="16" src="images/individual/cherry.gif"/>: 10 <br/>
+						2x <img width="16" height="16" src="images/individual/cherry.gif"/>: 5 <br/>
+						1x <img width="16" height="16" src="images/individual/cherry.gif"/>: 2 <br/>
+					</div>
+				</div>
+			</div>
+	</div>
 </body>
 </html>

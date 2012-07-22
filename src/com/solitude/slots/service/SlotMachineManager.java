@@ -58,7 +58,9 @@ public class SlotMachineManager {
 							continue;
 						}
 						spinResults[i] = sprinResult;
+						
 					}
+					log.log(Level.INFO,"Loaded table "+index+" min="+minRange+", max="+maxRange+" symbols="+(String)properties.get("table.result.symbols."+index));
 				} catch (Exception e) {
 					log.log(Level.WARNING,"Unable to load pay out table index: "+index,e);
 				}
@@ -88,7 +90,13 @@ public class SlotMachineManager {
 		// spin!
 		SpinResult spinResult = null;
 		int attempts = 0;
-		while ((spinResult = spinResults[random.nextInt(spinResults.length)]) == null && attempts++ < 10);
+		int idx=0;
+		
+		do {
+			idx=random.nextInt(spinResults.length);
+			spinResult = spinResults[idx];
+		} while (spinResult==null && attempts++<10);
+
 		// debit and credit player coins
 		if (coins == 3 && spinResult.getCoins() > 0) {
 			spinResult = new SpinResult(
@@ -115,7 +123,7 @@ public class SlotMachineManager {
 			});
 		thread.start();
 		}
-		log.log(Level.INFO,spinResult+", player: "+player);
+		log.log(Level.INFO,"random="+idx+" "+spinResult+", player: "+player);
 		return spinResult;
 	}
 

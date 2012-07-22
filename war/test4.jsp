@@ -14,10 +14,10 @@
   <body>
     <div class="wrapper">
     	<div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
-				
+		
 		<table class="subheader">
 			<tr>
-				<td class="xp" style="red">
+				<td class="xp">
 					<b>XP:</b>10
 				</td>
 				<td class="coins">
@@ -29,19 +29,19 @@
 		<table>
 			<tr align="center" >
 				<td>
-					<img width="38" height="64" src="images/comb-1.gif"/>
+					<img width="38" height="64" src="images/animated/animated-bar-0.gif"/>
 				</td>
 				<td>
-					<img width="38" height="64" src="images/comb-1.gif"/>
+					<img width="38" height="64" src="images/animated/animated-bell-0.gif"/>
 				</td>
 				<td>
-					<img width="38" height="64" src="images/comb-1.gif"/>
+					<img width="38" height="64" src="images/animated/animated-lemon-0.gif"/>
 				</td>
 			</tr>
 		</table>
 		
-		<div class="bets"><a href="test4.jsp" class="bet">BET ONE</a><a href="test4.jsp" class="bet">BET MAX</a></div>
-
+		<div class="bets"><a href="#" class="bet">BET ONE</a><a href="#" class="bet">BET MAX</a></div>
+	
 		<div class="payout"><a href="#">Payout Table</a></div>
 		<div class="menu"><a href="#">Menu</a></div>
 	</div>

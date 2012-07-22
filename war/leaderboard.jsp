@@ -33,9 +33,10 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
   	<div id="container">
 	  	<div class="wrapper">
 		    <div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
-		    <div>Global Leaderboard</div>
-		    <small>(updated every 4 hrs)</small>
-		    <ul>
+		    <h3>Global Leaderboard</h3>
+		    <h6>(updated every 4 hrs)</h6>
+		    
+		    <ul class="list">
 		        <% for (int i=0;i<jsonArray.size();i++) { 
 		        	org.json.simple.JSONObject entry = (org.json.simple.JSONObject)jsonArray.get(i); %>
 		    	<li><%= entry.get("rank") %>. <%= entry.get("userName") %> - <%= entry.get("score") %> XP</li>
