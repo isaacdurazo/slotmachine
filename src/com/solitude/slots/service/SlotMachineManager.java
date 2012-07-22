@@ -2,16 +2,11 @@ package com.solitude.slots.service;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.google.appengine.api.LifecycleManager;
-import com.google.appengine.api.LifecycleManager.ShutdownHook;
-import com.google.appengine.api.utils.SystemProperty;
 import com.google.appengine.api.ThreadManager;
 import com.solitude.slots.cache.CacheStoreException;
 import com.solitude.slots.data.DataStoreException;
@@ -30,8 +25,6 @@ public class SlotMachineManager {
 	public static SlotMachineManager getInstance() { return instance; }	
 	/** logger */
     private static final Logger log = Logger.getLogger(instance.getClass().getName());
-    /** map of player ids to update in leaderboard */
-    private static final Map<Long,String> playerLbMap = new ConcurrentHashMap<Long,String>();
     
 	/** array of spin results */
 	private static final SpinResult[] spinResults = new SpinResult[10000];
@@ -76,25 +69,6 @@ public class SlotMachineManager {
 		} catch (IOException e) {
 			log.log(Level.SEVERE,"Unable to load pay out table!");
 		}
-		/* start thread that will update user's in LB
-		ThreadManager.createBackgroundThread(new Runnable() {
-			public void run() {
-				try {
-					while(true) {
-						flushLBMap();
-						Thread.sleep(1000*60*60); // every hour
-					}
-				} catch (InterruptedException e) {
-					log.log(Level.SEVERE,"lb thread interrupted?!",e);
-				} 
-			}
-		}).start();
-		// flush lb map on shutdown
-		LifecycleManager.getInstance().setShutdownHook(new ShutdownHook() {
-			  public void shutdown() {
-				  flushLBMap();
-			  }
-		});*/
 	}
 	
 	/** random generator (nextInt is thread-safe) */
@@ -102,23 +76,6 @@ public class SlotMachineManager {
 	
 	/** private constructor to ensure singleton */
 	private SlotMachineManager() { }
-	
-	private static void flushLBMap() {
-		for (long playerId : playerLbMap.keySet()) {
-			try {
-				playerLbMap.remove(playerId);
-				Player player = PlayerManager.getInstance().getPlayer(playerId);
-				OpenSocialService.getInstance().setScore(
-						(short)1, 
-						player.getMocoId(), 
-						player.getXp(), 
-						false);				// forceOverride
-			} catch (Exception ex) {
-				log.log(Level.WARNING,"error submitting score for playerId: "+playerId,ex);
-				throw new RuntimeException(ex);
-			}
-		}
-	}
 	
 	/**
 	 * 
@@ -151,29 +108,25 @@ public class SlotMachineManager {
 		// increment xp with # of coins spent and update leaderboard (do this with batching later?)
 		player.setXp(player.getXp()+coins);
 		PlayerManager.getInstance().storePlayer(player);
-		if (Boolean.getBoolean("xp.leaderboard.enabled")) {
-			if (Boolean.getBoolean("xp.leaderboard.synchronous") && SystemProperty.environment.get().equals(SystemProperty.Environment.Value.Production)) {
-				playerLbMap.put(player.getId(), null);
-			} else {
-				try {
-					ThreadManager.createBackgroundThread(new Runnable() {
-						public void run() {
-							try {
-								OpenSocialService.getInstance().setScore(
-										(short)1, 
-										player.getMocoId(), 
-										player.getXp(), 
-										false);				// forceOverride
-							} catch (Exception ex) {
-								log.log(Level.WARNING,"error submitting score for player: "+player,ex);
-								throw new RuntimeException(ex);
-							}
+		if (Boolean.getBoolean("xp.leaderboard.enabled") && Boolean.getBoolean("xp.leaderboard.synchronous")) {
+			try {
+				ThreadManager.createBackgroundThread(new Runnable() {
+					public void run() {
+						try {
+							OpenSocialService.getInstance().setScore(
+									(short)1, 
+									player.getMocoId(), 
+									player.getXp(), 
+									false);				// forceOverride
+						} catch (Exception ex) {
+							log.log(Level.WARNING,"error submitting score for player: "+player,ex);
+							throw new RuntimeException(ex);
 						}
-					}).start();
-				} catch (Exception e) {
-					log.log(Level.WARNING,"error creating lb thread for submitting score for player: "+player,e);
-				}
-			}			
+					}
+				}).start();
+			} catch (Exception e) {
+				log.log(Level.WARNING,"error creating lb thread for submitting score for player: "+player,e);
+			}		
 		}
 		return spinResult;
 	}

@@ -1,11 +1,11 @@
-<!-- Indices written at Sun, 22 Jul 2012 18:25:32 UTC -->
+<!-- Indices written at Sun, 22 Jul 2012 23:34:52 UTC -->
 
 <datastore-indexes>
 
     <!-- Used 1 time in query history -->
     <datastore-index kind="Player" ancestor="false" source="auto">
-        <property name="accessToken" direction="asc"/>
-        <property name="creationtime" direction="desc"/>
+        <property name="deleted" direction="asc"/>
+        <property name="updatetime" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>

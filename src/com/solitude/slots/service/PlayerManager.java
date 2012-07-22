@@ -14,6 +14,7 @@ import com.solitude.slots.cache.GAECacheManager;
 import com.solitude.slots.data.DataStoreException;
 import com.solitude.slots.data.GAEDataManager;
 import com.solitude.slots.data.QueryCondition;
+import com.solitude.slots.entities.AbstractGAEPersistent;
 import com.solitude.slots.entities.Pair;
 import com.solitude.slots.entities.Player;
 import com.solitude.slots.opensocial.Person;
@@ -72,6 +73,19 @@ public class PlayerManager {
 	}
 	
 	/**
+	 * Fetch players who played within the last hours specified
+	 * @param hours to include
+	 * @return list of players
+	 * @throws DataStoreException for data error
+	 */
+	public List<Player> getRecentPlayers(int hours) throws DataStoreException {
+		Set<QueryCondition> conditions = new HashSet<QueryCondition>();
+		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_DELETED_KEY,false));
+		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_UPDATE_KEY,System.currentTimeMillis()-hours*3600*1000,QueryCondition.QUERY_OPERATOR.GREATER_THAN_EQUALS));
+		return GAEDataManager.getInstance().query(Player.class, conditions, null, false);
+	}
+	
+	/**
 	 * Called on start of game player which will verify redirect parameters (set by system 
 	 * property "redirect.validate.enabled") and load player.  If new user  
 	 * 
@@ -83,7 +97,7 @@ public class PlayerManager {
 	 * @throws Exception on unexpected error
 	 */
 	public Pair<Player,Integer> startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
-		if (Boolean.valueOf(System.getProperty("redirect.validate.enabled")) && SystemProperty.environment.get().equals(SystemProperty.Environment.Value.Production)) {
+		if (Boolean.getBoolean("redirect.validate.enabled") && SystemProperty.environment.get().equals(SystemProperty.Environment.Value.Production)) {
 			// validate redirect parameters from moco
 			String expectedVerifier = DigestUtils.md5Hex(userId+Long.toString(timestamp)+GameUtils.getGameGoldSecret());
 			if (!expectedVerifier.equalsIgnoreCase(verifier)) throw new UnAuthorizedException("Invalid verifier!");
