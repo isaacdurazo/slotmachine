@@ -34,24 +34,12 @@ public class PlayerManager {
 	private PlayerManager() { }
 	
 	/**
-	 * Called on start of game player which will verify redirect parameters (set by system 
-	 * property "redirect.validate.enabled") and load player.  If new user  
-	 * 
-	 * @param userId of user
-	 * @param timestamp for verification
-	 * @param verifier token
+	 * Called on start of game player for webkit devices where accessToken is known 
+	 * @param accessToken for access to moco
 	 * @return pair of player (will create if new) and coins awarded as part of consecutive play
-	 * @throws UnAuthorizedException if verifier is invalid
 	 * @throws Exception on unexpected error
 	 */
-	public Pair<Player,Integer> startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
-		if (Boolean.valueOf(System.getProperty("redirect.validate.enabled"))) {
-			// validate redirect parameters from moco
-			String expectedVerifier = DigestUtils.md5Hex(userId+Long.toString(timestamp)+GameUtils.getGameGoldSecret());
-			if (expectedVerifier.equalsIgnoreCase(verifier)) throw new UnAuthorizedException("Invalid verifier!");
-		}
-		// lookup access token via opensocial request
-		String accessToken = OpenSocialService.getInstance().fetchOAuthToken(userId, GameUtils.getGameAdminToken());
+	public Pair<Player,Integer> startGamePlayer(String accessToken) throws Exception {
 		// look up user with given access token
 		Player player = this.getPlayer(accessToken);
 		if (player == null) {
@@ -80,6 +68,28 @@ public class PlayerManager {
 		// store player (if new or to track consecutive days)
 		GAEDataManager.getInstance().store(player);
 		return new Pair<Player, Integer>(player,coinsAwarded);
+	}
+	
+	/**
+	 * Called on start of game player which will verify redirect parameters (set by system 
+	 * property "redirect.validate.enabled") and load player.  If new user  
+	 * 
+	 * @param userId of user
+	 * @param timestamp for verification
+	 * @param verifier token
+	 * @return pair of player (will create if new) and coins awarded as part of consecutive play
+	 * @throws UnAuthorizedException if verifier is invalid
+	 * @throws Exception on unexpected error
+	 */
+	public Pair<Player,Integer> startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
+		if (Boolean.valueOf(System.getProperty("redirect.validate.enabled"))) {
+			// validate redirect parameters from moco
+			String expectedVerifier = DigestUtils.md5Hex(userId+Long.toString(timestamp)+GameUtils.getGameGoldSecret());
+			if (!expectedVerifier.equalsIgnoreCase(verifier)) throw new UnAuthorizedException("Invalid verifier!");
+		}
+		// lookup access token via opensocial request
+		return this.startGamePlayer(OpenSocialService.getInstance().fetchOAuthToken(userId, GameUtils.getGameAdminToken()));
+		
 	}
 	
 	/**

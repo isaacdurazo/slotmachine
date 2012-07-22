@@ -17,7 +17,7 @@
     <property name="redirect.validate.enabled" value="true"/>
     <property name="game.moco.id" value="1252"/>
     <property name="game.visitor.url" value="/landing.jsp"/>  
-    <property name="mocospace.main.url" value="http://www.mocospace.com/wap2/games?gid=1252"/>  
+    <property name="mocospace.main.url" value="http://www.mocospace.com/games?gid=1252"/>  
     <property name="mocospace.opensocial.api.endpoint" value="https://apps.mocospace.com/social"/> 
     
     <!-- game play properties -->
