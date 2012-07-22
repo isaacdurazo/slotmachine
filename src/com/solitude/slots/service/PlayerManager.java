@@ -129,7 +129,7 @@ public class PlayerManager {
 		if (playerIds.isEmpty()) return null;
 		for (long playerId : playerIds) {
 			Player player = GAECacheManager.getInstance().get(playerId, Player.class);
-			if (!player.isDeleted()) return player;
+			if (player != null && !player.isDeleted()) return player;
 		}
 		return null;
 	}
