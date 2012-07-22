@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.google.appengine.api.utils.SystemProperty;
 import com.solitude.slots.cache.CacheStoreException;
 import com.solitude.slots.cache.GAECacheManager;
 import com.solitude.slots.data.DataStoreException;
@@ -82,7 +83,7 @@ public class PlayerManager {
 	 * @throws Exception on unexpected error
 	 */
 	public Pair<Player,Integer> startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
-		if (Boolean.valueOf(System.getProperty("redirect.validate.enabled"))) {
+		if (Boolean.valueOf(System.getProperty("redirect.validate.enabled")) && SystemProperty.environment.get().equals(SystemProperty.Environment.Value.Production)) {
 			// validate redirect parameters from moco
 			String expectedVerifier = DigestUtils.md5Hex(userId+Long.toString(timestamp)+GameUtils.getGameGoldSecret());
 			if (!expectedVerifier.equalsIgnoreCase(verifier)) throw new UnAuthorizedException("Invalid verifier!");

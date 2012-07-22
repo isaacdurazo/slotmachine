@@ -18,7 +18,8 @@ try {
 	
 	fSpinOK=true;
 } catch (InsufficientFundsException ife) {
-	fSpinOK=false;
+	pageContext.forward("/topup.jsp?message="+java.net.URLEncoder.encode("You need more coins!","UTF-8"));
+	return;
 }
 
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
