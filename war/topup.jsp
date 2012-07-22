@@ -30,6 +30,8 @@ if (coin > 0 && gold > 0 && formValidation.equals((String)request.getSession().g
 	try {
 		// valid transaction so debit and go back to main page
 		OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,topupAction);
+		player.setCoins(player.getCoins()+coin);
+		PlayerManager.getInstance().storePlayer(player);
 		pageContext.forward("/");
 		return;
 	} catch (OpenSocialService.GoldTopupRequiredException e) {
