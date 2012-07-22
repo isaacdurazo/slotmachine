@@ -9,24 +9,30 @@
 
 </head>
 <body>
-<h1>About Slot Mania</h1>
-<div>
-<ul>
-<li>Come back daily to get FREE coins and spin to win!</li>
-<li>Weekly Coin Prize: Gain eXPerience as you play and become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li>
-<li>Weekly Moco Gold JACKPOT: One player guaranteed to win the Gold jackpot. The more you spin the more likely you win!</li>
-</ul>
-</div>
-<h1>Payout Table</h1>
-<div>
-3x diamonds: 500 <br/>
-3x 7: 100 <br/>
-3x bars: 50 <br/> 
-3x bells: 20 <br/>
-3x watermelon: 15 <br/>
-3x chrry: 10 <br/>
-2x cherry: 5 <br/>
-1x cherry: 2 <br/>
-</div>
+	<div id="container">
+			<div class="wrapper">
+				 <div class="header-logo">
+			   		<h3>About</h3>
+			    	<img width="103" height="18" src="images/logo.gif"/>
+			    </div>
+				<ul  class="list">
+					<li>Come back daily to get <b>FREE</b> coins and spin to win!</li><br />
+					<li><b>Weekly Coin Prize:</b> Gain eXPerience as you play and become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
+					<li><b>Weekly Moco Gold JACKPOT:</b> One player guaranteed to win the Gold jackpot. The more you spin the more likely you win!</li><br />
+				</ul>
+				
+				<div>Payout Table</div>
+				<div>
+				3x diamonds: 500 <br/>
+				3x 7: 100 <br/>
+				3x bars: 50 <br/> 
+				3x bells: 20 <br/>
+				3x watermelon: 15 <br/>
+				3x chrry: 10 <br/>
+				2x cherry: 5 <br/>
+				1x cherry: 2 <br/>
+				</div>
+			</div>
+	</div>
 </body>
 </html>
