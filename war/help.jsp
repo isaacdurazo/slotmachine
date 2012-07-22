@@ -19,11 +19,14 @@
 </div>
 <h1>Payout Table</h1>
 <div>
-List graphics</div>
-<a href="index.jsp?uid=<%=(String)request.getParameter("uid")%>">My Moco Info</a><br/>
-
-uid=<%=(String)request.getParameter("uid")%><br/> 
-timestamp=<%=(String)request.getParameter("timestamp")%><br/> 
-verify=<%=(String)request.getParameter("verify")%><br/> 
+3x diamonds: 500 <br/>
+3x 7: 100 <br/>
+3x bars: 50 <br/> 
+3x bells: 20 <br/>
+3x watermelon: 15 <br/>
+3x chrry: 10 <br/>
+2x cherry: 5 <br/>
+1x cherry: 2 <br/>
+</div>
 </body>
 </html>
