@@ -420,6 +420,7 @@ public class OpenSocialService {
 	 * @throws ApiException on API error
 	 */
 	private static String doHttpPost(String url, String body) throws IOException, ApiException {
+		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"post to url: "+url+", body: "+body);
 		return doHttpRequest(url,"POST",null,body,
 				Integer.parseInt(System.getProperty("url.connect.timeout","2000")),
 				Integer.parseInt(System.getProperty("url.read.timeout","2000")));

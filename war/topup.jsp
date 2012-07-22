@@ -10,10 +10,10 @@ if (playerId == null || (player = PlayerManager.getInstance().getPlayer(playerId
 }
 // load random uuid
 String topupAction = request.getParameter("topup");
-String formValidation = (String)request.getSession().getAttribute("topUpValidation");
+String formValidation = request.getParameter("verify");
 if (formValidation == null && topupAction == null) {
 	formValidation = java.util.UUID.randomUUID().toString();
-	request.setAttribute("topUpValidation",formValidation);
+	request.getSession().setAttribute("topUpValidation",formValidation);
 }
 int coin = 0, gold = 0;
 if ("Buy 10 Coins for 99 gold".equals(topupAction)) {
@@ -26,22 +26,26 @@ if ("Buy 10 Coins for 99 gold".equals(topupAction)) {
 	coin = 100;
 	gold = 499;
 }
-if (coin > 0 && gold > 0 && formValidation.equals((String)request.getSession().getAttribute("topUpValidation"))) {
-	try {
-		// valid transaction so debit and go back to main page
-		OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,topupAction);
-		player.setCoins(player.getCoins()+coin);
-		PlayerManager.getInstance().storePlayer(player);
-		pageContext.forward("/");
-		return;
-	} catch (OpenSocialService.GoldTopupRequiredException e) {
-		// redirect 
-		response.sendRedirect(e.getRedirectUrl());
-		return;
-	} catch (Exception e) {
-		Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"error attempting to topup for player: "+player,e);
+if (coin > 0 && gold > 0) {
+	if (formValidation.equals((String)request.getSession().getAttribute("topUpValidation"))) {
+		try {
+			// valid transaction so debit and go back to main page
+			OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,topupAction);
+			player.setCoins(player.getCoins()+coin);
+			PlayerManager.getInstance().storePlayer(player);
+			pageContext.forward("/");
+			return;
+		} catch (OpenSocialService.GoldTopupRequiredException e) {
+			// redirect 
+			response.sendRedirect(e.getRedirectUrl());
+			return;
+		} catch (Exception e) {
+			Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"error attempting to topup for player: "+player,e);
+		}
+	} else {
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"invalid topup verification for player: "+player);
 	}
-}
+} 
 String message = request.getParameter("message");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
