@@ -102,10 +102,8 @@ public class GAEDataManager implements DataManager<AbstractGAEPersistent> {
 	public void store(AbstractGAEPersistent persistent) throws DataStoreException, CacheStoreException {
 		if (persistent == null) throw new IllegalArgumentException("persistent is null?!");
 		persistent.setUpdatetime();
-		if (persistent.getId() == 0) {
-			persistent.setId(GAEUtil.getEntityKey(persistent));
-			GAECacheManager.getInstance().put(persistent);
-		}
+		persistent.setId(GAEUtil.getEntityKey(persistent));
+		GAECacheManager.getInstance().put(persistent);
 		Entity storedEntity = new Entity(GAEUtil.getEntityName(persistent.getClass()), persistent.getId());
 		for (Map.Entry<String, Object> entry : persistent.serialize().entrySet()) {
 			if (entry.getKey().equals(AbstractGAEPersistent.ENTITY_ID_KEY)) continue;

@@ -2,14 +2,13 @@
 <% 
 String action = request.getParameter("action");
 SpinResult spinResult = null;
-if ("credit".equals(action)) {
+/*if ("credit".equals(action)) {
 	player.setCoins(player.getCoins()+10);
 	PlayerManager.getInstance().storePlayer(player);
 } else if ("debit".equals(action)) {
 	player.setCoins(0);
 	PlayerManager.getInstance().storePlayer(player);
-}
-//coinsAwarded=2;
+}*/
 %>
  
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -56,11 +55,11 @@ if ("credit".equals(action)) {
 		        <a href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a>
 		        
 		    </div>
-			<br/>Admin Tools<br/>
+			<!-- br/>Admin Tools<br/>
 			<div class="menu">
 		        <a href="<%= response.encodeURL("/?action=credit") %>">Credit 10 coins</a>
 		        <a href="<%= response.encodeURL("/?action=debit") %>">Set Coins=0</a>
-			</div>
+			</div-->
 	    </div>
 	</div>
   </body>

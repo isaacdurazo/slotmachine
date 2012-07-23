@@ -23,8 +23,6 @@ public abstract class AbstractGAEPersistent implements MapSerializable {
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {
 		if (inputMap == null) throw new IllegalArgumentException("Null map?");
-		Object keyObj = inputMap.get(ENTITY_ID_KEY);
-		this.id = keyObj == null ? 0 : (Long)keyObj;
 		Object versionObj = inputMap.get(SERIAL_VERSION_KEY);
 		if (versionObj == null) this.version = this.getCurrentVersion();
 		else if (versionObj instanceof Integer) this.version = (Integer)versionObj;
@@ -39,7 +37,6 @@ public abstract class AbstractGAEPersistent implements MapSerializable {
 	@Override
 	public Map<String, Object> serialize() {
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put(ENTITY_ID_KEY, this.getId());
 		map.put(SERIAL_VERSION_KEY, this.getCurrentVersion());
 		map.put(ENTITY_CREATION_KEY, this.creationtime);
 		map.put(ENTITY_UPDATE_KEY, this.updatetime);

@@ -70,6 +70,7 @@ public class SlotMachineManager {
 			log.log(Level.SEVERE,"Unable to load pay out table!");
 		}
 	}
+	
 	/** random generator (nextInt is thread-safe) */
 	private static final Random random = new Random();
 	
@@ -107,23 +108,26 @@ public class SlotMachineManager {
 		// increment xp with # of coins spent and update leaderboard (do this with batching later?)
 		player.setXp(player.getXp()+coins);
 		PlayerManager.getInstance().storePlayer(player);
-		if (Boolean.getBoolean(System.getProperty("xp.leaderboard.enabled"))) {
-			Thread thread = ThreadManager.createBackgroundThread(new Runnable() {
-				public void run() {
-					try {
-						OpenSocialService.getInstance().setScore(
-								(short)1, 
-								player.getMocoId(), 
-								player.getXp(), 
-								false);				// forceOverride
-					} catch (Exception ex) {
-						throw new RuntimeException(ex);
+		if (Boolean.getBoolean("xp.leaderboard.enabled") && Boolean.getBoolean("xp.leaderboard.synchronous")) {
+			try {
+				ThreadManager.createBackgroundThread(new Runnable() {
+					public void run() {
+						try {
+							OpenSocialService.getInstance().setScore(
+									(short)1, 
+									player.getMocoId(), 
+									player.getXp(), 
+									false);				// forceOverride
+						} catch (Exception ex) {
+							log.log(Level.WARNING,"error submitting score for player: "+player,ex);
+							throw new RuntimeException(ex);
+						}
 					}
-				}
-			});
-		thread.start();
+				}).start();
+			} catch (Exception e) {
+				log.log(Level.WARNING,"error creating lb thread for submitting score for player: "+player,e);
+			}		
 		}
-		log.log(Level.INFO,"random="+idx+" "+spinResult+", player: "+player);
 		return spinResult;
 	}
 
