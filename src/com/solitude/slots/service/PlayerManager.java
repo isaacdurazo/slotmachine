@@ -44,7 +44,8 @@ public class PlayerManager {
 	public Pair<Player,Integer> startGamePlayer(String accessToken) throws Exception {
 		// look up user with given access token
 		Player player = this.getPlayer(accessToken);
-		if (player == null) {
+		boolean newPlayer = player == null;
+		if (newPlayer) {
 			// create new player by first fetching moco data
 			player = new Player();
 			Person person = OpenSocialService.getInstance().fetchSelf(accessToken, Person.Field.BIRTHDAY.toString(), 
@@ -59,16 +60,25 @@ public class PlayerManager {
 			player.setMale("male".equals((String)person.getFieldValue(Person.Field.GENDER.toString())));
 			player.setMocoId(Integer.parseInt((String)person.getFieldValue(Person.Field.ID.toString())));
 			player.setName((String)person.getFieldValue(Person.Field.DISPLAY_NAME.toString()));
+			player.setCoins(Integer.getInteger("new.player.coins", 10));
 		}
 		// award coins if consecutive days greater than 0 and last consecutive days increment last than 100 ms (just happened)
 		int coinsAwarded = 0;
 		if (System.currentTimeMillis()-player.getConsecutiveDaysTimestamp() < 100) {
-			coinsAwarded = Integer.parseInt(System.clearProperty("consecutive.days.coin.award.per.day"))*
-					(1+Math.min(player.getConsecutiveDays(),Integer.parseInt(System.clearProperty("consecutive.days.coin.award.day.cap"))));
+			coinsAwarded = Integer.getInteger("consecutive.days.coin.award.per.day")*
+					(1+Math.min(player.getConsecutiveDays(),Integer.getInteger("consecutive.days.coin.award.day.cap")));
 			player.setCoins(player.getCoins()+coinsAwarded);
 		}
 		// store player (if new or to track consecutive days)
 		GAEDataManager.getInstance().store(player);
+		// add to look up by access token cache
+		if (newPlayer) {
+			final String cacheKey = "moco_token_"+accessToken;
+			List<Long> existingPlayerIds = GAECacheManager.getInstance().getIds(CACHE_REGION, cacheKey);
+			if (existingPlayerIds == null) existingPlayerIds = new ArrayList<Long>();
+			existingPlayerIds.add(0, player.getId());
+			GAECacheManager.getInstance().putIds(CACHE_REGION, cacheKey, existingPlayerIds);
+		}
 		return new Pair<Player, Integer>(player,coinsAwarded);
 	}
 	
@@ -97,6 +107,7 @@ public class PlayerManager {
 	 * @throws Exception on unexpected error
 	 */
 	public Pair<Player,Integer> startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
+		if (userId <= 0) throw new IllegalArgumentException("invalid userId: "+userId);
 		if (Boolean.getBoolean("redirect.validate.enabled") && SystemProperty.environment.get().equals(SystemProperty.Environment.Value.Production)) {
 			// validate redirect parameters from moco
 			String expectedVerifier = DigestUtils.md5Hex(userId+Long.toString(timestamp)+GameUtils.getGameGoldSecret());
@@ -118,10 +129,11 @@ public class PlayerManager {
 		// find players with this moco id
 		final String cacheKey = "moco_token_"+accessToken;
 		List<Long> playerIds = GAECacheManager.getInstance().getIds(CACHE_REGION, cacheKey);
-		if (playerIds == null) {
+		if (playerIds == null || playerIds.isEmpty()) {
 			// make datastore request
 			Set<QueryCondition> conditions = new HashSet<QueryCondition>();
 			conditions.add(new QueryCondition("accessToken",accessToken));
+			conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_DELETED_KEY,false));
 			List<Player> players = GAEDataManager.getInstance().query(
 					Player.class, 
 					conditions, 

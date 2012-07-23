@@ -79,7 +79,7 @@ public class GAECacheManager implements CacheManager<AbstractGAEPersistent> {
 	@Override
 	public <K extends AbstractGAEPersistent> K get(long id, Class<?> persistentClass) throws CacheStoreException {
 		try {
-			return this.<K>getAll(Arrays.asList(id), persistentClass, false).get(0);
+			return this.<K>getAll(Arrays.asList(id), persistentClass, true).get(0);
 		} catch (DataStoreException e) {
 			log.log(Level.SEVERE,"This should never happen!",e);
 			return null;
@@ -114,6 +114,7 @@ public class GAECacheManager implements CacheManager<AbstractGAEPersistent> {
 				try {
 					AbstractGAEPersistent persistent = (AbstractGAEPersistent) persistentClass.newInstance();
 					persistent.deserialize((Map<String,Object>)cachedObject);
+					persistent.setId(id);
 					result.add((K)persistent);
 				} catch (SecurityException e) {
 					log.log(Level.SEVERE, "Error inflating type: "+entityName,e);

@@ -38,9 +38,13 @@ public class GAEUtil {
 	/** @return key to be used for entity type given */
 	public static long getEntityKey(AbstractGAEPersistent persistent) throws DataStoreException {
 		try {
-			return persistent.getId() > 0 ? persistent.getId() : 
-				DatastoreServiceFactory.getDatastoreService().allocateIds(
+			if (persistent.getId() > 0) return persistent.getId();
+			else {
+				long id = DatastoreServiceFactory.getDatastoreService().allocateIds(
 						getEntityName(persistent.getClass()), 1).getStart().getId();
+				log.log(Level.FINEST, "creating id: "+id+" for "+persistent.toString());
+				return id;
+			}
 		} catch (DatastoreFailureException e) {
 			throw new DataStoreException(e);
 		}
