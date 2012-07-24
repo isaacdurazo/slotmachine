@@ -1,0 +1,112 @@
+body { 
+	font-family: Arial;
+	background-color: #000;
+	color:#FFF;
+	margin:0;
+}
+
+#container {
+	text-align:center;
+}
+
+.wrapper {
+	width: 120px;
+	display: inline-block;
+}
+    	
+h3 {
+	margin:0;
+	font-size: 14px;
+}
+
+h6 {
+	margin:0;
+	color:#aaa;	
+}
+
+ul {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+table {
+	border-collapse:collapse;
+}
+
+.header-logo {
+	background-color: #c70304;
+	padding:4px 5px 0px;
+	border: 2px solid #950405;
+	width: 106px;
+	text-align: center;
+	color: #fff;
+	margin-bottom:3px;
+}
+
+.coins {
+	padding-left:5px;
+}
+
+.bets div {
+	background-color: #07a107;
+	border: 2px solid #367219;
+	text-align:center;
+	padding: 5px 0;
+	margin: 3px 0;
+	font-size: 13px;
+}
+
+a.bet {
+	color:#FFF;	
+}
+
+.play {
+	background-color: #07a107;
+	padding:3px 0;
+	border: 2px solid #367219;
+	margin: 5px 0;
+	width:116px;
+	text-align:center;
+}
+
+.play a {
+	color: #FFF;
+	
+}
+
+.subheader {
+	font-size:11px;
+	text-align: center;
+	display: inline-block;
+}
+
+.menu {
+	padding: 3px 10px 0 5px;
+	text-align:left;
+}
+
+.menu a{
+	color: #c70304;
+}
+
+.wonspin, .jackpotteaser {
+	color: #07a107;
+}
+
+.jackpotteaser{
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	margin-top: 5px;
+	font-size:14px;
+}
+
+.list {
+	margin: 10px 0;
+	font-size: 13px;
+}
+
+.payout-table {
+	text-align:left;
+}
