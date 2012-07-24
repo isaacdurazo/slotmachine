@@ -11,6 +11,10 @@
 .classpath
 .settings/*
 
+#GAE dynamix stuff
+war/WEB_INF/appengine-generated/*
+
+
 # Package Files #
 #*.jar
 #*.war
