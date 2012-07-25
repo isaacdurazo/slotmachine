@@ -23,8 +23,7 @@ try {
 }
 
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
-
-
+int key = 1;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -88,10 +87,10 @@ symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still g
 			
 			<div class="bets">
 				<div>
-					<a class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin") %>">Bet 1!</a>
+					<%= key %>. <a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin") %>">Bet 1!</a>
 				</div>
 				<div>
-					<a class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin") %>">Bet Max (<%= System.getProperty("max.bet.coins") %> coins)!</a>
+					<%= key %>. <a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin") %>">Bet Max (<%= System.getProperty("max.bet.coins") %> coins)!</a>
 				</div>
 			</div>
 			<%} %>
@@ -100,8 +99,8 @@ symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still g
 			
 		    
 		     <div class="menu">
-		        <a href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a>
-		        <a href="<%= response.encodeURL("/") %>">Main</a>
+		        <%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a><br/>
+		        <%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/") %>">Main</a>
 		    </div>
 		</div>
 	</div>

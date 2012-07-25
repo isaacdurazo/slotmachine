@@ -34,6 +34,10 @@
 						1x <img width="16" height="16" src="images/individual/cherry.gif"/>: 2 <br/>
 					</div>
 				</div>
+				<div class="menu">
+			    	1. <a accessKey="1" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a><br/>
+			        2. <a accessKey="2" href="<%= response.encodeURL("/") %>">Main</a>
+			    </div>
 			</div>
 	</div>
 </body>
