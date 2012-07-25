@@ -123,3 +123,12 @@ a.bet {
 	font-size: 10px;
 	width: 120px;
 }
+
+.results {
+	font-size:14px;
+	height:35px;
+}
+
+.results .lostspin {
+	line-height:35px
+}

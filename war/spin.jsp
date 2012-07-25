@@ -43,6 +43,7 @@ int key = 1;
 				</tr>
 			</table>
 			
+			<div class="results">
 			<% if (fSpinOK==true) { 
 					if (spinResult.getCoins()>0) {
 			%>
@@ -60,8 +61,8 @@ int key = 1;
 				You have no coins!
 				</div>
 			<% } %>
+			</div>
 			
-				<div>
 				<table>
 					<tr align="center" >
 						<td>
@@ -78,7 +79,6 @@ int key = 1;
 						</td>
 					</tr>
 				</table>
-				</div>
 			<% if (fSpinOK==true) { %>
 			
 			<div class="bets">

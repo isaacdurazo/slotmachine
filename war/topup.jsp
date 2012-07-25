@@ -52,10 +52,10 @@ String message = request.getParameter("message");
 		    <div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
 		    <% if (message != null) { %><div style="color:red"><%= message %></div><% } %>
 			<form action="<%= response.encodeURL("/topup.jsp") %>" method="get">
-				<input type="hidden" name="verify" value="<%= formValidation %>"/>
-				<input type="submit" name="topup" value="Buy 10 Coins for 99 gold"/>
-				<input type="submit" name="topup" value="Buy 50 Coins for 299 gold"/>
-				<input type="submit" name="topup" value="Buy 100 Coins for 499 gold"/>
+				<input class="input" type="hidden" name="verify" value="<%= formValidation %>"/>
+				<input class="input" type="submit" name="topup" value="Buy 10 Coins for 99 gold"/>
+				<input class="input" type="submit" name="topup" value="Buy 50 Coins for 299 gold"/>
+				<input class="input" type="submit" name="topup" value="Buy 100 Coins for 499 gold"/>
 			</form>
 			
 			<div class="menu">
