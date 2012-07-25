@@ -12,7 +12,7 @@
 .settings/*
 
 #GAE dynamix stuff
-war/WEB_INF/appengine-generated/*
+war/WEB-INF/appengine-generated/*
 
 
 # Package Files #
