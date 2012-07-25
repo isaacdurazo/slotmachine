@@ -26,11 +26,7 @@ symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still g
 int key = 1;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
-    <title>Slot Mania</title>
-    <link rel="stylesheet" href="css/wap.css" />    
-  </head>
+<%@ include file="header_html.jsp" %>
   <body>
   	<div id="container">
 	  	<div class="wrapper">

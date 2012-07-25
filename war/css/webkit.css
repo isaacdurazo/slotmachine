@@ -10,7 +10,7 @@ body {
 }
 
 .wrapper {
-	width: 120px;
+	width: 320px;
 	display: inline-block;
 }
     	
@@ -39,7 +39,7 @@ table {
 	background-color: #c70304;
 	padding:4px 5px 0px;
 	border: 2px solid #950405;
-	width: 106px;
+	width: 300px;
 	text-align: center;
 	color: #fff;
 	margin-bottom:3px;

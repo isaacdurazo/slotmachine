@@ -19,11 +19,7 @@ if (!"success".equals(action)) {
 
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Invite Friends</title>
-<link rel="stylesheet" href="css/wap.css" />    
-</head>
+<%@ include file="header_html.jsp" %>
 <body>
     <h1>Invite Friends</h1>
 	<div>
