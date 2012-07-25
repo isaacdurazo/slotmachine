@@ -1,14 +1,17 @@
 <%@ include file="header.jsp" %>
-<% 
-String action = request.getParameter("action");
-SpinResult spinResult = null;
-/*if ("credit".equals(action)) {
-	player.setCoins(player.getCoins()+10);
-	PlayerManager.getInstance().storePlayer(player);
-} else if ("debit".equals(action)) {
-	player.setCoins(0);
-	PlayerManager.getInstance().storePlayer(player);
-}*/
+<%
+	String action = request.getParameter("action");
+	SpinResult spinResult = null;
+
+	if (player.hasAdminPriv()) {
+		if ("credit".equals(action)) {
+			player.setCoins(player.getCoins() + 10);
+			PlayerManager.getInstance().storePlayer(player);
+		} else if ("debit".equals(action)) {
+			player.setCoins(0);
+			PlayerManager.getInstance().storePlayer(player);
+		}
+	}
 %>
  
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -53,11 +56,17 @@ SpinResult spinResult = null;
 		        <div>4. <a accessKey="4" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div>
 		        
 		    </div>
-			<!-- br/>Admin Tools<br/>
+			<%
+				if (player.hasAdminPriv()) {
+			%>
+			<br/>Admin Tools<br/>
 			<div class="menu">
-		        <a href="<%= response.encodeURL("/?action=credit") %>">Credit 10 coins</a>
-		        <a href="<%= response.encodeURL("/?action=debit") %>">Set Coins=0</a>
-			</div-->
+		        <div><a href="<%=response.encodeURL("/?action=credit")%>">Credit 10 coins</a></div>
+		        <div><a href="<%=response.encodeURL("/?action=debit")%>">Set Coins=0</a></div>
+			</div>
+			<%
+				}
+			%>
 	    </div>
 	</div>
   </body>
