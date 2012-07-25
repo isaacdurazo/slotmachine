@@ -1,5 +1,6 @@
 package com.solitude.slots.entities;
 
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
 
@@ -83,6 +84,14 @@ public class Player extends AbstractGAEPersistent {
 	/** @param locale for user's language in string form */
 	public void setLocale(Locale locale) { this.locale = locale; }
 	
+	
+	public boolean hasAdminPriv() {
+		String[] mocoIds = ((String)System.getProperty("game.adminpriv.ids")).split(",");
+		if (Arrays.asList(mocoIds).contains(Integer.toString(this.mocoId)))
+			return (true);
+		else 
+			return(false);
+	}
 	
 	@Override
 	public void setUpdatetime() {
