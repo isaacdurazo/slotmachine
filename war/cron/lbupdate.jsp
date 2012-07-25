@@ -9,11 +9,9 @@ java.util.List<Player> players = PlayerManager.getInstance().getRecentPlayers(4)
 Logger.getLogger(request.getRequestURI()).log(Level.INFO,"update leaderboard for "+players.size()+" players");
 for (Player player : players) {
 	try {
-		OpenSocialService.getInstance().setScore(
-			(short)1,
-			player.getMocoId(),
-			player.getXp(),
-			false);
+		OpenSocialService.getInstance().setScores(player.getMocoId(),
+				new OpenSocialService.ScoreUpdate((short)1, player.getXp(), false),
+				new OpenSocialService.ScoreUpdate((short)2, player.getCoinsWon(), false));
 	} catch (Exception e) {
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"error updating leaderboard for: "+player,e);
 	}

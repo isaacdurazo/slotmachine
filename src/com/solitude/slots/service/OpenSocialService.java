@@ -185,27 +185,52 @@ public class OpenSocialService {
 	}
 	
 	/**
-	 * Set a player's score on a leaderboard
+	 * Set a player's score(s) on a leaderboard
 	 * 
 	 * @param type specifying the leaderboard
-	 * @param userId of user whose score is set
-	 * @param score to be set
-	 * @param forceOverride if true then update score event if new score is lower than what is in leaderboard
+	 * @param scoreUpdates with info on scores to update
 	 * @throws ApiException on API error
 	 * @throws IOException on connection error
 	 */
 	@SuppressWarnings("unchecked")
-	public void setScore(short type, int userId, long score, boolean forceOverride) throws IOException, ApiException {
+	public void setScores(int userId, ScoreUpdate... scoreUpdates) throws IOException, ApiException {
+		if (scoreUpdates == null || scoreUpdates.length == 0) return;
 		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/leaderboard?oauth_token="+URLEncoder.encode(GameUtils.getGameAdminToken(),"UTF-8");		
 		JSONObject scores = new JSONObject();		
 		scores.put("userId",userId);
-		scores.put(type,score);
-		if (forceOverride) {
-			JSONArray overrideTypes = new JSONArray();
-			overrideTypes.add(type);
-			scores.put("forceOverride",type);
+		JSONArray overrideTypes = new JSONArray();
+		for (ScoreUpdate scoreUpdate : scoreUpdates) {
+			scores.put(scoreUpdate.type,scoreUpdate.score);
+			if (scoreUpdate.forceOverride) {
+				overrideTypes.add(scoreUpdate.type);
+			}
 		}
+		scores.put("forceOverride",overrideTypes);
 		doHttpPost(url,scores.toJSONString());		
+	}
+	
+	/**
+	 * Hold data associated with updating a player's scores in a leaderboard
+	 * @author kwright
+	 */
+	public static class ScoreUpdate {
+		/** type of leaderboard */
+		private final short type;
+		/** new score */
+		private final long score;
+		/** if true will overwrite leaderboard score even if new value is lower */
+		private final boolean forceOverride;
+		
+		/**
+		 * @param type of leaderboard
+		 * @param score to be set
+		 * @param forceOverride if true will overwrite leaderboard score even if new value is lower
+		 */
+		public ScoreUpdate(short type, long score, boolean forceOverride) {
+			this.type = type;
+			this.score = score;
+			this.forceOverride = forceOverride;
+		}
 	}
 	
 	/**

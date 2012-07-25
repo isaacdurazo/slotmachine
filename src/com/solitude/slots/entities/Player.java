@@ -1,5 +1,7 @@
 package com.solitude.slots.entities;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Map;
 
@@ -23,6 +25,8 @@ public class Player extends AbstractGAEPersistent {
 	private String image;
 	/** coins available */
 	private int coins = 0;
+	/** coins won */
+	private long coinsWon = 0L;
 	/** xp accumulated */
 	private int xp = 0;
 	/** id of moco profile */
@@ -57,6 +61,11 @@ public class Player extends AbstractGAEPersistent {
 	public int getCoins() { return coins; }
 	/** @param coins available */
 	public void setCoins(int coins) { this.coins = coins; }
+	
+	/** @return coins won since player created (does not include daily grant coins) */
+	public long getCoinsWon() { return coinsWon; }
+	/** @param coinsWon since player created (does not include daily grant coins)*/
+	public void setCoinsWon(long coinsWon) { this.coinsWon = coinsWon; }
 
 	/** @return xp accumulated */
 	public int getXp() { return xp; }
@@ -87,8 +96,12 @@ public class Player extends AbstractGAEPersistent {
 	@Override
 	public void setUpdatetime() {
 		super.setUpdatetime();
-		// see if consecutive days needs to be updated
-		if (System.currentTimeMillis()-consecutiveDaysTimestamp > 24*60*60*1000) {
+		// see if consecutive days needs to be updated (if last timestamp was for the previous day)
+		boolean setToMidnight = false;
+		if (consecutiveDaysTimestamp == 0L) {
+			// never called before so set to today at midnight
+			setToMidnight = true;
+		} else if (System.currentTimeMillis()-consecutiveDaysTimestamp > 24*60*60*1000) {
 			if (System.currentTimeMillis()-consecutiveDaysTimestamp < 48*60*60*1000) {
 				// it has been more than a day but less than 48 so increment
 				this.consecutiveDays++;
@@ -96,7 +109,15 @@ public class Player extends AbstractGAEPersistent {
 				// more than 48 hours so do nothing
 				this.consecutiveDays=0;
 			}
-			this.consecutiveDaysTimestamp = System.currentTimeMillis();
+			// to ensure midnight is roll-over set next timestamp accordingly
+			setToMidnight = true;
+		}
+		if (setToMidnight) {
+			Calendar cal = new GregorianCalendar();
+			cal.set(Calendar.HOUR, 0);
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 1);
+			this.consecutiveDaysTimestamp = cal.getTimeInMillis();
 		}
 	}
 	
@@ -119,6 +140,7 @@ public class Player extends AbstractGAEPersistent {
 		this.locale = createLocaleFromString((String)inputMap.get("locale"));
 		this.consecutiveDays = ((Long)inputMap.get("consecutiveDays")).intValue();
 		this.consecutiveDaysTimestamp = (Long)inputMap.get("consecutiveDaysTimestamp");
+		this.coinsWon = inputMap.get("coinsWon") == null ? 0L : (Long)inputMap.get("coinsWon");
 	}
 
 	@Override
@@ -135,6 +157,7 @@ public class Player extends AbstractGAEPersistent {
 		map.put("locale", this.locale.getLanguage());
 		map.put("consecutiveDays", this.consecutiveDays);
 		map.put("consecutiveDaysTimestamp", this.consecutiveDaysTimestamp);
+		map.put("coinsWon", this.coinsWon);
 		return map;
 	}
 
