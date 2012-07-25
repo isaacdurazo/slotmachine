@@ -29,13 +29,13 @@
 		<table>
 			<tr align="center" >
 				<td>
-					<img width="38" height="64" src="images/animated/animated-bar-0.gif"/>
+					<img width="38" height="64" src="images/animated-3/animated-lemon-0.gif"/>
 				</td>
 				<td>
-					<img width="38" height="64" src="images/animated/animated-bell-0.gif"/>
+					<img width="38" height="64" src="images/animated-3/animated-seven-0.gif"/>
 				</td>
 				<td>
-					<img width="38" height="64" src="images/animated/animated-lemon-0.gif"/>
+					<img width="38" height="64" src="images/animated-3/animated-watermelon-0.gif"/>
 				</td>
 			</tr>
 		</table>

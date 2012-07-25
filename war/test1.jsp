@@ -40,7 +40,11 @@
 			</tr>
 		</table>
 		
-		<div class="bets"><a href="test4.jsp" class="bet">BET ONE</a><a href="test4.jsp" class="bet">BET MAX</a></div>
+		<div class="bets">
+			<a href="test4.jsp" class="bet">Test4</a>
+			<a href="test5.jsp" class="bet">Test5</a>
+			<a href="test6.jsp" class="bet">Test6</a>
+		</div>
 
 		<div class="payout"><a href="#">Payout Table</a></div>
 		<div class="menu"><a href="#">Menu</a></div>
