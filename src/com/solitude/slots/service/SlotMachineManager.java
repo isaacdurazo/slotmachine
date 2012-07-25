@@ -105,6 +105,7 @@ public class SlotMachineManager {
 							spinResult.getSymbols());
 		}
 		player.setCoins(player.getCoins()-coins+spinResult.getCoins());
+		player.setCoinsWon(spinResult.getCoins());
 		// increment xp with # of coins spent and update leaderboard (do this with batching later?)
 		player.setXp(player.getXp()+coins);
 		PlayerManager.getInstance().storePlayer(player);
@@ -113,11 +114,9 @@ public class SlotMachineManager {
 				ThreadManager.createBackgroundThread(new Runnable() {
 					public void run() {
 						try {
-							OpenSocialService.getInstance().setScore(
-									(short)1, 
-									player.getMocoId(), 
-									player.getXp(), 
-									false);				// forceOverride
+							OpenSocialService.getInstance().setScores(player.getMocoId(),
+									new OpenSocialService.ScoreUpdate((short)1, player.getXp(), false),
+									new OpenSocialService.ScoreUpdate((short)2, player.getCoinsWon(), false));
 						} catch (Exception ex) {
 							log.log(Level.WARNING,"error submitting score for player: "+player,ex);
 							throw new RuntimeException(ex);

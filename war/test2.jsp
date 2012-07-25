@@ -8,7 +8,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
     <meta http-equiv="refresh" content="1;url=test3.jsp">
     <title>SLOTMANIA</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/wap.css" />
     
   </head>
 

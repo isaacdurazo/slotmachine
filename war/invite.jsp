@@ -22,6 +22,7 @@ if (!"success".equals(action)) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Invite Friends</title>
+<link rel="stylesheet" href="css/wap.css" />    
 </head>
 <body>
     <h1>Invite Friends</h1>
@@ -29,8 +30,8 @@ if (!"success".equals(action)) {
 		<%=res%>
 	</div>
     <div class="menu">
-        <a href="<%= response.encodeURL("/invite.jsp") %>">Invite More Friends</a>
-        <a href="<%= response.encodeURL("/") %>">Main</a>
+        <div><a href="<%= response.encodeURL("/invite.jsp") %>">Invite More Friends</a></div>
+        <div><a href="<%= response.encodeURL("/") %>">Main</a></div>
     </div>
 </body>
 </html>

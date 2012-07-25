@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Slot Mania</title>
-	<link rel="stylesheet" href="css/style.css" />    
+    <link rel="stylesheet" href="css/wap.css" />    
 
 	</head>
 	<body>
@@ -20,9 +20,9 @@
 					You must be logged in to MocoSpace to play this game!
 				</h3>
 				<div class="menu">
-					<a href="<%=GameUtils.getMocoSpaceHome() %>">Login</a><br />
-					<a href="<%=response.encodeURL("/")+"?uid=12534729" %>">Fake Login as niels</a><br />
-					<a href="<%= response.encodeURL("/help.jsp") %>">What is Slot Mania?</a>
+					<div><a href="<%=GameUtils.getMocoSpaceHome() %>">Login</a></div>
+					<div><a href="<%=response.encodeURL("/")+"?uid=12534729" %>">Fake Login as niels</a></div>
+					<div><a href="<%= response.encodeURL("/help.jsp") %>">What is Slot Mania?</a></div>
 				</div>
 			</div>
 		</div>

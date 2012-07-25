@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Slot Mania</title>
-    <link rel="stylesheet" href="css/style.css" />    
+    <link rel="stylesheet" href="css/wap.css" />    
 </head>
 <body>
 	<div id="container">
@@ -31,9 +31,13 @@
 						3x <img width="16" height="16" src="images/individual/watermelon.gif"/>: 15 <br/>
 						3x <img width="16" height="16" src="images/individual/cherry.gif"/>: 10 <br/>
 						2x <img width="16" height="16" src="images/individual/cherry.gif"/>: 5 <br/>
-						1x <img width="16" height="16" src="images/individual/cherry.gif"/>: 2 <br/>
+						1x <img width="16" height="16" src="images/individual/cherry.gif"/>: 2 <br/> 
 					</div>
 				</div>
+				<div class="menu">
+			    	<div>1. <a accessKey="1" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a><br/></div>
+			       	<div>2. <a accessKey="2" href="<%= response.encodeURL("/") %>">Main</a></div>
+			    </div>
 			</div>
 	</div>
 </body>

@@ -15,7 +15,7 @@ SpinResult spinResult = null;
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
     <title>Slot Mania</title>
-    <link rel="stylesheet" href="css/style.css" />    
+    <link rel="stylesheet" href="css/wap.css" />    
   </head>
 
   <body>
@@ -32,9 +32,7 @@ SpinResult spinResult = null;
 						<b>Coins:</b><%= player.getCoins() %>
 					</td>
 				</tr>
-			</table>
-		 		    
-		    
+			</table>		 		 		   
 		    
 		    <h3>Hello <%= player.getName() %>!</h3>    
 		    <% if (coinsAwarded > 0) { %>
@@ -46,13 +44,13 @@ SpinResult spinResult = null;
 			Jackpot value: <%=System.getProperty("weekly.coin.prize")%> Moco Gold!
 			</div>
 			<div class="play">
-				<a href="<%= response.encodeURL("spin.jsp") %>">Play Now</a>
+				1. <a accessKey="1" href="<%= response.encodeURL("spin.jsp") %>">Play Now</a>
 			</div>
 		
 		    <div class="menu">
-		        <a href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a>
-		        <a href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a>
-		        <a href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a>
+		        <div>2. <a accessKey="2" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
+		        <div>3. <a accessKey="3" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a></div>
+		        <div>4. <a accessKey="4" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div>
 		        
 		    </div>
 			<!-- br/>Admin Tools<br/>
