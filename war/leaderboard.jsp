@@ -27,7 +27,7 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
     <title>Slot Mania</title>
-    <link rel="stylesheet" href="css/style.css" />    
+    <link rel="stylesheet" href="css/wap.css" />    
   </head>
 
   <body>
@@ -45,8 +45,8 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 		    </ul>
 			
 			<div class="menu">
-				1. <a accessKey="1" href="<%= response.encodeURL("/leaderboard.jsp?type="+(type == (short)1 ? 2 : 1)) %>"><%= type == (short)1 ? "Coins Won" : "XP" %> Leaderboard</a><br/>
-				2. <a accessKey="2" href="<%= response.encodeURL("/") %>">Main</a>
+				<div>1. <a accessKey="1" href="<%= response.encodeURL("/leaderboard.jsp?type="+(type == (short)1 ? 2 : 1)) %>"><%= type == (short)1 ? "Coins Won" : "XP" %> Leaderboard</a></div><br/>
+				<div>2. <a accessKey="2" href="<%= response.encodeURL("/") %>">Main</a></div>
 			</div>
 		</div>
 	</div>

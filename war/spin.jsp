@@ -29,7 +29,7 @@ int key = 1;
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
     <title>Slot Mania</title>
-    <link rel="stylesheet" href="css/style.css" />    
+    <link rel="stylesheet" href="css/wap.css" />    
   </head>
   <body>
   	<div id="container">
@@ -99,8 +99,8 @@ int key = 1;
 			
 		    
 		     <div class="menu">
-		        <%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a><br/>
-		        <%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/") %>">Main</a>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div><br/>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/") %>">Main</a></div>
 		    </div>
 		</div>
 	</div>

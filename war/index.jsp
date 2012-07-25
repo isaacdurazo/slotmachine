@@ -15,7 +15,7 @@ SpinResult spinResult = null;
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
     <title>Slot Mania</title>
-    <link rel="stylesheet" href="css/style.css" />    
+    <link rel="stylesheet" href="css/wap.css" />    
   </head>
 
   <body>
@@ -48,9 +48,9 @@ SpinResult spinResult = null;
 			</div>
 		
 		    <div class="menu">
-		        2. <a accessKey="2" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a><br/>
-		        3. <a accessKey="3" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a><br/>
-		        4. <a accessKey="4" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a><br/>
+		        <div>2. <a accessKey="2" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div><br/>
+		        <div>3. <a accessKey="3" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a></div><br/>
+		        <div>4. <a accessKey="4" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div><br/>
 		        
 		    </div>
 			<!-- br/>Admin Tools<br/>

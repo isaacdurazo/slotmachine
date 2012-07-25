@@ -53,7 +53,7 @@ String message = request.getParameter("message");
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
     <title>Slot Mania</title>
-    <link rel="stylesheet" href="css/style.css" />    
+    <link rel="stylesheet" href="css/wap.css" />    
   </head>
 
   <body>
@@ -69,7 +69,7 @@ String message = request.getParameter("message");
 			</form>
 			
 			<div class="menu">
-				<a href="<%= response.encodeURL("/") %>">Main</a>
+				<div><a href="<%= response.encodeURL("/") %>">Main</a></div>
 			</div>
 		</div>
 	</div>
