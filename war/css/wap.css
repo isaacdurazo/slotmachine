@@ -16,7 +16,7 @@ body {
     	
 h3 {
 	margin:0;
-	font-size: 14px;
+	font-size: 11px;
 }
 
 h6 {
@@ -73,7 +73,6 @@ a.bet {
 
 .play a {
 	color: #FFF;
-	
 }
 
 .subheader {
@@ -82,13 +81,18 @@ a.bet {
 	display: inline-block;
 }
 
-.menu {
-	padding: 3px 10px 0 5px;
-	text-align:left;
+.menu a {
+	color: #3e1501;	
 }
 
-.menu a{
-	color: #c70304;
+.menu div {
+	font-size: 12px;
+	background-color: #ff8d00;
+	color: #fff;
+	padding:2px 0;
+	margin: 5px 0;
+	width:120px;
+	text-align:center;
 }
 
 .wonspin, .jackpotteaser {
@@ -109,4 +113,9 @@ a.bet {
 
 .payout-table {
 	text-align:left;
+}
+
+.input{
+	font-size: 10px;
+	width: 120px;
 }
