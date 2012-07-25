@@ -48,9 +48,9 @@ SpinResult spinResult = null;
 			</div>
 		
 		    <div class="menu">
-		        <div>2. <a accessKey="2" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div><br/>
-		        <div>3. <a accessKey="3" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a></div><br/>
-		        <div>4. <a accessKey="4" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div><br/>
+		        <div>2. <a accessKey="2" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
+		        <div>3. <a accessKey="3" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a></div>
+		        <div>4. <a accessKey="4" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div>
 		        
 		    </div>
 			<!-- br/>Admin Tools<br/>

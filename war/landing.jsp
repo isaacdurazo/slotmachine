@@ -20,8 +20,8 @@
 					You must be logged in to MocoSpace to play this game!
 				</h3>
 				<div class="menu">
-					<div><a href="<%=GameUtils.getMocoSpaceHome() %>">Login</a></div><br />
-					<div><a href="<%=response.encodeURL("/")+"?uid=12534729" %>">Fake Login as niels</a></div><br />
+					<div><a href="<%=GameUtils.getMocoSpaceHome() %>">Login</a></div>
+					<div><a href="<%=response.encodeURL("/")+"?uid=12534729" %>">Fake Login as niels</a></div>
 					<div><a href="<%= response.encodeURL("/help.jsp") %>">What is Slot Mania?</a></div>
 				</div>
 			</div>

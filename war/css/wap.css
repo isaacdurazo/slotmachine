@@ -71,6 +71,10 @@ a.bet {
 	text-align:center;
 }
 
+.login-menu a {
+	color:#950405;	
+}
+
 .play a {
 	color: #FFF;
 }
@@ -81,14 +85,13 @@ a.bet {
 	display: inline-block;
 }
 
-.menu a {
+.menu a, .menu div {
 	color: #3e1501;	
 }
 
 .menu div {
 	font-size: 12px;
 	background-color: #ff8d00;
-	color: #fff;
 	padding:2px 0;
 	margin: 5px 0;
 	width:120px;

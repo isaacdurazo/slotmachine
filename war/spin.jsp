@@ -99,8 +99,8 @@ int key = 1;
 			
 		    
 		     <div class="menu">
-		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div><br/>
-		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/") %>">Main</a></div>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/") %>">Main</a>
 		    </div>
 		</div>
 	</div>
