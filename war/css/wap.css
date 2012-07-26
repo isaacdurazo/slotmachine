@@ -49,13 +49,21 @@ table {
 	padding-left:5px;
 }
 
-.bets div {
+table.bets {
+	border-collapse: separate;
+
+}
+
+.bets td {
 	background-color: #07a107;
 	border: 2px solid #367219;
 	text-align:center;
-	padding: 5px 0;
-	margin: 3px 0;
-	font-size: 13px;
+	padding: 5px;
+	font-size: 12px;
+}
+
+.bets div {
+	margin: 7px 0 10px 0;
 }
 
 a.bet {

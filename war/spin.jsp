@@ -81,22 +81,24 @@ int key = 1;
 				</table>
 			<% if (fSpinOK==true) { %>
 			
-			<div class="bets">
-				<div>
-					<%= key %>. <a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin") %>">Bet 1!</a>
-				</div>
-				<div>
-					<%= key %>. <a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin") %>">Bet Max (<%= System.getProperty("max.bet.coins") %> coins)!</a>
-				</div>
-			</div>
-			<%} %>
+			<table class="bets">
+				<tr>
+					<td class="bet-1">
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin") %>"> Bet 1!</a>
+					</td>
+					<td class="bet-2">
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin") %>">Bet 3!</a>
+					</td>
+				</tr>
+			</table>
+			<% } %>
 				
 		
 			
 		    
 		     <div class="menu">
 		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
-		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/") %>">Main</a>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/") %>">Main</a></div>
 		    </div>
 		</div>
 	</div>
