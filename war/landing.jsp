@@ -14,6 +14,17 @@
 
 	</head>
 	<body>
+		
+		<% if (isWebkit) {%>
+		
+		<div id="container">
+		  	<div class="wrapper">
+			    <img style="margin-top:45px;" width="240" height="110" src="images/wk-landing-logo.png"/>
+			</div>
+		</div>
+		
+		<% } else { %>
+		
 		<div id="container">
 		  	<div class="wrapper">
 			    <div class="header-logo">
@@ -30,5 +41,8 @@
 				</div>
 			</div>
 		</div>
+		
+		<%} %>
+	
 	</body>
 </html>
