@@ -1,4 +1,6 @@
 package com.solitude.slots.entities;
+
+import java.util.Arrays;
  
 /**
  * Meta data associated with the results of a spin
@@ -26,6 +28,6 @@ public class SpinResult {
 	
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName()+" - coins: "+coins+", symbols: "+symbols;
+		return this.getClass().getSimpleName()+" - coins won: "+coins+", symbols: "+Arrays.toString(symbols);
 	}
 }

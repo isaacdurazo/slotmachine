@@ -2,8 +2,16 @@
 <%@page import="java.util.Random"%>
 
 <%
-int rand = (new Random()).nextInt(999); 
-String cacheBuster = "r="+rand; //used to postfix on spin hyperlinks to force OpenWave browser to fetch from server
+//used to postfix on spin hyperlinks to force OpenWave browser to fetch from server
+final int rand = (new Random()).nextInt(999); 
+final String cacheBuster = "r="+rand; 
+
+// logic to do animated/static images based on browser support
+String imageLocation="images/animated-2/";
+if (!hasAnimGifSupport) {
+	imageLocation="images/";
+}
+
 
 int coinsAwarded = 0;
 Long playerId = (Long)request.getSession().getAttribute("playerId");

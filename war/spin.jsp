@@ -90,13 +90,13 @@ int key = 1;
 				<table>
 					<tr align="center" >
 						<td>
-							<img width="38" height="64" src="images/comb-<%=symbol[0] %>.gif"/>
+							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[0] %>.gif"/>
 						</td>
 						<td>
-							<img width="38" height="64" src="images/comb-<%=symbol[1] %>.gif"/>
+							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[1] %>.gif"/>
 						</td>
 						<td>
-							<img width="38" height="64" src="images/comb-<%=symbol[2] %>.gif"/>
+							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[2] %>.gif"/>
 						</td>
 					</tr>
 				</table>
@@ -105,10 +105,10 @@ int key = 1;
 			<table class="bets">
 				<tr>
 					<td class="bet-1">
-						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin&"+cacheBuster) %>"> Bet 1!</a>
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin&"+cacheBuster) %>"> Bet 1</a>
 					</td>
 					<td class="bet-2">
-						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin&"+cacheBuster) %>">Bet 3!</a>
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin&"+cacheBuster) %>">Bet 3</a>
 					</td>
 				</tr>
 			</table>

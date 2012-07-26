@@ -8,11 +8,11 @@
 			   		<h3>About</h3>
 			    	<img width="103" height="18" src="images/logo.gif"/>
 			    </div>
-			    <div>Play Slots for FREE and win weekly prices:</div>
+			    <div>Play Slots for FREE and WIN prices:</div>
 				<ul  class="list">
-					<li>Return every day for <b>FREE</b> coins and spin to win!</li><br />
-					<li><b>Weekly Coin Prize:</b> Gain XP as you play and become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
-					<li><b>Weekly Moco Gold JACKPOT:</b>Every week chance to win the <b>Moco Gold jackpot</b>. The more you spin the more likely you win!</li><br />
+					<li><b>FREE coins</b>: Return daily to get more free coins!</li><br />
+					<li><b>Mega Coin Prize</b>: Gain XP as you spin. Become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
+					<li><b>Gold JACKPOT</b>: Weekly progressive Moco Gold jackpot. Currently: <%=System.getProperty("weekly.mocogold.min.prize") %> <img alt="gold" src="/images/mocogold.gif">. The more you spin the more likely you win!</li><br />
 				</ul>
 				
 				<div class="payout-table">
@@ -29,8 +29,7 @@
 					</div>
 				</div>
 				<div class="menu">
-			    	<div>1. <a accessKey="1" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a><br/></div>
-			       	<div>2. <a accessKey="2" href="<%= response.encodeURL("/") %>">Main</a></div>
+			       	<div>1. <a accessKey="1" href="<%= response.encodeURL("/") %>">Main Page</a></div>
 			    </div>
 			</div>
 	</div>

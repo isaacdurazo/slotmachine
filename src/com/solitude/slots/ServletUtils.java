@@ -96,4 +96,21 @@ public class ServletUtils {
 		request.getSession().setAttribute("device.webkit", "false");
 		return false;
 	}
+	
+	/**
+	 * Check UserAgent and return true/false for animated GIF support
+	 * Example: Novarra browser (on many US Cel devices) does not have last frame static - continue to cycle..
+	 */
+	public static boolean hasAnimGifSupport(HttpServletRequest request) {
+
+		String userAgent = null;
+		try { userAgent = request.getHeader("User-Agent"); }
+		catch (Throwable t) {}
+
+		if (userAgent != null && (userAgent.indexOf("Novarra-Vision") > -1))
+				return (false);
+
+		return(true);
+		
+	}
 }

@@ -28,7 +28,7 @@
     <property name="max.bet.coin.multiplier" value="4"/> 
     <property name="xp.leaderboard.enabled" value="true"/>
     <property name="weekly.coin.prize" value="1000"/>
-    <property name="weekly.mocogold.min.prize" value="555"/>
+    <property name="weekly.mocogold.min.prize" value="333"/>
 
   </system-properties>
 

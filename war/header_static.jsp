@@ -3,4 +3,6 @@
 <%@ page import="com.solitude.slots.*,com.solitude.slots.service.*,com.solitude.slots.entities.*,com.solitude.slots.service.SlotMachineManager.InsufficientFundsException,java.util.logging.*" %>
 <%
 final boolean isWebkit = ServletUtils.isWebKitDevice(request);
+final boolean hasAnimGifSupport = ServletUtils.hasAnimGifSupport(request);
+
 %>
