@@ -1,7 +1,4 @@
-<%@page language="java" buffer="64kb" pageEncoding="UTF-8"%><?xml version="1.0" encoding="utf-8"?>
-<%@ page import="com.solitude.slots.*,com.solitude.slots.service.*,com.solitude.slots.entities.*,java.util.logging.*" %>
-
-<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<%@ include file="header_static.jsp" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
 <body>
@@ -11,10 +8,11 @@
 			   		<h3>About</h3>
 			    	<img width="103" height="18" src="images/logo.gif"/>
 			    </div>
+			    <div>Play Slots for FREE and win weekly prices:</div>
 				<ul  class="list">
-					<li>Come back daily to get <b>FREE</b> coins and spin to win!</li><br />
-					<li><b>Weekly Coin Prize:</b> Gain eXPerience as you play and become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
-					<li><b>Weekly Moco Gold JACKPOT:</b> One player guaranteed to win the Gold jackpot. The more you spin the more likely you win!</li><br />
+					<li>Return every day for <b>FREE</b> coins and spin to win!</li><br />
+					<li><b>Weekly Coin Prize:</b> Gain XP as you play and become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
+					<li><b>Weekly Moco Gold JACKPOT:</b>Every week chance to win the <b>Moco Gold jackpot</b>. The more you spin the more likely you win!</li><br />
 				</ul>
 				
 				<div class="payout-table">

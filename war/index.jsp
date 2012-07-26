@@ -42,7 +42,7 @@
 			Jackpot value:<br /><img style="vertical-align:top" width="16" height="16" src="images/mocogold.gif"/> <%=System.getProperty("weekly.coin.prize")%> Moco Gold!
 			</div>
 			<div class="play">
-				1. <a accessKey="1" href="<%= response.encodeURL("spin.jsp") %>">Play Now</a>
+				1. <a accessKey="1" href="<%= response.encodeURL("spin.jsp?"+cacheBuster) %>">Play Now</a>
 			</div>
 		
 		    <div class="menu">

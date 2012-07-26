@@ -32,7 +32,10 @@ if (coin > 0 && gold > 0) {
 		} catch (OpenSocialService.GoldTopupRequiredException e) {
 			// redirect 
 			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup required: "+e.getRedirectUrl());
-			response.sendRedirect(e.getRedirectUrl());
+
+			//@TODO very TEMP Moco FIX
+			String s = e.getRedirectUrl().replace("gameplatform.mocospace.com/link/", "apps.mocospace.com/wap2/");
+			response.sendRedirect(s);
 			return;
 		} catch (Exception e) {
 			Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"error attempting to topup for player: "+player,e);

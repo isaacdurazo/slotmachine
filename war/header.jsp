@@ -1,10 +1,10 @@
-<%@page language="java" buffer="64kb" pageEncoding="UTF-8"%><?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<%@ include file="header_static.jsp" %>
+<%@page import="java.util.Random"%>
 
-
-<%@ page import="com.solitude.slots.*,com.solitude.slots.service.*,com.solitude.slots.entities.*,com.solitude.slots.service.SlotMachineManager.InsufficientFundsException,java.util.logging.*" %>
 <%
-final boolean isWebkit = ServletUtils.isWebKitDevice(request);
+int rand = (new Random()).nextInt(999); 
+String cacheBuster = "r="+rand; //used to postfix on spin hyperlinks to force OpenWave browser to fetch from server
+
 int coinsAwarded = 0;
 Long playerId = (Long)request.getSession().getAttribute("playerId");
 Player player = null; 

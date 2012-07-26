@@ -91,15 +91,12 @@ int key = 1;
 					<tr align="center" >
 						<td>
 							<img width="38" height="64" src="images/comb-<%=symbol[0] %>.gif"/>
-							<br/>(<%=symbol[0] %>)
 						</td>
 						<td>
 							<img width="38" height="64" src="images/comb-<%=symbol[1] %>.gif"/>
-							<br/>(<%=symbol[1] %>)
 						</td>
 						<td>
 							<img width="38" height="64" src="images/comb-<%=symbol[2] %>.gif"/>
-							<br/>(<%=symbol[2] %>)
 						</td>
 					</tr>
 				</table>
@@ -108,10 +105,10 @@ int key = 1;
 			<table class="bets">
 				<tr>
 					<td class="bet-1">
-						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin") %>"> Bet 1!</a>
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin&"+cacheBuster) %>"> Bet 1!</a>
 					</td>
 					<td class="bet-2">
-						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin") %>">Bet 3!</a>
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin&"+cacheBuster) %>">Bet 3!</a>
 					</td>
 				</tr>
 			</table>
