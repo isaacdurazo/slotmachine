@@ -1,3 +1,4 @@
+<%@ page import="com.solitude.slots.*" %>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
     <title>Slot Mania</title>
