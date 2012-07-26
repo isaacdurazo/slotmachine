@@ -12,6 +12,9 @@
 			PlayerManager.getInstance().storePlayer(player);
 		}
 	}
+	
+	
+	//@TODO add logic for 1) process/log invite requests using if=<mocoid> as senderID and 2) new users redirect to help
 %>
  
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -39,18 +42,22 @@
 		    	</div> 
 		    <% } %>
 			<div class="jackpotteaser">
-			Jackpot value:<br /><img style="vertical-align:top" width="16" height="16" src="images/mocogold.gif"/> <%=System.getProperty("weekly.mocogold.min.prize")%> Moco Gold!
+			Jackpot:<br /><img style="vertical-align:top" width="16" height="16" src="images/mocogold.gif"/> <%=System.getProperty("weekly.mocogold.min.prize")%> MocoGold!
 			</div>
 			<div class="play">
 				1. <a accessKey="1" href="<%= response.encodeURL("spin.jsp?"+cacheBuster) %>">Play Now</a>
 			</div>
 		
 		    <div class="menu">
-		        <div>2. <a accessKey="2" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
-		        <div>3. <a accessKey="3" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a></div>
-		        <div>4. <a accessKey="4" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div>
+		        <div>2. <a accessKey="2" href="<%= response.encodeURL("/topup.jsp") %>">Buy Coins</a></div>
+		        <div>3. <a accessKey="3" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
+		        <div>4. <a accessKey="4" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a></div>
 		        
 		    </div>
+		    <br/>
+			<div class="menu">
+		        <div>5. <a accessKey="5" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div>
+			</div>
 			<%
 				if (player.hasAdminPriv()) {
 			%>

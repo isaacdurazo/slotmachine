@@ -10,38 +10,41 @@ if (formValidation == null && topupAction == null) {
 	request.getSession().setAttribute("topUpValidation",formValidation);
 }
 int coin = 0, gold = 0;
-if ("Buy 10 Coins for 99 gold".equals(topupAction)) {
-	coin = 10;
+if ("20 Coins: 99 Gold".equals(topupAction)) {
+	coin = 20;
 	gold = 99;
-} else if ("Buy 50 Coins for 299 gold".equals(topupAction)) {
+} else if ("50 Coins: 199 Gold".equals(topupAction)) {
 	coin = 50;
-	gold = 299;
-} else if ("Buy 100 Coins for 499 gold".equals(topupAction)) {
-	coin = 100;
+	gold = 199;
+} else if ("MysteryBox: 499 Gold".equals(topupAction)) {
+	coin = 200+(new Random()).nextInt(150);
 	gold = 499;
 }
 if (coin > 0 && gold > 0) {
 	if (formValidation.equals((String)request.getSession().getAttribute("topUpValidation"))) {
 		try {
+			String s = topupAction.substring(0, topupAction.indexOf(':'));
 			// valid transaction so debit and go back to main page
-			OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,coin+" coins");
+			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup: Ready to buy "+coin+" coins. player: "+player);
+			OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s);
+			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup: Completed buy "+coin+" coins. player: "+player);
 			player.setCoins(player.getCoins()+coin);
 			PlayerManager.getInstance().storePlayer(player);
 			pageContext.forward("/");
 			return;
 		} catch (OpenSocialService.GoldTopupRequiredException e) {
 			// redirect 
-			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup required: "+e.getRedirectUrl());
+			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup: Gold topup required: "+e.getRedirectUrl());
 
 			//@TODO very TEMP Moco FIX
-			String s = e.getRedirectUrl().replace("gameplatform.mocospace.com/link/", "apps.mocospace.com/wap2/");
+			String s = e.getRedirectUrl().replace("/link/", "/wap2/");
 			response.sendRedirect(s);
 			return;
 		} catch (Exception e) {
-			Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"error attempting to topup for player: "+player,e);
+			Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"topup: error attempting to topup for player: "+player,e);
 		}
 	} else {
-		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"invalid topup verification for player: "+player);
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"topup: invalid topup verification for player: "+player);
 	}
 } 
 String message = request.getParameter("message");
@@ -54,11 +57,15 @@ String message = request.getParameter("message");
 	  	<div class="wrapper">
 		    <div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
 		    <% if (message != null) { %><div style="color:red"><%= message %></div><% } %>
+		    <div>
+		    Buy Coins:
+		    </div>
 			<form action="<%= response.encodeURL("/topup.jsp") %>" method="get">
 				<input class="input" type="hidden" name="verify" value="<%= formValidation %>"/>
-				<input class="input" type="submit" name="topup" value="Buy 10 Coins for 99 gold"/>
-				<input class="input" type="submit" name="topup" value="Buy 50 Coins for 299 gold"/>
-				<input class="input" type="submit" name="topup" value="Buy 100 Coins for 499 gold"/>
+				<input class="input" type="submit" name="topup" value="20 Coins: 99 Gold"/>
+				<input class="input" type="submit" name="topup" value="50 Coins: 199 Gold"/>
+				<input class="input" type="submit" name="topup" value="MysteryBox: 499 Gold"/>
+				<div class="subheader">(MysteryBox buys 150 - 300 Coins)</div>
 			</form>
 			
 			<div class="menu">

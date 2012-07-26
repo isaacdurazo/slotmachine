@@ -19,6 +19,7 @@
 			    <img style="margin-top:45px;" width="240" height="110" src="images/wk-landing-logo.png"/>
 			</div>
 		</div>
+		<div align="center">Available on Smart Phones August 1st!</div>
 		
 		<% } else { %>
 		

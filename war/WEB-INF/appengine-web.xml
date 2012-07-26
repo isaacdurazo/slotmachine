@@ -17,8 +17,8 @@
     <property name="redirect.validate.enabled" value="true"/>
     <property name="game.moco.id" value="1252"/>
     <property name="game.visitor.url" value="/landing.jsp"/>  
-    <property name="game.adminpriv.ids" value="51653696,12534729"/>  
-    <property name="mocospace.main.url" value="http://www.mocospace.com/games?gid=1252"/>  
+    <property name="game.adminpriv.ids" value="51653696,12534729,15631292"/>  
+    <property name="mocospace.main.url" value="http://www.mocospace.com/"/>  
     <property name="mocospace.opensocial.api.endpoint" value="https://apps.mocospace.com/social"/> 
     
     <!-- game play properties -->
@@ -27,7 +27,7 @@
     <property name="max.bet.coins" value="3"/>
     <property name="max.bet.coin.multiplier" value="4"/> 
     <property name="xp.leaderboard.enabled" value="true"/>
-    <property name="weekly.coin.prize" value="1000"/>
+    <property name="weekly.coin.prize" value="500"/>
     <property name="weekly.mocogold.min.prize" value="333"/>
 
   </system-properties>

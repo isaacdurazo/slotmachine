@@ -106,7 +106,7 @@ a.bet {
 	text-align:center;
 }
 
-.wonspin, .jackpotteaser {
+.wonspin {
 	color: #07a107;
 }
 
@@ -114,7 +114,8 @@ a.bet {
 	border-top: 1px solid;
 	border-bottom: 1px solid;
 	margin-top: 5px;
-	font-size:14px;
+	font-size:12px;
+	color: #A98525;
 }
 
 .list {
@@ -128,7 +129,7 @@ a.bet {
 }
 
 .input{
-	font-size: 10px;
+	font-size: 11px;
 	width: 120px;
 }
 

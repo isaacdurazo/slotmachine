@@ -21,8 +21,11 @@ try {
 	pageContext.forward("/topup.jsp?message="+java.net.URLEncoder.encode("You need more coins!","UTF-8"));
 	return;
 }
-
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
+
+
+
+
 int key = 1;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -44,8 +47,16 @@ int key = 1;
 			</table>
 			
 			<div class="results">
-			<% if (fSpinOK==true) { 
-					if (spinResult.getCoins()>0) {
+			<% if (fSpinOK==true) {
+				
+				//only for maxspin give ability to win Moco Gold
+				if ("maxspin".equals(action) && symbol[0]==0 && symbol[1]==0 && symbol[2]==0) {
+			%>
+				<div class="wonspin">
+					You WON the Moco Gold JACKPOT!!!
+				</div>	
+			<%		
+				} else if (spinResult.getCoins()>0) {
 			%>
 				<img width="6" height="6" src="images/light-1.gif"/>
 				<img width="6" height="6" src="images/light-2.gif"/>

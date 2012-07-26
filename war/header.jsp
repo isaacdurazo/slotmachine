@@ -1,5 +1,23 @@
 <%@ include file="header_static.jsp" %>
 <%@page import="java.util.Random"%>
+<%
+if (isWebkit) {
+%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <%@ include file="header_html.jsp" %>
+  <body>
+		<div id="container">
+		  	<div class="wrapper">
+			    <img style="margin-top:45px;" width="240" height="110" src="images/wk-landing-logo.png"/>
+			</div>
+		</div>
+		<div align="center">Available on Smart Phones August 1st!</div>
+</body>
+</html>		
+<% return;
+} 
+%>
+
 
 <%
 //used to postfix on spin hyperlinks to force OpenWave browser to fetch from server

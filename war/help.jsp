@@ -8,7 +8,7 @@
 			   		<h3>About</h3>
 			    	<img width="103" height="18" src="images/logo.gif"/>
 			    </div>
-			    <div>Play Slots for FREE and WIN prices:</div>
+			    <div>Play Slots and WIN prices:</div>
 				<ul  class="list">
 					<li><b>FREE coins</b>: Return daily to get more free coins!</li><br />
 					<li><b>Mega Coin Prize</b>: Gain XP as you spin. Become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
