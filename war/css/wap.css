@@ -133,8 +133,16 @@ a.bet {
 }
 
 .results {
-	font-size:14px;
-	height:35px;
+	font-size: 13px;
+	height: 45px;
+}
+
+.wonspin {
+	font-size: 12px;
+}
+
+.lostspin {
+	font-size: 18px;
 }
 
 .results .lostspin {

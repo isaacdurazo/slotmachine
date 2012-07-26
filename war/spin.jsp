@@ -47,9 +47,33 @@ int key = 1;
 			<% if (fSpinOK==true) { 
 					if (spinResult.getCoins()>0) {
 			%>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
 				<div class="wonspin">
 					You WON <%=spinResult.getCoins() %> coins!
 				</div>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
+				<img width="6" height="6" src="images/light-1.gif"/>
+				<img width="6" height="6" src="images/light-2.gif"/>
 					
 			<%		} else if (spinResult.getCoins()==0) { %>
 				<div class="lostspin">
