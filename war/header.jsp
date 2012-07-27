@@ -30,12 +30,13 @@ if (!hasAnimGifSupport) {
 	imageLocation="images/";
 }
 
-
 int coinsAwarded = 0;
-Long playerId = (Long)request.getSession().getAttribute("playerId");
 Player player = null; 
+
 int uid = ServletUtils.getInt(request,"uid"); 
 String accessToken = request.getParameter("accessToken");
+Long playerId = (Long)request.getSession().getAttribute("playerId");
+
 if (playerId != null) {
 	player = PlayerManager.getInstance().getPlayer(playerId);
 	// check that if uid is given, that it matches player's moco id to handle multiple login case
@@ -66,6 +67,9 @@ if (player == null) {
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Could not create/load player? params: "+request.getQueryString(),e);
 		response.sendRedirect(GameUtils.getVisitorHome());
 		return;
+	}
+	if (player.getIsNewPlayer()==true){
+		pageContext.forward("/help.jsp?msg="+URLEncoder.encode("Welcome "+player.getName(),"UTF-8"));
 	}
 }
 %>

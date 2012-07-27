@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -32,6 +34,9 @@ public class PlayerManager {
 	private static final PlayerManager instance = new PlayerManager();
 	/** @return singleton */
 	public static PlayerManager getInstance() { return instance; }
+
+    private static final Logger log = Logger.getLogger(instance.getClass().getName());
+	
 	/** private constructor to ensure singleton */
 	private PlayerManager() { }
 	
@@ -61,7 +66,11 @@ public class PlayerManager {
 			player.setMocoId(Integer.parseInt((String)person.getFieldValue(Person.Field.ID.toString())));
 			player.setName((String)person.getFieldValue(Person.Field.DISPLAY_NAME.toString()));
 			player.setCoins(Integer.getInteger("new.player.coins", 10));
+			log.log(Level.INFO,"Session Start: new user uid="+player.getMocoId()+", Player="+player.toString());
+		} else {
+			log.log(Level.INFO,"Session Start: returning user uid="+player.getMocoId()+", Player="+player.toString());
 		}
+		
 		// award coins if consecutive days greater than 0 and last consecutive days increment last than 100 ms (just happened)
 		int coinsAwarded = 0;
 		if (System.currentTimeMillis()-player.getConsecutiveDaysTimestamp() < 100) {
@@ -71,6 +80,9 @@ public class PlayerManager {
 		}
 		// store player (if new or to track consecutive days)
 		GAEDataManager.getInstance().store(player);
+
+		player.setIsNewPlayer(newPlayer); //Important ONLY set this after persisting = IsNewPlayer only true on 1st pgview
+
 		// add to look up by access token cache
 		if (newPlayer) {
 			final String cacheKey = "moco_token_"+accessToken;

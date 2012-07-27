@@ -8,6 +8,10 @@
 			   		<h3>About</h3>
 			    	<img width="103" height="18" src="images/logo.gif"/>
 			    </div>
+			    <% if (request.getParameter("msg")!=null) { %>
+			    <div class="notify"> <%=request.getParameter("msg") %>
+			    </div>
+			    <%} %>
 			    <div>Play Slots and WIN prices:</div>
 				<ul  class="list">
 					<li><b>FREE coins</b>: Return daily to get more free coins!</li><br />

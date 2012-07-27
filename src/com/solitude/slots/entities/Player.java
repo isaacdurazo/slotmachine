@@ -42,6 +42,9 @@ public class Player extends AbstractGAEPersistent {
 	private int consecutiveDays = 0;
 	/** timestamp of last play time for consecutive days calculation */
 	private long consecutiveDaysTimestamp = System.currentTimeMillis();
+
+	/** NOTE this is only stored in memory and set/deleted by PlayerManager **/
+	private boolean isNewPlayer = false;
 	
 	/** @return moco access token */
 	public String getAccessToken() { return accessToken; }
@@ -135,6 +138,10 @@ public class Player extends AbstractGAEPersistent {
 	/** @return timestamp of consecutive days */
 	public long getConsecutiveDaysTimestamp() { return consecutiveDaysTimestamp; }
 	
+	public boolean getIsNewPlayer() {return isNewPlayer;}
+	public void setIsNewPlayer(boolean flag) { this.isNewPlayer=flag;}
+		
+		
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {
 		super.deserialize(inputMap);
