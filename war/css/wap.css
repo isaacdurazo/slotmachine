@@ -14,6 +14,11 @@ body {
 	display: inline-block;
 }
     	
+h2 {
+	margin: 0px 0px 10px;
+	font-size: 13px;
+}
+
 h3 {
 	margin:0;
 	font-size: 11px;
@@ -28,7 +33,7 @@ ul {
 	text-align: left;
 	margin: 0;
 	padding: 0;
-	list-style: none;
+	list-style: dics;
 }
 
 table {
@@ -121,6 +126,12 @@ a.bet {
 	color: #07a107;
 }
 
+.goldtext {
+	color: #A98525;
+    font-size: 13px;
+    font-weight:bold;
+    }
+    
 .jackpotteaser{
 	border-top: 1px solid;
 	border-bottom: 1px solid;
@@ -136,8 +147,13 @@ a.bet {
 
 .payout-table {
 	text-align:left;
-	
+	border: 1px solid #950405;
 }
+.payout-table div {
+	margin-left: 10px;	
+}
+
+
 
 .input{
 	font-size: 11px;
