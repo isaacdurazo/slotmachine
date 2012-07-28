@@ -105,7 +105,7 @@ public class SlotMachineManager {
 				String cacheVal = GAECacheManager.getInstance().getCustom(cacheRegion,cacheKey);
 				if (cacheVal == null || 
 						System.currentTimeMillis() - Long.parseLong(cacheVal) > TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS)) {
-					GAECacheManager.getInstance().putCustom(cacheRegion, cacheKey, System.currentTimeMillis(), TimeUnit.SECONDS.convert(7, TimeUnit.DAYS));
+					GAECacheManager.getInstance().putCustom(cacheRegion, cacheKey, Long.toString(System.currentTimeMillis()), (int)TimeUnit.SECONDS.convert(7, TimeUnit.DAYS));
 					// we have a legit jackpot!!! send notifications to user and admin account
 					String subject = "Jackpot!", body = "You won the Moco Gold jackpot!  We will get you the gold ASAP";
 					try {
