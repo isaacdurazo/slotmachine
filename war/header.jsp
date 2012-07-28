@@ -1,7 +1,7 @@
 <%@ include file="header_static.jsp" %>
 <%@page import="java.util.Random"%>
 <%
-if (isWebkit) {
+if (false && isWebkit) {
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
  <%@ include file="header_html.jsp" %>

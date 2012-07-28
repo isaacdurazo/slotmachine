@@ -25,16 +25,16 @@ if (coin > 0 && gold > 0) {
 		try {
 			String s = topupAction.substring(0, topupAction.indexOf(':'));
 			// valid transaction so debit and go back to main page
-			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup: Ready to buy "+coin+" coins. player: "+player);
+			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Request buy "+coin+" coins.|uid|"+player.getMocoId());
 			OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s,player.getAccessToken());
-			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup: Completed buy "+coin+" coins. player: "+player);
+			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId());
 			player.setCoins(player.getCoins()+coin);
 			PlayerManager.getInstance().storePlayer(player);
 			pageContext.forward("/");
 			return;
 		} catch (OpenSocialService.GoldTopupRequiredException e) {
 			// redirect 
-			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup: Gold topup required: "+e.getRedirectUrl());
+			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Failed - Gold topup required.|uid|"+player.getMocoId()+" - url="+e.getRedirectUrl());
 
 			//@TODO very TEMP Moco FIX
 			String s = e.getRedirectUrl().replace("/link/", "/wap2/");
