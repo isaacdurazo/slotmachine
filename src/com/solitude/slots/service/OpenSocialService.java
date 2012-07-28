@@ -314,6 +314,7 @@ public class OpenSocialService {
 	 * @param userId of user to be billed
 	 * @param amount of gold to bill
 	 * @param description of item being purchased with gold
+	 * @param oauthToken of user to be billed
 	 * @return unique id for transaction
 	 * @throws GoldTopupRequiredException if user does not have sufficient gold, will include redirect url for top-up
 	 * @throws ApiException on API error or unexpected content
@@ -321,8 +322,8 @@ public class OpenSocialService {
 	 * @throws ParseException for invalid JSON
 	 */
 	@SuppressWarnings("unchecked")
-	public String doDirectDebit(int userId, int amount, String description) throws GoldTopupRequiredException, ApiException, IOException, ParseException {
-		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/gold/"+userId+"?oauth_token="+URLEncoder.encode(GameUtils.getGameAdminToken(),"UTF-8");		
+	public String doDirectDebit(int userId, int amount, String description, String oauthToken) throws GoldTopupRequiredException, ApiException, IOException, ParseException {
+		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/gold/"+userId+"?oauth_token="+URLEncoder.encode(oauthToken,"UTF-8");		
 		JSONObject json = new JSONObject();
 		json.put("amount", amount);
 		json.put("name", description);
@@ -332,7 +333,7 @@ public class OpenSocialService {
 		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
 		JSONObject jsonContent = (JSONObject)new JSONParser().parse(response);
 		// get as string and parse to work around server bug
-		JSONObject jsonPayload = (JSONObject)jsonContent.get("entry");
+		JSONObject jsonPayload = (JSONObject)new JSONParser().parse((String)jsonContent.get("entry"));
 		String redirectUrl = (String)jsonPayload.get("redirectUrl");
 		JSONArray transactionArray = (JSONArray)jsonPayload.get("GamePlatformPointsTransaction");
 		if (redirectUrl != null) {
@@ -342,7 +343,7 @@ public class OpenSocialService {
 			jsonPayload = (JSONObject)transactionArray.get(0);
 			String token = (String)jsonPayload.get("token");
 			String id = (String)jsonPayload.get("id");
-			int amountReply = (Integer)jsonPayload.get("amount");
+			int amountReply = ((Long)jsonPayload.get("amount")).intValue();
 			long timestamp = (Long)jsonPayload.get("timestamp");
 			if (token != null && token.equals(DigestUtils.md5Hex(id + amountReply + timestamp + GameUtils.getGameGoldSecret())) && amountReply == amount) {
 				return id;

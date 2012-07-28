@@ -26,7 +26,7 @@ if (coin > 0 && gold > 0) {
 			String s = topupAction.substring(0, topupAction.indexOf(':'));
 			// valid transaction so debit and go back to main page
 			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup: Ready to buy "+coin+" coins. player: "+player);
-			OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s);
+			OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s,player.getAccessToken());
 			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup: Completed buy "+coin+" coins. player: "+player);
 			player.setCoins(player.getCoins()+coin);
 			PlayerManager.getInstance().storePlayer(player);
