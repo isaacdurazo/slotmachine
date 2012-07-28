@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Player of the game
@@ -42,6 +43,8 @@ public class Player extends AbstractGAEPersistent {
 	private int consecutiveDays = 0;
 	/** timestamp of last play time for consecutive days calculation */
 	private long consecutiveDaysTimestamp = System.currentTimeMillis();
+	/** number of game sessions */
+	private long numSessions = 0;
 
 	/** NOTE this is only stored in memory and set/deleted by PlayerManager **/
 	private boolean isNewPlayer = false;
@@ -139,10 +142,25 @@ public class Player extends AbstractGAEPersistent {
 	/** @return timestamp of consecutive days */
 	public long getConsecutiveDaysTimestamp() { return consecutiveDaysTimestamp; }
 	
+	/** @return if new player */
 	public boolean getIsNewPlayer() {return isNewPlayer;}
+	
+	/** @param flag if true user is a new player */
 	public void setIsNewPlayer(boolean flag) { this.isNewPlayer=flag;}
+	
+	/** @return number of game sessions */
+	public long getNumSessions() { return this.numSessions; }
+	/** @param numSessions number of game sessions */
+	public void setNumSessions(long numSessions) { this.numSessions = numSessions; }
 		
-		
+	@Override
+	public void setUpdatetime() {
+		// update numSessions  
+		if (System.currentTimeMillis() - this.getUpdatetime() > TimeUnit.MICROSECONDS.convert(13, TimeUnit.MINUTES)) {
+			this.numSessions += 1;
+		}
+		super.setUpdatetime();
+	}
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {
 		super.deserialize(inputMap);
@@ -158,6 +176,7 @@ public class Player extends AbstractGAEPersistent {
 		this.consecutiveDays = ((Long)inputMap.get("consecutiveDays")).intValue();
 		this.consecutiveDaysTimestamp = (Long)inputMap.get("consecutiveDaysTimestamp");
 		this.coinsWon = inputMap.get("coinsWon") == null ? 0L : (Long)inputMap.get("coinsWon");
+		this.numSessions = inputMap.get("numSessions") == null ? 0L : (Long)inputMap.get("numSessions");
 	}
 
 	@Override
@@ -175,6 +194,7 @@ public class Player extends AbstractGAEPersistent {
 		map.put("consecutiveDays", this.consecutiveDays);
 		map.put("consecutiveDaysTimestamp", this.consecutiveDaysTimestamp);
 		map.put("coinsWon", this.coinsWon);
+		map.put("numSessions", this.numSessions);
 		return map;
 	}
 
