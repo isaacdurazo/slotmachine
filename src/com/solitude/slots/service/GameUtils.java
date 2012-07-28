@@ -9,6 +9,9 @@ public class GameUtils {
 	/** @return game admin oauth token */
 	public static String getGameAdminToken() { return System.getProperty("game.admin.token"); }
 	
+	/** @return game admin's moco user id */
+	public static String getGameAdminMocoId() { return System.getProperty("game.admin.user.id"); }
+	
 	/** @return game gold secret */
 	public static String getGameGoldSecret() { return System.getProperty("game.gold.secret"); }
 	

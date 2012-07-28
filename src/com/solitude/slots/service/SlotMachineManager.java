@@ -2,13 +2,16 @@ package com.solitude.slots.service;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.appengine.api.ThreadManager;
 import com.solitude.slots.cache.CacheStoreException;
+import com.solitude.slots.cache.GAECacheManager;
 import com.solitude.slots.data.DataStoreException;
 import com.solitude.slots.entities.Player;
 import com.solitude.slots.entities.SpinResult;
@@ -96,6 +99,22 @@ public class SlotMachineManager {
 		do {
 			idx=random.nextInt(spinResults.length);
 			spinResult = spinResults[idx];
+			// check if jackpot and if so that one hasn't been reached already this week
+			if (!Boolean.getBoolean("jackpot.disabled") && spinResult != null && Arrays.equals(spinResult.getSymbols(), new int[]{0,0,0})) {
+				final String cacheRegion = "jackpot", cacheKey = "last";
+				String cacheVal = GAECacheManager.getInstance().getCustom(cacheRegion,cacheKey);
+				if (cacheVal == null || 
+						System.currentTimeMillis() - Long.parseLong(cacheVal) > TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS)) {
+					// we have a legit jackpot!!! send notifications to user and admin account
+					String subject = "Jackpot!", body = "You won the Moco Gold jackpot!  We will get you the gold ASAP";
+					try {
+						OpenSocialService.getInstance().sendNotification(player.getMocoId(), subject, body);
+						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, body);
+					} catch (Exception e) {
+						log.log(Level.SEVERE,"Error sending jackpot notification, winner id: "+player.getId(),e);
+					}
+				} else spinResult = null;
+			}
 		} while (spinResult==null && attempts++<10);
 
 		// debit and credit player coins
