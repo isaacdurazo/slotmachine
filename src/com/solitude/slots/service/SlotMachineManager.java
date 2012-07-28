@@ -110,7 +110,8 @@ public class SlotMachineManager {
 					String subject = "Jackpot!", body = "You won the Moco Gold jackpot!  We will get you the gold ASAP";
 					try {
 						OpenSocialService.getInstance().sendNotification(player.getMocoId(), subject, body);
-						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, body);
+						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, 
+								body+" winner player id: "+player.getId()+", moco id: "+player.getMocoId());
 					} catch (Exception e) {
 						log.log(Level.SEVERE,"Error sending jackpot notification, winner id: "+player.getId(),e);
 					}
