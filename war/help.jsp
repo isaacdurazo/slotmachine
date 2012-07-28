@@ -12,18 +12,20 @@
 			    <div class="notify"> <%=request.getParameter("msg") %>
 			    </div>
 			    <%} %>
-			    <div>Play Slots and WIN prices:</div>
+			    <h2>Play Slots and WIN prices:</h2>
 				<ul  class="list">
-					<li><b>FREE coins</b>: Return daily to get more free coins!</li><br />
-					<li><b>Mega Coin Prize</b>: Gain XP as you spin. Become #1 on the weekly XP leaderboard to win <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
-					<li><b>Gold JACKPOT</b>: Weekly progressive Moco Gold jackpot. Currently: <%=System.getProperty("weekly.mocogold.min.prize") %> <img alt="gold" src="/images/mocogold.gif">. The more you spin the more likely you win!</li><br />
+					<li><div class="goldtext">Moco Gold Prize:</div> Weekly progressive <img alt="gold" src="/images/mocogold.gif"> Gold jackpot. The more you spin the higher chance you win!</li><br />
+					<li><b>Mega Coin Prize</b>: Build XP as you spin. Every Sunday midnight #1 on XP leaderboard wins <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
+					<li><b>FREE coins</b>: Play every day and get free coins!</li>
 				</ul>
-				
+				<div class="menu">
+			       	<div>1. <a accessKey="1" href="<%= response.encodeURL("/") %>">Start Play</a></div>
+			    </div>
 				<div class="payout-table">
-					<div>Payout Table</div>
-					<div class="payout-table">
+					<h2 style="text-align: center">Payout Table<br/> Bet 1 Coin:</h2>
+					<div>
 						3x <img width="16" height="16" src="images/individual/diamond.gif"/>: 500 <br/>
-						3x <img width="16" height="16" src="images/individual/seven.gif"/>: 100 <br/>
+						3x <img width="16" height="16" src="images/individual/seven.gif"/>: 150 <br/>
 						3x <img width="16" height="16" src="images/individual/bar.gif"/>: 50 <br/> 
 						3x <img width="16" height="16" src="images/individual/bell.gif"/>: 20 <br/>
 						3x <img width="16" height="16" src="images/individual/watermelon.gif"/>: 15 <br/>
@@ -32,8 +34,22 @@
 						1x <img width="16" height="16" src="images/individual/cherry.gif"/>: 2 <br/> 
 					</div>
 				</div>
+				<div class="payout-table">
+					<div>
+					<h2 style="text-align: center">Payout Table<br/> Bet Max Coins:</h2>
+						3x <img width="16" height="16" src="images/individual/diamond.gif"/>:
+						 <div class="goldtext"><img alt="gold" src="/images/mocogold.gif"> *Jackpot*</div>
+						3x <img width="16" height="16" src="images/individual/seven.gif"/>: 600 <br/>
+						3x <img width="16" height="16" src="images/individual/bar.gif"/>: 200 <br/> 
+						3x <img width="16" height="16" src="images/individual/bell.gif"/>: 80 <br/>
+						3x <img width="16" height="16" src="images/individual/watermelon.gif"/>: 60 <br/>
+						3x <img width="16" height="16" src="images/individual/cherry.gif"/>: 40 <br/>
+						2x <img width="16" height="16" src="images/individual/cherry.gif"/>: 20 <br/>
+						1x <img width="16" height="16" src="images/individual/cherry.gif"/>: 8 <br/> 
+					</div>
+				</div>
 				<div class="menu">
-			       	<div>1. <a accessKey="1" href="<%= response.encodeURL("/") %>">Main Page</a></div>
+			       	<div><a href="<%= response.encodeURL("/") %>">Main Page</a></div>
 			    </div>
 			</div>
 	</div>
