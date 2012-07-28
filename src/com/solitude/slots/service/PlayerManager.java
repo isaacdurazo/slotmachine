@@ -73,7 +73,7 @@ public class PlayerManager {
 		
 		// award coins if consecutive days greater than 0 and last consecutive days increment last than 100 ms (just happened)
 		int coinsAwarded = 0;
-		if (System.currentTimeMillis()-player.getConsecutiveDaysTimestamp() < 100) {
+		if (player.awardConsecutiveDays()) {
 			coinsAwarded = Integer.getInteger("consecutive.days.coin.award.per.day")*
 					(1+Math.min(player.getConsecutiveDays(),Integer.getInteger("consecutive.days.coin.award.day.cap")));
 			player.setCoins(player.getCoins()+coinsAwarded);

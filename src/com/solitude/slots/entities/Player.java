@@ -104,10 +104,10 @@ public class Player extends AbstractGAEPersistent {
 			return(false);
 	}
 
-	
-	@Override
-	public void setUpdatetime() {
-		super.setUpdatetime();
+	/**
+	 * @return if player should get consecutive days award (or new player)
+	 */
+	public boolean awardConsecutiveDays() {
 		// see if consecutive days needs to be updated (if last timestamp was for the previous day)
 		boolean setToMidnight = false;
 		if (consecutiveDaysTimestamp == 0L) {
@@ -131,6 +131,7 @@ public class Player extends AbstractGAEPersistent {
 			cal.set(Calendar.SECOND, 1);
 			this.consecutiveDaysTimestamp = cal.getTimeInMillis();
 		}
+		return setToMidnight;
 	}
 	
 	/** @return consecutive days of game play (0 indicating user did not play yesterday, 1 meaning they did...) */
