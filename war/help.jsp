@@ -37,7 +37,8 @@
 				<div class="payout-table">
 					<div>
 					<h2 style="text-align: center">Payout Table<br/> Bet Max Coins:</h2>
-						3x <img width="16" height="16" src="images/individual/diamond.gif"/>: <img alt="gold" src="/images/mocogold.gif"> Jackpot<br/>
+						3x <img width="16" height="16" src="images/individual/diamond.gif"/>:
+						 <div class="goldtext"><img alt="gold" src="/images/mocogold.gif"> *Jackpot*</div>
 						3x <img width="16" height="16" src="images/individual/seven.gif"/>: 600 <br/>
 						3x <img width="16" height="16" src="images/individual/bar.gif"/>: 200 <br/> 
 						3x <img width="16" height="16" src="images/individual/bell.gif"/>: 80 <br/>
