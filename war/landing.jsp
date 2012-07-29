@@ -34,7 +34,6 @@
 				</h3>
 				<div class="menu">
 					<div><a href="<%=GameUtils.getMocoSpaceHome() %>">Login</a></div>
-					<div><a href="<%=response.encodeURL("/")+"?uid=12534729" %>">Test Login as niels</a></div>
 					<div><a href="<%= response.encodeURL("/help.jsp") %>">What is Slot Mania?</a></div>
 				</div>
 			</div>
