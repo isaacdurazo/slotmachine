@@ -63,11 +63,22 @@ table {
     background: none repeat scroll 0 0 #FFF9D7;
     border: 1px solid #E2C822;
     color: #644B00;
-    margin-bottom: 3px;
+    margin-bottom: 3px; 
     padding: 4px 5px 0;
     text-align: center;
     width: 106px;
     }
+    
+.confirm {
+    background: none repeat scroll 0 0 #E1FAE1;
+    border: 1px solid #3C6400;
+    color: #3C6400;
+}
+
+.error {
+    background: none repeat scroll 0 0 #FFAFAF;
+    border: 1px solid red;
+    color: #000000;}
 
 
 .coins {

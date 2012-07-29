@@ -33,9 +33,9 @@
 						<b>Coins:</b><%= player.getCoins() %>
 					</td>
 				</tr>
-			</table>		 		 		   
-		    
+			</table>
 		    <h3>Hello <%= player.getName() %>!</h3>    
+			<%@ include file="message.jsp" %>		    
 		    <% if (coinsAwarded > 0) { %>
 		    	<div class="bonus">
 		    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
@@ -71,5 +71,6 @@
 			%>
 	    </div>
 	</div>
+	<%@ include file="footer.jsp" %>
   </body>
 </html>

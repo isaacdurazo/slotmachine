@@ -66,9 +66,9 @@ public class PlayerManager {
 			player.setMocoId(Integer.parseInt((String)person.getFieldValue(Person.Field.ID.toString())));
 			player.setName((String)person.getFieldValue(Person.Field.DISPLAY_NAME.toString()));
 			player.setCoins(Integer.getInteger("new.player.coins", 10));
-			log.log(Level.INFO,"Session Start: new user uid="+player.getMocoId()+", Player="+player.toString());
+			log.log(Level.INFO,"sessionstart|new user|uid|"+player.getMocoId()+"|Player="+player.toString());
 		} else {
-			log.log(Level.INFO,"Session Start: returning user uid="+player.getMocoId()+", Player="+player.toString());
+			log.log(Level.INFO,"sessionstart|returning user|uid|"+player.getMocoId()+", Player="+player.toString());
 		}
 		
 		// award coins if consecutive days greater than 0 and last consecutive days increment last than 100 ms (just happened)

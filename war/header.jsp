@@ -1,23 +1,5 @@
 <%@ include file="header_static.jsp" %>
 <%@page import="java.util.Random"%>
-<%
-if (false && isWebkit) {
-%>
-<html xmlns="http://www.w3.org/1999/xhtml">
- <%@ include file="header_html.jsp" %>
-  <body>
-		<div id="container">
-		  	<div class="wrapper">
-			    <img style="margin-top:45px;" width="240" height="110" src="images/wk-landing-logo.png"/>
-			</div>
-		</div>
-		<div align="center">Available on Smart Phones in Early August!</div>
-</body>
-</html>		
-<% return;
-} 
-%>
-
 
 <%
 //used to postfix on spin hyperlinks to force OpenWave browser to fetch from server
@@ -38,12 +20,14 @@ String accessToken = request.getParameter("accessToken");
 Long playerId = (Long)request.getSession().getAttribute("playerId");
 
 if (playerId != null) {
+	//player already has session - get her.
 	player = PlayerManager.getInstance().getPlayer(playerId);
+
 	// check that if uid is given, that it matches player's moco id to handle multiple login case
 	if (player != null && uid > 0 && player.getMocoId() != uid) player = null;
 } 
 if (player == null) {
-	// verify and create player as needed	
+	// No session - verify and create/fetch player as needed	
 	try {
 		Pair<Player,Integer> gameStartPair;
 		if (accessToken != null && isWebkit) {
@@ -68,8 +52,27 @@ if (player == null) {
 		response.sendRedirect(GameUtils.getVisitorHome());
 		return;
 	}
+	
+	if (!player.hasAdminPriv() && isWebkit) {
+		//only allow admins to play on webkit - all others roadblock until public release
+		%>
+		<html xmlns="http://www.w3.org/1999/xhtml">
+		 <%@ include file="header_html.jsp" %>
+		  <body>
+				<div id="container">
+				  	<div class="wrapper">
+					    <img style="margin-top:45px;" width="240" height="110" src="images/wk-landing-logo.png"/>
+					</div>
+				</div>
+				<div align="center">Available on Smart Phones in early August!</div>
+		</body>
+		</html>		
+ 		<% 
+		return;
+		} 
+	
 	if (player.getIsNewPlayer()==true){
-		pageContext.forward("/help.jsp?msg="+URLEncoder.encode("Welcome "+player.getName(),"UTF-8"));
+		pageContext.forward("/help.jsp?notifymsg="+URLEncoder.encode("Welcome "+player.getName(),"UTF-8"));
 	}
 }
 %>

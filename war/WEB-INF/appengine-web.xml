@@ -17,7 +17,7 @@
     <property name="redirect.validate.enabled" value="true"/>
     <property name="game.moco.id" value="1252"/>
     <property name="game.visitor.url" value="/landing.jsp"/>  
-    <property name="game.adminpriv.ids" value="51653696,12534729,15631292"/>  
+    <property name="game.adminpriv.ids" value="51653696,12534729"/>  
     <property name="mocospace.main.url" value="http://www.mocospace.com/"/>  
     <property name="mocospace.opensocial.api.endpoint" value="https://apps.mocospace.com/social"/> 
     

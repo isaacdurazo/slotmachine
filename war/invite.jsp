@@ -9,7 +9,7 @@ String action = request.getParameter("action");
 String res="";
 
 if (!"success".equals(action)) {
-	response.sendRedirect(OpenSocialService.getInstance().getInviteRedirectUrl("action=success",
+	response.sendRedirect(OpenSocialService.getInstance().getInviteRedirectUrl("confirmmsg=Sent%20Invites",
 			"Play SlotMania and win Moco Gold",
 			"Join me playing the new slot machine game on MocoSpace. I gave you 20 FREE coins to get started. Spin to win prices including Moco Gold!", null,
 			"if="+player.getMocoId(), null));

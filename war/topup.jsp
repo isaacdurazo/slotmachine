@@ -26,11 +26,11 @@ if (coin > 0 && gold > 0) {
 			String s = topupAction.substring(0, topupAction.indexOf(':'));
 			// valid transaction so debit and go back to main page
 			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Request buy "+coin+" coins.|uid|"+player.getMocoId());
-			OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s,player.getAccessToken());
-			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId());
+			String ret=OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s,player.getAccessToken());
+			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|"+ret);
 			player.setCoins(player.getCoins()+coin);
 			PlayerManager.getInstance().storePlayer(player);
-			pageContext.forward("/");
+			pageContext.forward("/?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
 			return;
 		} catch (OpenSocialService.GoldTopupRequiredException e) {
 			// redirect 

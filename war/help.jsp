@@ -8,10 +8,7 @@
 			   		<h3>About</h3>
 			    	<img width="103" height="18" src="images/logo.gif"/>
 			    </div>
-			    <% if (request.getParameter("msg")!=null) { %>
-			    <div class="notify"> <%=request.getParameter("msg") %>
-			    </div>
-			    <%} %>
+<%@ include file="message.jsp" %>		    
 			    <h2>Play Slots and WIN prices:</h2>
 				<ul  class="list">
 					<li><div class="goldtext">Moco Gold Prize:</div> Weekly progressive <img alt="gold" src="/images/mocogold.gif"> Gold jackpot. The more you spin the higher chance you win!</li><br />
