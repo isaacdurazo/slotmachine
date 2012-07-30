@@ -13,7 +13,7 @@
     <property name="game.admin.token" value="94ou1phjs74v|ur48w"/>
     <property name="game.admin.user.id" value="51653696"/>
     <property name="game.gold.secret" value="nrrwb0r1"/>
-    <property name="game.leaderboardcached.sec" value="10"/>
+    <property name="game.leaderboardcached.sec" value="14400"/>
     <property name="redirect.validate.enabled" value="true"/>
     <property name="game.moco.id" value="1252"/>
     <property name="game.visitor.url" value="/landing.jsp"/>  

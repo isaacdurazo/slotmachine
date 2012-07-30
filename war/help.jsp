@@ -9,7 +9,7 @@
 			    	<img width="103" height="18" src="images/logo.gif"/>
 			    </div>
 <%@ include file="message.jsp" %>		    
-			    <h2>Play Slots and WIN prices:</h2>
+			    <h2>Play Slots and WIN prizes:</h2>
 				<ul  class="list">
 					<li><div class="goldtext">Moco Gold Prize:</div> Weekly progressive <img alt="gold" src="/images/mocogold.gif"> Gold jackpot. The more you spin the higher chance you win!</li><br />
 					<li><b>Mega Coin Prize</b>: Build XP as you spin. Every Sunday midnight #1 on XP leaderboard wins <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />

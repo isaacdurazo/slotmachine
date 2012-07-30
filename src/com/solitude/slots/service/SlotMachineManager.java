@@ -148,7 +148,7 @@ public class SlotMachineManager {
 				log.log(Level.WARNING,"error creating lb thread for submitting score for player: "+player,e);
 			}		
 		}
-		log.log(Level.INFO,"random="+idx+" "+spinResult+", player: "+player);
+		log.log(Level.INFO,"spin|random="+idx+" "+spinResult+"|uid|"+player.getMocoId()+"| player: "+player);
 		return spinResult;
 	}
 

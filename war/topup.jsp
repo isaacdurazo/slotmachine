@@ -10,14 +10,14 @@ if (formValidation == null && topupAction == null) {
 	request.getSession().setAttribute("topUpValidation",formValidation);
 }
 int coin = 0, gold = 0;
-if ("20 Coins: 99 Gold".equals(topupAction)) {
-	coin = 20;
+if ("30 Coins: 99 Gold".equals(topupAction)) {
+	coin = 30;
 	gold = 99;
-} else if ("50 Coins: 199 Gold".equals(topupAction)) {
-	coin = 50;
+} else if ("70 Coins: 199 Gold".equals(topupAction)) {
+	coin = 70;
 	gold = 199;
 } else if ("MysteryBox: 499 Gold".equals(topupAction)) {
-	coin = 200+(new Random()).nextInt(150);
+	coin = 250+(new Random()).nextInt(150);
 	gold = 499;
 }
 if (coin > 0 && gold > 0) {
@@ -30,7 +30,7 @@ if (coin > 0 && gold > 0) {
 			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|"+ret);
 			player.setCoins(player.getCoins()+coin);
 			PlayerManager.getInstance().storePlayer(player);
-			pageContext.forward("/?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
+			response.sendRedirect("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
 			return;
 		} catch (OpenSocialService.GoldTopupRequiredException e) {
 			// redirect 
@@ -47,7 +47,6 @@ if (coin > 0 && gold > 0) {
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"topup: invalid topup verification for player: "+player);
 	}
 } 
-String message = request.getParameter("message");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
@@ -56,16 +55,16 @@ String message = request.getParameter("message");
   	<div id="container">
 	  	<div class="wrapper">
 		    <div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
-		    <% if (message != null) { %><div style="color:red"><%= message %></div><% } %>
+			<%@ include file="message.jsp" %>		    
 		    <div>
 		    Buy Coins:
 		    </div>
 			<form action="<%= response.encodeURL("/topup.jsp") %>" method="get">
 				<input class="input" type="hidden" name="verify" value="<%= formValidation %>"/>
-				<input class="input" type="submit" name="topup" value="20 Coins: 99 Gold"/>
-				<input class="input" type="submit" name="topup" value="50 Coins: 199 Gold"/>
+				<input class="input" type="submit" name="topup" value="30 Coins: 99 Gold"/>
+				<input class="input" type="submit" name="topup" value="70 Coins: 199 Gold"/>
 				<input class="input" type="submit" name="topup" value="MysteryBox: 499 Gold"/>
-				<div class="subheader">(MysteryBox buys 150 - 300 Coins)</div>
+				<div class="subheader">(MysteryBox buys 200 - 400 Coins)</div>
 			</form>
 			
 			<div class="menu">

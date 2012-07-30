@@ -28,6 +28,6 @@ public class SpinResult {
 	
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName()+" - coins won: "+coins+", symbols: "+Arrays.toString(symbols);
+		return this.getClass().getSimpleName()+" - won: "+coins+", symbols: "+Arrays.toString(symbols);
 	}
 }

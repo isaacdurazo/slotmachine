@@ -18,7 +18,9 @@ try {
 	
 	fSpinOK=true;
 } catch (InsufficientFundsException ife) {
-	pageContext.forward("/topup.jsp?message="+java.net.URLEncoder.encode("You need more coins!","UTF-8"));
+	//use redirect to ensure the logging works for topup impressions
+	
+	response.sendRedirect("/topup.jsp?notifymsg="+java.net.URLEncoder.encode("You need more coins to spin!","UTF-8"));
 	return;
 }
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
@@ -108,7 +110,7 @@ int key = 1;
 		    
 		     <div class="menu">
 		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
-		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/") %>">Main</a></div>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/index.jsp") %>">Main</a></div>
 		    </div>
 		</div>
 	</div>
