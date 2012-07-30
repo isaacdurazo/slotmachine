@@ -333,7 +333,16 @@ public class OpenSocialService {
 		if (log.isLoggable(LOG_LEVEL)) log.log(LOG_LEVEL,"url: "+url+", response: "+response);
 		JSONObject jsonContent = (JSONObject)new JSONParser().parse(response);
 		// get as string and parse to work around server bug
-		JSONObject jsonPayload = (JSONObject)new JSONParser().parse((String)jsonContent.get("entry"));
+		
+		Object o = jsonContent.get("entry");
+		JSONObject jsonPayload;
+		
+		if (o instanceof JSONObject) {
+			jsonPayload = (JSONObject)o;
+		} else {
+			jsonPayload = (JSONObject)(new JSONParser()).parse((String)o);
+			
+		}
 		String redirectUrl = (String)jsonPayload.get("redirectUrl");
 		JSONArray transactionArray = (JSONArray)jsonPayload.get("GamePlatformPointsTransaction");
 		if (redirectUrl != null) {
