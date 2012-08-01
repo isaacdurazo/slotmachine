@@ -9,12 +9,12 @@
 			   		<h3>The best way to WIN Moco Gold.</h3>
 			    </div>
 <%@ include file="message.jsp" %>		    
-			    <div>Play slots, win coins and spin to win the <span class="goldtext">Moco Gold Jackpot</span></div>
+			    <div>Play slots, win coins and spin to win the <span class="goldtext">Moco Gold Jackpot</span></div><br />
 				<ul  class="list">
-					<li>Weekly <span class="goldtext">Gold Jackpot.</span> Value now: 333 Gold <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
-					<li> Mega Coin Prize: Build XP as you spin and become #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
-					<li>Daily free coins: Play daily and get extra free coins to spin.</li><br />
-					<li>Payout: Check the payout table to see spin payouts.</li>
+					<li>Weekly <span class="goldtext">Gold Jackpot.</span> Value now: <span class="goldtext">333 Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
+					<li><b>Mega Coin Prize:</b> Build XP as you spin and become #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
+					<li><b>Daily free coins:</b> Play daily and get extra free coins to spin.</li><br />
+					<li><b>Payout:</b> Check the payout table to see spin payouts.</li>
 				</ul>
 				<div class="menu">
 			       	<div>1. <a accessKey="1" href="<%= response.encodeURL("/") %>">Start Play</a></div>

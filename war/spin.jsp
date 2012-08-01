@@ -77,6 +77,7 @@ int key = 1;
 			<% } %>
 			</div>
 			
+			<div class="spin-container">
 				<table align="center" >
 					<tr align="center" >
 						<td>
@@ -90,6 +91,8 @@ int key = 1;
 						</td>
 					</tr>
 				</table>
+			</div>	
+				
 			<% if (fSpinOK==true) { %>
 			
 			<table class="bets" align="center" >

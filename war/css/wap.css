@@ -90,7 +90,8 @@ table {
 
 table.bets {
 	border-collapse: separate;
-		width:100%;
+	width:100%;
+	margin-top: 3px;
 }
 
 
@@ -174,14 +175,11 @@ a.bet {
 	border: 2px solid #646464;
 	border-bottom:none;
 	background-color: #3e3e3e;
+	padding:5px;
 }
 
 .border-bottom {
 	border-bottom:2px solid #646464;
-}
-
-.payout-table div {
-	margin-left: 10px;	
 }
 
 .input{
@@ -204,4 +202,10 @@ a.bet {
 
 .icon {
 	vertical-align: top;
+}
+
+.spin-container {
+	border: 2px solid #646464;
+	background-color: #3e3e3e;
+	padding-top: 3px;	
 }
