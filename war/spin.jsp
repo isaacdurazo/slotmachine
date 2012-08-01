@@ -50,11 +50,6 @@ int key = 1;
 			
 			<div class="results">
 			
-				<div class="goldtext">
-					You WON the Moco Gold<br />
-					<img width="112" height="14" src="images/jackpot-winner.gif"/>
-				</div>
-			
 			<% if (fSpinOK==true) {
 				
 				//only for maxspin give ability to win Moco Gold
