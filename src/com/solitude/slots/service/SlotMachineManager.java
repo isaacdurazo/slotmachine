@@ -2,9 +2,13 @@ package com.solitude.slots.service;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +17,10 @@ import com.google.appengine.api.ThreadManager;
 import com.solitude.slots.cache.CacheStoreException;
 import com.solitude.slots.cache.GAECacheManager;
 import com.solitude.slots.data.DataStoreException;
+import com.solitude.slots.data.GAEDataManager;
+import com.solitude.slots.data.QueryCondition;
+import com.solitude.slots.entities.AbstractGAEPersistent;
+import com.solitude.slots.entities.JackpotWinner;
 import com.solitude.slots.entities.Player;
 import com.solitude.slots.entities.SpinResult;
 
@@ -28,6 +36,8 @@ public class SlotMachineManager {
 	public static SlotMachineManager getInstance() { return instance; }	
 	/** logger */
     private static final Logger log = Logger.getLogger(instance.getClass().getName());
+    /** cache region */
+    private static final String CACHE_REGION = "slot.region";
     
 	/** array of spin results */
 	private static final SpinResult[] spinResults = new SpinResult[10000];
@@ -101,11 +111,19 @@ public class SlotMachineManager {
 			spinResult = spinResults[idx];
 			// check if jackpot and if so that one hasn't been reached already this week
 			if (!Boolean.getBoolean("jackpot.disabled") && spinResult != null && Arrays.equals(spinResult.getSymbols(), new int[]{0,0,0})) {
-				final String cacheRegion = "jackpot", cacheKey = "last";
-				String cacheVal = GAECacheManager.getInstance().getCustom(cacheRegion,cacheKey);
-				if (cacheVal == null || 
-						System.currentTimeMillis() - Long.parseLong(cacheVal) > TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS)) {
-					GAECacheManager.getInstance().putCustom(cacheRegion, cacheKey, Long.toString(System.currentTimeMillis()), (int)TimeUnit.SECONDS.convert(7, TimeUnit.DAYS));
+				// get recent jackpot winners
+				List<JackpotWinner> winners = this.getRecentJackpotWinners();
+				if (winners == null || winners.isEmpty() || 
+						System.currentTimeMillis() - winners.get(0).getCreationtime() > TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS)) {
+					// create winner entry
+					JackpotWinner newWinner = new JackpotWinner();
+					newWinner.setPlayerId(player.getId());
+					GAEDataManager.getInstance().store(newWinner);
+					// update cache
+					final String cacheKey = "jackpot_winners";
+					List<Long> winnerIds = GAECacheManager.getInstance().getIds(CACHE_REGION, cacheKey);
+					winnerIds.add(0, newWinner.getId());
+					GAECacheManager.getInstance().putIds(CACHE_REGION, cacheKey, winnerIds);
 					// we have a legit jackpot!!! send notifications to user and admin account
 					String subject = "Jackpot!", body = "You won the Moco Gold jackpot!  We will get you the gold ASAP";
 					try {
@@ -152,6 +170,26 @@ public class SlotMachineManager {
 		return spinResult;
 	}
 
+	/**
+	 * @return list of recent winners descending by when jackpot occurred
+	 * @throws CacheStoreException for cache error
+	 * @throws DataStoreException for data store error
+	 */
+	public List<JackpotWinner> getRecentJackpotWinners() throws CacheStoreException, DataStoreException {
+		final String cacheKey = "jackpot_winners";
+		List<Long> winnerIds = GAECacheManager.getInstance().getIds(CACHE_REGION, cacheKey);
+		if (winnerIds == null) {
+			// query for winners
+			Set<QueryCondition> conditions = new HashSet<QueryCondition>();
+			conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_DELETED_KEY, false));
+			List<JackpotWinner> winners = GAEDataManager.getInstance().query(JackpotWinner.class, conditions, AbstractGAEPersistent.ENTITY_CREATION_KEY, true, 20);
+			winnerIds = new ArrayList<Long>(winners.size());
+			for (JackpotWinner winner : winners) { winnerIds.add(winner.getId()); }
+			GAECacheManager.getInstance().putIds(CACHE_REGION, cacheKey, winnerIds);
+			return winners;
+		}
+		return GAECacheManager.getInstance().getAll(winnerIds, JackpotWinner.class, true);
+	}
 	
 	/**
 	 * Occurs when user does not have sufficient funds for spin

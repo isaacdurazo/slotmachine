@@ -132,7 +132,7 @@ public class GAEDataManager implements DataManager<AbstractGAEPersistent> {
 	}
 	
 	@Override
-	public <K extends AbstractGAEPersistent> List<K> query(Class<?> persistentClass, Set<QueryCondition> conditions, String orderBy, boolean descending) throws DataStoreException {
+	public <K extends AbstractGAEPersistent> List<K> query(Class<?> persistentClass, Set<QueryCondition> conditions, String orderBy, boolean descending, int limit) throws DataStoreException {
 		final String entityName = GAEUtil.getEntityName(persistentClass);
 		List<K> result;
 		// not in cache so look up
@@ -157,7 +157,7 @@ public class GAEDataManager implements DataManager<AbstractGAEPersistent> {
 			q.addSort(orderBy, descending ? Query.SortDirection.DESCENDING : Query.SortDirection.ASCENDING);
 		}
 		PreparedQuery pq = DatastoreServiceFactory.getDatastoreService().prepare(q);
-		List<Entity> entities = pq.asList(FetchOptions.Builder.withLimit(100));
+		List<Entity> entities = pq.asList(FetchOptions.Builder.withLimit(limit));
 		if (log.isLoggable(Level.FINEST)) log.log(Level.FINEST, "query: "+pq);
 		result = new ArrayList<K>(entities.size());
 		for (Entity entity : entities) {

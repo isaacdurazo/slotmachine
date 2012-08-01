@@ -52,11 +52,11 @@
 		        <div>2. <a accessKey="2" href="<%= response.encodeURL("/topup.jsp") %>">Buy Coins</a></div>
 		        <div>3. <a accessKey="3" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
 		        <div>4. <a accessKey="4" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a></div>
-		        
+		        <div>5. <a accessKey="5" href="<%= response.encodeURL("/jackpots.jsp") %>">Jackpot Winners</a></div>
 		    </div>
 		    <br/>
 			<div class="menu">
-		        <div>5. <a accessKey="5" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div>
+		        <div>6. <a accessKey="6" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div>
 			</div>
 			<%
 				if (player.hasAdminPriv()) {

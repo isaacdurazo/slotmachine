@@ -104,7 +104,7 @@ public class PlayerManager {
 		Set<QueryCondition> conditions = new HashSet<QueryCondition>();
 		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_DELETED_KEY,false));
 		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_UPDATE_KEY,System.currentTimeMillis()-hours*3600*1000,QueryCondition.QUERY_OPERATOR.GREATER_THAN_EQUALS));
-		return GAEDataManager.getInstance().query(Player.class, conditions, null, false);
+		return GAEDataManager.getInstance().query(Player.class, conditions, null, false, 1000);
 	}
 	
 	/**
@@ -150,7 +150,8 @@ public class PlayerManager {
 					Player.class, 
 					conditions, 
 					Player.ENTITY_CREATION_KEY, 
-					true); 				// descending
+					true,
+					5); 				// descending
 			// update cache
 			playerIds = new ArrayList<Long>(players.size());
 			Player result = null;

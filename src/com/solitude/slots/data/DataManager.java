@@ -56,8 +56,9 @@ public interface DataManager<T  extends Persistent> {
 	 * @param conditions to be applied
 	 * @param order by field
 	 * @param if ascending or descending
+	 * @param limit item count to return
 	 * @return list of matching items
 	 * @throws DataStoreException for back end issues
 	 */
-	public <K extends T> List<K> query(Class<?> persistentClass, Set<QueryCondition> conditions, String orderBy, boolean descending) throws DataStoreException;
+	public <K extends T> List<K> query(Class<?> persistentClass, Set<QueryCondition> conditions, String orderBy, boolean descending, int limit) throws DataStoreException;
 }

@@ -35,7 +35,7 @@ import com.solitude.slots.opensocial.Score;
  */
 public class OpenSocialService {
 	/** logging level */
-	private static final Level LOG_LEVEL = Level.INFO;
+	private static final Level LOG_LEVEL = Level.FINEST;
 	
 	/** singleton instance */
 	private static final OpenSocialService instance = new OpenSocialService();
