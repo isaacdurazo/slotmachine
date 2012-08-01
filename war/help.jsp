@@ -5,21 +5,22 @@
 	<div id="container">
 			<div class="wrapper">
 				 <div class="header-logo">
-			   		<h3>About</h3>
 			    	<img width="103" height="18" src="images/logo.gif"/>
+			   		<h3>The best way to WIN Moco Gold.</h3>
 			    </div>
 <%@ include file="message.jsp" %>		    
-			    <h2>Play Slots and WIN prizes:</h2>
+			    <div>Play slots, win coins and spin to win the <span class="goldtext">Moco Gold Jackpot</span></div>
 				<ul  class="list">
-					<li><div class="goldtext">Moco Gold Prize:</div> Weekly progressive <img alt="gold" src="/images/mocogold.gif"> Gold jackpot. The more you spin the higher chance you win!</li><br />
-					<li><b>Mega Coin Prize</b>: Build XP as you spin. Every Sunday midnight #1 on XP leaderboard wins <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
-					<li><b>FREE coins</b>: Play every day and get free coins!</li>
+					<li>Weekly <span class="goldtext">Gold Jackpot.</span> Value now: 333 Gold <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
+					<li> Mega Coin Prize: Build XP as you spin and become #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
+					<li>Daily free coins: Play daily and get extra free coins to spin.</li><br />
+					<li>Payout: Check the payout table to see spin payouts.</li>
 				</ul>
 				<div class="menu">
 			       	<div>1. <a accessKey="1" href="<%= response.encodeURL("/") %>">Start Play</a></div>
 			    </div>
 				<div class="payout-table">
-					<h2 style="text-align: center">Payout Table<br/> Bet 1 Coin:</h2>
+					<div style="text-align: center">Payout Table<br/> Bet 1 Coin:</div>
 					<div>
 						3x <img width="16" height="16" src="images/individual/diamond.gif"/>: 500 <br/>
 						3x <img width="16" height="16" src="images/individual/seven.gif"/>: 150 <br/>
@@ -31,11 +32,10 @@
 						1x <img width="16" height="16" src="images/individual/cherry.gif"/>: 2 <br/> 
 					</div>
 				</div>
-				<div class="payout-table">
+				<div class="payout-table border-bottom">
 					<div>
-					<h2 style="text-align: center">Payout Table<br/> Bet Max Coins:</h2>
-						3x <img width="16" height="16" src="images/individual/diamond.gif"/>:
-						 <div class="goldtext"><img alt="gold" src="/images/mocogold.gif"> *Jackpot*</div>
+					<div style="text-align: center">Payout Table<br/> Bet Max Coins:</div>
+						3x <img width="16" height="16" src="images/individual/diamond.gif"/>: <img class="icon"  alt="gold" src="/images/mocogold.gif"> <span class="goldtext">*Jackpot*</span><br/>
 						3x <img width="16" height="16" src="images/individual/seven.gif"/>: 600 <br/>
 						3x <img width="16" height="16" src="images/individual/bar.gif"/>: 200 <br/> 
 						3x <img width="16" height="16" src="images/individual/bell.gif"/>: 80 <br/>

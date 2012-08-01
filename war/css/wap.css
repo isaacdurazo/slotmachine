@@ -10,18 +10,17 @@ body {
 }
 
 .wrapper {
-	width: 120px;
-	display: inline-block;
+	/*width: 120px;*/
+	margin: 2px;
 }
     	
 h2 {
 	margin: 0px 0px 10px;
-	font-size: 13px;
 }
 
 h3 {
 	margin:0;
-	font-size: 11px;
+	font-size: .8em;
 }
 
 h6 {
@@ -29,11 +28,15 @@ h6 {
 	color:#aaa;	
 }
 
-ul {
+ul.list {
 	text-align: left;
 	margin: 0;
 	padding: 0;
-	list-style: dics;
+	padding-left: 17px;
+}
+
+ul li {
+	list-style-type: disc;
 }
 
 table {
@@ -44,7 +47,7 @@ table {
 	background-color: #c70304;
 	padding:4px 5px 0px;
 	border: 2px solid #950405;
-	width: 106px;
+	/* width: 106px;*/
 	text-align: center;
 	color: #fff;
 	margin-bottom:3px;
@@ -66,7 +69,7 @@ table {
     margin-bottom: 3px; 
     padding: 4px 5px 0;
     text-align: center;
-    width: 106px;
+    /*width: 106px;*/
     }
     
 .confirm {
@@ -87,8 +90,9 @@ table {
 
 table.bets {
 	border-collapse: separate;
-
+		width:100%;
 }
+
 
 .bets td {
 	background-color: #07a107;
@@ -96,6 +100,7 @@ table.bets {
 	text-align:center;
 	padding: 5px;
 	font-size: 12px;
+	width:40%;
 }
 
 .bets div {
@@ -111,8 +116,8 @@ a.bet {
 	padding:3px 0;
 	border: 2px solid #367219;
 	margin: 5px 0;
-	width:116px;
-	text-align:center;
+	/*width:116px;*/
+	text-align:left;
 }
 
 .login-menu a {
@@ -124,9 +129,13 @@ a.bet {
 }
 
 .subheader {
-	font-size:11px;
+	font-size: .8em;
 	text-align: center;
 	display: inline-block;
+}
+
+.menu {
+	text-align:left;
 }
 
 .menu a, .menu div {
@@ -134,12 +143,10 @@ a.bet {
 }
 
 .menu div {
-	font-size: 12px;
 	background-color: #ff8d00;
 	padding:2px 0;
 	margin: 5px 0;
-	width:120px;
-	text-align:center;
+	/*width:120px;*/
 }
 
 .wonspin {
@@ -148,7 +155,6 @@ a.bet {
 
 .goldtext {
 	color: #A98525;
-    font-size: 13px;
     font-weight:bold;
     }
     
@@ -156,37 +162,36 @@ a.bet {
 	border-top: 1px solid;
 	border-bottom: 1px solid;
 	margin-top: 5px;
-	font-size:12px;
 	color: #A98525;
 }
 
 .list {
 	margin: 10px 0;
-	font-size: 13px;
 }
 
 .payout-table {
 	text-align:left;
-	border: 1px solid #950405;
+	border: 2px solid #646464;
+	border-bottom:none;
+	background-color: #3e3e3e;
 }
+
+.border-bottom {
+	border-bottom:2px solid #646464;
+}
+
 .payout-table div {
 	margin-left: 10px;	
 }
 
-
-
 .input{
-	font-size: 11px;
+	font-size: 10px;
 	width: 120px;
+	text-align:left;
 }
 
 .results {
-	font-size: 13px;
 	height: 45px;
-}
-
-.wonspin {
-	font-size: 12px;
 }
 
 .lostspin {
@@ -197,3 +202,6 @@ a.bet {
 	line-height:35px
 }
 
+.icon {
+	vertical-align: top;
+}

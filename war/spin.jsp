@@ -60,7 +60,6 @@ int key = 1;
 			<%		
 				} else if (spinResult.getCoins()>0) {
 			%>
-				<img width="118" height="6" src="images/lights.gif"/>
 				<div class="wonspin">
 					You WON <%=spinResult.getCoins() %> coins!
 				</div>
@@ -78,7 +77,7 @@ int key = 1;
 			<% } %>
 			</div>
 			
-				<table>
+				<table align="center" >
 					<tr align="center" >
 						<td>
 							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[0] %>.gif"/>
@@ -93,7 +92,7 @@ int key = 1;
 				</table>
 			<% if (fSpinOK==true) { %>
 			
-			<table class="bets">
+			<table class="bets" align="center" >
 				<tr>
 					<td class="bet-1">
 						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin&"+cacheBuster) %>"> Bet 1</a>

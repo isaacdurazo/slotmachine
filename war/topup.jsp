@@ -133,10 +133,19 @@ if (isWebkit) {
 		    Buy Coins:
 		    </div>
 			<form action="<%= response.encodeURL("/topup.jsp") %>" method="get">
-				<input class="input" type="hidden" name="verify" value="<%= formValidation %>"/>
-				<input class="input gold" type="submit" name="topup" value="30 Coins: 99 Gold"/>
-				<input class="input gold" type="submit" name="topup" value="70 Coins: 199 Gold"/>
-				<input class="input gold" type="submit" name="topup" value="MysteryBox: 499 Gold"/>
+				<div>
+					<input class="input" type="hidden" name="verify" value="<%= formValidation %>"/>
+				</div>
+				<div>
+					<input class="input" type="submit" name="topup" value="30 Coins: 99 Gold"/>
+				</div>
+				<div>
+					<input class="input" type="submit" name="topup" value="70 Coins: 199 Gold"/>
+				</div>
+				<div>
+					<input class="input" type="submit" name="topup" value="MysteryBox: 499 Gold"/>
+				</div>
+				
 				<div class="subheader">(MysteryBox buys 200 - 400 Coins)</div>
 			</form>
 			
