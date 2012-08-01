@@ -6,7 +6,7 @@
 			<div class="wrapper">
 				 <div class="header-logo">
 			    	<img width="112" height="34" src="images/logo.gif"/>
-			   		<h3>The best way to WIN Moco Gold.</h3>
+			   		<div class="secondary-header">The best way to WIN Moco Gold.</div>
 			    </div>
 <%@ include file="message.jsp" %>		    
 			    <div>Play slots, win coins and spin to win the <span class="goldtext">Moco Gold Jackpot</span></div><br />

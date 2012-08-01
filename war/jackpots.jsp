@@ -5,22 +5,31 @@
 	  <body>
 	  	<div id="container">
 		  	<div class="wrapper">
-			    <div class="header-logo"><img width="112" height="34" src="images/logo.gif"/></div>
-			    
+			    <div class="header-logo"><img width="112" height="34" src="images/logo.gif"/><br />
+			    	<div class="secondary-header">Jackpot Hall Of Fame</div>
+			    </div>
 			    <div class="subheader">
-			    	Recent Jackpot Winners
+			    	Recent Moco Gold Jackpot winers
 			    </div>
 			    <ul class="list">
 			    	<%
 			    	java.util.List<JackpotWinner> winners = SlotMachineManager.getInstance().getRecentJackpotWinners();
 			    	if (winners == null || winners.isEmpty()) { %>
 			    		<li>Be the first winner!</li>
+
 			    	<% } else {
 				    	for (JackpotWinner winner : winners) { 
 				    		Player winningPlayer = PlayerManager.getInstance().getPlayer(winner.getPlayerId()); %>
 				    		<li>
 				    			<%= winningPlayer.getName() %> <img src="<%= winningPlayer.getImage() %>" height="25" width="25"/>
 				    		</li>
+				    		
+				    		<!-- Example of the structure I would like to use 
+				    		
+				    		<li>
+				    			<img style="vertical-align:middle;" src="images/logo.gif" height="25" width="25"/> <a href="#">Fulanito</a> 
+				    		</li>
+				    		-->
 				    	<% } 
 			    	}%>
 			    </ul>

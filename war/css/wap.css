@@ -35,8 +35,13 @@ ul.list {
 	padding-left: 17px;
 }
 
+ul.list a {
+	color: #C70304;
+}
+
 ul li {
 	list-style-type: disc;
+	margin-top:2px;
 }
 
 table {
@@ -45,12 +50,17 @@ table {
 
 .header-logo {
 	background-color: #c70304;
-	padding:4px 5px 0px;
+	padding-top: 4px;
 	border: 2px solid #950405;
-	/* width: 106px;*/
 	text-align: center;
 	color: #fff;
 	margin-bottom:3px;
+}
+
+.secondary-header {
+	background-color: #950405;
+	font-size: 0.8em;
+	padding-top:2px;
 }
 
 .bonus {
@@ -99,7 +109,7 @@ table.bets {
 	border: 2px solid #367219;
 	text-align:center;
 	padding: 5px;
-	font-size: 12px;
+	font-size: 0.8em;
 	width:40%;
 }
 
