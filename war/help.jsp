@@ -5,7 +5,7 @@
 	<div id="container">
 			<div class="wrapper">
 				 <div class="header-logo">
-			    	<img width="103" height="18" src="images/logo.gif"/>
+			    	<img width="112" height="34" src="images/logo.gif"/>
 			   		<h3>The best way to WIN Moco Gold.</h3>
 			    </div>
 <%@ include file="message.jsp" %>		    

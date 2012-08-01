@@ -27,7 +27,7 @@
 		  	<div class="wrapper">
 			    <div class="header-logo">
 			   		<h3>Welcome to</h3>
-			    	<img width="103" height="18" src="images/logo.gif"/>
+			    	<img width="112" height="34" src="images/logo.gif"/>
 			    </div>
 				<h3>
 					You must be logged in to MocoSpace to play this game!

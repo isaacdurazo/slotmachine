@@ -24,7 +24,7 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
   <body>
   	<div id="container">
 	  	<div class="wrapper">
-		    <div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
+		    <div class="header-logo"><img width="112" height="34" src="images/logo.gif"/></div>
 		    <h3>Weekly <%= type == (short)1 ? "Xp" : "Coins Won" %> Leaderboard</h3>
 		    <h6>(updated every 4 hrs)</h6>
 		    

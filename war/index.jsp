@@ -22,7 +22,7 @@
   <body>
   	<div id="container">
 	  	<div class="wrapper">
-		    <div class="header-logo"><img width="103" height="18" src="images/logo.gif"/></div>
+		    <div class="header-logo"><img width="112" height="34" src="images/logo.gif"/></div>
 		    
 		    <table class="subheader">
 				<tr>
