@@ -60,7 +60,7 @@ if (player == null) {
 
 	//@TODO FIX - for now block new players
 	//if (!player.hasAdminPriv() && isWebkit) {
-	if (false && isWebkit) {
+	if (isWebkit) {
 		//only allow admins to play on webkit - all others roadblock until public release
 		%>
 		<html xmlns="http://www.w3.org/1999/xhtml">
