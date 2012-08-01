@@ -49,21 +49,28 @@ int key = 1;
 			</table>
 			
 			<div class="results">
+			
+				<div class="goldtext">
+					You WON the Moco Gold<br />
+					<img width="112" height="14" src="images/jackpot-winner.gif"/>
+				</div>
+			
 			<% if (fSpinOK==true) {
 				
 				//only for maxspin give ability to win Moco Gold
 				if ("maxspin".equals(action) && symbol[0]==0 && symbol[1]==0 && symbol[2]==0) {
 			%>
-				<div class="wonspin">
-					You WON the Moco Gold JACKPOT!!!
-				</div>	
+				<div class="goldtext">
+					You WON the Moco Gold<br />
+					<img width="112" height="14" src="images/jackpot-winner.gif"/>
+				</div>		
 			<%		
 				} else if (spinResult.getCoins()>0) {
 			%>
 				<div class="wonspin">
-					You WON <%=spinResult.getCoins() %> coins!
+					You WON<br />
+					<img width="13" height="11" src="images/animated-star.gif"/> <%=spinResult.getCoins() %> coins! <img width="13" height="11" src="images/animated-star.gif"/>
 				</div>
-				<img width="118" height="6" src="images/lights.gif"/>
 					
 			<%		} else if (spinResult.getCoins()==0) { %>
 				<div class="lostspin">
