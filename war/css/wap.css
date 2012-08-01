@@ -94,7 +94,6 @@ table.bets {
 	margin-top: 3px;
 }
 
-
 .bets td {
 	background-color: #07a107;
 	border: 2px solid #367219;
@@ -155,7 +154,7 @@ a.bet {
 }
 
 .goldtext {
-	color: #A98525;
+	color: #f1bc4c;
     font-weight:bold;
     }
     
@@ -163,7 +162,7 @@ a.bet {
 	border-top: 1px solid;
 	border-bottom: 1px solid;
 	margin-top: 5px;
-	color: #A98525;
+	color: #f1bc4c;
 }
 
 .list {
