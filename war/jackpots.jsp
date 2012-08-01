@@ -21,14 +21,15 @@
 				    	for (JackpotWinner winner : winners) { 
 				    		Player winningPlayer = PlayerManager.getInstance().getPlayer(winner.getPlayerId()); %>
 				    		<li>
-				    			<%= winningPlayer.getName() %> <img src="<%= winningPlayer.getImage() %>" height="25" width="25"/>
+				    			<img src="<%= winningPlayer.getImage() %>" height="25" width="25"/> <%= winningPlayer.getName() %> 
 				    		</li>
 				    		
 				    		<!-- Example of the structure I would like to use 
 				    		
 				    		<li>
-				    			<img style="vertical-align:middle;" src="images/logo.gif" height="25" width="25"/> <a href="#">Fulanito</a> 
+				    			<img style="vertical-align:middle;" src="#" height="25" width="25"/> <a href="#">name</a> 
 				    		</li>
+				    		
 				    		-->
 				    	<% } 
 			    	}%>
