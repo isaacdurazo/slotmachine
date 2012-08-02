@@ -6,15 +6,15 @@
 			<div class="wrapper">
 				 <div class="header-logo">
 			    	<img width="112" height="34" src="images/logo.gif"/>
-			   		<div class="secondary-header">The best way to WIN Moco Gold.</div>
+			   		<div class="secondary-header">The best way to WIN <span class="goldtext">Moco Gold</span>.</div>
 			    </div>
 <%@ include file="message.jsp" %>		    
-			    <div>Play slots, win coins and spin to win the <span class="goldtext">Moco Gold Jackpot</span></div><br />
+			    <div>Play slots, have fun and win prizes:</div><br />
 				<ul  class="list">
-					<li>Weekly <span class="goldtext">Gold Jackpot.</span> Value now: <span class="goldtext">333 Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
-					<li><b>Mega Coin Prize:</b> Build XP as you spin and become #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
-					<li><b>Daily free coins:</b> Play daily and get extra free coins to spin.</li><br />
-					<li><b>Payout:</b> Check the payout table to see spin payouts.</li>
+					<li><b>Weekly</b> <span class="goldtext">Gold Jackpot.</span> Now: <span class="goldtext"><%=System.getProperty("weekly.mocogold.min.prize")%> Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
+					<li><b>Mega Coin Prize:</b> Gain XP with every spin and compete to be #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
+					<li><b>Daily free coins:</b> Return <b>every day</b> and get FREE coins to spin.</li><br />
+					<li><b>Payout:</b> Check the payout table for spin payouts.</li>
 				</ul>
 				<div class="menu">
 			       	<div>1. <a accessKey="1" href="<%= response.encodeURL("/") %>">Start Play</a></div>

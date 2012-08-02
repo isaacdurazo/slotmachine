@@ -98,6 +98,10 @@ public class Player extends AbstractGAEPersistent {
 	public Locale getLocale() { return this.locale; }
 	/** @param locale for user's language in string form */
 	public void setLocale(Locale locale) { this.locale = locale; }
+	
+	
+	public long getSessions() {return this.numSessions;}
+	public void setSessions(long n) {this.numSessions=n;};
 
 	public boolean hasAdminPriv() {
 		String[] mocoIds = ((String)System.getProperty("game.adminpriv.ids")).split(",");

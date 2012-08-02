@@ -11,21 +11,27 @@ public class JackpotWinner extends AbstractGAEPersistent {
 	private static final int CURRENT_VERSION = 1;
 	/** id of winner */
 	private long playerId;
+	private long gold;
+	
+	
+	
 	/** @return id of player */
 	public long getPlayerId() { return playerId; }
 	/** @param playerId of winner */
 	public void setPlayerId(long playerId) { this.playerId = playerId; }
 
-	public long gold;
 	public long getGold(){return gold;}
 	public void setGold(long gold){ this.gold=gold;}
 	
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {
 		super.deserialize(inputMap);
+		try {
 		this.playerId = (Long)inputMap.get("playerId");
 		this.gold = (Long)inputMap.get("gold");
-		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	@Override

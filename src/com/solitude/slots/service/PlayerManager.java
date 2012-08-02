@@ -68,6 +68,7 @@ public class PlayerManager {
 			player.setCoins(Integer.getInteger("new.player.coins", 20));
 			log.log(Level.INFO,"sessionstart|new user|uid|"+player.getMocoId()+"|Player="+player.toString());
 		} else {
+			player.setSessions(player.getSessions()+1);
 			log.log(Level.INFO,"sessionstart|returning user|uid|"+player.getMocoId()+", Player="+player.toString());
 		}
 		

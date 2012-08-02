@@ -133,11 +133,20 @@ public class SlotMachineManager {
 					try {
 						OpenSocialService.getInstance().sendNotification(player.getMocoId(), subject, body);
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, 
-								body+" winner player id: "+player.getId()+", moco id: "+player.getMocoId());
+								body+" winner player id: "+player.getId()+", moco id: "+player.getMocoId()+ ", xp: "+player.getXp());
 					} catch (Exception e) {
 						log.log(Level.SEVERE,"Error sending jackpot notification, winner id: "+player.getId(),e);
 					}
-				} else spinResult = null;
+				} else {
+					spinResult = null;
+					try {
+						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
+								"Jackpot miss", 
+								"Jackpot within 7days since last jackpot. player id: "+player.getId()+", moco id: "+player.getMocoId()+ ", xp: "+player.getXp());
+					} catch (Exception e) {
+						log.log(Level.SEVERE,"Error sending jackpot miss notification, player id: "+player.getId(),e);
+					}					
+				}
 			}
 		} while (spinResult==null && attempts++<10);
 
@@ -187,7 +196,7 @@ public class SlotMachineManager {
 			}
 			} //synchronous
 		}
-		log.log(Level.INFO,"spin|random="+idx+" "+spinResult+"|uid|"+player.getMocoId()+"| player: "+player);
+		log.log(Level.INFO,"spin|random="+idx+", bet="+coins+", "+spinResult+"|uid|"+player.getMocoId()+"| player: "+player);
 		return spinResult;
 	}
 
