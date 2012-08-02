@@ -19,7 +19,8 @@
 			    <img style="margin-top:45px;" width="240" height="110" src="images/wk-landing-logo.png"/>
 			</div>
 		</div>
-		<div align="center">Available on Smart Phones August 1st!</div>
+		<div align="center">Game is available on Feature Phones today.<br/>
+							Coming to Smart Phones in early August!</div>
 		
 		<% } else { %>
 		

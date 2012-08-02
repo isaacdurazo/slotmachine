@@ -109,8 +109,8 @@ table.bets {
 	border: 2px solid #367219;
 	text-align:center;
 	padding: 5px;
-	font-size: 0.8em;
-	width:40%;
+/*	font-size: 0.8em;
+*/	width:40%;
 }
 
 .bets div {
@@ -159,10 +159,6 @@ a.bet {
 	/*width:120px;*/
 }
 
-.wonspin {
-	color: #07a107;
-}
-
 .goldtext {
 	color: #f1bc4c;
     font-weight:bold;
@@ -192,23 +188,28 @@ a.bet {
 }
 
 .input{
-	font-size: 10px;
-	width: 120px;
+/*	font-size: 10px;
+*/	width: 120px;
 	text-align:left;
 }
 
 .results {
-	height: 45px;
+	height: 20px;
 }
 
 .lostspin {
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .results .lostspin {
-	line-height:35px
+	line-height:16px
 }
 
+.wonspin {
+	color: #07a107;
+	font-size: 1.0em;
+ }
+ 
 .icon {
 	vertical-align: top;
 }

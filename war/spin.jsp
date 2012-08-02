@@ -35,7 +35,7 @@ int key = 1;
   <body>
   	<div id="container">
 	  	<div class="wrapper">
-		    <div class="header-logo"><img width="112" height="34" src="images/logo.gif"/></div>
+		    <div class="header-logo"><img width="112" height="18" src="images/logosmall.gif"/></div>
 		    
 		    <table class="subheader">
 				<tr>
@@ -63,8 +63,7 @@ int key = 1;
 				} else if (spinResult.getCoins()>0) {
 			%>
 				<div class="wonspin">
-					You WON<br />
-					<img width="13" height="11" src="images/animated-star.gif"/> <%=spinResult.getCoins() %> coins! <img width="13" height="11" src="images/animated-star.gif"/>
+					<img width="13" height="11" src="images/animated-star.gif"/>WON <%=spinResult.getCoins() %> coins! <img width="13" height="11" src="images/animated-star.gif"/>
 				</div>
 					
 			<%		} else if (spinResult.getCoins()==0) { %>
@@ -103,7 +102,7 @@ int key = 1;
 						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin&"+cacheBuster) %>"> Bet 1</a>
 					</td>
 					<td class="bet-2">
-						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin&"+cacheBuster) %>">Bet 3</a>
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin&"+cacheBuster) %>"> Bet 3</a>
 					</td>
 				</tr>
 			</table>
