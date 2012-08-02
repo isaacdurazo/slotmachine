@@ -29,6 +29,7 @@
     <property name="xp.leaderboard.enabled" value="true"/>
     <property name="weekly.coin.prize" value="500"/>
     <property name="weekly.mocogold.min.prize" value="333"/>
+    <property name="xp.leaderboard.synchronous" value="true"/>
 
   </system-properties>
 
