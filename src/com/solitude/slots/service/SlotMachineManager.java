@@ -105,6 +105,7 @@ public class SlotMachineManager {
 		SpinResult spinResult = null;
 		int attempts = 0;
 		int idx=0;
+		boolean fJackpot=false;
 		
 		do {
 			idx=random.nextInt(spinResults.length);
@@ -118,14 +119,17 @@ public class SlotMachineManager {
 					// create winner entry
 					JackpotWinner newWinner = new JackpotWinner();
 					newWinner.setPlayerId(player.getId());
+					newWinner.setGold(Long.getLong("weekly.mocogold.min.prize"));
 					GAEDataManager.getInstance().store(newWinner);
+					fJackpot=true;
+					
 					// update cache
 					final String cacheKey = "jackpot_winners";
 					List<Long> winnerIds = GAECacheManager.getInstance().getIds(CACHE_REGION, cacheKey);
 					winnerIds.add(0, newWinner.getId());
 					GAECacheManager.getInstance().putIds(CACHE_REGION, cacheKey, winnerIds);
 					// we have a legit jackpot!!! send notifications to user and admin account
-					String subject = "Jackpot!", body = "You won the Moco Gold jackpot!  We will get you the gold ASAP";
+					String subject = "SlotMania Jackpot!", body = "Congratulations - you won the Moco Gold jackpot in Slot Mania! You will be credited Gold within next 24hrs and will receive a confirmation inbox message.";
 					try {
 						OpenSocialService.getInstance().sendNotification(player.getMocoId(), subject, body);
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, 
@@ -137,19 +141,35 @@ public class SlotMachineManager {
 			}
 		} while (spinResult==null && attempts++<10);
 
-		// debit and credit player coins
-		if (coins == 3 && spinResult.getCoins() > 0) {
-			spinResult = new SpinResult(
-					spinResult.getCoins()*Integer.parseInt(System.getProperty("max.bet.coin.multiplier")),
-							spinResult.getSymbols());
+		// debit and credit player coins. Jackpot users only win gold; apply maxspin multiplies
+		int c = spinResult.getCoins();
+		if (fJackpot) {c=0;}
+		
+		if (coins == 3 && spinResult.getCoins() > 0 ) {
+			spinResult = new SpinResult(c*Integer.parseInt(System.getProperty("max.bet.coin.multiplier")),
+					spinResult.getSymbols());
 		}
-		player.setCoins(player.getCoins()-coins+spinResult.getCoins());
-		player.setCoinsWon(spinResult.getCoins());
-		// increment xp with # of coins spent and update leaderboard (do this with batching later?)
-		player.setXp(player.getXp()+coins);
+		player.setCoins(player.getCoins()-coins+c);
+		player.setCoinsWon(player.getCoinsWon()+c);
+
+		
+		// increment xp with spins and update leaderboard (do this with batching later?)
+		player.setXp(player.getXp()+1);
 		PlayerManager.getInstance().storePlayer(player);
-		if (Boolean.getBoolean("xp.leaderboard.enabled") && Boolean.getBoolean("xp.leaderboard.synchronous")) {
-			try {
+		
+		if (Boolean.getBoolean("xp.leaderboard.enabled")) {
+			if (Boolean.getBoolean("xp.leaderboard.synchronous")) {
+				try {
+					OpenSocialService.getInstance().setScores(player.getMocoId(),
+							new OpenSocialService.ScoreUpdate((short)1, player.getXp(), false),
+							new OpenSocialService.ScoreUpdate((short)2, player.getCoinsWon(), false));
+				} catch (Exception ex) {
+					log.log(Level.WARNING,"error submitting synchronous score for player: "+player,ex);
+					throw new RuntimeException(ex);
+				}
+				
+			} else {
+				try {
 				ThreadManager.createBackgroundThread(new Runnable() {
 					public void run() {
 						try {
@@ -157,14 +177,15 @@ public class SlotMachineManager {
 									new OpenSocialService.ScoreUpdate((short)1, player.getXp(), false),
 									new OpenSocialService.ScoreUpdate((short)2, player.getCoinsWon(), false));
 						} catch (Exception ex) {
-							log.log(Level.WARNING,"error submitting score for player: "+player,ex);
+							log.log(Level.WARNING,"error submitting async score for player: "+player,ex);
 							throw new RuntimeException(ex);
 						}
 					}
 				}).start();
 			} catch (Exception e) {
 				log.log(Level.WARNING,"error creating lb thread for submitting score for player: "+player,e);
-			}		
+			}
+			} //synchronous
 		}
 		log.log(Level.INFO,"spin|random="+idx+" "+spinResult+"|uid|"+player.getMocoId()+"| player: "+player);
 		return spinResult;
