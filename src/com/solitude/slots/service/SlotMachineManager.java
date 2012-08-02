@@ -151,15 +151,15 @@ public class SlotMachineManager {
 		} while (spinResult==null && attempts++<10);
 
 		// debit and credit player coins. Jackpot users only win gold; apply maxspin multiplies
-		int c = spinResult.getCoins();
-		if (fJackpot) {c=0;}
+//		int c = spinResult.getCoins();
+//		if (fJackpot==true) {c=0;}
 		
 		if (coins == 3 && spinResult.getCoins() > 0 ) {
-			spinResult = new SpinResult(c*Integer.parseInt(System.getProperty("max.bet.coin.multiplier")),
+			spinResult = new SpinResult(spinResult.getCoins()*Integer.parseInt(System.getProperty("max.bet.coin.multiplier")),
 					spinResult.getSymbols());
 		}
-		player.setCoins(player.getCoins()-coins+c);
-		player.setCoinsWon(player.getCoinsWon()+c);
+		player.setCoins(player.getCoins()-coins+spinResult.getCoins());
+		player.setCoinsWon(player.getCoinsWon()+spinResult.getCoins());
 
 		
 		// increment xp with spins and update leaderboard (do this with batching later?)

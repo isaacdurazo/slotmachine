@@ -150,7 +150,7 @@ if (isWebkit) {
 			</form>
 			
 			<div class="menu">
-				<div><a href="<%= response.encodeURL("/") %>">Main</a></div>
+				<div><a href="<%= response.encodeURL("/index.jsp") %>">Main</a></div>
 			</div>
 		</div>
 	</div>
