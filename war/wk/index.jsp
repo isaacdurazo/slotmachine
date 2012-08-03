@@ -13,7 +13,6 @@
 		}
 	}
 	
-	
 	//@TODO add logic for 1) process/log invite requests using if=<mocoid> as senderID and 2) new users redirect to help
 %>
  
@@ -32,7 +31,9 @@
 							<b>XP:</b> <%= player.getXp() %>
 						</td>
 						<td>
-							<b>Coins:</b> <%= player.getCoins() %>
+							<a href="<%=response.encodeURL("/wk/?action=credit")%>">
+								<b>Coins:</b> <%= player.getCoins() %>
+							</a>
 						</td>
 					</tr>
 				</table>
@@ -51,8 +52,12 @@
 			    
 				<div class="jackpotteaser-container">
 					<div class="jackpotteaser goldtext">
-						<img width="112" height="14" src="images/jackpot.gif"/><br />
-						<img class="icon" width="16" height="16" src="images/mocogold.png"/> <%=System.getProperty("weekly.mocogold.min.prize")%> MocoGold!
+						<span class="jackpot">
+							<img width="161" height="34" src="images/jackpot.png"/>
+						</span>
+						<span class="jackpot-text">
+							<img width="16" height="16" src="images/mocogold.png"/> <%=System.getProperty("weekly.mocogold.min.prize")%> MocoGold!
+						</span>
 					</div>
 				</div>
 				
@@ -113,6 +118,5 @@
 			
 	    </div>
 	</div>
-	<%@ include file="footer.jsp" %>
   </body>
 </html>

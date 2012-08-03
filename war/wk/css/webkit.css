@@ -89,6 +89,9 @@ table {
 	padding:4px;
 }
 
+.stats a {
+	color: #FFF;	
+}
 
 .controls, .buy-container {
 	text-align: center;
@@ -199,10 +202,10 @@ table {
 	border: 3px solid #181818;
 	text-align:center;
 	border-radius: 10px;
-	background-image: linear-gradient(bottom, rgb(20,117,15) 0%, rgb(20,107,15) 49%, rgb(134,255,127) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(20,117,15) 0%, rgb(20,107,15) 49%, rgb(134,255,127) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(20,117,15) 0%, rgb(20,107,15) 49%, rgb(134,255,127) 100%);
-	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(20,117,15)), color-stop(0.49, rgb(20,107,15)), color-stop(1, rgb(134,255,127)));
+	background-image: linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(37,130,0)), color-stop(0.5, rgb(43,156,2)), color-stop(1, rgb(96,248,36)));
 	
 	-webkit-box-shadow: inset 0 3px 0px rgba(17,102,12,1), inset 0 -3px 0px rgba(17,102,12,1), inset 3px 0 0px rgba(17,102,12,1), inset -3px 0 0px rgba(17,102,12,1);
 	-moz-box-shadow: inset 0 3px 0px rgba(17,102,12,1), inset 0 -3px 0px rgba(17,102,12,1), inset 3px 0 0px rgba(17,102,12,1), inset -3px 0 0px rgba(17,102,12,1);
@@ -214,14 +217,14 @@ table {
 	text-align:center;
 	width: 50%;
 	border-radius: 10px;
-	background-image: linear-gradient(bottom, rgb(205,0,0) 0%, rgb(175,0,0) 49%, rgb(249,112,112) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(205,0,0) 0%, rgb(175,0,0) 49%, rgb(249,112,112) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(205,0,0) 0%, rgb(175,0,0) 49%, rgb(249,112,112) 100%);
-	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(205,0,0)), color-stop(0.49, rgb(175,0,0)), color-stop(1, rgb(249,112,112)));
-
-	-webkit-box-shadow: inset 0 3px 0px rgba(147,0,0,1), inset 0 -3px 0px rgba(147,0,0,1), inset 3px 0 0px rgba(147,0,0,1), inset -3px 0 0px rgba(147,0,0,1);
-	-moz-box-shadow: inset 0 3px 0px rgba(147,0,0,1), inset 0 -3px 0px rgba(147,0,0,1), inset 3px 0 0px rgba(147,0,0,1), inset -3px 0 0px rgba(147,0,0,1);
-	box-shadow: inset 0 3px 0px rgba(147,0,0,1), inset 0 -3px 0px rgba(147,0,0,1), inset 3px 0 0px rgba(147,0,0,1), inset -3px 0 0px rgba(147,0,0,1);
+	background-image: linear-gradient(bottom, rgb(255,140,0) 0%, rgb(220,121,0) 50%, rgb(254,219,115) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(255,140,0) 0%, rgb(220,121,0) 50%, rgb(254,219,115) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255,140,0) 0%, rgb(220,121,0) 50%, rgb(254,219,115) 100%);
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(255,140,0)), color-stop(0.5, rgb(220,121,0)), color-stop(1, rgb(254,219,115)));
+	
+	-webkit-box-shadow: inset 0 3px 0px rgba(199,103,1,1), inset 0 -3px 0px rgba(199,103,1,1), inset 3px 0 0px rgba(199,103,1,1), inset -3px 0 0px rgba(199,103,1,1);
+	-moz-box-shadow: inset 0 3px 0px rgba(199,103,1,1), inset 0 -3px 0px rgba(199,103,1,1), inset 3px 0 0px rgba(199,103,1,1), inset -3px 0 0px rgba(199,103,1,1);
+	box-shadow: inset 0 3px 0px rgba(199,103,1,1), inset 0 -3px 0px rgba(199,103,1,1), inset 3px 0 0px rgba(199,103,1,1), inset -3px 0 0px rgba(199,103,1,1);
 }
 
 .bets a, .menu a, .play a {
@@ -258,15 +261,39 @@ table {
 }
 
 .jackpotteaser {
-	background-color: #000000;
-	border: 2px solid #f1bc4c;
+	background:  url('/wk/images/jackpot-bg.gif') center;
+	border: 2px solid #f19f30;
     border-radius: 3px 3px 3px 3px;
-    height: 38px;
+    height: 49px;
 	padding-top: 4px;
+	position: relative;
 }
 
 .jackpotteaser.goldtext {
 	font-weight: normal;
+}
+
+.jackpot {
+	position: absolute;
+	right: 0;
+	left: 0;
+	top:-1px;
+	margin: auto;
+}
+
+.jackpot-text {
+	position: absolute;
+	right: 0;
+	left: 0;
+	top: 27px;
+	margin: auto;	
+	color: #6f1709;
+	font-size: 1.3em;
+	font-weight: 600;
+}
+
+.jackpot-text img {
+	vertical-align: middle;
 }
 
 .list-container {

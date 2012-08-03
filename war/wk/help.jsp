@@ -31,7 +31,7 @@
 						</ul>
 					</div>
 					
-					<table class="menu">
+					<table class="play">
 						<tr>
 							<td>
 				       			<a accessKey="1" href="<%= response.encodeURL("/wk/index.jsp") %>">Start Play</a>
