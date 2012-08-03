@@ -25,10 +25,10 @@ try {
 }
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
 
-
-
-
 int key = 1;
+
+//if (!isWebkit) { cacheBuster="";}
+
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
@@ -82,13 +82,13 @@ int key = 1;
 				<table align="center" >
 					<tr align="center" >
 						<td>
-							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[0] %>.gif"/>
+							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[0] %>.gif<%="?"+cacheBuster%>"/>
 						</td>
 						<td>
-							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[1] %>.gif"/>
+							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[1] %>.gif<%="?"+cacheBuster%>"/>
 						</td>
 						<td>
-							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[2] %>.gif"/>
+							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[2] %>.gif<%="?"+cacheBuster%>"/>
 						</td>
 					</tr>
 				</table>
@@ -112,7 +112,7 @@ int key = 1;
 			
 		    
 		     <div class="menu">
-		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
+		        <div><%= key %>. <a class="invite" accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
 		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/index.jsp") %>">Main</a></div>
 		    </div>
 		</div>

@@ -22,13 +22,13 @@
     <property name="mocospace.opensocial.api.endpoint" value="https://apps.mocospace.com/social"/> 
     
     <!-- game play properties -->
-    <property name="consecutive.days.coin.award.per.day" value="20"/>
+    <property name="consecutive.days.coin.award.per.day" value="40"/>
     <property name="consecutive.days.coin.award.day.cap" value="3"/> 
     <property name="max.bet.coins" value="3"/>
     <property name="max.bet.coin.multiplier" value="4"/> 
     <property name="xp.leaderboard.enabled" value="true"/>
     <property name="weekly.coin.prize" value="500"/>
-    <property name="weekly.mocogold.min.prize" value="555"/>
+    <property name="weekly.mocogold.min.prize" value="666"/>
     <property name="xp.leaderboard.synchronous" value="true"/>
 
   </system-properties>

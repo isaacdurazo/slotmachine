@@ -46,7 +46,7 @@
 				<img class="icon" width="16" height="16" src="images/mocogold.png"/> <%=System.getProperty("weekly.mocogold.min.prize")%> MocoGold!
 			</div>
 			<div class="play">
-				1. <a accessKey="1" href="<%= response.encodeURL("spin.jsp?"+cacheBuster) %>">Play Now</a>
+				1. <a accessKey="1" href="<%= response.encodeURL("/spin.jsp?"+cacheBuster) %>">Play Now</a>
 			</div>
 		
 		    <div class="menu">

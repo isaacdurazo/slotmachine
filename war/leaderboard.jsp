@@ -10,7 +10,7 @@ RestfulCollection restfulCollection;
 String json = GAECacheManager.getInstance().getCustom(cacheRegion, cacheKey);
 if (json == null) {
 	restfulCollection = OpenSocialService.getInstance().getLeaderboard(type, player.getMocoId(), 
-		OpenSocialService.LEADERBOARD_DATE_RANGE.WEEK, OpenSocialService.LEADERBOARD_FILTER.ALL, 0, 10);
+		OpenSocialService.LEADERBOARD_DATE_RANGE.ALL, OpenSocialService.LEADERBOARD_FILTER.ALL, 0, 10);
 	// cache for one day
 	GAECacheManager.getInstance().putCustom(cacheRegion, cacheKey, restfulCollection.toJSONString(),Integer.parseInt(System.getProperty("game.leaderboardcached.sec")));
 } else {
