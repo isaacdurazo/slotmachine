@@ -53,7 +53,7 @@
 				<div class="jackpotteaser-container">
 					<div class="jackpotteaser goldtext">
 						<span class="jackpot">
-							<img width="161" height="34" src="images/jackpot.png"/>
+							<img width="120" height="26" src="images/jackpot.png"/>
 						</span>
 						<span class="jackpot-text">
 							<img width="16" height="16" src="images/mocogold.png"/> <%=System.getProperty("weekly.mocogold.min.prize")%> MocoGold!
