@@ -88,7 +88,7 @@ if (isWebkit) {
 		<script type="text/javascript">
 			console.log('topup');
 			document.addEventListener('DOMContentLoaded', function() {
-				var goldButtons = document.querySelectorAll('input.gold');
+				var goldButtons = document.querySelectorAll('input.input');
 				var onClickFn = function(e) {
 					e.preventDefault();
 					var desc = this.value;
