@@ -24,14 +24,23 @@ try {
 	return;
 }
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
-
-
-
-
 int key = 1;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
+  <script>
+  	document.addEventListener('load',function() {
+  		setTimeout(function() {
+  			// make any item with class 'delay' visible after 1 second
+  	  		var elems = document.querySelectorAll('.delay');
+  	  		if (elems) {
+  	  			for (var i=0;i<elems.length;i++) {
+  	  				elems[i].style.display = 'block';
+  	  			}
+  	  		}
+  		}, 750);  		
+  	},true);
+  </script>
   <body>
   	<div id="container">
 	  	<div class="wrapper">
@@ -64,12 +73,12 @@ int key = 1;
 						<%		
 							} else if (spinResult.getCoins()>0) {
 						%>
-							<div class="wonspin">
+							<div class="wonspin delay" style="display:none;">
 								<img width="13" height="11" src="images/animated-star.gif"/>WON <%=spinResult.getCoins() %> coins! <img width="13" height="11" src="images/animated-star.gif"/>
 							</div>
 								
 						<%		} else if (spinResult.getCoins()==0) { %>
-							<div class="lostspin">
+							<div class="lostspin delay" style="display:none;">
 								Spin again!
 							</div>
 						<% 		}
