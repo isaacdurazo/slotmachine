@@ -28,7 +28,10 @@ if ("set".equals(request.getParameter("action")) && key != null && value != null
 				<th>Property</th>
 				<th>Value</th>
 			</tr>
-			<% for (java.util.Map.Entry<Object,Object> entry : System.getProperties().entrySet()) { %>
+			<% for (java.util.Map.Entry<Object,Object> entry : System.getProperties().entrySet()) {
+				if (((String)entry.getKey()).indexOf("game.")==-1)
+					continue;
+				%>
 				<tr>
 					<td><%= entry.getKey() %></td>
 					<td><%= entry.getValue() %></td>					

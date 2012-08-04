@@ -13,7 +13,7 @@ try {
 	if ("spin".equals(action)) {
 		spinResult = SlotMachineManager.getInstance().spin(player, 1);
 	} else if ("maxspin".equals(action)) {
-		spinResult = SlotMachineManager.getInstance().spin(player, Integer.parseInt(System.getProperty("max.bet.coins")));
+		spinResult = SlotMachineManager.getInstance().spin(player, Integer.parseInt(System.getProperty("game.max.bet.coins")));
 	}
 	
 	fSpinOK=true;

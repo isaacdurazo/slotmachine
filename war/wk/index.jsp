@@ -56,7 +56,7 @@
 							<img width="120" height="26" src="/wk/images/jackpot.png"/>
 						</span>
 						<span class="jackpot-text">
-							Now: <%=System.getProperty("weekly.mocogold.min.prize")%> <img width="16" height="16" src="/wk/images/mocogold.png"/> MocoGold!
+							Now: <%=System.getProperty("game.weekly.mocogold.min.prize")%> <img width="16" height="16" src="/wk/images/mocogold.png"/> MocoGold!
 						</span>
 					</div>
 				</div>

@@ -140,7 +140,7 @@ public class SlotMachineManager {
 					// create winner entry
 					JackpotWinner newWinner = new JackpotWinner();
 					newWinner.setPlayerId(player.getId());
-					newWinner.setGold(Long.getLong("weekly.mocogold.min.prize"));
+					newWinner.setGold(Long.getLong("game.weekly.mocogold.min.prize"));
 					GAEDataManager.getInstance().store(newWinner);
 					fJackpot=true;
 					
@@ -150,11 +150,11 @@ public class SlotMachineManager {
 					winnerIds.add(0, newWinner.getId());
 					GAECacheManager.getInstance().putIds(CACHE_REGION, cacheKey, winnerIds);
 					// we have a legit jackpot!!! send notifications to user and admin account
-					String subject = "SlotMania Jackpot!", body = "Congratulations - you won the Moco Gold jackpot in Slot Mania! You will be credited Gold within next 24hrs and will receive a confirmation inbox message.";
+					String subject = "SlotMania Jackpot!", body = "Congratulations - you won the Moco Gold jackpot in Slot Mania! You will be credited "+System.getProperty("game.weekly.mocogold.min.prize") +" Gold within next 24hrs and will receive a confirmation inbox message.";
 					try {
 						OpenSocialService.getInstance().sendNotification(player.getMocoId(), subject, body);
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, 
-								body+" winner player id: "+player.getId()+", moco id: "+player.getMocoId()+ ", xp: "+player.getXp());
+								body+" winner: player id: "+player.getId()+", moco id: "+player.getMocoId()+ ",  gold: "+System.getProperty("game.weekly.mocogold.min.prize") +", xp: "+player.getXp());
 					} catch (Exception e) {
 						log.log(Level.SEVERE,"Error sending jackpot notification, winner id: "+player.getId(),e);
 					}
@@ -176,7 +176,7 @@ public class SlotMachineManager {
 //		if (fJackpot==true) {c=0;}
 		
 		if (coins == 3 && spinResult.getCoins() > 0 ) {
-			spinResult = new SpinResult(spinResult.getCoins()*Integer.parseInt(System.getProperty("max.bet.coin.multiplier")),
+			spinResult = new SpinResult(spinResult.getCoins()*Integer.parseInt(System.getProperty("game.max.bet.coin.multiplier")),
 					spinResult.getSymbols());
 		}
 		player.setCoins(player.getCoins()-coins+spinResult.getCoins());
@@ -187,8 +187,8 @@ public class SlotMachineManager {
 		player.setXp(player.getXp()+1);
 		PlayerManager.getInstance().storePlayer(player);
 		
-		if (Boolean.getBoolean("xp.leaderboard.enabled")) {
-			if (Boolean.getBoolean("xp.leaderboard.synchronous")) {
+		if (Boolean.getBoolean("game.xp.leaderboard.enabled")) {
+			if (Boolean.getBoolean("game.xp.leaderboard.synchronous")) {
 				try {
 					OpenSocialService.getInstance().setScores(player.getMocoId(),
 							new OpenSocialService.ScoreUpdate((short)1, player.getXp(), false),

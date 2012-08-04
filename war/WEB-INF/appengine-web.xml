@@ -14,23 +14,29 @@
     <property name="game.admin.user.id" value="51653696"/>
     <property name="game.gold.secret" value="nrrwb0r1"/>
     <property name="game.leaderboardcached.sec" value="14400"/>
-    <property name="redirect.validate.enabled" value="true"/>
+    <property name="game.redirect.validate.enabled" value="true"/>
     <property name="game.moco.id" value="1252"/>
     <property name="game.visitor.url" value="/landing.jsp"/>  
     <property name="game.adminpriv.ids" value="51653696,12534729,34402369"/>  
+    <property name="game.webkit.disabled" value="true"/>
     <property name="mocospace.main.url" value="http://www.mocospace.com/"/>  
     <property name="mocospace.opensocial.api.endpoint" value="https://apps.mocospace.com/social"/> 
     
     <!-- game play properties -->
-    <property name="consecutive.days.coin.award.per.day" value="20"/>
-    <property name="consecutive.days.coin.award.day.cap" value="3"/> 
-    <property name="max.bet.coins" value="3"/>
-    <property name="max.bet.coin.multiplier" value="4"/> 
-    <property name="xp.leaderboard.enabled" value="true"/>
-    <property name="weekly.coin.prize" value="500"/>
-    <property name="weekly.mocogold.min.prize" value="888"/>
-    <property name="xp.leaderboard.synchronous" value="true"/>
+    <property name="game.consecutive.days.coin.award.per.day" value="20"/>
+    <property name="game.consecutive.days.coin.award.day.cap" value="3"/> 
+    <property name="game.max.bet.coins" value="3"/>
+    <property name="game.max.bet.coin.multiplier" value="4"/> 
+    <property name="game.xp.leaderboard.enabled" value="true"/>
+    <property name="game.weekly.coin.prize" value="500"/>
+    <property name="game.weekly.mocogold.min.prize" value="888"/>
+    <property name="game.xp.leaderboard.synchronous" value="true"/>
 
+    <property name="url.connect.timeout" value="9999"/>
+    <property name="url.read.timeout" value="9999"/>
+
+
+url.read.timeout
   </system-properties>
 
   <!-- HTTP Sessions are disabled by default. To enable HTTP sessions specify: -->

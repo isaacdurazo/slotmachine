@@ -24,7 +24,8 @@ if ("clear".equals(request.getParameter("action"))) {
 	com.google.appengine.api.memcache.MemcacheServiceFactory.getMemcacheService(region).delete(key);
 } else if (region != null && key != null) {
 	if (entityRegions.contains(region)) {
-		result = com.google.appengine.api.memcache.MemcacheServiceFactory.getMemcacheService(region).get(Long.parseLong(key));
+//		result = com.google.appengine.api.memcache.MemcacheServiceFactory.getMemcacheService(region).get(Long.parseLong(key));
+		result = com.google.appengine.api.memcache.MemcacheServiceFactory.getMemcacheService(region).get(key);
 	} else {
 		result = com.google.appengine.api.memcache.MemcacheServiceFactory.getMemcacheService(region).get(key);
 	}

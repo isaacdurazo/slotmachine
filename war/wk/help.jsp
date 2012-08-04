@@ -24,8 +24,8 @@
 					
 					<div class="list-container">
 						<ul  class="list">
-							<li><b>Weekly</b> <span class="goldtext">Gold Jackpot.</span> Now: <span class="goldtext"><%=System.getProperty("weekly.mocogold.min.prize")%> Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
-							<li><b>Mega Coin Prize:</b> Gain XP with every spin and compete to be #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("weekly.coin.prize") %> coins.</li><br />
+							<li><b>Weekly</b> <span class="goldtext">Gold Jackpot.</span> Now: <span class="goldtext"><%=System.getProperty("game.weekly.mocogold.min.prize")%> Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
+							<li><b>Mega Coin Prize:</b> Gain XP with every spin and compete to be #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("game.weekly.coin.prize") %> coins.</li><br />
 							<li><b>Daily free coins:</b> Return <b>every day</b> and get FREE coins to spin.</li><br />
 							<li><b>Payout:</b> Check the payout table for spin payouts.</li>
 						</ul>

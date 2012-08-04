@@ -43,7 +43,7 @@
 		    <% } %>
 			<div class="jackpotteaser">
 				<img width="112" height="14" src="images/jackpot.gif"/><br />
-				<img class="icon" width="16" height="16" src="images/mocogold.png"/> <%=System.getProperty("weekly.mocogold.min.prize")%> MocoGold!
+				<img class="icon" width="16" height="16" src="images/mocogold.png"/> <%=System.getProperty("game.weekly.mocogold.min.prize")%> MocoGold!
 			</div>
 			<div class="play">
 				1. <a accessKey="1" href="<%= response.encodeURL("/spin.jsp?"+cacheBuster) %>">Play Now</a>

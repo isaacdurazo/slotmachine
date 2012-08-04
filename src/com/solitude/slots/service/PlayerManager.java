@@ -75,8 +75,8 @@ public class PlayerManager {
 		// award coins if consecutive days greater than 0 and last consecutive days increment last than 100 ms (just happened)
 		int coinsAwarded = 0;
 		if (player.awardConsecutiveDays()) {
-			coinsAwarded = Integer.getInteger("consecutive.days.coin.award.per.day")*
-					(1+Math.min(player.getConsecutiveDays(),Integer.getInteger("consecutive.days.coin.award.day.cap")));
+			coinsAwarded = Integer.getInteger("game.consecutive.days.coin.award.per.day")*
+					(1+Math.min(player.getConsecutiveDays(),Integer.getInteger("game.consecutive.days.coin.award.day.cap")));
 			player.setCoins(player.getCoins()+coinsAwarded);
 		}
 		// store player (if new or to track consecutive days)
@@ -110,7 +110,7 @@ public class PlayerManager {
 	
 	/**
 	 * Called on start of game player which will verify redirect parameters (set by system 
-	 * property "redirect.validate.enabled") and load player.  If new user  
+	 * property "game.redirect.validate.enabled") and load player.  If new user  
 	 * 
 	 * @param userId of user
 	 * @param timestamp for verification
@@ -121,7 +121,7 @@ public class PlayerManager {
 	 */
 	public Pair<Player,Integer> startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
 		if (userId <= 0) throw new IllegalArgumentException("invalid userId: "+userId);
-		if (Boolean.getBoolean("redirect.validate.enabled") && SystemProperty.environment.get().equals(SystemProperty.Environment.Value.Production)) {
+		if (Boolean.getBoolean("game.redirect.validate.enabled") && SystemProperty.environment.get().equals(SystemProperty.Environment.Value.Production)) {
 			// validate redirect parameters from moco
 			String expectedVerifier = DigestUtils.md5Hex(userId+Long.toString(timestamp)+GameUtils.getGameGoldSecret());
 			if (!expectedVerifier.equalsIgnoreCase(verifier)) throw new UnAuthorizedException("Invalid verifier!");

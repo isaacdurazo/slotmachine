@@ -1,7 +1,6 @@
 <%@ include file="header_static.jsp" %>
 <%@page import="java.util.Random"%>
 
-
 <%
 
 //used to postfix on spin hyperlinks to force OpenWave browser to fetch from server
@@ -61,9 +60,8 @@ if (player == null) {
 }
 
 if (isWebkit) {
-	//@TODO FIX - ALSO block existiong players who are nonadmin
-	if (!player.hasAdminPriv()) {
-		//only allow admins to play on webkit - all others roadblock until public release
+	if (!player.hasAdminPriv() && Boolean.getBoolean("game.webkit.disabled")) {
+		//only allow admins to play on webkit if game disabled for webkit
 		%>
 		<html xmlns="http://www.w3.org/1999/xhtml">
 		 <%@ include file="header_html.jsp" %>
