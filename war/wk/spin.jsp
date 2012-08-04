@@ -147,14 +147,14 @@ int key = 1;
 					<table class="spins">
 						<tr >
 							<td>
-								
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[0] %>.gif?rand=<?=rand(1,1000);?"/>
+								<% int random = new Random().nextInt(10000); %>
+								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[0] %>.gif?rand=<%=random%>"/>
 							</td>
 							<td>
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[1] %>.gif?rand=<?=rand(1,1000);?"/>
+								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[1] %>.gif?rand=<%=random%>"/>
 							</td>
 							<td>
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[2] %>.gif?rand=<?=rand(1,1000);?"/>
+								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[2] %>.gif?rand=<%=random%>"/>
 							</td>
 						</tr>
 					</table>
