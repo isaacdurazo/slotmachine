@@ -34,7 +34,7 @@
 					<table class="play">
 						<tr>
 							<td>
-				       			<a accessKey="1" href="<%= response.encodeURL("/wk/index.jsp") %>">Start Play</a>
+				       			<a accessKey="1" href="<%= response.encodeURL("/wk/spin.jsp") %>">Start Play</a>
 				       		</td>
 				       	</tr>
 				    </table>
