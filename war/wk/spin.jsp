@@ -139,13 +139,13 @@ int key = 1;
 						<tr >
 							<td>
 								
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[0] %>.gif"/>
+								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[0] %>.gif?rand=<?=rand(1,1000);?"/>
 							</td>
 							<td>
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[1] %>.gif"/>
+								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[1] %>.gif?rand=<?=rand(1,1000);?"/>
 							</td>
 							<td>
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[2] %>.gif"/>
+								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[2] %>.gif?rand=<?=rand(1,1000);?"/>
 							</td>
 						</tr>
 					</table>

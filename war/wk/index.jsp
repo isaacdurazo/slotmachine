@@ -22,7 +22,7 @@
   	<div id="container">
 	  	<div class="wrapper">
 		    <div class="header-logo"><img width="192" height="60" src="/wk/images/logo.png"/></div>
-		    
+			<%@ include file="message.jsp" %>		    
 		    <div class="content">
 		    
 			    <table class="stats">
@@ -41,7 +41,6 @@
 				<div class="results-container">
 					<div class="results">
 					    <h3>Hello <%= player.getName() %>!</h3>    
-						<%@ include file="message.jsp" %>		    
 					    <% if (coinsAwarded > 0) { %>
 					    	<div class="bonus">
 					    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
