@@ -1,6 +1,6 @@
-<%@ include file="header_static.jsp" %>
+<%@ include file="header_static.jsp"%>
 <%@page import="java.util.Random"%>
-
+<!-- wk/header.jsp -->
 
 <%
 	//used to postfix on spin hyperlinks to force OpenWave browser to fetch from server
@@ -10,12 +10,12 @@
 	Player player = null;
 
 	// logic to do animated/static images based on browser support
-	String imageLocation = "images/animated-2/";
-	if (!hasAnimGifSupport) { imageLocation = "images/";}
+	String imageLocation = "images/";
 
 	int uid = ServletUtils.getInt(request, "uid");
 	String accessToken = request.getParameter("accessToken");
-	Long playerId = (Long) request.getSession().getAttribute("playerId");
+	Long playerId = (Long) request.getSession()
+			.getAttribute("playerId");
 
 	if (playerId != null) {
 		//player already has session - get her.
@@ -42,8 +42,8 @@
 			}
 			player = gameStartPair.getElement1();
 			coinsAwarded = gameStartPair.getElement2();
-			request.getSession().setAttribute("playerId",
-					player.getId());
+			request.getSession().setAttribute("playerId",player.getId());
+			
 		} catch (PlayerManager.UnAuthorizedException e) {
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Invalid verification: "+ request.getQueryString());
 			response.sendRedirect(GameUtils.getVisitorHome());
@@ -55,21 +55,24 @@
 		}
 
 		//@TODO FIX - for now block new players
-		if (!player.hasAdminPriv() && Boolean.getBoolean("game.webkit.disabled") && isWebkit) {
+		if (isWebkit && Boolean.getBoolean("game.webkit.disabled") && !player.hasAdminPriv() ) {
 			//only allow admins to play on webkit - all others roadblock until public release
 %>
-		<html xmlns="http://www.w3.org/1999/xhtml">
-		 <%@ include file="header_html.jsp" %>
-		  <body>
-				<div id="container">
-				  	<div class="wrapper">
-					    <img style="margin-top:45px;" width="240" height="110" src="images/wk-landing-logo.png"/>
-					</div>
-				</div>
-				<div align="center">Game is available on Feature Phones today.<br/>Coming to Smart Phones in early August!</div>
-		</body>
-		</html>		
-			<%
+<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="header_html.jsp"%>
+<body>
+	<div id="container">
+		<div class="wrapper">
+			<img style="margin-top: 45px;" width="240" height="110" src="images/wk-landing-logo.png" />
+		</div>
+	</div>
+	<div align="center">
+		Game is available on Feature Phones today.<br />Coming to Smart Phones
+		in early August!
+	</div>
+</body>
+</html>
+<%
 			return;
 		}
 
@@ -79,21 +82,31 @@
 	} //player==null
 
 	//ALSO block existiong players who are nonadmin
-	if (!player.hasAdminPriv() && Boolean.getBoolean("game.webkit.disabled") && isWebkit) {
+	if (isWebkit && Boolean.getBoolean("game.webkit.disabled") && !player.hasAdminPriv() ) {
 		//only allow admins to play on webkit - all others roadblock until public release
-	%>
-	<html xmlns="http://www.w3.org/1999/xhtml">
-	 <%@ include file="header_html.jsp" %>
-	  <body>
-			<div id="container">
-			  	<div class="wrapper">
-				    <img style="margin-top:45px;" width="240" height="110" src="images/wk-landing-logo.png"/>
-				</div>
-			</div>
-			<div align="center">Game is available on Feature Phones today.<br/>Coming to Smart Phones in early August!</div>
-	</body>
-	</html>		
-	<%
-		return;
+%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="header_html.jsp"%>
+<body>
+	<div id="container">
+		<div class="wrapper">
+			<img style="margin-top: 45px;" width="240" height="110"
+				src="images/wk-landing-logo.png" />
+		</div>
+	</div>
+	<div align="center">
+		Game is available on Feature Phones today.<br />Coming to Smart Phones
+		in early August!
+	</div>
+</body>
+</html>
+<%
+	return;
 	}
-	%>
+%>
+
+
+Niels Boegholm
+mobile: +1 617-818-8405
+
+

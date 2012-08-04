@@ -24,14 +24,33 @@ try {
 	return;
 }
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
-
-
-
-
 int key = 1;
+
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
+  <script>
+  	document.addEventListener('load',function() {
+  		setTimeout(function() {
+  			// make any item with class 'delay' visible after 1 second
+  	  		var elems = document.querySelectorAll('.delay');
+  	  		if (elems) {
+  	  			for (var i=0;i<elems.length;i++) {
+  	  				elems[i].style.display = 'block';
+  	  			}
+  	  		}
+  		}, 750);  		
+  	},true);
+  </script>
+  
+  <script type="text/javascript">
+	setTimeout(function(){
+	    document.getElementById('spin-animation-1').style.display = 'none';
+	    document.getElementById('spin-animation-2').style.display = 'none';
+	    document.getElementById('spin-animation-3').style.display = 'none';
+	},750);
+  </script>
+  
   <body>
   	<div id="container">
 	  	<div class="wrapper">
@@ -58,18 +77,18 @@ int key = 1;
 							if ("maxspin".equals(action) && symbol[0]==0 && symbol[1]==0 && symbol[2]==0) {
 						%>
 							<div class="goldtext">
-								You WON the Moco Gold<br />
+								You WON the Moco Gold Jackpot<br />
 								<img width="112" height="14" src="images/jackpot-winner.gif"/>
 							</div>		
 						<%		
 							} else if (spinResult.getCoins()>0) {
 						%>
-							<div class="wonspin">
+							<div class="wonspin delay" style="display:none;">
 								<img width="13" height="11" src="images/animated-star.gif"/>WON <%=spinResult.getCoins() %> coins! <img width="13" height="11" src="images/animated-star.gif"/>
 							</div>
 								
 						<%		} else if (spinResult.getCoins()==0) { %>
-							<div class="lostspin">
+							<div class="lostspin delay" style="display:none;">
 								Spin again!
 							</div>
 						<% 		}
@@ -138,17 +157,35 @@ int key = 1;
 					<table class="spins">
 						<tr >
 							<td>
-								
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[0] %>.gif"/>
+								<div>
+									<span id="spin-animation-1">
+										<span class="shadows"></span>
+										<img src="images/spin-static-animation.jpg" alt="animation" width="70" height="249" />
+									</span>
+									<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[0] %>.jpg"/>
+								</div>
 							</td>
 							<td>
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[1] %>.gif"/>
+								<div>
+									<span id="spin-animation-2">
+										<span class="shadows"></span>
+										<img src="images/spin-static-animation.jpg" alt="animation" width="70" height="249" />
+									</span>
+									<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[1] %>.jpg"/>
+								</div>
 							</td>
 							<td>
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[2] %>.gif"/>
+								<div>
+									<span id="spin-animation-3">
+										<span class="shadows"></span>
+										<img src="images/spin-static-animation.jpg" alt="animation" width="70" height="249" />
+									</span>
+									<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[2] %>.jpg"/>
+								</div>
 							</td>
 						</tr>
 					</table>
+					
 				</div>	
 				
 				<div class="controls">

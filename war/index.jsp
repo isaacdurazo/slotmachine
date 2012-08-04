@@ -18,6 +18,7 @@
 %>
  
 <html xmlns="http://www.w3.org/1999/xhtml">
+<!-- index.jsp -->
  <%@ include file="header_html.jsp" %>
   <body>
   	<div id="container">

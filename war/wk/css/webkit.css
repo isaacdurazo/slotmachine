@@ -1,3 +1,5 @@
+/** wk/css/webkit.css */
+
 body {
 	font: 13px Arial, Helvetica, sans-serif;
 	-webkit-text-size-adjust: none;
@@ -163,6 +165,10 @@ table {
 	text-align: center;
 }
 
+.spins td div {
+	position:relative;
+}
+
 .bonus {
     background: none repeat scroll 0 0 #FFF9D7;
     border: 1px solid #E2C822;
@@ -176,10 +182,8 @@ table {
     background: none repeat scroll 0 0 #FFF9D7;
     border: 1px solid #E2C822;
     color: #644B00;
-    margin-bottom: 3px; 
     padding: 4px 5px 0;
     text-align: center;
-    /*width: 106px;*/
     }
     
 .confirm {
@@ -386,4 +390,40 @@ table {
 .subheader {
 	text-align:center;
 	margin: 5px 0;
+}
+
+#spin-animation-1, #spin-animation-2, #spin-animation-3 {
+	width: 70px;
+	height: 102px;
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	left: 0;
+	margin: auto;
+	display:block;
+}
+			
+#spin-animation-1 img, #spin-animation-2 img, #spin-animation-3 img {
+	position: absolute;
+	right: 0;
+	-webkit-animation: spinning .15s  infinite;
+}
+				
+@-webkit-keyframes spinning {
+	0% { top: -148px }
+	100% { top: 0px }
+}
+
+.shadows {
+	width: 70px;
+	height: 102px;
+	position: absolute;
+	z-index: 1;
+	right:0;
+	background-image: linear-gradient(bottom, rgba(0,0,0,.7) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,.7) 100%);
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.7) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,.7) 100%);
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.7) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,.7) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.7) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,.7) 100%);
+	background-image: -ms-linear-gradient(bottom, rgba(0,0,0,.7) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,.7) 100%);
+	background-image: -webkit-gradient(linear, left bottom, left top,color-stop(0, rgba(0,0,0,.7)), color-stop(0.5, rgba(255,255,255,0)), color-stop(1, rgba(0,0,0,.7)));
 }
