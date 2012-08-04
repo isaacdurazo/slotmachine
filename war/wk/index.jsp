@@ -21,7 +21,7 @@
   <body>
   	<div id="container">
 	  	<div class="wrapper">
-		    <div class="header-logo"><img width="192" height="60" src="images/logo.png"/></div>
+		    <div class="header-logo"><img width="192" height="60" src="/wk/images/logo.png"/></div>
 		    
 		    <div class="content">
 		    
@@ -53,10 +53,10 @@
 				<div class="jackpotteaser-container">
 					<div class="jackpotteaser goldtext">
 						<span class="jackpot">
-							<img width="120" height="26" src="images/jackpot.png"/>
+							<img width="120" height="26" src="/wk/images/jackpot.png"/>
 						</span>
 						<span class="jackpot-text">
-							Now: <%=System.getProperty("weekly.mocogold.min.prize")%> <img width="16" height="16" src="images/mocogold.png"/> MocoGold!
+							Now: <%=System.getProperty("weekly.mocogold.min.prize")%> <img width="16" height="16" src="/wk/images/mocogold.png"/> MocoGold!
 						</span>
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 				<div class="controls">
 				
 					<div class="play">
-						<a accessKey="1" href="<%= response.encodeURL("spin.jsp?"+cacheBuster) %>">Play Now</a>
+						<a accessKey="1" href="<%= response.encodeURL("/wk/spin.jsp?"+cacheBuster) %>">Play Now</a>
 					</div>
 					
 					<table class="menu">

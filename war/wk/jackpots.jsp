@@ -55,7 +55,7 @@
 				        		<a accessKey="2" href="<%= response.encodeURL("/wk/index.jsp") %>">Main</a>
 				    		</td>
 				    		<td>
-				        		<a accessKey="1" href="<%= response.encodeURL("/wk/invite.jsp") %>">Invite Friends</a>
+				        		<a accessKey="1" class="invite" href="<%= response.encodeURL("/wk/invite.jsp") %>">Invite Friends</a>
 				    		</td>
 				    	</tr>
 				    </table>
