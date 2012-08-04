@@ -104,9 +104,3 @@
 	return;
 	}
 %>
-
-
-Niels Boegholm
-mobile: +1 617-818-8405
-
-
