@@ -5,7 +5,7 @@
 <%
 
 //used to postfix on spin hyperlinks to force OpenWave browser to fetch from server
-final int rand = (new Random()).nextInt(9999); 
+final int rand = (new Random()).nextInt(999); 
 String cacheBuster = "r="+rand; 
 
 int coinsAwarded = 0;

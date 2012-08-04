@@ -111,11 +111,13 @@ public class SlotMachineManager {
 		boolean fCustomProbability = false;
 		
 		do {
-			// players with >500 Coins get a reduced probability of winning so to reduce coin inflation
 			fCustomProbability = false;
-
 			
-			if (player.getCoins()>500) {
+			// players with more coins get a reduced probability of winning so to reduce coin inflation
+			if (player.getCoins()>300) {
+				maxRnd = spinResults.length+ 3000;
+				fCustomProbability = true;
+			} else if (player.getCoins()>100) {
 				maxRnd = spinResults.length+ 2000;
 				fCustomProbability = true;
 			}
@@ -123,7 +125,7 @@ public class SlotMachineManager {
 			idx=random.nextInt(maxRnd);
 
 			if (idx>= spinResults.length) {
-				//Any of these spins will result in payout table idx starting w zero = NO win
+				//rebase the spinresult to payout table for idx between 0 and 4998 (=no payout)
 				idx -= spinResults.length;
 			}
 				
