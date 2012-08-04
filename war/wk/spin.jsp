@@ -25,6 +25,7 @@ try {
 }
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
 int key = 1;
+
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
@@ -41,6 +42,15 @@ int key = 1;
   		}, 750);  		
   	},true);
   </script>
+  
+  <script type="text/javascript">
+	setTimeout(function(){
+	    document.getElementById('spin-animation-1').style.display = 'none';
+	    document.getElementById('spin-animation-2').style.display = 'none';
+	    document.getElementById('spin-animation-3').style.display = 'none';
+	},750);
+  </script>
+  
   <body>
   	<div id="container">
 	  	<div class="wrapper">
@@ -147,17 +157,35 @@ int key = 1;
 					<table class="spins">
 						<tr >
 							<td>
-								<% int random = new Random().nextInt(10000); %>
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[0] %>.gif?rand=<%=random%>"/>
+								<div>
+									<span id="spin-animation-1">
+										<span class="shadows"></span>
+										<img src="images/spin-static-animation.jpg" alt="animacion" width="70" height="249" />
+									</span>
+									<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[0] %>.jpg"/>
+								</div>
 							</td>
 							<td>
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[1] %>.gif?rand=<%=random%>"/>
+								<div>
+									<span id="spin-animation-2">
+										<span class="shadows"></span>
+										<img src="images/spin-static-animation.jpg" alt="animacion" width="70" height="249" />
+									</span>
+									<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[1] %>.jpg"/>
+								</div>
 							</td>
 							<td>
-								<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[2] %>.gif?rand=<%=random%>"/>
+								<div>
+									<span id="spin-animation-3">
+										<span class="shadows"></span>
+										<img src="images/spin-static-animation.jpg" alt="animacion" width="70" height="249" />
+									</span>
+									<img width="70" height="102" src="/wk/<%=imageLocation+"comb-"+symbol[2] %>.jpg"/>
+								</div>
 							</td>
 						</tr>
 					</table>
+					
 				</div>	
 				
 				<div class="controls">

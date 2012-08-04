@@ -13,7 +13,7 @@ Player player = null;
 
 
 // logic to do animated/static images based on browser support
-String imageLocation="images/animated-2/";
+String imageLocation="images/";
 if (!hasAnimGifSupport) {
 	imageLocation="images/";
 }
