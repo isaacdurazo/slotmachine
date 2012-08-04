@@ -130,7 +130,6 @@ table {
 	border-radius: 3px;
 	background-color: #000;
     border: 2px solid #959595;
-    height: 2.5em;
     line-height: 2.5em;
 }
 
@@ -176,10 +175,8 @@ table {
     background: none repeat scroll 0 0 #FFF9D7;
     border: 1px solid #E2C822;
     color: #644B00;
-    margin-bottom: 3px; 
     padding: 4px 5px 0;
     text-align: center;
-    /*width: 106px;*/
     }
     
 .confirm {
