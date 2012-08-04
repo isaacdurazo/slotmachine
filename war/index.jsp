@@ -66,6 +66,8 @@
 			<div class="menu">
 		        <div><a href="<%=response.encodeURL("/?action=credit")%>">Credit 10 coins</a></div>
 		        <div><a href="<%=response.encodeURL("/?action=debit")%>">Set Coins=0</a></div>
+		        <div><a href="<%=response.encodeURL("/admin/cache.jsp")%>">Cache Manager</a></div>
+		        <div><a href="<%=response.encodeURL("/admin/properties.jsp")%>">System Properties Manager</a></div>
 			</div>
 			<%
 				}

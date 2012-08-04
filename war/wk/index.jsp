@@ -106,6 +106,12 @@
 				        	<td>
 				       			<a href="<%=response.encodeURL("/wk/?action=debit")%>">Set Coins=0</a>
 				        	</td>
+				        	<td>
+				       			<a href="<%=response.encodeURL("/admin/cache.jsp")%>">Cache Manager</a>
+				        	</td>
+				        	<td>
+				       			<a href="<%=response.encodeURL("/admin/properties.jsp")%>">System Properties Manager</a>
+				        	</td>
 				        </tr>
 					</table>
 					<%
