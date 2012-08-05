@@ -198,10 +198,10 @@ int key = 1;
 					<table class="bets" align="center" >
 						<tr>
 							<td class="bet-1">
-								<a class="bet" href="<%= response.encodeURL("/wk/spin.jsp?action=spin&"+cacheBuster+"&accessToken="+player.getAccessToken()) %>"> BET 1</a>
+								<a class="bet" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?action=spin&"+cacheBuster, response) %>"> BET 1</a>
 							</td>
 							<td class="bet-2">
-								<a class="bet" href="<%= response.encodeURL("/wk/spin.jsp?action=maxspin&"+cacheBuster+"&accessToken="+player.getAccessToken()) %>"> BET 3</a>
+								<a class="bet" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?action=maxspin&"+cacheBuster, response) %>"> BET 3</a>
 							</td>
 						</tr>
 					</table>
@@ -210,10 +210,10 @@ int key = 1;
 				     <table class="menu">
 				        <tr>
 				        	<td>
-				        		<a href="<%= response.encodeURL("/wk/index.jsp"+"?accessToken="+player.getAccessToken()) %>">Main</a>
+				        		<a href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
 				        	</td>
 				        	<td>
-				        		<a accessKey="2" href="<%= response.encodeURL("/wk/topup.jsp"+"?accessToken="+player.getAccessToken()) %>">Buy Coins</a>
+				        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>">Buy Coins</a>
 				        	</td>
 				        </tr>
 				    </table>

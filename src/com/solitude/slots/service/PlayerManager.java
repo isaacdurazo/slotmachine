@@ -234,7 +234,7 @@ public class PlayerManager {
 	 * @throws CacheStoreException for cache issues
 	 */
 	public void storePlayer(Player player, boolean delay) throws DataStoreException, CacheStoreException {
-		if (!delay && Boolean.getBoolean("player.delta.flush.enabled")) GAEDataManager.getInstance().store(player);
+		if (!delay || !Boolean.getBoolean("player.delta.flush.enabled")) GAEDataManager.getInstance().store(player);
 		else {
 			PlayerDeltaInfo info = playerIDtoCoinXPMap.get(player.getId());
 			if (info == null) {

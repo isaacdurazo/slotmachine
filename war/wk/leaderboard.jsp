@@ -52,10 +52,10 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 				<table class="menu">
 					<tr>
 						<td>
-							<a accessKey="1" href="<%= response.encodeURL("/wk/leaderboard.jsp?type="+(type == (short)1 ? 2 : 1)) %>"><%= type == (short)1 ? "Coins Won" : "XP" %> Leaderboard</a>
+							<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/wk/leaderboard.jsp?type="+(type == (short)1 ? 2 : 1), response) %>"><%= type == (short)1 ? "Coins Won" : "XP" %> Leaderboard</a>
 						</td>
 						<td>
-							<a accessKey="2" href="<%= response.encodeURL("/wk/invite.jsp") %>">Invite Friends</a>
+							<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
 						</td>
 					</tr>
 				</table>
@@ -63,7 +63,7 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 				<table class="menu">
 					<tr>
 						<td>
-							<a accessKey="3" href="<%= response.encodeURL("/wk/index.jsp") %>">Main</a>
+							<a accessKey="3" href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
 						</td>
 					</tr>
 				</table>

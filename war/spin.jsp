@@ -97,10 +97,10 @@ int key = 1;
 			<table class="bets" align="center" >
 				<tr>
 					<td class="bet-1">
-						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=spin&"+cacheBuster) %>"> Bet 1</a>
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= ServletUtils.buildUrl(player, "/spin.jsp?action=spin&"+cacheBuster, response) %>"> Bet 1</a>
 					</td>
 					<td class="bet-2">
-						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= response.encodeURL("/spin.jsp?action=maxspin&"+cacheBuster) %>"> Bet 3</a>
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= ServletUtils.buildUrl(player, "/spin.jsp?action=maxspin&"+cacheBuster, response) %>"> Bet 3</a>
 					</td>
 				</tr>
 			</table>
@@ -110,8 +110,8 @@ int key = 1;
 			
 		    
 		     <div class="menu">
-		        <div><%= key %>. <a class="invite" accessKey="<%= key++ %>" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
-		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= response.encodeURL("/index.jsp") %>">Main</a></div>
+		        <div><%= key %>. <a class="invite" accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
 		    </div>
 		</div>
 	</div>

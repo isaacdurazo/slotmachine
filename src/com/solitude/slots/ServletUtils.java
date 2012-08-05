@@ -1,6 +1,9 @@
 package com.solitude.slots;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.solitude.slots.entities.Player;
 
 /**
  * Holds servlet utility methods
@@ -112,5 +115,19 @@ public class ServletUtils {
 
 		return(true);
 		
+	}
+	/**
+	 * Build url with player's access token always included
+	 * @param player playing game
+	 * @param url to build
+	 * @param response to encode properly
+	 * @return url
+	 */
+	public static String buildUrl(Player player, String url, HttpServletResponse response) {
+		if (url == null) url = "/";
+		if (player != null) {
+			url += (url.contains("?") ? "&" : "?") + "accessToken="+player.getAccessToken();
+		}
+		return response.encodeURL(url);
 	}
 }

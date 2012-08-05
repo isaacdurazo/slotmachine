@@ -52,10 +52,10 @@
 				    <table class="menu">
 				    	<tr>
 				    		<td>
-				        		<a accessKey="2" href="<%= response.encodeURL("/wk/index.jsp") %>">Main</a>
+				        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
 				    		</td>
 				    		<td>
-				        		<a accessKey="1" class="invite" href="<%= response.encodeURL("/wk/invite.jsp") %>">Invite Friends</a>
+				        		<a accessKey="1" class="invite" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
 				    		</td>
 				    	</tr>
 				    </table>

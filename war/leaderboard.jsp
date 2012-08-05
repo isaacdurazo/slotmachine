@@ -36,9 +36,9 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 		    </ul>
 			
 			<div class="menu">
-				<div>1. <a accessKey="1" href="<%= response.encodeURL("/leaderboard.jsp?type="+(type == (short)1 ? 2 : 1)) %>"><%= type == (short)1 ? "Coins Won" : "XP" %> Leaderboard</a></div>
-				<div>2. <a accessKey="2" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
-				<div>3. <a accessKey="3" href="<%= response.encodeURL("/index.jsp") %>">Main</a></div>
+				<div>1. <a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/leaderboard.jsp?type="+(type == (short)1 ? 2 : 1), response) %>"><%= type == (short)1 ? "Coins Won" : "XP" %> Leaderboard</a></div>
+				<div>2. <a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>
+				<div>3. <a accessKey="3" href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
 			</div>
 		</div>
 	</div>

@@ -141,7 +141,7 @@ if (isWebkit) {
 				</table>
 			    
 				<div class="buy-container">
-					<form action="<%= response.encodeURL("/wk/topup.jsp") %>" method="get">
+					<form action="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>" method="get">
 						<div>
 							<input class="input gold" type="hidden" name="verify" value="<%= formValidation %>"/>
 						</div>
@@ -163,7 +163,7 @@ if (isWebkit) {
 					<table class="menu">
 						<tr>
 							<td align="center">
-					        	<a href="<%= response.encodeURL("/wk/index.jsp") %>">Main</a>
+					        	<a href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
 							</td>
 						</tr>
 					</table>

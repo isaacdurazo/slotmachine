@@ -27,7 +27,10 @@ if (player == null) {
 		player = PlayerManager.getInstance().getPlayer(playerId);
 	
 		// check that if uid is given, that it matches player's moco id to handle multiple login case
-		if (player != null && uid > 0 && player.getMocoId() != uid) player = null;
+		if (player != null && ((uid > 0 && player.getMocoId() != uid) || 
+			(accessToken != null && !accessToken.equals(player.getAccessToken())))) {
+				player = null;
+		}
 	}
 	
 	if (player == null) {

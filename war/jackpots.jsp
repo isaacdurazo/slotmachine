@@ -35,8 +35,8 @@
 			    	}%>
 			    </ul>
 			    <div class="menu">
-			        <div>1. <a class="invite" accessKey="1" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
-			        <div>2. <a accessKey="2" href="<%= response.encodeURL("/index.jsp") %>">Main</a></div>
+			        <div>1. <a class="invite" accessKey="1" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>
+			        <div>2. <a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
 			    </div>
 			</div>
 		</div>

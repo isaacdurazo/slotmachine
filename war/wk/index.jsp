@@ -64,24 +64,24 @@
 				<div class="controls">
 				
 					<div class="play">
-						<a accessKey="1" href="<%= response.encodeURL("/wk/spin.jsp?"+cacheBuster) %>">Play Now</a>
+						<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
 					</div>
 					
 					<table class="menu">
 						<tr>
 							<td>
-				        		<a accessKey="2" href="<%= response.encodeURL("/wk/topup.jsp") %>">Buy Coins</a>
+				        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>">Buy Coins</a>
 							</td>
 							<td>
-				        		<a class="invite" accessKey="3" href="<%= response.encodeURL("/wk/invite.jsp") %>">Invite Friends</a>
+				        		<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
 							</td>
 						</tr>
 						<tr>
 							<td>
-				        		<a class="leaderboard" accessKey="4" href="<%= response.encodeURL("/wk/leaderboard.jsp") %>">Leaderboard</a>
+				        		<a class="leaderboard" accessKey="4" href="<%= ServletUtils.buildUrl(player, "/wk/leaderboard.jsp", response) %>">Leaderboard</a>
 							</td>
 							<td>
-				        		<a accessKey="5" href="<%= response.encodeURL("/wk/jackpots.jsp") %>">Jackpot Winners</a>
+				        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/wk/jackpots.jsp", response) %>">Jackpot Winners</a>
 							</td>
 						</tr>
 					</table>
@@ -89,7 +89,7 @@
 					<table class="menu">
 						<tr>
 							<td align="center">
-				        		<a accessKey="6" href="<%= response.encodeURL("/wk/help.jsp") %>">Payout Table</a>
+				        		<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>">Payout Table</a>
 							</td>
 						</tr>
 					</table>
@@ -101,16 +101,16 @@
 					<table class="menu">
 				    	<tr>   
 				        	<td>
-				        		<a href="<%=response.encodeURL("/wk/index.jsp?action=credit")%>">Credit 10 coins</a>
+				        		<a href="<%=ServletUtils.buildUrl(player, "/wk/index.jsp?action=credit", response)%>">Credit 10 coins</a>
 				        	</td>
 				        	<td>
-				       			<a href="<%=response.encodeURL("/wk/index.jsp?action=debit")%>">Set Coins=0</a>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/wk/index.jsp?action=debit", response)%>">Set Coins=0</a>
 				        	</td>
 				        	<td>
-				       			<a href="<%=response.encodeURL("/admin/cache.jsp")%>">Cache Manager</a>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/cache.jsp", response)%>">Cache Manager</a>
 				        	</td>
 				        	<td>
-				       			<a href="<%=response.encodeURL("/admin/properties.jsp")%>">System Properties Manager</a>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/properties.jsp", response)%>">System Properties Manager</a>
 				        	</td>
 				        </tr>
 					</table>

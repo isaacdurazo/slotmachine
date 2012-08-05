@@ -47,28 +47,28 @@
 				<img class="icon" width="16" height="16" src="images/mocogold.png"/> <%=System.getProperty("game.weekly.mocogold.min.prize")%> MocoGold!
 			</div>
 			<div class="play">
-				1. <a accessKey="1" href="<%= response.encodeURL("/spin.jsp?"+cacheBuster) %>">Play Now</a>
+				1. <a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
 			</div>
 		
 		    <div class="menu">
-		        <div>2. <a accessKey="2" href="<%= response.encodeURL("/topup.jsp") %>">Buy Coins</a></div>
-		        <div>3. <a class="invite" accessKey="3" href="<%= response.encodeURL("/invite.jsp") %>">Invite Friends</a></div>
-		        <div>4. <a class="leaderboard" accessKey="4" href="<%= response.encodeURL("/leaderboard.jsp") %>">Leaderboard</a></div>
-		        <div>5. <a accessKey="5" href="<%= response.encodeURL("/jackpots.jsp") %>">Jackpot Winners</a></div>
+		        <div>2. <a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Buy Coins</a></div>
+		        <div>3. <a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>
+		        <div>4. <a class="leaderboard" accessKey="4" href="<%= ServletUtils.buildUrl(player, "/leaderboard.jsp", response) %>">Leaderboard</a></div>
+		        <div>5. <a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/jackpots.jsp", response) %>">Jackpot Winners</a></div>
 		    </div>
 		    <br/>
 			<div class="menu">
-		        <div>6. <a accessKey="6" href="<%= response.encodeURL("/help.jsp") %>">Payout Table</a></div>
+		        <div>6. <a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/help.jsp", response) %>">Payout Table</a></div>
 			</div>
 			<%
 				if (player.hasAdminPriv()) {
 			%>
 			<br/>Admin Tools<br/>
 			<div class="menu">
-		        <div><a href="<%=response.encodeURL("/?action=credit")%>">Credit 10 coins</a></div>
-		        <div><a href="<%=response.encodeURL("/?action=debit")%>">Set Coins=0</a></div>
-		        <div><a href="<%=response.encodeURL("/admin/cache.jsp")%>">Cache Manager</a></div>
-		        <div><a href="<%=response.encodeURL("/admin/properties.jsp")%>">System Properties Manager</a></div>
+		        <div><a href="<%=ServletUtils.buildUrl(player, "/?action=credit", response)%>">Credit 10 coins</a></div>
+		        <div><a href="<%=ServletUtils.buildUrl(player, "/?action=debit", response)%>">Set Coins=0</a></div>
+		        <div><a href="<%=ServletUtils.buildUrl(player, "/admin/cache.jsp", response)%>">Cache Manager</a></div>
+		        <div><a href="<%=ServletUtils.buildUrl(player, "/admin/properties.jsp", response)%>">System Properties Manager</a></div>
 			</div>
 			<%
 				}

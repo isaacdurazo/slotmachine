@@ -33,7 +33,7 @@ if (isWebkit) {
 			player.setCoins(player.getCoins()+coin);
 			PlayerManager.getInstance().storePlayer(player);
 			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|webkit");
-			response.sendRedirect("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
+			pageContext.forward("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
 			return;
 		} else {
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"topup: error attempting to topup for player: "+player);
@@ -63,7 +63,7 @@ if (isWebkit) {
 				Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|"+ret);
 				player.setCoins(player.getCoins()+coin);
 				PlayerManager.getInstance().storePlayer(player);
-				response.sendRedirect("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
+				pageContext.forward("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
 				return;
 			} catch (OpenSocialService.GoldTopupRequiredException e) {
 				// redirect 
@@ -132,7 +132,7 @@ if (isWebkit) {
 		    <div>
 		    Buy Coins:
 		    </div>
-			<form action="<%= response.encodeURL("/topup.jsp") %>" method="get">
+			<form action="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>" method="get">
 				<div>
 					<input class="input" type="hidden" name="verify" value="<%= formValidation %>"/>
 				</div>
@@ -150,7 +150,7 @@ if (isWebkit) {
 			</form>
 			
 			<div class="menu">
-				<div><a href="<%= response.encodeURL("/index.jsp") %>">Main</a></div>
+				<div><a href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
 			</div>
 		</div>
 	</div>

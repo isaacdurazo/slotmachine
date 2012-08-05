@@ -17,7 +17,7 @@
 					<li><b>Payout:</b> Check the payout table for spin payouts.</li>
 				</ul>
 				<div class="menu">
-			       	<div>1. <a accessKey="1" href="<%= response.encodeURL("/index.jsp") %>">Start Play</a></div>
+			       	<div>1. <a accessKey="1" href="<%= ServletUtils.buildUrl(null, "/index.jsp", response) %>">Start Play</a></div>
 			    </div>
 				<div class="payout-table">
 					<div style="text-align: center">Payout Table<br/> Bet 1 Coin:</div>
@@ -46,7 +46,7 @@
 					</div>
 				</div>
 				<div class="menu">
-			       	<div><a href="<%= response.encodeURL("/index.jsp") %>">Main Page</a></div>
+			       	<div><a href="<%= ServletUtils.buildUrl(null, "/index.jsp", response) %>">Main Page</a></div>
 			    </div>
 			</div>
 	</div>

@@ -32,7 +32,7 @@
     <property name="game.weekly.mocogold.min.prize" value="888"/>
     <property name="game.xp.leaderboard.synchronous" value="true"/>
 	<property name="player.delta.flush.ttl.min" value="1"/>
-	<property name="player.delta.flush.enabled" value="true"/>
+	<property name="player.delta.flush.enabled" value="false"/>
 
   </system-properties>
 
