@@ -4,12 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.google.appengine.api.LifecycleManager;
+import com.google.appengine.api.LifecycleManager.ShutdownHook;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.appengine.api.utils.SystemProperty;
 import com.solitude.slots.cache.CacheStoreException;
 import com.solitude.slots.cache.GAECacheManager;
@@ -34,11 +40,26 @@ public class PlayerManager {
 	private static final PlayerManager instance = new PlayerManager();
 	/** @return singleton */
 	public static PlayerManager getInstance() { return instance; }
-
+	/** logger */
     private static final Logger log = Logger.getLogger(instance.getClass().getName());
+    /** map of player ID to delta info to delay datastore writes */
+    private final Map<Long,PlayerDeltaInfo> playerIDtoCoinXPMap;
 	
 	/** private constructor to ensure singleton */
-	private PlayerManager() { }
+	private PlayerManager() {
+		playerIDtoCoinXPMap = new ConcurrentHashMap<Long,PlayerDeltaInfo>();
+		// start queue flushing
+		this.flushDeltaPlayers(false);
+		// flush on instance shutdown
+		LifecycleManager.getInstance().setShutdownHook(new ShutdownHook() {
+
+			@Override
+			public void shutdown() {
+				PlayerManager.getInstance().flushDeltaPlayers(true);
+			}
+			
+		});
+	}
 	
 	/**
 	 * Called on start of game player for webkit devices where accessToken is known 
@@ -201,8 +222,57 @@ public class PlayerManager {
 	 * @throws CacheStoreException for cache issues
 	 */
 	public void storePlayer(Player player) throws DataStoreException, CacheStoreException {
-		GAEDataManager.getInstance().store(player);
+		this.storePlayer(player, false);
+	}
+	
+	/**
+	 * Store player in DB and cache with option to delay flushing to datastore
+	 * 
+	 * @param player to be stored
+	 * @param delay if true then will flush to datastore every minute
+	 * @throws DataStoreException for data issues
+	 * @throws CacheStoreException for cache issues
+	 */
+	public void storePlayer(Player player, boolean delay) throws DataStoreException, CacheStoreException {
+		if (!delay && Boolean.getBoolean("player.delta.flush.enabled")) GAEDataManager.getInstance().store(player);
+		else {
+			PlayerDeltaInfo info = playerIDtoCoinXPMap.get(player.getId());
+			if (info == null) {
+				info = new PlayerDeltaInfo();
+				playerIDtoCoinXPMap.put(player.getId(), info);
+			}
+			info.player = player;
+			info.lastAccess = System.currentTimeMillis();
+		}
 		GAECacheManager.getInstance().put(player);
+	}
+	
+	/**
+	 * Flush player delta map
+	 * @param force if true will flush all without taking last access into account
+	 */
+	public void flushDeltaPlayers(boolean force) {
+		for (PlayerDeltaInfo info : playerIDtoCoinXPMap.values()) {
+			try {
+				if (force || System.currentTimeMillis() - info.lastAccess > Integer.getInteger("player.delta.flush.ttl.min", 1)*60*1000) {					
+					// fetch from cache to ensure latest
+					Player player = GAECacheManager.getInstance().get(info.player.getId(), Player.class);
+					if (player == null) player = info.player;
+					GAEDataManager.getInstance().store(player);
+					playerIDtoCoinXPMap.remove(player.getId());
+					log.log(Level.FINEST, "flushing player: "+player);
+				}
+			} catch (Exception e) {
+				log.log(Level.WARNING, "Error attempting to flush player "+info.player,e);
+			}
+		}
+		if (!force) {
+			TaskOptions task = TaskOptions.Builder.withUrl("/admin/queue.jsp");
+			task.countdownMillis(60*1000);
+			task.param("queue", "flushDeltaPlayers");
+			task.param("accessToken", GameUtils.getGameAdminToken());
+			QueueFactory.getQueue("playerFlush").add(task);
+		}
 	}
 	
 	/**
@@ -216,5 +286,10 @@ public class PlayerManager {
 		public UnAuthorizedException(String message) {
 			super(message);
 		}
+	}
+	
+	private static class PlayerDeltaInfo {
+		long lastAccess = System.currentTimeMillis();
+		Player player;
 	}
 }

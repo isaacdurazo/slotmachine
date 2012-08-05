@@ -185,7 +185,7 @@ public class SlotMachineManager {
 		
 		// increment xp with spins and update leaderboard (do this with batching later?)
 		player.setXp(player.getXp()+1);
-		PlayerManager.getInstance().storePlayer(player);
+		PlayerManager.getInstance().storePlayer(player, true);
 		
 		if (Boolean.getBoolean("game.xp.leaderboard.enabled")) {
 			if (Boolean.getBoolean("game.xp.leaderboard.synchronous")) {
