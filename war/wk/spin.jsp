@@ -20,7 +20,8 @@ try {
 } catch (InsufficientFundsException ife) {
 	//use redirect to ensure the logging works for topup impressions
 	
-	response.sendRedirect("/wk/topup.jsp?notifymsg="+java.net.URLEncoder.encode("You need more coins to spin!","UTF-8"));
+	pageContext.forward("/wk/topup.jsp?notifymsg="+java.net.URLEncoder.encode("You need more coins to spin!","UTF-8")+
+	"&accessToken="+player.getAccessToken());
 	return;
 }
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
@@ -197,10 +198,10 @@ int key = 1;
 					<table class="bets" align="center" >
 						<tr>
 							<td class="bet-1">
-								<a class="bet" href="<%= response.encodeURL("/wk/spin.jsp?action=spin&"+cacheBuster) %>"> BET 1</a>
+								<a class="bet" href="<%= response.encodeURL("/wk/spin.jsp?action=spin&"+cacheBuster+"&accessToken="+player.getAccessToken()) %>"> BET 1</a>
 							</td>
 							<td class="bet-2">
-								<a class="bet" href="<%= response.encodeURL("/wk/spin.jsp?action=maxspin&"+cacheBuster) %>"> BET 3</a>
+								<a class="bet" href="<%= response.encodeURL("/wk/spin.jsp?action=maxspin&"+cacheBuster+"&accessToken="+player.getAccessToken()) %>"> BET 3</a>
 							</td>
 						</tr>
 					</table>
@@ -209,10 +210,10 @@ int key = 1;
 				     <table class="menu">
 				        <tr>
 				        	<td>
-				        		<a href="<%= response.encodeURL("/wk/index.jsp") %>">Main</a>
+				        		<a href="<%= response.encodeURL("/wk/index.jsp"+"?accessToken="+player.getAccessToken()) %>">Main</a>
 				        	</td>
 				        	<td>
-				        		<a accessKey="2" href="<%= response.encodeURL("/wk/topup.jsp") %>">Buy Coins</a>
+				        		<a accessKey="2" href="<%= response.encodeURL("/wk/topup.jsp"+"?accessToken="+player.getAccessToken()) %>">Buy Coins</a>
 				        	</td>
 				        </tr>
 				    </table>

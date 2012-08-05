@@ -18,7 +18,7 @@
     <property name="game.moco.id" value="1252"/>
     <property name="game.visitor.url" value="/landing.jsp"/>  
     <property name="game.adminpriv.ids" value="42530147,51653696,12534729,34402369"/>  
-    <property name="game.webkit.disabled" value="true"/>
+    <property name="game.webkit.disabled" value="false"/>
     <property name="mocospace.main.url" value="http://www.mocospace.com/"/>  
     <property name="mocospace.opensocial.api.endpoint" value="https://apps.mocospace.com/social"/> 
     

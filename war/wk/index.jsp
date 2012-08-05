@@ -32,8 +32,8 @@
 							<b>XP:</b> <%= player.getXp() %>
 						</td>
 						<td>
-							<a href="<%=response.encodeURL("/wk/?action=credit")%>">
-								<b>Coins:</b> <%= player.getCoins() %>
+
+							<b>Coins:</b> <%= player.getCoins() %>
 							</a>
 						</td>
 					</tr>
@@ -101,10 +101,10 @@
 					<table class="menu">
 				    	<tr>   
 				        	<td>
-				        		<a href="<%=response.encodeURL("/wk/?action=credit")%>">Credit 10 coins</a>
+				        		<a href="<%=response.encodeURL("/wk/index.jsp?action=credit")%>">Credit 10 coins</a>
 				        	</td>
 				        	<td>
-				       			<a href="<%=response.encodeURL("/wk/?action=debit")%>">Set Coins=0</a>
+				       			<a href="<%=response.encodeURL("/wk/index.jsp?action=debit")%>">Set Coins=0</a>
 				        	</td>
 				        	<td>
 				       			<a href="<%=response.encodeURL("/admin/cache.jsp")%>">Cache Manager</a>
