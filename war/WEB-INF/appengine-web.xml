@@ -32,11 +32,7 @@
     <property name="game.weekly.mocogold.min.prize" value="888"/>
     <property name="game.xp.leaderboard.synchronous" value="true"/>
 
-    <property name="url.connect.timeout" value="9999"/>
-    <property name="url.read.timeout" value="9999"/>
 
-
-url.read.timeout
   </system-properties>
 
   <!-- HTTP Sessions are disabled by default. To enable HTTP sessions specify: -->
