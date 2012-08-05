@@ -66,6 +66,7 @@ public class PlayerManager {
 			player.setMocoId(Integer.parseInt((String)person.getFieldValue(Person.Field.ID.toString())));
 			player.setName((String)person.getFieldValue(Person.Field.DISPLAY_NAME.toString()));
 			player.setCoins(Integer.getInteger("new.player.coins", 20));
+			player.setSessions(1);
 			log.log(Level.INFO,"sessionstart|new user|uid|"+player.getMocoId()+"|Player="+player.toString());
 		} else {
 			player.setSessions(player.getSessions()+1);
