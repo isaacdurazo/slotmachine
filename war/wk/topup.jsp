@@ -33,7 +33,7 @@ if (isWebkit) {
 			player.setCoins(player.getCoins()+coin);
 			PlayerManager.getInstance().storePlayer(player);
 			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|webkit");
-			response.sendRedirect("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
+			response.sendRedirect("/wk/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
 			return;
 		} else {
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"topup: error attempting to topup for player: "+player);
