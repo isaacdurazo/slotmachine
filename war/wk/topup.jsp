@@ -111,7 +111,7 @@ if (isWebkit) {
 					MocoSpace.goldTransaction(gold,desc,{
 							onSuccess: function(id,timestamp,token) {
 								// redirect with those parameters
-								window.location = '/wk/topup.jsp?action=widget&id='+id+'&timestamp='+timestamp+'&token='+token+'&gold='+gold;
+								window.location = '/wk/topup.jsp?accessToken=<%= player.getAccessToken() %>&action=widget&id='+id+'&timestamp='+timestamp+'&token='+token+'&gold='+gold;
 							},
 							onError: function(error) {
 								console.error(error);
