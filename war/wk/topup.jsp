@@ -63,7 +63,7 @@ if (isWebkit) {
 				Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|"+ret);
 				player.setCoins(player.getCoins()+coin);
 				PlayerManager.getInstance().storePlayer(player);
-				response.sendRedirect("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
+				response.sendRedirect("/wk/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
 				return;
 			} catch (OpenSocialService.GoldTopupRequiredException e) {
 				// redirect 
