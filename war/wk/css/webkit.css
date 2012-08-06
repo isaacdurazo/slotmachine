@@ -57,10 +57,6 @@ table {
 	width:100%;
 }
 
-#container {
-	 padding: 5px;
-}
-
 .wrapper {
 	width: 100%;
 	display: inline-block;
@@ -132,7 +128,7 @@ table {
 	border-radius: 3px;
 	background-color: #000;
     border: 2px solid #959595;
-    height: 2.5em;
+    min-height: 2.5em;
     line-height: 2.5em;
 }
 
@@ -170,11 +166,8 @@ table {
 }
 
 .bonus {
-    background: none repeat scroll 0 0 #FFF9D7;
-    border: 1px solid #E2C822;
+    background-color: #FFF9D7;
     color: #644B00;
-    margin-bottom: 3px;
-    padding: 4px 5px 0;
     text-align: center;
 }
 
