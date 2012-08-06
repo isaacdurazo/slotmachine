@@ -140,7 +140,7 @@ public class SlotMachineManager {
 					// create winner entry
 					JackpotWinner newWinner = new JackpotWinner();
 					newWinner.setPlayerId(player.getId());
-					newWinner.setGold(Long.getLong("game.weekly.mocogold.min.prize"));
+					newWinner.setGold(GameUtils.getGlobalProps().getMocoGoldPrize());
 					GAEDataManager.getInstance().store(newWinner);
 					fJackpot=true;
 					
@@ -150,13 +150,13 @@ public class SlotMachineManager {
 					winnerIds.add(0, newWinner.getId());
 					GAECacheManager.getInstance().putIds(CACHE_REGION, cacheKey, winnerIds);
 					// we have a legit jackpot!!! send notifications to user and admin account
-					String subject = "SlotMania Jackpot!", body = "Congratulations - you won the Moco Gold jackpot in Slot Mania! You will be credited "+System.getProperty("game.weekly.mocogold.min.prize") +" Gold within next 24hrs. You will receive a inbox message once Gold has been credited.";
+					String subject = "SlotMania Jackpot!", body = "Congratulations - you won the Moco Gold jackpot in Slot Mania! You will be credited "+GameUtils.getGlobalProps().getMocoGoldPrize() +" Gold within next 24hrs. You will receive a inbox message once Gold has been credited.";
 					try {
 						OpenSocialService.getInstance().sendNotification(player.getMocoId(), subject, body);
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, 
-								body+" winner: player id: "+player.getId()+", moco id: "+player.getMocoId()+ ",  gold: "+System.getProperty("game.weekly.mocogold.min.prize") +", xp: "+player.getXp());
+								body+" winner: player id: "+player.getId()+", moco id: "+player.getMocoId()+ ",  gold: "+GameUtils.getGlobalProps().getMocoGoldPrize() +", xp: "+player.getXp());
 						OpenSocialService.getInstance().sendNotification(12534729, subject, 
-								body+" winner: player id: "+player.getId()+", moco id: "+player.getMocoId()+ ",  gold: "+System.getProperty("game.weekly.mocogold.min.prize") +", xp: "+player.getXp());
+								body+" winner: player id: "+player.getId()+", moco id: "+player.getMocoId()+ ",  gold: "+GameUtils.getGlobalProps().getMocoGoldPrize() +", xp: "+player.getXp());
 					} catch (Exception e) {
 						log.log(Level.SEVERE,"Error sending jackpot notification, winner id: "+player.getId(),e);
 					}
