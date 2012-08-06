@@ -5,4 +5,8 @@
     <name>playerFlush</name>
     <rate>1/s</rate>
   </queue>
+  <queue>
+    <name>inbox</name>
+    <rate>1/m</rate>
+  </queue>
 </queue-entries>

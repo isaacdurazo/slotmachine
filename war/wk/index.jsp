@@ -112,6 +112,9 @@
 				        	<td>
 				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/properties.jsp", response)%>">System Properties Manager</a>
 				        	</td>
+				        	<td>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/inbox.jsp", response)%>">Inbox Utility</a>
+				        	</td>
 				        </tr>
 					</table>
 					<%
