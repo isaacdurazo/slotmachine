@@ -81,4 +81,19 @@ public abstract class AbstractGAEPersistent implements MapSerializable {
 		}
 		return sb.toString();	
 	}
+	
+	/**
+	 * Deserialize stored map value into into
+	 * @param key from map
+	 * @param inputMap to deserialize
+	 * @param defaultVal if not in map
+	 * @return int value
+	 */
+	protected int deserializeInt(String key, Map<String, Object> inputMap, int defaultVal) {
+		Object value = inputMap.get(key);
+		if (value == null) return defaultVal;
+		if (value instanceof Integer) return (Integer)value;
+		if (value instanceof Long) return ((Long)value).intValue();
+		else throw new IllegalArgumentException("value was not int for "+key+": "+value);
+	}
 }

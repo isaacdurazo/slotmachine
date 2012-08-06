@@ -170,17 +170,17 @@ public class Player extends AbstractGAEPersistent {
 		super.deserialize(inputMap);
 		this.accessToken = (String)inputMap.get("accessToken");
 		this.birthday = (Long)inputMap.get("birthday");
-		this.coins = ((Long)inputMap.get("coins")).intValue();
+		this.coins = deserializeInt("coins", inputMap, 20);
 		this.image = (String)inputMap.get("image");
 		this.isMale = (Boolean)inputMap.get("isMale");
-		this.mocoId = ((Long)inputMap.get("mocoId")).intValue();
+		this.mocoId = deserializeInt("mocoId", inputMap, -1);
 		this.name = (String)inputMap.get("name");
-		this.xp = ((Long)inputMap.get("xp")).intValue();
+		this.xp = deserializeInt("xp", inputMap, 0);
 		this.locale = createLocaleFromString((String)inputMap.get("locale"));
-		this.consecutiveDays = ((Long)inputMap.get("consecutiveDays")).intValue();
+		this.consecutiveDays = deserializeInt("consecutiveDays", inputMap, 0);
 		this.consecutiveDaysTimestamp = (Long)inputMap.get("consecutiveDaysTimestamp");
-		this.coinsWon = inputMap.get("coinsWon") == null ? 0L : (Long)inputMap.get("coinsWon");
-		this.numSessions = inputMap.get("numSessions") == null ? 0L : (Long)inputMap.get("numSessions");
+		this.coinsWon = deserializeInt("coinsWon",inputMap, 0);
+		this.numSessions = deserializeInt("numSessions", inputMap, 0);
 	}
 
 	@Override

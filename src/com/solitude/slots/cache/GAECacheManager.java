@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,42 +36,27 @@ public class GAECacheManager implements CacheManager<AbstractGAEPersistent> {
 	@Override
 	public void put(AbstractGAEPersistent persistent) throws CacheStoreException {
 		if (persistent == null) throw new IllegalArgumentException("persistent is null?");
-		String entityName = GAEUtil.getEntityName(persistent.getClass());
-		MemcacheServiceFactory.getAsyncMemcacheService(entityName).put(persistent.getId(), persistent.serialize());
+		MemcacheServiceFactory.getAsyncMemcacheService().put(getKey(persistent), persistent.serialize());
 	}
 	
 	@Override
 	public void putAll(Collection<AbstractGAEPersistent> persistents) throws CacheStoreException {
-		// need to group by entityName to ensure region is consistent
-		Map<String,Set<AbstractGAEPersistent>> entityNameToPersistents = new HashMap<String,Set<AbstractGAEPersistent>>();
+		Map<Object,Map<String,Object>> valuesToStore = new HashMap<Object,Map<String,Object>>(persistents.size());
 		for (AbstractGAEPersistent persistent : persistents) {
 			if (persistent == null) continue;
-			String entityName = GAEUtil.getEntityName(persistent.getClass());
-			Set<AbstractGAEPersistent> persistentSet = entityNameToPersistents.get(entityName);
-			if (persistentSet == null) {
-				persistentSet = new HashSet<AbstractGAEPersistent>();
-				entityNameToPersistents.put(entityName, persistentSet);
-			}
-			persistentSet.add(persistent);
+			valuesToStore.put(getKey(persistent),persistent.serialize());
 		}
-		for (Map.Entry<String,Set<AbstractGAEPersistent>> entry : entityNameToPersistents.entrySet()) {
-			Map<Object,Map<String,Object>> valuesToStore = new HashMap<Object,Map<String,Object>>(entry.getValue().size());
-			for (AbstractGAEPersistent persistent : entry.getValue()) {
-				try {
-					valuesToStore.put(persistent.getId(), persistent.serialize());
-				} catch (IllegalArgumentException e) {
-					log.log(Level.WARNING, "Not an instance of AbstractGAEPersistent: "+persistent);
-				}
-			}
-			MemcacheServiceFactory.getAsyncMemcacheService(entry.getKey()).putAll(valuesToStore);		
-		}
+		MemcacheServiceFactory.getAsyncMemcacheService().putAll(valuesToStore);		
 	}
 
 	@Override
 	public void removePeristent(AbstractGAEPersistent persistent) throws CacheStoreException {
 		if (persistent == null) throw new IllegalArgumentException("persistent is null?");
-		String entityName = GAEUtil.getEntityName(persistent.getClass());
-		MemcacheServiceFactory.getAsyncMemcacheService(entityName).delete(persistent.getId());
+		MemcacheServiceFactory.getAsyncMemcacheService().delete(getKey(persistent));
+	}
+	
+	private static String getKey(AbstractGAEPersistent persistent) {
+		return GAEUtil.getEntityName(persistent.getClass())+"_"+persistent.getId();
 	}
 
 	@Override
@@ -95,9 +78,9 @@ public class GAECacheManager implements CacheManager<AbstractGAEPersistent> {
 		final String entityName = GAEUtil.getEntityName(persistentClass);
 		List<Object> keys = new ArrayList<Object>(ids.size());
 		for (long id : ids) {
-			keys.add(id);
+			keys.add(entityName+"_"+id);
 		}
-		Map<Object,Object> keyToCachedObj = MemcacheServiceFactory.getMemcacheService(entityName).getAll(keys);
+		Map<Object,Object> keyToCachedObj = MemcacheServiceFactory.getMemcacheService().getAll(keys);
 		List<K> result = new ArrayList<K>(keyToCachedObj.size());
 		for (long id : ids) {
 			final String key = entityName+"_"+id;
@@ -135,34 +118,34 @@ public class GAECacheManager implements CacheManager<AbstractGAEPersistent> {
 	@Override
 	public List<Long> getIds(String region, String key) throws CacheStoreException {
 		if (key == null || key.trim().length() == 0) return null;
-		return (List<Long>)MemcacheServiceFactory.getMemcacheService(region).get(key);
+		return (List<Long>)MemcacheServiceFactory.getMemcacheService().get(region+"_"+key);
 	}
 
 	@Override
 	public void remove(String region, String key) throws CacheStoreException {
 		if (StringUtils.isEmpty(key) || StringUtils.isEmpty(region)) return;
-		MemcacheServiceFactory.getAsyncMemcacheService(region).delete(key);
+		MemcacheServiceFactory.getAsyncMemcacheService().delete(region+"_"+key);
 	}
 
 	@Override
 	public void putIds(String region, String key, List<Long> ids) throws CacheStoreException {
 		if (StringUtils.isEmpty(key) || StringUtils.isEmpty(region) || ids == null) 
 			throw new IllegalArgumentException("ids or key are null");
-		MemcacheServiceFactory.getAsyncMemcacheService(region).put(key, ids);
+		MemcacheServiceFactory.getAsyncMemcacheService().put(region+"_"+key, ids);
 	}
 	
 	@Override
 	public void putNull(long id, Class<?> persistentClass) throws CacheStoreException {
-		MemcacheServiceFactory.getAsyncMemcacheService().put(GAEUtil.getEntityName(persistentClass), "null");
+		MemcacheServiceFactory.getAsyncMemcacheService().put(GAEUtil.getEntityName(persistentClass)+"_"+id, "null");
 	}
 	
 	@Override
 	public String getCustom(String region, String key) throws CacheStoreException {
-		return (String)MemcacheServiceFactory.getMemcacheService(region).get(key);
+		return (String)MemcacheServiceFactory.getMemcacheService().get(region+"_"+key);
 	}
 	
 	@Override
 	public void putCustom(String region, String key, String data, int ttlSeconds) throws CacheStoreException {
-		MemcacheServiceFactory.getMemcacheService().put(key, data, Expiration.byDeltaSeconds(ttlSeconds));
+		MemcacheServiceFactory.getMemcacheService().put(region+"_"+key, data, Expiration.byDeltaSeconds(ttlSeconds));
 	}
 }
