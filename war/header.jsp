@@ -37,7 +37,7 @@ if (player == null) {
 		// No session - verify and create/fetch player as needed	
 		try {
 			Pair<Player,Integer> gameStartPair;
-			if (accessToken != null && isWebkit) {
+			if (accessToken != null) {
 				// webkit case
 				gameStartPair = PlayerManager.getInstance().startGamePlayer(accessToken);
 			} else {
