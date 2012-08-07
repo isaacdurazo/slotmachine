@@ -12,12 +12,15 @@
 		return;
 	}
 
-	String subject = request.getParameter("subject");
-	String message = request.getParameter("message");
-	String daysS = request.getParameter("days");
-	String maxS = request.getParameter("max");
+	//default values
 	int days=3;
 	int max=50000;
+
+	String subject = request.getParameter("subject");
+	String message = request.getParameter("message");
+	String daysS = (request.getParameter("days")==null ? Integer.toString(days) : request.getParameter("days")) ;
+	String maxS = (request.getParameter("max") ==null ? Integer.toString(max): request.getParameter("max"));
+
 
 	String action = request.getParameter("action");
 	if ("send".equals(action)) {
@@ -25,11 +28,11 @@
 			out.write("Message, subject,x days and max recipients required!");
 			return;
 		} else if (request.getParameter("test")!=null) {
-			out.write("TEST: Not sending msgs - only counting recipients..: ");
+			out.write("<div style='color:red'>TEST: Not sending inbox - only counting recipients..: ");
 			days = Integer.parseInt(daysS);
 			max = Integer.parseInt(maxS);
 			java.util.List<Player> players = PlayerManager.getInstance().getRecentPlayers(days * 24, max);
-			out.write(players.size()+ " players match the inbox criteria.<br/>");
+			out.write(players.size()+ " players match the inbox criteria.</div><br/>");
 		} else {
 
 			TaskOptions task = TaskOptions.Builder.withUrl("/admin/inbox.jsp");
@@ -40,22 +43,24 @@
 			task.param("action", "queue");
 			task.param("accessToken", GameUtils.getGameAdminToken());
 			QueueFactory.getQueue("inbox").add(task);
-			out.write("Message queued! Inbox progress sent to slotmania account<br/>");
+			
+			out.write("<div style='color:green'>Message queued! Inbox progress sent to slotmania account</div><br/>");
 			out.write("Subject="+subject+"<br/>");
 			out.write("Message="+message+"<br/>");
-			out.write("daysS="+days+"<br/>");
+			out.write("daysS="+daysS+"<br/>");
 			out.write("maxS="+maxS+"<br/>");
 			out.write("action="+action+"<br/>");
 			return;
 		}
 
 	} else if ("queue".equals(action)) {
-//		days = Integer.parseInt(daysS);
-//		max = Integer.parseInt(maxS);
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: params days="+daysS+ " maxs="+maxS+", sub="+subject+", body="+message);
+		days = Integer.parseInt(daysS);
+		max = Integer.parseInt(maxS);
 		max = Math.min(max, 50000);
 
 		java.util.List<Player> players = PlayerManager.getInstance().getRecentPlayers(days * 24, max);
-		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Sending inbox to " + players.size() + " players");
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX Start sending  to " + players.size() + " players");
 
 		long idx = 0;
 		for (Player currPlayer : players) {
@@ -71,8 +76,13 @@
 		}
 		OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 				"Inbox to " + players.size()+ " players complete.","Running background job");
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: Completed sending to "+players.size()+" players");
+		
 		return;
 	}
+	if (subject==null) subject = "";
+	if (message==null) message = "";
+	
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -86,7 +96,7 @@
 			<label for="key">Subject:</label><br/>
 			<input type="text" name="subject" maxlength="50" value="<%=subject%>"></input><br/>
 			<label for="message">Message:</label><br/>
-			<textarea rows="3" cols="80" name="message" value="<%=message%>"></textarea><br/>
+			<textarea rows="3" cols="80" name="message"><%=message%></textarea><br/>
 			<small>(only plain text - no HTML!)</small><br/><br/>
 			<label for="key">Played in last x days. x=:</label>
 			<input type="number" name="days" value="<%=days%>"></input><br/>
