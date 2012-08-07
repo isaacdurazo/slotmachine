@@ -51,7 +51,9 @@ int key = 1;
   <body>
   	<div id="container">
 	  	<div class="wrapper">
-		    <div class="header-logo"><img width="192" height="60" src="images/logo.png"/></div>
+		    <div class="header-logo">
+		    	<img width="154" height="48" src="/wk/images/logo.png"/>
+		    </div>
 		    
 		    <div class="content">
 			    
