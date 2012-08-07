@@ -32,26 +32,36 @@ int key = 1;
 <%@ include file="header_html.jsp" %>
 	<% if (action != null) { %>
 	  <script>
+	  
+	  	setTimeout(function() {
+	  		document.getElementById('spin-animation-1').style.display = 'none';
+	  	}, 750);  		
+	  	
+	  	setTimeout(function() {
+	 	   	document.getElementById('spin-animation-2').style.display = 'none';
+	  	}, 1250);  		
+	  	
 	  	document.addEventListener('load',function() {
 	  		setTimeout(function() {
-	  			document.getElementById('spin-animation-1').style.display = 'none';
-	 	   		document.getElementById('spin-animation-2').style.display = 'none';
 	 	    	document.getElementById('spin-animation-3').style.display = 'none';
-	  			// make any item with class 'delay' visible after 1 second
-	  	  		var elems = document.querySelectorAll('.delay');
-	  	  		if (elems) {
-	  	  			for (var i=0;i<elems.length;i++) {
-	  	  				elems[i].style.display = 'block';
-	  	  			}
-	  	  		}  	  		
-	  		}, 750);  		
+  				// make any item with class 'delay' visible after 1 second
+  	  			var elems = document.querySelectorAll('.delay');
+  	  			if (elems) {
+  	  				for (var i=0;i<elems.length;i++) {
+  	  					elems[i].style.display = 'block';
+  	  				}
+  	  			}
+	  		}, 1500);  		
 	  	},true);
+	  	
 	  </script>
 	<% } %>
   <body>
   	<div id="container">
 	  	<div class="wrapper">
-		    <div class="header-logo"><img width="192" height="60" src="images/logo.png"/></div>
+		    <div class="header-logo">
+		    	<img width="154" height="48" src="/wk/images/logo.png"/>
+		    </div>
 		    
 		    <div class="content">
 			    

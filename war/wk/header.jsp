@@ -63,7 +63,7 @@
 <body>
 	<div id="container">
 		<div class="wrapper">
-			<img style="margin-top: 45px;" width="240" height="110" src="images/wk-landing-logo.png" />
+			<img style="margin-top: 45px;" width="154" height="48" src="images/wk-landing-logo.png" />
 		</div>
 	</div>
 	<div align="center">

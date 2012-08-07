@@ -22,7 +22,9 @@
   <body>
   	<div id="container">
 	  	<div class="wrapper">
-		    <div class="header-logo"><img width="192" height="60" src="/wk/images/logo.png"/></div>
+		    <div class="header-logo">
+		    	<img width="154" height="48" src="/wk/images/logo.png"/>
+		    </div>
 			<%@ include file="message.jsp" %>		    
 		    <div class="content">
 		    
@@ -111,6 +113,9 @@
 				        	</td>
 				        	<td>
 				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/properties.jsp", response)%>">System Properties Manager</a>
+				        	</td>
+				        	<td>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/inbox.jsp", response)%>">Inbox Utility</a>
 				        	</td>
 				        </tr>
 					</table>

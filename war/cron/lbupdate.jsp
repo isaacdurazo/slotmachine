@@ -5,7 +5,7 @@ if (!"true".equals(request.getHeader("X-AppEngine-Cron")) && SystemProperty.envi
 	out.write("ERROR!");
 	return;
 }
-java.util.List<Player> players = PlayerManager.getInstance().getRecentPlayers(4);
+java.util.List<Player> players = PlayerManager.getInstance().getRecentPlayers(4,1000);
 Logger.getLogger(request.getRequestURI()).log(Level.INFO,"update leaderboard for "+players.size()+" players");
 for (Player player : players) {
 	try {

@@ -120,14 +120,15 @@ public class PlayerManager {
 	/**
 	 * Fetch players who played within the last hours specified
 	 * @param hours to include
+	 * @param max number of players to return
 	 * @return list of players
 	 * @throws DataStoreException for data error
 	 */
-	public List<Player> getRecentPlayers(int hours) throws DataStoreException {
+	public List<Player> getRecentPlayers(int hours, int max) throws DataStoreException {
 		Set<QueryCondition> conditions = new HashSet<QueryCondition>();
 		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_DELETED_KEY,false));
 		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_UPDATE_KEY,System.currentTimeMillis()-hours*3600*1000,QueryCondition.QUERY_OPERATOR.GREATER_THAN_EQUALS));
-		return GAEDataManager.getInstance().query(Player.class, conditions, null, false, 1000);
+		return GAEDataManager.getInstance().query(Player.class, conditions, null, false, max);
 	}
 	
 	/**
