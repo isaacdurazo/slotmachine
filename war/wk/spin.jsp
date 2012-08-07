@@ -32,20 +32,28 @@ int key = 1;
 <%@ include file="header_html.jsp" %>
 	<% if (action != null) { %>
 	  <script>
+	  
+	  	setTimeout(function() {
+	  		document.getElementById('spin-animation-1').style.display = 'none';
+	  	}, 750);  		
+	  	
+	  	setTimeout(function() {
+	 	   	document.getElementById('spin-animation-2').style.display = 'none';
+	  	}, 1250);  		
+	  	
 	  	document.addEventListener('load',function() {
 	  		setTimeout(function() {
-	  			document.getElementById('spin-animation-1').style.display = 'none';
-	 	   		document.getElementById('spin-animation-2').style.display = 'none';
 	 	    	document.getElementById('spin-animation-3').style.display = 'none';
-	  			// make any item with class 'delay' visible after 1 second
-	  	  		var elems = document.querySelectorAll('.delay');
-	  	  		if (elems) {
-	  	  			for (var i=0;i<elems.length;i++) {
-	  	  				elems[i].style.display = 'block';
-	  	  			}
-	  	  		}  	  		
-	  		}, 750);  		
+  				// make any item with class 'delay' visible after 1 second
+  	  			var elems = document.querySelectorAll('.delay');
+  	  			if (elems) {
+  	  				for (var i=0;i<elems.length;i++) {
+  	  					elems[i].style.display = 'block';
+  	  				}
+  	  			}
+	  		}, 1500);  		
 	  	},true);
+	  	
 	  </script>
 	<% } %>
   <body>
