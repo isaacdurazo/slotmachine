@@ -26,29 +26,37 @@
 				    
 					<div class="list-container">
 				    
-					    <ul class="list">
+					    <div class="list">
 					    	<%
 					    	java.util.List<JackpotWinner> winners = SlotMachineManager.getInstance().getRecentJackpotWinners();
 					    	if (winners == null || winners.isEmpty()) { %>
-					    		<li>Be the first winner!</li>
+					    		<div>Be the first winner!</div>
+		
+								<div class="list-entity">
+						    		<div class="profile-pic-frame"><img src="/wk/images/comb-1.jpg" height="45" width="45"/> </div>
+						    		<div class="list-entry-content">NAME</div> 
+								</div>
+						    	
+								<div class="list-entity">
+						    		<div class="profile-pic-frame"><img src="/wk/images/comb-1.jpg" height="45" width="45"/> </div>
+						    		<div class="list-entry-content">NAME</div> 
+								</div>
+						    	
+								<div class="list-entity">
+						    		<div class="profile-pic-frame"><img src="/wk/images/comb-1.jpg" height="45" width="45"/> </div>
+						    		<div class="list-entry-content">NAME</div> 
+								</div>
 		
 					    	<% } else {
 						    	for (JackpotWinner winner : winners) { 
 						    		Player winningPlayer = PlayerManager.getInstance().getPlayer(winner.getPlayerId()); %>
-						    		<li>
-						    			<img src="<%= winningPlayer.getImage() %>" height="25" width="25"/> <%= winningPlayer.getName() %> 
-						    		</li>
-						    		
-						    		<!-- Example of the structure I would like to use 
-						    		
-						    		<li>
-						    			<img style="vertical-align:middle;" src="#" height="25" width="25"/> <a href="#">name</a> 
-						    		</li>
-						    		
-						    		-->
+									<div class="list-entity">
+						    			<img src="<%= winningPlayer.getImage() %>" height="45" width="45"/> <%= winningPlayer.getName() %> 
+						    		</div>
+
 						    	<% } 
 					    	}%>
-					    </ul>
+					    </div>
 				    </div>
 				    
 				    <table class="menu">
