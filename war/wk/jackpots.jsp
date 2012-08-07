@@ -31,28 +31,15 @@
 					    	java.util.List<JackpotWinner> winners = SlotMachineManager.getInstance().getRecentJackpotWinners();
 					    	if (winners == null || winners.isEmpty()) { %>
 					    		<div>Be the first winner!</div>
-		
-								<div class="list-entity">
-						    		<div class="profile-pic-frame"><img src="/wk/images/comb-1.jpg" height="45" width="45"/> </div>
-						    		<div class="list-entry-content">NAME</div> 
-								</div>
-						    	
-								<div class="list-entity">
-						    		<div class="profile-pic-frame"><img src="/wk/images/comb-1.jpg" height="45" width="45"/> </div>
-						    		<div class="list-entry-content">NAME</div> 
-								</div>
-						    	
-								<div class="list-entity">
-						    		<div class="profile-pic-frame"><img src="/wk/images/comb-1.jpg" height="45" width="45"/> </div>
-						    		<div class="list-entry-content">NAME</div> 
-								</div>
-		
+
 					    	<% } else {
 						    	for (JackpotWinner winner : winners) { 
 						    		Player winningPlayer = PlayerManager.getInstance().getPlayer(winner.getPlayerId()); %>
-									<div class="list-entity">
-						    			<img src="<%= winningPlayer.getImage() %>" height="45" width="45"/> <%= winningPlayer.getName() %> 
-						    		</div>
+
+						    		<div class="list-entity">
+						    			<div class="profile-pic-frame"><img src="<%= winningPlayer.getImage() %>" height="45" width="45"/></div>
+						    		<div class="list-entry-content"><%= winningPlayer.getName() %></div> 
+								</div>
 
 						    	<% } 
 					    	}%>
