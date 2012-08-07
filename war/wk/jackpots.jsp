@@ -38,7 +38,9 @@
 
 						    		<div class="list-entity">
 						    			<div class="profile-pic-frame"><img src="<%= winningPlayer.getImage() %>" height="45" width="45"/></div>
-						    		<div class="list-entry-content"><%= winningPlayer.getName() %></div> 
+						    		<div class="list-entry-content">
+						    			<span><%= winningPlayer.getName() %></span>
+						    		</div> 
 								</div>
 
 						    	<% } 

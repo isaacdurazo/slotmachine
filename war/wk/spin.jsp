@@ -41,18 +41,19 @@ int key = 1;
 	 	   	document.getElementById('spin-animation-2').style.display = 'none';
 	  	}, 1250);  		
 	  	
-	  	document.addEventListener('load',function() {
-	  		setTimeout(function() {
-	 	    	document.getElementById('spin-animation-3').style.display = 'none';
-  				// make any item with class 'delay' visible after 1 second
-  	  			var elems = document.querySelectorAll('.delay');
-  	  			if (elems) {
-  	  				for (var i=0;i<elems.length;i++) {
-  	  					elems[i].style.display = 'block';
-  	  				}
-  	  			}
-	  		}, 1500);  		
-	  	},true);
+	  	setTimeout(function() {
+	 	   	document.getElementById('spin-animation-3').style.display = 'none';
+	  	}, 1500);  
+
+	  	
+	  	setTimeout(function() {
+	  		var elems = document.querySelectorAll('.delay');
+	  		if (elems) {
+	  			for (var i=0;i<elems.length;i++) {
+	  				elems[i].style.display = 'block';
+	  			}
+	  		}
+  		}, 1800); 
 	  	
 	  </script>
 	<% } %>
@@ -83,7 +84,7 @@ int key = 1;
 							//only for maxspin give ability to win Moco Gold
 							if ("maxspin".equals(action) && symbol[0]==0 && symbol[1]==0 && symbol[2]==0) {
 						%>
-							<div class="goldtext">
+							<div class="goldtext delay">
 								You WON the Moco Gold Jackpot<br />
 								<img width="112" height="14" src="images/jackpot-winner.gif"/>
 							</div>		
@@ -115,7 +116,7 @@ int key = 1;
 						if ("maxspin".equals(action) && symbol[0]==0 && symbol[1]==0 && symbol[2]==0) {
 					%>
 					
-						<div class="lights-win">
+						<div class="lights-win delay" style="display:none;">
 							<div class="lights left"></div>
 							<div class="lights right"></div>
 							<div class="lights top"></div>
@@ -126,7 +127,7 @@ int key = 1;
 						} else if (spinResult.getCoins()>0) {
 					%>
 					
-						<div class="lights-win">
+						<div class="lights-win delay" style="display:none;">
 							<div class="lights left"></div>
 							<div class="lights right"></div>
 							<div class="lights top"></div>
