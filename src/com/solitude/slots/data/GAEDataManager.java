@@ -157,7 +157,7 @@ public class GAEDataManager implements DataManager<AbstractGAEPersistent> {
 			q.addSort(orderBy, descending ? Query.SortDirection.DESCENDING : Query.SortDirection.ASCENDING);
 		}
 		PreparedQuery pq = DatastoreServiceFactory.getDatastoreService().prepare(q);
-		List<Entity> entities = pq.asList(FetchOptions.Builder.withLimit(limit));
+		List<Entity> entities = pq.asList(FetchOptions.Builder.withLimit(limit).chunkSize(1000).prefetchSize(1000));
 		if (log.isLoggable(Level.FINEST)) log.log(Level.FINEST, "query: "+pq);
 		result = new ArrayList<K>(entities.size());
 		for (Entity entity : entities) {
