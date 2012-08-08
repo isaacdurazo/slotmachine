@@ -7,14 +7,15 @@
 final int rand = (new Random()).nextInt(999); 
 String cacheBuster = "r="+rand; 
 
-int coinsAwarded = 0;
 Player player = (Player)request.getAttribute("player"); 
 
-
 // logic to do animated/static images based on browser support
-String imageLocation="images/animated-2/";
-if (!hasAnimGifSupport) {
-	imageLocation="images/";
+String imageLocation = "images/";
+if (!isWebkit) {
+	imageLocation="images/animated-2/";
+	if (!hasAnimGifSupport) {
+		imageLocation="images/";
+	}
 }
 
 if (player == null) {
@@ -36,19 +37,16 @@ if (player == null) {
 	if (player == null) {
 		// No session - verify and create/fetch player as needed	
 		try {
-			Pair<Player,Integer> gameStartPair;
 			if (accessToken != null) {
 				// webkit case
-				gameStartPair = PlayerManager.getInstance().startGamePlayer(accessToken);
+				player = PlayerManager.getInstance().startGamePlayer(accessToken);
 			} else {
 				// feature phone
-				gameStartPair = PlayerManager.getInstance().startGamePlayer(
+				player = PlayerManager.getInstance().startGamePlayer(
 					ServletUtils.getInt(request,"uid"), 
 					ServletUtils.getLong(request,"timestamp"), 
 					request.getParameter("verify"));			
 			}
-			player = gameStartPair.getElement1();
-			coinsAwarded = gameStartPair.getElement2();
 			request.getSession().setAttribute("playerId",player.getId());
 		} catch (PlayerManager.UnAuthorizedException e) { 
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Invalid verification: "+request.getQueryString());
@@ -60,7 +58,10 @@ if (player == null) {
 			return;
 		}
 	}
+	request.setAttribute("player",player);
 }
+// check if coins awarded
+int coinsAwarded = PlayerManager.getInstance().getRetentionCoinAward(player);
 
 if (isWebkit) {
 	if (!player.hasAdminPriv() && Boolean.getBoolean("game.webkit.disabled")) {

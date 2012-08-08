@@ -1,4 +1,4 @@
-<%@ include file="header.jsp" %>
+<%@ include file="/header.jsp" %>
 <%@ page import="com.solitude.slots.opensocial.*,com.solitude.slots.cache.*" %>
 <%
 String topupAction = request.getParameter("topup");

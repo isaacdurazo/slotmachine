@@ -1,4 +1,4 @@
-<%@ include file="header.jsp" %>
+<%@ include file="/header.jsp" %>
 <%
 	String action = request.getParameter("action");
 	SpinResult spinResult = null;

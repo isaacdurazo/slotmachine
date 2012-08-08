@@ -1,5 +1,5 @@
 <%@page import="com.sun.java_cup.internal.runtime.Symbol"%>
-<%@ include file="header.jsp" %>
+<%@ include file="/header.jsp" %>
 <%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException" %>
  
 

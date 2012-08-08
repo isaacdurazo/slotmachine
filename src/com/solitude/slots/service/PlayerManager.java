@@ -23,7 +23,6 @@ import com.solitude.slots.data.DataStoreException;
 import com.solitude.slots.data.GAEDataManager;
 import com.solitude.slots.data.QueryCondition;
 import com.solitude.slots.entities.AbstractGAEPersistent;
-import com.solitude.slots.entities.Pair;
 import com.solitude.slots.entities.Player;
 import com.solitude.slots.opensocial.Person;
 
@@ -64,10 +63,10 @@ public class PlayerManager {
 	/**
 	 * Called on start of game player for webkit devices where accessToken is known 
 	 * @param accessToken for access to moco
-	 * @return pair of player (will create if new) and coins awarded as part of consecutive play
+	 * @return player (will create if new)
 	 * @throws Exception on unexpected error
 	 */
-	public Pair<Player,Integer> startGamePlayer(String accessToken) throws Exception {
+	public Player startGamePlayer(String accessToken) throws Exception {
 		// look up user with given access token
 		Player player = this.getPlayer(accessToken);
 		boolean newPlayer = player == null;
@@ -94,14 +93,7 @@ public class PlayerManager {
 			log.log(Level.INFO,"sessionstart|returning user|uid|"+player.getMocoId()+", Player="+player.toString());
 		}
 		
-		// award coins if consecutive days greater than 0 and last consecutive days increment last than 100 ms (just happened)
-		int coinsAwarded = 0;
-		if (player.awardConsecutiveDays()) {
-			coinsAwarded = Integer.getInteger("game.consecutive.days.coin.award.per.day")*
-					(1+Math.min(player.getConsecutiveDays(),Integer.getInteger("game.consecutive.days.coin.award.day.cap")));
-			player.setCoins(player.getCoins()+coinsAwarded);
-		}
-		// store player (if new or to track consecutive days)
+		// store player to update last access time
 		GAEDataManager.getInstance().store(player);
 
 		player.setIsNewPlayer(newPlayer); //Important ONLY set this after persisting = IsNewPlayer only true on 1st pgview
@@ -114,7 +106,26 @@ public class PlayerManager {
 			existingPlayerIds.add(0, player.getId());
 			GAECacheManager.getInstance().putIds(CACHE_REGION, cacheKey, existingPlayerIds);
 		}
-		return new Pair<Player, Integer>(player,coinsAwarded);
+		return player;
+	}
+	
+	/**
+	 * Determines if user has earned coins for returning.  Will increase player's coins and store automatically.
+	 * @param player to check
+	 * @return coins awarded (0 if none)
+	 * @throws DataStoreException data error
+	 * @throws CacheStoreException cache error
+	 */
+	public Integer getRetentionCoinAward(Player player) throws DataStoreException, CacheStoreException {
+		// award coins if consecutive days greater than 0 and last consecutive days increment last than 100 ms (just happened)
+		int coinsAwarded = 0;
+		if (player.awardConsecutiveDays()) {
+			coinsAwarded = Integer.getInteger("game.consecutive.days.coin.award.per.day")*
+					(1+Math.min(player.getConsecutiveDays(),Integer.getInteger("game.consecutive.days.coin.award.day.cap")));
+			player.setCoins(player.getCoins()+coinsAwarded);
+			GAEDataManager.getInstance().store(player);
+		}		
+		return coinsAwarded;
 	}
 	
 	/**
@@ -138,11 +149,11 @@ public class PlayerManager {
 	 * @param userId of user
 	 * @param timestamp for verification
 	 * @param verifier token
-	 * @return pair of player (will create if new) and coins awarded as part of consecutive play
+	 * @return player (will create if new)
 	 * @throws UnAuthorizedException if verifier is invalid
 	 * @throws Exception on unexpected error
 	 */
-	public Pair<Player,Integer> startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
+	public Player startGamePlayer(int userId, long timestamp, String verifier) throws UnAuthorizedException, Exception {
 		if (userId <= 0) throw new IllegalArgumentException("invalid userId: "+userId);
 		if (Boolean.getBoolean("game.redirect.validate.enabled") && SystemProperty.environment.get().equals(SystemProperty.Environment.Value.Production)) {
 			// validate redirect parameters from moco

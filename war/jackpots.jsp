@@ -1,4 +1,4 @@
-<%@ include file="header.jsp" %>
+<%@ include file="/header.jsp" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<%@ include file="header_html.jsp" %>
@@ -19,6 +19,7 @@
 
 			    	<% } else {
 				    	for (JackpotWinner winner : winners) { 
+				    		if (winner == null) continue;
 				    		Player winningPlayer = PlayerManager.getInstance().getPlayer(winner.getPlayerId()); %>
 				    		<li>
 				    			<img src="<%= winningPlayer.getImage() %>" height="25" width="25"/> <%= winningPlayer.getName() %> 

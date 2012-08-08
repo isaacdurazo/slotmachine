@@ -181,9 +181,10 @@ public class SlotMachineManager {
 			spinResult = new SpinResult(spinResult.getCoins()*Integer.parseInt(System.getProperty("game.max.bet.coin.multiplier")),
 					spinResult.getSymbols());
 		}
-		player.setCoins(player.getCoins()-coins+spinResult.getCoins());
-		player.setCoinsWon(player.getCoinsWon()+spinResult.getCoins());
-
+		if (!fJackpot) {
+			player.setCoins(player.getCoins()-coins+spinResult.getCoins());
+			player.setCoinsWon(player.getCoinsWon()+spinResult.getCoins());
+		}
 		
 		// increment xp with spins and update leaderboard (do this with batching later?)
 		player.setXp(player.getXp()+1);
