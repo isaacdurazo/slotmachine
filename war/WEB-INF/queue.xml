@@ -3,7 +3,7 @@
   <!-- total-storage-limit>50M</total-storage-limit -->
   <queue>
     <name>playerFlush</name>
-    <rate>1/s</rate>
+    <rate>1/m</rate>
   </queue>
   <queue>
     <name>inbox</name>
