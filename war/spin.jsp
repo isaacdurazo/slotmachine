@@ -45,6 +45,11 @@ int key = 1;
 					</td>
 				</tr>
 			</table>
+		    <% if (coinsAwarded > 0) { %>
+		    	<div class="bonus">
+		    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
+		    	</div> 
+		    <% } %>
 			
 			<div class="results">
 			

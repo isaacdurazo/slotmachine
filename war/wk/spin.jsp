@@ -79,6 +79,13 @@ int key = 1;
 				
 				<div class="results-container">
 					<div class="results">
+						    <% if (coinsAwarded > 0) { %>
+					    	<div class="bonus">
+					    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
+					    	</div> 
+					    <% } %>
+					
+					
 						<% if (fSpinOK==true) {
 							
 							//only for maxspin give ability to win Moco Gold
