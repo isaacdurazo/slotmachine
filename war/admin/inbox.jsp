@@ -18,8 +18,8 @@
 
 	String subject = request.getParameter("subject");
 	String message = request.getParameter("message");
-	String daysS = (request.getParameter("days")==null ? Integer.toString(days) : request.getParameter("days")) ;
-	String maxS = (request.getParameter("max") ==null ? Integer.toString(max): request.getParameter("max"));
+	String daysS = (request.getParameter("daysS")==null ? Integer.toString(days) : request.getParameter("daysS")) ;
+	String maxS = (request.getParameter("maxS") ==null ? Integer.toString(max): request.getParameter("maxS"));
 
 
 	String action = request.getParameter("action");
@@ -57,7 +57,7 @@
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: params days="+daysS+ " maxs="+maxS+", sub="+subject+", body="+message);
 		days = Integer.parseInt(daysS);
 		max = Integer.parseInt(maxS);
-		max = Math.min(max, 50000);
+		max = Math.min(max, 5000);
 
 		java.util.List<Player> players = PlayerManager.getInstance().getRecentPlayers(days * 24, max);
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX Start sending  to " + players.size() + " players");
@@ -65,10 +65,11 @@
 		long idx = 0;
 		for (Player currPlayer : players) {
 			try {
-//				OpenSocialService.getInstance().sendNotification(currPlayer.getMocoId(), subject, message);
+				OpenSocialService.getInstance().sendNotification(currPlayer.getMocoId(), subject, message);
+//				OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, message);
 				if (idx++ % 2500 == 0) {
 					OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
-							"Inbox " + idx + " of " + players.size()+ " sent.","Running background job");
+							"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
 				}
 			} catch (Exception e) {
 				Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error sending inbox to player: " + player, e);
@@ -80,8 +81,9 @@
 		
 		return;
 	}
-	if (subject==null) subject = "";
-	if (message==null) message = "";
+	if (subject==null) subject = "Jackpot Update";
+	if (message==null) message = "Hi, we have a new MocoGold Jackpot winner! <a href='http://www.mocospace.com/games?source=inbox&gid=1252'>Check the Jackpot Winner list</a>."+
+			" The next Jackpot is waiting for you - hurry up and <a href='http://www.mocospace.com/games?source=inbox&gid=1252'>spin now</a> before somebody else wins it! <br/><br/>The more you spin the more likely you win!";
 	
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -99,9 +101,9 @@
 			<textarea rows="3" cols="80" name="message"><%=message%></textarea><br/>
 			<small>(only plain text - no HTML!)</small><br/><br/>
 			<label for="key">Played in last x days. x=:</label>
-			<input type="number" name="days" value="<%=days%>"></input><br/>
+			<input type="number" name="daysS" value="<%=days%>"></input><br/>
 			<label for="key">Max # of recipients:</label>
-			<input type="number" name="max" value="<%=max%>"></input><br/>
+			<input type="number" name="maxS" value="<%=max%>"></input><br/>
 			<small>(max 50000 recipients)</small><br/>
 			<br/><br/>
 			<label for="key">Test</label>

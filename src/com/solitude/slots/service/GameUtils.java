@@ -68,9 +68,13 @@ public class GameUtils {
 	public static GlobalProps getGlobalProps() {
 		GlobalProps theOne; 
 		try {
-
+			theOne =  new GlobalProps();
+			return (theOne);
+/*
 			List<Long> ids = GAECacheManager.getInstance().getIds("global.props", "singleton");
 			if (ids!=null && !ids.isEmpty()) {
+//				List<GlobalProps> all = GAECacheManager.getInstance().getAll(ids, GlobalProps.class, true);
+//				theOne = (GlobalProps) (all.toArray())[0];
 				theOne = GAECacheManager.getInstance().get(ids.get(0), GlobalProps.class);
 			} else {
 				// not in cache so try to get from DB
@@ -92,6 +96,7 @@ public class GameUtils {
 					GAECacheManager.getInstance().putIds("global.props","singleton", id);
 				}		
 			}
+			*/
 		} catch (Exception e) {
 			// CacheStoreException, DataStoreException
 			log.log(Level.SEVERE,
