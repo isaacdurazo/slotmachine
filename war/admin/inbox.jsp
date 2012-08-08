@@ -57,27 +57,29 @@
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: params days="+daysS+ " maxs="+maxS+", sub="+subject+", body="+message);
 		days = Integer.parseInt(daysS);
 		max = Integer.parseInt(maxS);
-		max = Math.min(max, 10000);
+		max = Math.min(max, 20000);
 
 		java.util.List<Player> players = PlayerManager.getInstance().getRecentPlayers(days * 24, max);
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX Start sending  to " + players.size() + " players");
 
 		long idx = 0;
+		long err = 0
 		for (Player currPlayer : players) {
 			try {
 				OpenSocialService.getInstance().sendNotification(currPlayer.getMocoId(), subject, message);
 //				OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, message);
-				if (idx++ % 2500 == 0) {
+				if (idx++ % 1000 == 0) {
 					OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 							"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
 				}
 			} catch (Exception e) {
-				Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error sending inbox to player: " + player, e);
+				Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error sending inbox to player: " + currPlayer, e);
+				err++;
 			}
 		}
 		OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
-				"Inbox to " + players.size()+ " players complete.","Running background job");
-		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: Completed sending to "+players.size()+" players");
+				"Inbox to " + players.size()+ " players complete.","Errors="+err+". Check server warning log for more details");
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: Completed sending to "+players.size()+" players with "+err+" errors");
 		
 		return;
 	}
@@ -104,7 +106,7 @@
 			<input type="number" name="daysS" value="<%=days%>"></input><br/>
 			<label for="key">Max # of recipients:</label>
 			<input type="number" name="maxS" value="<%=max%>"></input><br/>
-			<small>(max 50000 recipients)</small><br/>
+			<small>(max 20000 recipients)</small><br/>
 			<br/><br/>
 			<label for="key">Test</label>
 			<input type="checkbox" name="test" value="on" checked="checked"><br/>
