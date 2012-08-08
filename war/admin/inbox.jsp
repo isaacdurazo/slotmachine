@@ -14,7 +14,7 @@
 
 	//default values
 	int days=3;
-	int max=50000;
+	int max=5000;
 
 	String subject = request.getParameter("subject");
 	String message = request.getParameter("message");
@@ -57,7 +57,7 @@
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: params days="+daysS+ " maxs="+maxS+", sub="+subject+", body="+message);
 		days = Integer.parseInt(daysS);
 		max = Integer.parseInt(maxS);
-		max = Math.min(max, 5000);
+		max = Math.min(max, 10000);
 
 		java.util.List<Player> players = PlayerManager.getInstance().getRecentPlayers(days * 24, max);
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX Start sending  to " + players.size() + " players");
@@ -82,8 +82,8 @@
 		return;
 	}
 	if (subject==null) subject = "Jackpot Update";
-	if (message==null) message = "Hi, we have a new MocoGold Jackpot winner! <a href='http://www.mocospace.com/games?source=inbox&gid=1252'>Check the Jackpot Winner list</a>."+
-			" The next Jackpot is waiting for you - hurry up and <a href='http://www.mocospace.com/games?source=inbox&gid=1252'>spin now</a> before somebody else wins it! <br/><br/>The more you spin the more likely you win!";
+	if (message==null) message = "Hi, we have a new <a href=\"http://www.mocospace.com/games?source=inbox&gid=1252&next=jackpots\">MocoGold Jackpot winner</a> in SlotMania.<br/>"+
+			" The next Jackpot is waiting for you - hurry up and <a href=\"http://www.mocospace.com/games?source=inbox&gid=1252\">spin now</a> before somebody else wins! <br/><br/>The more you spin the more likely you win!";
 	
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
