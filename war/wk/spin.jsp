@@ -1,5 +1,5 @@
 <%@page import="com.sun.java_cup.internal.runtime.Symbol"%>
-<%@ include file="header.jsp" %>
+<%@ include file="/header.jsp" %>
 <%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException" %>
  
 
@@ -50,7 +50,7 @@ int key = 1;
 	  		var elems = document.querySelectorAll('.delay');
 	  		if (elems) {
 	  			for (var i=0;i<elems.length;i++) {
-	  				elems[i].style.display = 'block';
+	  				elems[i].style.display = elems[i].className.indexOf('inline') == -1 ? 'block' : 'inline-block';
 	  			}
 	  		}
   		}, 1800); 
@@ -72,7 +72,7 @@ int key = 1;
 							<b>XP:</b> <%= player.getXp() %>
 						</td>
 						<td>
-							<b>Coins:</b> <%= player.getCoins() %>
+							<b>Coins:</b> <span class="delay inline" <% if (action != null) { %>style="display:none;"<% } %>><%= player.getCoins() %>
 						</td>
 					</tr>
 				</table>

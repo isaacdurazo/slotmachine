@@ -1,4 +1,4 @@
-<%@ include file="header.jsp" %>
+<%@ include file="/header.jsp" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<%@ include file="header_html.jsp" %>
