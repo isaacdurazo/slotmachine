@@ -34,9 +34,8 @@
 							<b>XP:</b> <%= player.getXp() %>
 						</td>
 						<td>
-
-							<b>Coins:</b> <%= player.getCoins() %>
-							</a>
+							<b>Coins:</b> <%= player.getCoins() %></a></br>
+							<small>Next award: <%= readableUntilCoinAward %></small>
 						</td>
 					</tr>
 				</table>

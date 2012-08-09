@@ -61,7 +61,31 @@ if (player == null) {
 	request.setAttribute("player",player);
 }
 // check if coins awarded
-int coinsAwarded = PlayerManager.getInstance().getRetentionCoinAward(player);
+String readableUntilCoinAward = (String)request.getAttribute("readableUntilCoinAward");
+int coinsAwarded = 0;
+if (readableUntilCoinAward == null) {
+	coinsAwarded = PlayerManager.getInstance().getRetentionCoinAward(player);
+	// determine how long until next coin award
+	java.util.Calendar cal = new java.util.GregorianCalendar();
+	cal.set(java.util.Calendar.HOUR, 0);
+	cal.set(java.util.Calendar.MINUTE, 0);
+	cal.set(java.util.Calendar.SECOND, 1);
+	cal.add(java.util.Calendar.HOUR,24);
+	long timestampUntilCoinAward = cal.getTimeInMillis()-System.currentTimeMillis();
+	if (timestampUntilCoinAward < 2*60*1000) {
+		// within 2 minutes
+		readableUntilCoinAward = "1 min";
+	} else if (timestampUntilCoinAward < 60*60*1000) {
+		// within 1 hour
+		readableUntilCoinAward = ((int)java.util.concurrent.TimeUnit.MINUTES.convert(timestampUntilCoinAward, java.util.concurrent.TimeUnit.MILLISECONDS))+" min"; 
+	} else {
+		// within 1 day
+		int hours = (int)Math.ceil(java.util.concurrent.TimeUnit.HOURS.convert(timestampUntilCoinAward, java.util.concurrent.TimeUnit.MILLISECONDS));
+		readableUntilCoinAward = hours+" hour"+(hours == 1 ? "" : "s"); 
+	}
+	request.setAttribute("readableUntilCoinAward",readableUntilCoinAward);
+	request.setAttribute("coinsAwarded",coinsAwarded);
+} else coinsAwarded = (Integer)request.getAttribute("coinsAwarded");
 
 if (isWebkit) {
 	if (!player.hasAdminPriv() && Boolean.getBoolean("game.webkit.disabled")) {
