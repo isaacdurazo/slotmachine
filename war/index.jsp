@@ -13,7 +13,22 @@
 		}
 	}
 	
+	int key = 1;
 	
+	
+	if ("Invites Sent!".equals(request.getParameter("confirmmsg")) && "true".equals(request.getSession().getAttribute("invite"))) {
+		request.getSession().removeAttribute("invite");
+		player.incrementNumInvitesSent(1);
+		PlayerManager.getInstance().storePlayer(player);
+	}
+	
+	java.util.List<Achievement> earnedAchievements = null;
+	try {
+		earnedAchievements = AchievementService.getInstance().grantAchievements(player, 
+				AchievementService.Type.SESSION, AchievementService.Type.INVITE);	
+	} catch (Exception e) {
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
+	}
 	//@TODO add logic for 1) process/log invite requests using if=<mocoid> as senderID and 2) new users redirect to help
 %>
  
@@ -42,23 +57,40 @@
 		    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
 		    	</div> 
 		    <% } %>
+		    <% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
+				<div class="achievements">
+					<%
+					int coinsEarned = 0;
+					for (Achievement achievement : earnedAchievements) { coinsEarned += achievement.getCoinsAwarded(); }
+					%>
+					You earned <%= earnedAchievements.size() > 1 ? "an achievement" : "achievements" %> and <%= coinsEarned %> coins!
+					<ul>
+						<% for (Achievement achievement : earnedAchievements) { %>
+						<li><%= achievement.getTitle() %></li>
+						<% } %>
+					</ul>
+				</div>
+			<% } %>
 			<div class="jackpotteaser">
 				<img width="112" height="14" src="images/jackpot.gif"/><br />
 				<img class="icon" width="16" height="16" src="images/mocogold.png"/> <%=GameUtils.getGlobalProps().getMocoGoldPrize()%> MocoGold!
 			</div>
 			<div class="play">
-				1. <a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
+				<%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
 			</div>
 		
 		    <div class="menu">
-		        <div>2. <a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Buy Coins</a></div>
-		        <div>3. <a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>
-		        <div>4. <a class="leaderboard" accessKey="4" href="<%= ServletUtils.buildUrl(player, "/leaderboard.jsp", response) %>">Leaderboard</a></div>
-		        <div>5. <a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/jackpots.jsp", response) %>">Jackpot Winners</a></div>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Buy Coins</a></div>
+		        <div><%= key %>. <a class="invite" accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>
+		        <div><%= key %>. <a class="leaderboard" accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/leaderboard.jsp", response) %>">Leaderboard</a></div>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/jackpots.jsp", response) %>">Jackpot Winners</a></div>
+		        <% if (AchievementService.getInstance().isEnabled() || player.hasAdminPriv()) { %>
+		        	<div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/achievement.jsp", response) %>">Achievements</a></div>
+		        <% } %>
 		    </div>
 		    <br/>
 			<div class="menu">
-		        <div>6. <a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/help.jsp", response) %>">Payout Table</a></div>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/help.jsp", response) %>">Payout Table</a></div>
 			</div>
 			<%
 				if (player.hasAdminPriv()) {

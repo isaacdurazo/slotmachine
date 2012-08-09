@@ -25,6 +25,15 @@ try {
 }
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
 
+java.util.List<Achievement> earnedAchievements = null;
+if (action != null) {
+	try {
+		earnedAchievements = AchievementService.getInstance().grantAchievements(player, 
+				AchievementService.Type.COIN_COUNT, AchievementService.Type.MAX_SPINS);	
+	} catch (Exception e) {
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
+	}
+}
 int key = 1;
 
 %>
@@ -50,6 +59,20 @@ int key = 1;
 		    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
 		    	</div> 
 		    <% } %>
+		    <% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
+				<div class="achievements">
+					<%
+					int coinsEarned = 0;
+					for (Achievement achievement : earnedAchievements) { coinsEarned += achievement.getCoinsAwarded(); }
+					%>
+					You earned <%= earnedAchievements.size() > 1 ? "an achievement" : "achievements" %> and <%= coinsEarned %> coins!
+					<ul>
+						<% for (Achievement achievement : earnedAchievements) { %>
+						<li><%= achievement.getTitle() %></li>
+						<% } %>
+					</ul>
+				</div>
+			<% } %>
 			
 			<div class="results">
 			

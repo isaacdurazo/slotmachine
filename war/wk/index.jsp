@@ -12,7 +12,22 @@
 			PlayerManager.getInstance().storePlayer(player);
 		}
 	}
-	
+
+	String token = request.getParameter("token");
+	int count = ServletUtils.getInt(request, "count");
+	if ("sent".equals(request.getParameter("action")) && token != null && count > 0 && 
+			token.equals((String)request.getSession().getAttribute("invite_token")+count)) {
+		request.getSession().removeAttribute("invite_token");
+		player.incrementNumInvitesSent(1);
+		PlayerManager.getInstance().storePlayer(player);
+	}
+	java.util.List<Achievement> earnedAchievements = null;
+	try {
+		earnedAchievements = AchievementService.getInstance().grantAchievements(player, 
+				AchievementService.Type.SESSION, AchievementService.Type.INVITE);	
+	} catch (Exception e) {
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
+	}
 	//@TODO add logic for 1) process/log invite requests using if=<mocoid> as senderID and 2) new users redirect to help
 %>
  
@@ -49,6 +64,20 @@
 					    	</div> 
 					    <% } %>
 			    	</div>
+			    	<% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
+						<div class="achievements">
+							<%
+							int coinsEarned = 0;
+							for (Achievement achievement : earnedAchievements) { coinsEarned += achievement.getCoinsAwarded(); }
+							%>
+							You earned <%= earnedAchievements.size() > 1 ? "an achievement" : "achievements" %> and <%= coinsEarned %> coins!
+							<ul>
+								<% for (Achievement achievement : earnedAchievements) { %>
+								<li><%= achievement.getTitle() %></li>
+								<% } %>
+							</ul>
+						</div>
+					<% } %>
 			    </div>
 			    
 				<div class="jackpotteaser-container">
@@ -88,10 +117,16 @@
 					</table>
 					
 					<table class="menu">
+						<% boolean achievementsEnabled = AchievementService.getInstance().isEnabled() || player.hasAdminPriv(); %>
 						<tr>
-							<td align="center">
+							<td <% if (!achievementsEnabled) { %>align="center"<% } %>>
 				        		<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>">Payout Table</a>
 							</td>
+							<% if (achievementsEnabled) { %>
+							<td>
+								<a accessKey="7" href="<%= ServletUtils.buildUrl(player, "/wk/achievement.jsp", response) %>">Achievements</a>
+							</td>
+							<% } %>
 						</tr>
 					</table>
 

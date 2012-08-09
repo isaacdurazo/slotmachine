@@ -80,8 +80,11 @@ public class AchievementService {
 			
 		});
 		
+		/** factory instance */
 		private final AchievementGrantFactory factory;
-		
+		/**
+		 * @param factory instance
+		 */
 		private Type(AchievementGrantFactory factory) {
 			this.factory = factory;
 		}
@@ -110,7 +113,7 @@ public class AchievementService {
 					// award coins to player
 					player.setCoins(player.getCoins()+achievement.getCoinsAwarded());
 					// update grant ids cache
-					grantIds = GAECacheManager.getInstance().getIds(CACHE_REGION, Long.toString(player.getId()));
+					if (grantIds == null) grantIds = GAECacheManager.getInstance().getIds(CACHE_REGION, Long.toString(player.getId()));
 					if (grantIds != null) { grantIds.add(grant.getId()); }
 				}				
 			}
@@ -139,7 +142,7 @@ public class AchievementService {
 		long index = 0;
 		try {			
 			Properties properties = new Properties();
-			properties.load(new FileReader("WEB-INF/achievement.properties"));
+			properties.load(new FileReader("WEB-INF/achievements.properties"));
 			String typeStr;
 			while ((typeStr = properties.getProperty("achievement.type."+index)) != null) {
 				Type type = Type.valueOf(typeStr);
@@ -186,10 +189,14 @@ public class AchievementService {
 	 * @param player to user
 	 * @return list of newly granted achievements (empty if none are granted)
 	 */
-	public List<Achievement> grantAchievements(Type type, Player player) {
+	public List<Achievement> grantAchievements(Player player, Type... type) {
 		if (!isEnabled() && !player.hasAdminPriv()) return Collections.emptyList();
 		try {
-			return Type.grantAchievements(typeToAchievementsMap.get(type), player);
+			List<Achievement> achievementsToCheck = new ArrayList<Achievement>();
+			for (Type currType : type) {
+				achievementsToCheck.addAll(typeToAchievementsMap.get(currType));
+			}
+			return Type.grantAchievements(achievementsToCheck, player);
 		} catch (Exception e) {
 			log.log(Level.SEVERE,"Error attempting to grant achievements of type: "+type+", for player: "+player,e);
 			return Collections.emptyList();

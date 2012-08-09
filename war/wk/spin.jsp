@@ -15,7 +15,6 @@ try {
 	} else if ("maxspin".equals(action)) {
 		spinResult = SlotMachineManager.getInstance().spin(player, Integer.parseInt(System.getProperty("game.max.bet.coins")));
 	}
-	
 	fSpinOK=true;
 } catch (InsufficientFundsException ife) {
 	//use redirect to ensure the logging works for topup impressions
@@ -26,7 +25,15 @@ try {
 }
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
 int key = 1;
-
+java.util.List<Achievement> earnedAchievements = null;
+if (action != null) {
+	try {
+		earnedAchievements = AchievementService.getInstance().grantAchievements(player, 
+				AchievementService.Type.COIN_COUNT, AchievementService.Type.MAX_SPINS);	
+	} catch (Exception e) {
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
+	}
+}
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
@@ -79,12 +86,25 @@ int key = 1;
 				
 				<div class="results-container">
 					<div class="results">
-						    <% if (coinsAwarded > 0) { %>
+						<% if (coinsAwarded > 0) { %>
 					    	<div class="bonus">
 					    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
 					    	</div> 
 					    <% } %>
-					
+						<% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
+							<div class="achievements">
+								<%
+								int coinsEarned = 0;
+								for (Achievement achievement : earnedAchievements) { coinsEarned += achievement.getCoinsAwarded(); }
+								%>
+								You earned <%= earnedAchievements.size() > 1 ? "an achievement" : "achievements" %> and <%= coinsEarned %> coins!
+								<ul>
+									<% for (Achievement achievement : earnedAchievements) { %>
+									<li><%= achievement.getTitle() %></li>
+									<% } %>
+								</ul>
+							</div>
+						<% } %>
 					
 						<% if (fSpinOK==true) {
 							
