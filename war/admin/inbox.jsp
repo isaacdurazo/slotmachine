@@ -63,7 +63,7 @@
 		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX Start sending  to " + players.size() + " players");
 
 		long idx = 0;
-		long err = 0
+		long err = 0;
 		for (Player currPlayer : players) {
 			try {
 				OpenSocialService.getInstance().sendNotification(currPlayer.getMocoId(), subject, message);
