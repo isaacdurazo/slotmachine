@@ -45,6 +45,10 @@ public class Player extends AbstractGAEPersistent {
 	private long consecutiveDaysTimestamp = System.currentTimeMillis();
 	/** number of game sessions */
 	private long numSessions = 0;
+	/** number of invites sent */
+	private int invitesSent;
+	/** number of max spin bets placed */
+	private int maxSpins;
 
 	/** NOTE this is only stored in memory and set/deleted by PlayerManager **/
 	private boolean isNewPlayer = false;
@@ -99,9 +103,20 @@ public class Player extends AbstractGAEPersistent {
 	/** @param locale for user's language in string form */
 	public void setLocale(Locale locale) { this.locale = locale; }
 	
+	/** @return number of game sessions for player */
+	public long getSessions() {return this.numSessions;}	
+	/** @param numSessions number of game sessions for player */
+	public void setSessions(long numSessions) {this.numSessions=numSessions;};
 	
-	public long getSessions() {return this.numSessions;}
-	public void setSessions(long n) {this.numSessions=n;};
+	/** @return number of invites sent by the player */
+	public int getNumInvitesSent() { return this.invitesSent; }
+	/** @param count of invites to increment total number by */
+	public void incrementNumInvitesSent(int count) { this.invitesSent += count; }
+	
+	/** @return number of max spins placed by the player */
+	public int getMaxSpins() { return this.maxSpins; }
+	/** increment number of max spins by 1 */
+	public void incrementMaxSpins() { this.maxSpins++; }
 
 	public boolean hasAdminPriv() {
 		String[] mocoIds = ((String)System.getProperty("game.adminpriv.ids")).split(",");
@@ -181,6 +196,8 @@ public class Player extends AbstractGAEPersistent {
 		this.consecutiveDaysTimestamp = (Long)inputMap.get("consecutiveDaysTimestamp");
 		this.coinsWon = deserializeInt("coinsWon",inputMap, 0);
 		this.numSessions = deserializeInt("numSessions", inputMap, 0);
+		this.invitesSent = deserializeInt("invitesSent", inputMap, 0);
+		this.maxSpins = deserializeInt("maxSpins", inputMap, 0);
 	}
 
 	@Override
@@ -199,6 +216,8 @@ public class Player extends AbstractGAEPersistent {
 		map.put("consecutiveDaysTimestamp", this.consecutiveDaysTimestamp);
 		map.put("coinsWon", this.coinsWon);
 		map.put("numSessions", this.numSessions);
+		map.put("invitesSent", this.invitesSent);
+		map.put("maxSpins", this.maxSpins);
 		return map;
 	}
 
