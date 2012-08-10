@@ -67,13 +67,14 @@
 			long err = 0;
 			for (Player currPlayer : players) {
 				try {
-//					OpenSocialService.getInstance().sendNotification(currPlayer.getMocoId(), subject, message);
+					Thread.sleep(20); // simulate API call
+					OpenSocialService.getInstance().sendNotification(currPlayer.getMocoId(), subject, message);
 					if (idx++ % 1000 == 0) {
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 								"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
 					}
 				} catch (Exception e) {
-					Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error sending inbox to player: " + currPlayer, e);
+					Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error sending inbox "+idx+" to player: " + currPlayer, e);
 					err++;
 				}
 			}
