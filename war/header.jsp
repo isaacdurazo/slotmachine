@@ -81,7 +81,7 @@ if (readableUntilCoinAward == null) {
 	} else {
 		// within 1 day
 		int hours = (int)Math.ceil(java.util.concurrent.TimeUnit.HOURS.convert(timestampUntilCoinAward, java.util.concurrent.TimeUnit.MILLISECONDS));
-		readableUntilCoinAward = hours+" hour"+(hours == 1 ? "" : "s"); 
+		readableUntilCoinAward = hours+" hr"+(hours == 1 ? "" : "s"); 
 	}
 	request.setAttribute("readableUntilCoinAward",readableUntilCoinAward);
 	request.setAttribute("coinsAwarded",coinsAwarded);

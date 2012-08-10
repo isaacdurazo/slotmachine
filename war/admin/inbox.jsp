@@ -67,8 +67,7 @@
 			long err = 0;
 			for (Player currPlayer : players) {
 				try {
-					OpenSocialService.getInstance().sendNotification(currPlayer.getMocoId(), subject, message);
-	//				OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, message);
+//					OpenSocialService.getInstance().sendNotification(currPlayer.getMocoId(), subject, message);
 					if (idx++ % 1000 == 0) {
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 								"Inbox " + idx + " of " + players.size()+ " sent.","Background job");

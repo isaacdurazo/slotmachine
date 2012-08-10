@@ -50,7 +50,8 @@
 					</td>
 				</tr>
 			</table>
-		    <h3>Hello <%= player.getName() %>!</h3>    
+		    <h3>Hello <%= player.getName() %>!</h3>
+		    <small>Next award: <%= readableUntilCoinAward %></small>
 			<%@ include file="message.jsp" %>		    
 		    <% if (coinsAwarded > 0) { %>
 		    	<div class="bonus">

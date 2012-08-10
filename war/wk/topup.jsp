@@ -137,7 +137,7 @@ if (isWebkit) {
 		    	<table class="stats">
 					<tr>
 						<td>
-							BUY COINS
+							Increase your chance to win the Jackpot<br/>Buy Coins!
 						</td>
 					</tr>
 				</table>
@@ -148,13 +148,13 @@ if (isWebkit) {
 							<input class="input gold" type="hidden" name="verify" value="<%= formValidation %>"/>
 						</div>
 						<div>
+							<input class="input gold" type="submit" name="topup" value="MysteryBox: 499 Gold"/>
+						</div>
+						<div>
 							<input class="input gold" type="submit" name="topup" value="30 Coins: 99 Gold"/>
 						</div>
 						<div>
 							<input class="input gold" type="submit" name="topup" value="70 Coins: 199 Gold"/>
-						</div>
-						<div>
-							<input class="input gold" type="submit" name="topup" value="MysteryBox: 499 Gold"/>
 						</div>
 						
 						<div class="subheader">(MysteryBox buys 200 - 400 Coins)</div>

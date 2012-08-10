@@ -21,6 +21,7 @@
     <property name="game.webkit.disabled" value="false"/>
     <property name="mocospace.main.url" value="http://www.mocospace.com/"/>  
     <property name="mocospace.opensocial.api.endpoint" value="https://apps.mocospace.com/social"/> 
+     <property name="url.connect.timeout" value="4000"/>
     
     <!-- game play properties -->
     <property name="game.consecutive.days.coin.award.per.day" value="20"/>
@@ -29,11 +30,11 @@
     <property name="game.max.bet.coin.multiplier" value="4"/> 
     <property name="game.xp.leaderboard.enabled" value="true"/>
     <property name="game.weekly.coin.prize" value="500"/>
-    <property name="game.weekly.mocogold.min.prize" value="777"/>
+    <property name="game.weekly.mocogold.min.prize" value="999"/>
     <property name="game.xp.leaderboard.synchronous" value="true"/>
 	<property name="player.delta.flush.ttl.min" value="2"/>
 	<property name="player.delta.flush.enabled" value="true"/>
-	<property name="achievements.enabled" value="true"/>
+	<property name="achievements.enabled" value="false"/>
 
   </system-properties>
 
