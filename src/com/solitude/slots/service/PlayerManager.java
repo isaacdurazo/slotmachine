@@ -16,6 +16,7 @@ import com.google.appengine.api.LifecycleManager;
 import com.google.appengine.api.LifecycleManager.ShutdownHook;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
+import com.google.appengine.api.taskqueue.TaskOptions.Method;
 import com.google.appengine.api.utils.SystemProperty;
 import com.solitude.slots.cache.CacheStoreException;
 import com.solitude.slots.cache.GAECacheManager;
@@ -300,11 +301,15 @@ public class PlayerManager {
 			}
 		}
 		if (!force) {
-			TaskOptions task = TaskOptions.Builder.withUrl("/admin/queue.jsp");
-			task.countdownMillis(60*1000);
-			task.param("queue", "flushDeltaPlayers");
-			task.param("accessToken", GameUtils.getGameAdminToken());
-			QueueFactory.getQueue("playerFlush").add(task);
+			try {
+				if (log != null) log.log(Level.INFO,"Adding to flush queue");
+				TaskOptions task = TaskOptions.Builder.withUrl("/admin/queue.jsp?queue=flushDeltaPlayers&accessToken="+System.getProperty("queue.token"));
+				task.method(Method.GET);
+				task.countdownMillis(60*1000);
+				QueueFactory.getQueue("playerFlush").add(task);
+			} catch (Exception e) {
+				if (log != null) log.log(Level.WARNING, "Error attempting to add to flush queue",e);
+			}
 		}
 	}
 	

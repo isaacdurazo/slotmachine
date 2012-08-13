@@ -94,7 +94,7 @@
 					"Inbox to " + players.size()+ " players complete.","Errors="+err+". Check server warning log for more details");
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: Completed sending to "+players.size()+" players with "+err+" errors");
 		} catch (Exception e) {
-			Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"Error sending inbox message!");
+			Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"Error sending inbox message!",e);
 		}
 		response.setStatus(200);
 		return;

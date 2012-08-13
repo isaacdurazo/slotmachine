@@ -10,6 +10,7 @@
   <system-properties>
    	<!--  system and opensocial properties -->
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+    <property name="queue.token" value="vote4pedro"/>
     <property name="game.admin.token" value="94ou1phjs74v|ur48w"/>
     <property name="game.admin.user.id" value="51653696"/>
     <property name="game.gold.secret" value="nrrwb0r1"/>
