@@ -1,6 +1,6 @@
 <%@ page import="com.solitude.slots.*" %>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 	<meta name="keywords" content="slotmachine,casino,prize,chat,android games,iphone games,mobile games,games,free,pics,photos,myspace"/>
 	<meta name="description" content="Play Casino Games on your mobile phone. FREE game with prizes and millions of people online."/>
 

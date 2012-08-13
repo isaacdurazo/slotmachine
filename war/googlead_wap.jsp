@@ -1,7 +1,9 @@
 <%@ include file="/googlead_common.jsp" %>
 <%@ page import="java.util.logging.*" %>
+<%@ page import="com.solitude.slots.*,com.solitude.slots.service.*,com.solitude.slots.entities.*,com.solitude.slots.service.SlotMachineManager.InsufficientFundsException" %>
+
 <%
-if (!(player.getMocoId()%2==0)) {
+if (!( ((Player)request.getAttribute("player")).getMocoId()%2==0)) {
 %>
 <!-- Ads on for this user-->
 <% 	

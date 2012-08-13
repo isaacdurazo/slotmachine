@@ -124,8 +124,10 @@ if (action != null) {
 								
 			<%		} else if (spinResult.getCoins()==0) {
 			String s = "Spin again!";	
-			if (Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
-				s="When you get all lemons make lemonade :).<br/> Check the <a href=\"help.jsp\">payout table</a> !";
+			if (true || Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
+				s="When you get all lemons make lemonade :).<br/> Check the <a href=\""+
+						ServletUtils.buildUrl(player, "/wk/help.jsp", response) +
+						"\">payout table</a> !";
 			}
 			%>
 				<div class="lostspin delay" style="display:none;">

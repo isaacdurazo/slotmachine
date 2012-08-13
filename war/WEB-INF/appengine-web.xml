@@ -30,7 +30,7 @@
     <property name="game.max.bet.coin.multiplier" value="4"/> 
     <property name="game.xp.leaderboard.enabled" value="true"/>
     <property name="game.weekly.coin.prize" value="500"/>
-    <property name="game.weekly.mocogold.min.prize" value="666"/>
+    <property name="game.weekly.mocogold.min.prize" value="777"/>
     <property name="game.xp.leaderboard.synchronous" value="true"/>
 	<property name="player.delta.flush.ttl.min" value="2"/>
 	<property name="player.delta.flush.enabled" value="true"/>
