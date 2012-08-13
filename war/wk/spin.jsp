@@ -1,6 +1,6 @@
 <%@page import="com.sun.java_cup.internal.runtime.Symbol"%>
 <%@ include file="/header.jsp" %>
-<%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException" %>
+<%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException, java.util.Arrays" %>
  
 
 <%
@@ -122,10 +122,15 @@ if (action != null) {
 								<img width="13" height="11" src="images/animated-star.gif"/>WON <%=spinResult.getCoins() %> coins! <img width="13" height="11" src="images/animated-star.gif"/>
 							</div>
 								
-						<%		} else if (spinResult.getCoins()==0) { %>
-							<div class="lostspin delay" style="display:none;">
-								Spin again!
-							</div>
+			<%		} else if (spinResult.getCoins()==0) {
+			String s = "Spin again!";	
+			if (Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
+				s="When you get all lemons make lemonade :).<br/> Check the <a href=\"help.jsp\">payout table</a> !";
+			}
+			%>
+				<div class="lostspin delay" style="display:none;">
+					<%=s %>
+				</div>
 						<% 		}
 							} else  { %>
 							<div class="nofunds">

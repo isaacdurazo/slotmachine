@@ -1,7 +1,6 @@
 <%@page import="com.sun.java_cup.internal.runtime.Symbol"%>
 <%@ include file="/header.jsp" %>
-<%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException" %>
- 
+<%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException, java.util.Arrays" %>
 
 <%
 String action = request.getParameter("action");
@@ -92,9 +91,14 @@ int key = 1;
 					<img width="13" height="11" src="images/animated-star.gif"/>WON <%=spinResult.getCoins() %> coins! <img width="13" height="11" src="images/animated-star.gif"/>
 				</div>
 					
-			<%		} else if (spinResult.getCoins()==0) { %>
+			<%		} else if (spinResult.getCoins()==0) {
+			String s = "Spin again!";	
+			if (Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
+				s="When you get lemons make lemonade :). Check the <a href=\"help.jsp\">payout table</a>!";
+			}
+			%>
 				<div class="lostspin">
-					Spin again!
+					<%=s %>
 				</div>
 			<% 		}
 				} else  { %>
@@ -133,9 +137,10 @@ int key = 1;
 				</tr>
 			</table>
 			<% } %>
-				
-		
-			
+<div id="ad">
+<%@ include file="/googlead_wap.jsp" %>
+
+</div>				
 		    
 		     <div class="menu">
 		        <div><%= key %>. <a class="invite" accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>

@@ -114,10 +114,10 @@ public class SlotMachineManager {
 			fCustomProbability = false;
 			
 			// players with more coins get a reduced probability of winning so to reduce coin inflation
-			if (player.getCoins()>300) {
-				maxRnd = spinResults.length+ 3000;
+			if (player.getCoins()>200 && Boolean.getBoolean("game.progressive.win.probability.enabled")) {
+				maxRnd = spinResults.length+ 4000;
 				fCustomProbability = true;
-			} else if (player.getCoins()>100) {
+			} else if (player.getCoins()>100 && Boolean.getBoolean("game.progressive.win.probability.enabled")) {
 				maxRnd = spinResults.length+ 2000;
 				fCustomProbability = true;
 			}
@@ -125,7 +125,7 @@ public class SlotMachineManager {
 			idx=random.nextInt(maxRnd);
 
 			if (idx>= spinResults.length) {
-				//rebase the spinresult to payout table for idx between 0 and 4998 (=no payout)
+				//for spin result >=10000 map to payout table for idx between 0 and 4998 (=no payout)
 				idx -= spinResults.length;
 			}
 				

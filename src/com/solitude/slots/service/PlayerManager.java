@@ -141,6 +141,27 @@ public class PlayerManager {
 		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_UPDATE_KEY,System.currentTimeMillis()-hours*3600*1000,QueryCondition.QUERY_OPERATOR.GREATER_THAN_EQUALS));
 		return GAEDataManager.getInstance().query(Player.class, conditions, null, false, max);
 	}
+
+	/**
+	 * Fetch players who played within the hours defined between starthours and endhours ago
+	 * @param starthours begin hour 
+	 * @param endhours end hour - must be smaller than starthours
+	 * @param max number of players to return
+	 * @return list of players
+	 * @throws DataStoreException for data error
+	 */
+	public List<Player> getActiveHoursPlayers(int starthours, int endhours, int max) throws DataStoreException {
+		if (starthours<endhours){
+			return(new ArrayList<Player>(0));
+		}
+		Set<QueryCondition> conditions = new HashSet<QueryCondition>();
+		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_DELETED_KEY,false));
+		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_UPDATE_KEY,System.currentTimeMillis()-starthours*3600*1000,QueryCondition.QUERY_OPERATOR.GREATER_THAN_EQUALS));
+		conditions.add(new QueryCondition(AbstractGAEPersistent.ENTITY_UPDATE_KEY,System.currentTimeMillis()-endhours*3600*1000,QueryCondition.QUERY_OPERATOR.LESS_THAN));
+		return GAEDataManager.getInstance().query(Player.class, conditions, null, false, max);
+	}
+	
+	
 	
 	/**
 	 * Called on start of game player which will verify redirect parameters (set by system 
