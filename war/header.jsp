@@ -70,6 +70,7 @@ if (readableUntilCoinAward == null) {
 	cal.set(java.util.Calendar.HOUR_OF_DAY, 0);
 	cal.set(java.util.Calendar.MINUTE, 0);
 	cal.set(java.util.Calendar.SECOND, 1);
+	cal.setTimeZone(java.util.TimeZone.getTimeZone("EST"));
 	cal.add(java.util.Calendar.HOUR,24);
 	long timestampUntilCoinAward = cal.getTimeInMillis()-System.currentTimeMillis();
 	if (timestampUntilCoinAward < 2*60*1000) {
@@ -80,7 +81,7 @@ if (readableUntilCoinAward == null) {
 		readableUntilCoinAward = ((int)java.util.concurrent.TimeUnit.MINUTES.convert(timestampUntilCoinAward, java.util.concurrent.TimeUnit.MILLISECONDS))+" min"; 
 	} else {
 		// within 1 day
-		int hours = (int)Math.ceil(java.util.concurrent.TimeUnit.HOURS.convert(timestampUntilCoinAward, java.util.concurrent.TimeUnit.MILLISECONDS));
+		int hours = (int)Math.floor(java.util.concurrent.TimeUnit.HOURS.convert(timestampUntilCoinAward, java.util.concurrent.TimeUnit.MILLISECONDS));
 		readableUntilCoinAward = hours+" hour"+(hours == 1 ? "" : "s"); 
 	}
 	request.setAttribute("readableUntilCoinAward",readableUntilCoinAward);

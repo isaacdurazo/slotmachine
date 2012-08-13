@@ -10,7 +10,9 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -373,12 +375,25 @@ public class OpenSocialService {
 	 * @throws ApiException on API error or unexpected content
 	 * @throws IOException on connection error
 	 */
-	@SuppressWarnings("unchecked")
 	public void sendNotification(int userId, String subject, String body) throws IOException, ApiException {
+		this.sendNotification(subject, body, Arrays.asList(userId));
+	}
+	
+	/**
+	 * Send game notification to multiple users with same content and title
+	 * 
+	 * @param subject of notification
+	 * @param body of notification
+	 * @param userIds list of user id recipients
+	 * @throws ApiException on API error or unexpected content
+	 * @throws IOException on connection error
+	 */
+	@SuppressWarnings("unchecked")
+	public void sendNotification(String subject, String body, List<Integer> userIds) throws IOException, ApiException {
 		String url = GameUtils.getMocoSpaceOpensocialAPIEndPoint()+"/messages?oauth_token="+URLEncoder.encode(GameUtils.getGameAdminToken(),"UTF-8");
 		JSONObject json = new JSONObject();
 		JSONArray recipientsArray = new JSONArray();
-		recipientsArray.add(userId);
+		recipientsArray.addAll(userIds);
 		json.put(Message.Field.RECIPIENTS.toString(), recipientsArray);
 		json.put(Message.Field.TITLE.toString(), subject);
 		json.put(Message.Field.BODY.toString(), body);

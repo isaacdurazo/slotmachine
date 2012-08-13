@@ -1,6 +1,11 @@
 <%@ page import="java.net.URLEncoder,java.net.URLDecoder,com.solitude.slots.*,com.solitude.slots.service.*,com.solitude.slots.entities.*,com.solitude.slots.service.SlotMachineManager.InsufficientFundsException,java.util.logging.*,com.google.appengine.api.taskqueue.QueueFactory,com.google.appengine.api.taskqueue.TaskOptions" %>
 
-<%
+<%	
+	try {
+		if (Integer.parseInt(request.getHeader("X-AppEngine-TaskRetryCount")) > 0 && "inbox".equals(request.getHeader("X-AppEngine-QueueName"))) {
+			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Ignoring inbox reattempt!");
+		}
+	} catch (Exception e) {}
 	Long playerId = (Long) request.getSession().getAttribute("playerId");
 	Player player = null;
 	if (request.getParameter("accessToken") != null)
@@ -71,10 +76,10 @@
 	
 			long idx = 0;
 			long err = 0;
+			java.util.List<Integer> recipientUserIds = new java.util.ArrayList<Integer>(players.size());
 			for (Player currPlayer : players) {
 				try {
-					Thread.sleep(20); // simulate API call
-					OpenSocialService.getInstance().sendNotification(currPlayer.getMocoId(), subject, message);
+					recipientUserIds.add(currPlayer.getMocoId());
 					if (idx++ % 1000 == 0) {
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 								"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
@@ -84,6 +89,7 @@
 					err++;
 				}
 			}
+			OpenSocialService.getInstance().sendNotification(subject, message, recipientUserIds);
 			OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 					"Inbox to " + players.size()+ " players complete.","Errors="+err+". Check server warning log for more details");
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: Completed sending to "+players.size()+" players with "+err+" errors");

@@ -151,6 +151,7 @@ public class Player extends AbstractGAEPersistent {
 			cal.set(Calendar.HOUR_OF_DAY, 0);
 			cal.set(Calendar.MINUTE, 0);
 			cal.set(Calendar.SECOND, 1);
+			cal.setTimeZone(java.util.TimeZone.getTimeZone("EST"));
 			this.consecutiveDaysTimestamp = cal.getTimeInMillis();
 		}
 		return setToMidnight;
