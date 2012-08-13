@@ -148,7 +148,7 @@ public class Player extends AbstractGAEPersistent {
 		}
 		if (setToMidnight) {
 			Calendar cal = new GregorianCalendar();
-			cal.set(Calendar.HOUR, 0);
+			cal.set(Calendar.HOUR_OF_DAY, 0);
 			cal.set(Calendar.MINUTE, 0);
 			cal.set(Calendar.SECOND, 1);
 			this.consecutiveDaysTimestamp = cal.getTimeInMillis();

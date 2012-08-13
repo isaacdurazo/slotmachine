@@ -124,7 +124,7 @@ if (action != null) {
 								
 			<%		} else if (spinResult.getCoins()==0) {
 			String s = "Spin again!";	
-			if (true || Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
+			if (Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
 				s="When you get all lemons make lemonade :).<br/> Check the <a href=\""+
 						ServletUtils.buildUrl(player, "/wk/help.jsp", response) +
 						"\">payout table</a> !";

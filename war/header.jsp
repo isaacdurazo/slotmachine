@@ -67,7 +67,7 @@ if (readableUntilCoinAward == null) {
 	coinsAwarded = PlayerManager.getInstance().getRetentionCoinAward(player);
 	// determine how long until next coin award
 	java.util.Calendar cal = new java.util.GregorianCalendar();
-	cal.set(java.util.Calendar.HOUR, 0);
+	cal.set(java.util.Calendar.HOUR_OF_DAY, 0);
 	cal.set(java.util.Calendar.MINUTE, 0);
 	cal.set(java.util.Calendar.SECOND, 1);
 	cal.add(java.util.Calendar.HOUR,24);
@@ -81,7 +81,7 @@ if (readableUntilCoinAward == null) {
 	} else {
 		// within 1 day
 		int hours = (int)Math.ceil(java.util.concurrent.TimeUnit.HOURS.convert(timestampUntilCoinAward, java.util.concurrent.TimeUnit.MILLISECONDS));
-		readableUntilCoinAward = hours+" hr"+(hours == 1 ? "" : "s"); 
+		readableUntilCoinAward = hours+" hour"+(hours == 1 ? "" : "s"); 
 	}
 	request.setAttribute("readableUntilCoinAward",readableUntilCoinAward);
 	request.setAttribute("coinsAwarded",coinsAwarded);
@@ -99,7 +99,7 @@ if (isWebkit) {
 					    <img style="margin-top:45px;" width="240" height="110" src="images/wk-landing-logo.png"/>
 					</div>
 				</div>
-				<div align="center">Something went wrong. Try again:<br/>Click Menu->Games->SlotMania</div>
+				<div align="center">Game is available on Feature Phones today.<br/>Coming to Smart Phones in early August!</div>
 		</body>
 		</html>		
 			<% 
