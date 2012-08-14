@@ -2,11 +2,9 @@
 <%@page import="java.util.Random"%>
 
 <%
-
 //used to postfix on spin hyperlinks to force OpenWave browser to fetch from server
 final int rand = (new Random()).nextInt(999); 
 String cacheBuster = "r="+rand; 
-
 Player player = (Player)request.getAttribute("player"); 
 
 // logic to do animated/static images based on browser support
@@ -21,6 +19,7 @@ if (!isWebkit) {
 if (player == null) {
 	int uid = ServletUtils.getInt(request,"uid"); 
 	String accessToken = request.getParameter("accessToken");
+	Logger.getLogger(request.getRequestURI()).log(Level.INFO,"accessToken: "+accessToken);
 	Long playerId = (Long)request.getSession().getAttribute("playerId");
 	
 	if (playerId != null) {
