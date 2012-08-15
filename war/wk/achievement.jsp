@@ -17,24 +17,43 @@
 		    	<img width="154" height="48" src="/wk/images/logo.png"/>
 		    </div>
 		    <div class="content">
-		  		<table>
-		  			<tr>
-		  				<th>Name</th>
-		  				<th>Reward</th>
-		  				<th>Granted</th>
-		  			</tr>
+		    		
+		    		<table class="stats">
+						<tr>
+							<td>
+								Jackpot Hall Of Fame
+							</td>
+						</tr>
+					</table>
+					
+		  		<div class="achievement-container">
+					<!-- 
+		  			<table>
+			  			<tr>
+			  				<th>Name</th>
+			  				<th>Reward</th>
+			  				<th>Granted</th>
+			  			</tr>
+		  			</table>
+		  			 -->
 		  			<% for (Pair<Achievement,Boolean> pair : AchievementService.getInstance().getAchievements(player)) { %>
-		  			<tr>
-		  				<td><%= pair.getElement1().getTitle() %></td>
-		  				<td><%= pair.getElement1().getCoinsAwarded() %> coins</td>
-		  				<td><%= pair.getElement2() %></td>
-		  			</tr>
+		  				<table class="achievement-entity">
+		  					<tr>
+		  						<td class="achievement-icon"><img width="30" height="30" src="/wk/images/logo.png"></td>
+		  						<td class="achievement"><%= pair.getElement1().getTitle() %> </td>
+		  						<td class="achievement-coins"><%= pair.getElement1().getCoinsAwarded() %> coins</td>
+		  						<!-- <td><%= pair.getElement2() %></td>-->
+		  					</tr>
+		  				</table>
 			   		<% } %>
-		  		</table>
+		  		</div>
+		  		
 	  		</div>		   
-	  		<div class="menu">
-	  			<div><a href="<%= ServletUtils.buildUrl(player, "/", response) %>">Main</a></div>
-	  		</div>
+	  		<table class="menu">
+	  			<tr>
+	  				<td><a href="<%= ServletUtils.buildUrl(player, "/", response) %>">Main</a></td>
+	  			</tr>
+	  		</table>
 		</div>
 	</div>
 	<%@ include file="/wk/footer.jsp" %>

@@ -448,3 +448,39 @@ table {
     text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000, 
     			 -2px 0 2px white, 0 2px 2px white, 2px 0 2px white, 0 -2px 1px white;
 }
+
+.achievements tr {
+	border-collapse: collapse;
+}
+
+.achievement-container {
+	padding: 5px;	
+}
+
+.achievement-entity {
+	background-image: linear-gradient(bottom, rgb(62,62,62) 4%, rgb(102,102,102) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(62,62,62) 4%, rgb(102,102,102) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(62,62,62) 4%, rgb(102,102,102) 100%);
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.04, rgb(62,62,62)), color-stop(1, rgb(102,102,102)));
+
+    border: 2px solid #646464;
+	margin: 5px 0;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 1.3em;
+ 	text-shadow: 0px 1px 0px black
+}
+
+.achievement-icon {
+ 	width: 30px;
+ 	height: 30px;
+}
+
+.achievement {
+	text-align: left;
+ 	padding-left: 10px;	
+}
+
+.achievement-coins {
+	text-align: right;
+}
