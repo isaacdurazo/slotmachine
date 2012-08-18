@@ -484,3 +484,7 @@ table {
 .achievement-coins {
 	text-align: right;
 }
+
+.disable {
+	opacity: 0.5;
+}
