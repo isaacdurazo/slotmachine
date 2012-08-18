@@ -219,3 +219,20 @@ a.bet {
 	background-color: #3e3e3e;
 	padding-top: 3px;	
 }
+
+.achievement-container {
+	width: 100%;
+}
+]
+.achievement-container tbody tr {
+	margin: 5px 0;
+}
+
+.achievement-container td {
+	text-align: left;
+	padding-left: 10px;
+	background-color: #646464;
+	border-top: 2px solid #000;
+	border-bottom: 2px solid #000;
+	font-size: 0.8em;
+}

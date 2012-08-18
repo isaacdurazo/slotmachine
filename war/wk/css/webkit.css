@@ -462,7 +462,6 @@ table {
 	background-image: -moz-linear-gradient(bottom, rgb(62,62,62) 4%, rgb(102,102,102) 100%);
 	background-image: -webkit-linear-gradient(bottom, rgb(62,62,62) 4%, rgb(102,102,102) 100%);
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.04, rgb(62,62,62)), color-stop(1, rgb(102,102,102)));
-
     border: 2px solid #646464;
 	margin: 5px 0;
 	padding: 5px;
