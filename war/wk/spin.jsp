@@ -54,6 +54,7 @@ if (action != null) {
 	<script>
 		var xp = <%= player.getXp()%>;
 		var currCoins = <%= player.getCoins() %>;
+		var btnClicked = false;
 		document.addEventListener('DOMContentLoaded', function() {
 			document.querySelector('.max_spin_button').addEventListener('click', function(e) {
 				e.preventDefault();
@@ -64,7 +65,13 @@ if (action != null) {
 				spin();
 			}, false);
 			function spin(isMax) {
+				if (btnClicked) return;
+				btnClicked = true;
 				// reset set
+				var betButtons = document.querySelectorAll('.bets td');
+				for (var i=0; i<betButtons.length;i++) {
+					betButtons[i].style.opacity = '0.5';
+				}
 				document.getElementById('jackpot').style.display = 'none';
 				document.getElementById('jackpot').className = '';
 				document.getElementById('lost_result').style.display = 'none';
@@ -187,6 +194,10 @@ if (action != null) {
 						  	}, 1250);  					  	
 						  	setTimeout(function() {
 						 	   	document.getElementById('spin-animation-3').style.display = 'none';
+							 	btnClicked = false;
+								for (var i=0; i<betButtons.length;i++) {
+									betButtons[i].style.opacity = '1';
+								}
 						  	}, 1500);
 						  	setTimeout(function() {
 						  		var elems = document.querySelectorAll('.delay');
