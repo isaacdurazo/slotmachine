@@ -49,6 +49,16 @@ public class AchievementService {
 			@Override
 			boolean grantAchievement(Achievement achievement, Player player) {
 				return player.getNumInvitesSent() >= achievement.getValue();
+			}
+
+			@Override
+			String getWAPImage() {
+				return "/images/friend.gif";
+			}
+
+			@Override
+			String getWebkitImage() {
+				return "/wk/images/friend.png";
 			} 
 			
 		}),
@@ -59,7 +69,16 @@ public class AchievementService {
 			boolean grantAchievement(Achievement achievement, Player player) {
 				return player.getNumSessions() >= achievement.getValue();
 			} 
-			
+
+			@Override
+			String getWAPImage() {
+				return "/images/come-back.gif";
+			}
+
+			@Override
+			String getWebkitImage() {
+				return "/wk/images/come-back.png";
+			} 
 		}),
 		/** based on # of max spin bets placed */
 		MAX_SPINS(new AchievementGrantFactory() {
@@ -69,6 +88,15 @@ public class AchievementService {
 				return player.getMaxSpins() >= achievement.getValue();
 			} 
 			
+			@Override
+			String getWAPImage() {
+				return "/images/bet.gif";
+			}
+
+			@Override
+			String getWebkitImage() {
+				return "/wk/images/bet.png";
+			} 
 		}),
 		/** based on achieving a certain # of coins */
 		COIN_COUNT(new AchievementGrantFactory() {
@@ -77,7 +105,16 @@ public class AchievementService {
 			boolean grantAchievement(Achievement achievement, Player player) {
 				return player.getCoins() >= achievement.getValue();
 			} 
-			
+
+			@Override
+			String getWAPImage() {
+				return "/images/coins.gif";
+			}
+
+			@Override
+			String getWebkitImage() {
+				return "/wk/images/coins.png";
+			}
 		});
 		
 		/** factory instance */
@@ -126,6 +163,20 @@ public class AchievementService {
 				}
 			}
 			return result;
+		}
+
+		/**
+		 * @return relative path to WAP image icon
+		 */
+		public String getWAPImage() {
+			return this.factory.getWAPImage();
+		}
+
+		/**
+		 * @return relative path to webkit image icon
+		 */
+		public String getWebkitImage() {
+			return this.factory.getWebkitImage();
 		}
 	}
 	
@@ -253,5 +304,15 @@ public class AchievementService {
 		 * @return if achievement has been earned by the player
 		 */
 		abstract boolean grantAchievement(Achievement achievement, Player player);
+		
+		/**
+		 * @return relative path to WAP image icon
+		 */
+		abstract String getWAPImage();
+		
+		/**
+		 * @return relative path to webkit image icon
+		 */
+		abstract String getWebkitImage();
 	}
 }

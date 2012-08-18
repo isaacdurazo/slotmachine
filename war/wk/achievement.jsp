@@ -21,28 +21,18 @@
 		    		<table class="stats">
 						<tr>
 							<td>
-								Jackpot Hall Of Fame
+								Achievements
 							</td>
 						</tr>
 					</table>
 					
 		  		<div class="achievement-container">
-					<!-- 
-		  			<table>
-			  			<tr>
-			  				<th>Name</th>
-			  				<th>Reward</th>
-			  				<th>Granted</th>
-			  			</tr>
-		  			</table>
-		  			 -->
 		  			<% for (Pair<Achievement,Boolean> pair : AchievementService.getInstance().getAchievements(player)) { %>
 		  				<table class="achievement-entity">
-		  					<tr>
-		  						<td class="achievement-icon"><img width="30" height="30" src="/wk/images/logo.png"></td>
+		  					<tr <%= pair.getElement2() ? "" : "class='disable'"%>>
+		  						<td class="achievement-icon"><img width="30" height="30" src="<%= pair.getElement1().getType().getWebkitImage() %>"/></td>
 		  						<td class="achievement"><%= pair.getElement1().getTitle() %> </td>
 		  						<td class="achievement-coins"><%= pair.getElement1().getCoinsAwarded() %> coins</td>
-		  						<!-- <td><%= pair.getElement2() %></td>-->
 		  					</tr>
 		  				</table>
 			   		<% } %>

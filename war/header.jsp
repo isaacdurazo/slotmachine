@@ -19,7 +19,6 @@ if (!isWebkit) {
 if (player == null) {
 	int uid = ServletUtils.getInt(request,"uid"); 
 	String accessToken = request.getParameter("accessToken");
-	Logger.getLogger(request.getRequestURI()).log(Level.INFO,"accessToken: "+accessToken);
 	Long playerId = (Long)request.getSession().getAttribute("playerId");
 	
 	if (playerId != null) {
