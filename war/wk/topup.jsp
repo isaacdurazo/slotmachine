@@ -163,6 +163,13 @@ if (isWebkit) {
 				
 				<div class="controls">
 					<table class="menu">
+						<% if (AchievementService.getInstance().isEnabled() || player.hasAdminPriv()) { %>
+						<tr>
+							<td align="center">
+					        	<a href="<%= ServletUtils.buildUrl(player, "/wk/achievement.jsp", response) %>">Get coins from Achievements!</a>
+							</td>
+						</tr>
+						<% } %>
 						<tr>
 							<td align="center">
 					        	<a href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>

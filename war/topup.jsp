@@ -150,7 +150,11 @@ if (isWebkit) {
 			</form>
 			
 			<div class="menu">
-				<div><a href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
+			<% int key = 1; %>
+				<% if (AchievementService.getInstance().isEnabled() || player.hasAdminPriv()) { %>
+				<div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/achievement.jsp", response) %>">Get coins from Achievements!</a></div>
+				<% } %>
+				<div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
 			</div>
 		</div>
 	</div>

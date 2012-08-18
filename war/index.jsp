@@ -81,7 +81,7 @@
 			</div>
 		
 		    <div class="menu">
-		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Buy Coins</a></div>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Get Coins</a></div>
 		        <div><%= key %>. <a class="invite" accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>
 		        <div><%= key %>. <a class="leaderboard" accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/leaderboard.jsp", response) %>">Leaderboard</a></div>
 		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/jackpots.jsp", response) %>">Jackpot Winners</a></div>

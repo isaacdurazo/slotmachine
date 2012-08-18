@@ -100,7 +100,7 @@
 					<table class="menu">
 						<tr>
 							<td>
-				        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>">Buy Coins</a>
+				        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>">Get Coins</a>
 							</td>
 							<td>
 				        		<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
