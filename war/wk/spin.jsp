@@ -66,6 +66,7 @@ if (action != null) {
 			}, false);
 			function spin(isMax) {
 				if (btnClicked) return;
+				currCoins -= isMax ? 3 : 1;
 				btnClicked = true;
 				// reset set
 				var betButtons = document.querySelectorAll('.bets td');
