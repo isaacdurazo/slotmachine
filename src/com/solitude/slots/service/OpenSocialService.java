@@ -398,7 +398,9 @@ public class OpenSocialService {
 		json.put(Message.Field.TITLE.toString(), subject);
 		json.put(Message.Field.BODY.toString(), body);
 		json.put(Message.Field.TYPE.toString(), Message.Type.NOTIFICATION.toString());
-		doHttpPost(url,json.toJSONString());		
+		doHttpRequest(url,"POST",null,json.toJSONString(),
+				Integer.parseInt(System.getProperty("url.notification.connect.timeout","5000")),
+				Integer.parseInt(System.getProperty("url.notification.read.timeout","5000")));
 	}
 	
 	/**

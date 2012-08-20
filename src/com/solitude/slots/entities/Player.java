@@ -49,6 +49,8 @@ public class Player extends AbstractGAEPersistent {
 	private int invitesSent;
 	/** number of max spin bets placed */
 	private int maxSpins;
+	/** amount of gold spent on the game by this player */
+	private int goldDebitted;
 
 	/** NOTE this is only stored in memory and set/deleted by PlayerManager **/
 	private boolean isNewPlayer = false;
@@ -181,6 +183,12 @@ public class Player extends AbstractGAEPersistent {
 		}
 		super.setUpdatetime();
 	}
+	
+	/** @return amount of gold spent on the game by this player */
+	public int getGoldDebitted() { return this.goldDebitted; }
+	/** @param goldDebitted amount of gold spent on the game by this player */
+	public void setGoldDebitted(int goldDebitted) { this.goldDebitted = goldDebitted; }
+	
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {
 		super.deserialize(inputMap);
@@ -199,6 +207,7 @@ public class Player extends AbstractGAEPersistent {
 		this.numSessions = deserializeInt("numSessions", inputMap, 0);
 		this.invitesSent = deserializeInt("invitesSent", inputMap, 0);
 		this.maxSpins = deserializeInt("maxSpins", inputMap, 0);
+		this.goldDebitted = deserializeInt("goldDebitted", inputMap, 0);
 	}
 
 	@Override
@@ -219,6 +228,7 @@ public class Player extends AbstractGAEPersistent {
 		map.put("numSessions", this.numSessions);
 		map.put("invitesSent", this.invitesSent);
 		map.put("maxSpins", this.maxSpins);
+		map.put("goldDebitted", this.goldDebitted);
 		return map;
 	}
 
