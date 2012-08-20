@@ -81,6 +81,7 @@
 				try {
 					recipientUserIds.add(currPlayer.getMocoId());
 					if (idx++ % 1000 == 0) {
+						Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 								"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
 					}

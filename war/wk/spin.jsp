@@ -112,7 +112,7 @@ if (action != null) {
 							
 							if (achievements) {
 								document.getElementById('achievements').style.display = 'block';
-								document.getElementById('achievement_title_text').innerHTML = 'achievement'+(achievement.length == 1 ? '' : 's');
+								document.getElementById('achievement_title_text').innerHTML = 'achievement'+(achievements.length == 1 ? '' : 's');
 								var coinsEarned = 0;
 								var achievementText = '';
 								for (var i=0;i<achievements.length;i++) {

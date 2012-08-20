@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.google.appengine.api.ThreadManager;
 import com.solitude.slots.cache.CacheStoreException;
 import com.solitude.slots.cache.GAECacheManager;
 import com.solitude.slots.data.DataStoreException;
@@ -101,6 +100,9 @@ public class SlotMachineManager {
 	 */
 	public SpinResult spin(final Player player, int coins) throws InsufficientFundsException, DataStoreException, CacheStoreException {
 		if (player.getCoins() < coins) throw new InsufficientFundsException();
+		if (coins == Integer.getInteger("game.max.bet.coins", 3)) {
+			player.incrementMaxSpins();
+		}
 		// spin!
 		SpinResult spinResult = null;
 		int attempts = 0;
@@ -190,36 +192,6 @@ public class SlotMachineManager {
 		player.setXp(player.getXp()+1);
 		PlayerManager.getInstance().storePlayer(player, true);
 		
-		if (Boolean.getBoolean("game.xp.leaderboard.enabled")) {
-			if (Boolean.getBoolean("game.xp.leaderboard.synchronous")) {
-				try {
-					OpenSocialService.getInstance().setScores(player.getMocoId(),
-							new OpenSocialService.ScoreUpdate((short)1, player.getXp(), false),
-							new OpenSocialService.ScoreUpdate((short)2, player.getCoinsWon(), false));
-				} catch (Exception ex) {
-					log.log(Level.WARNING,"error submitting synchronous score for player: "+player,ex);
-					throw new RuntimeException(ex);
-				}
-				
-			} else {
-				try {
-				ThreadManager.createBackgroundThread(new Runnable() {
-					public void run() {
-						try {
-							OpenSocialService.getInstance().setScores(player.getMocoId(),
-									new OpenSocialService.ScoreUpdate((short)1, player.getXp(), false),
-									new OpenSocialService.ScoreUpdate((short)2, player.getCoinsWon(), false));
-						} catch (Exception ex) {
-							log.log(Level.WARNING,"error submitting async score for player: "+player,ex);
-							throw new RuntimeException(ex);
-						}
-					}
-				}).start();
-			} catch (Exception e) {
-				log.log(Level.WARNING,"error creating lb thread for submitting score for player: "+player,e);
-			}
-			} //synchronous
-		}
 		log.log(Level.INFO,"spin|random="+idx+", custom="+fCustomProbability+", bet="+coins+", "+spinResult+"|uid|"+player.getMocoId());
 		return spinResult;
 	}

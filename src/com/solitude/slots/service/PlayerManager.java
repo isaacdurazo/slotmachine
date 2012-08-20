@@ -44,6 +44,8 @@ public class PlayerManager {
     private static final Logger log = Logger.getLogger(instance.getClass().getName());
     /** map of player ID to delta info to delay datastore writes */
     private final Map<Long,PlayerDeltaInfo> playerIDtoCoinXPMap;
+    /** if true then all player deltas are force flushed */
+    private static boolean forceFlushEnabled = false;
 	
 	/** private constructor to ensure singleton */
 	private PlayerManager() {
@@ -188,6 +190,16 @@ public class PlayerManager {
 	}
 	
 	/**
+	 * Get Player by Moco Id
+	 * @param mocoId of user
+	 * @return player or null if one does not exist
+	 * @throws Exception for unexpected errors or if user is not yet playing the game
+	 */
+	public Player getPlayerByMocoId(int mocoId) throws Exception {
+		return getPlayer(OpenSocialService.getInstance().fetchOAuthToken(mocoId, GameUtils.getGameAdminToken()));
+	}
+	
+	/**
 	 * Fetch most recent player (by creationtime) with moco accessToken given that is not deleted
 	 * @param accessToken of player
 	 * @return player (if exists and not deleted) and null otherwise
@@ -268,8 +280,10 @@ public class PlayerManager {
 	 * @throws CacheStoreException for cache issues
 	 */
 	public void storePlayer(Player player, boolean delay) throws DataStoreException, CacheStoreException {
-		if (!delay || !Boolean.getBoolean("player.delta.flush.enabled")) GAEDataManager.getInstance().store(player);
-		else {
+		if (!delay || !Boolean.getBoolean("player.delta.flush.enabled")) {
+			GAEDataManager.getInstance().store(player);
+			updatePlayerLeaderboards(player);
+		} else {
 			PlayerDeltaInfo info = playerIDtoCoinXPMap.get(player.getId());
 			if (info == null) {
 				info = new PlayerDeltaInfo();
@@ -281,6 +295,19 @@ public class PlayerManager {
 		GAECacheManager.getInstance().put(player);
 	}
 	
+	private void updatePlayerLeaderboards(Player player) {
+		if (Boolean.getBoolean("game.xp.leaderboard.enabled")) {
+			try {
+				OpenSocialService.getInstance().setScores(player.getMocoId(),
+						new OpenSocialService.ScoreUpdate((short)1, player.getXp(), false),
+						new OpenSocialService.ScoreUpdate((short)2, player.getCoinsWon(), false));
+			} catch (Exception ex) {
+				log.log(Level.WARNING,"error submitting synchronous score for player: "+player,ex);
+				throw new RuntimeException(ex);
+			}			
+		}
+	}
+	
 	/**
 	 * Flush player delta map
 	 * @param force if true will flush all without taking last access into account
@@ -288,11 +315,12 @@ public class PlayerManager {
 	public void flushDeltaPlayers(boolean force) {
 		for (PlayerDeltaInfo info : playerIDtoCoinXPMap.values()) {
 			try {
-				if (force || System.currentTimeMillis() - info.lastAccess > Integer.getInteger("player.delta.flush.ttl.min", 1)*60*1000) {					
+				if (forceFlushEnabled || force || System.currentTimeMillis() - info.lastAccess > Integer.getInteger("player.delta.flush.ttl.min", 1)*60*1000) {					
 					// fetch from cache to ensure latest
 					Player player = GAECacheManager.getInstance().get(info.player.getId(), Player.class);
 					if (player == null) player = info.player;
 					GAEDataManager.getInstance().store(player);
+					updatePlayerLeaderboards(player);
 					playerIDtoCoinXPMap.remove(player.getId());
 					log.log(Level.FINEST, "flushing player: "+player);
 				}
@@ -312,6 +340,19 @@ public class PlayerManager {
 			}
 		}
 	}
+	
+	/**
+	 * Forces all players to be flushed to the DB and any changes going forward as well
+	 * @param enabled to force, false means reset to default behavior
+	 */
+	public void setForceFlush(boolean enabled) {
+		forceFlushEnabled = enabled;
+		if (log != null) log.log(Level.WARNING, "Force flush all players to value: "+enabled);
+		if (enabled) flushDeltaPlayers(true);
+	}
+	
+	/** @return if force flush enabled */
+	public boolean isForceFlush() { return forceFlushEnabled; }
 	
 	/**
 	 * Indicates an unauthorized action has occurred
