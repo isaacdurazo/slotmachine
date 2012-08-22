@@ -28,8 +28,8 @@
 					
 		  		<div class="achievement-container">
 		  			<% for (Pair<Achievement,Boolean> pair : AchievementService.getInstance().getAchievements(player)) { %>
-		  				<table class="achievement-entity">
-		  					<tr <%= pair.getElement2() ? "" : "class='disable'"%>>
+		  				<table id="achievement-entity" <%= pair.getElement2() ? "" : "class='disable'"%>>
+		  					<tr>
 		  						<td class="achievement-icon"><img width="30" height="30" src="<%= pair.getElement1().getType().getWebkitImage() %>"/></td>
 		  						<td class="achievement"><%= pair.getElement1().getTitle() %> </td>
 		  						<td class="achievement-coins"><%= pair.getElement1().getCoinsAwarded() %> coins</td>
