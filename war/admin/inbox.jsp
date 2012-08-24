@@ -76,21 +76,31 @@
 	
 			long idx = 0;
 			long err = 0;
-			java.util.List<Integer> recipientUserIds = new java.util.ArrayList<Integer>(players.size());
+			int BATCHSIZE=100,j=0;
+			java.util.List<Integer> recipientUserIds = new java.util.ArrayList<Integer>(BATCHSIZE);
 			for (Player currPlayer : players) {
 				try {
 					recipientUserIds.add(currPlayer.getMocoId());
-					if (idx++ % 1000 == 0) {
-						Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
+					idx++; j++;
+					if (j==BATCHSIZE || idx == players.size() ) {
+						j=0;
+						if (j<BATCHSIZE) {
+							java.util.List<Integer> cpy = new java.util.ArrayList<Integer>(j);
+							for (int k=0;k<j;k++) cpy.add(recipientUserIds.get(k));
+							recipientUserIds=cpy;
+						}
+						Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Inbox " + idx + " of " + players.size()+ " sending....","Background job");
+						OpenSocialService.getInstance().sendNotification(subject, message, recipientUserIds);
+						recipientUserIds.clear();
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 								"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
 					}
 				} catch (Exception e) {
 					Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error sending inbox "+idx+" to player: " + currPlayer, e);
+					recipientUserIds.clear();
 					err++;
 				}
 			}
-			OpenSocialService.getInstance().sendNotification(subject, message, recipientUserIds);
 			OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 					"Inbox to " + players.size()+ " players complete.","Errors="+err+". Check server warning log for more details");
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"INBOX: Completed sending to "+players.size()+" players with "+err+" errors");
@@ -101,8 +111,10 @@
 		return;
 	}
 	if (subject==null) subject = "Jackpot Update";
-	if (message==null) message = "Hi, we have a new <a href=\"http://www.mocospace.com/games?source=inbox&gid=1252&next=jackpots\">MocoGold Jackpot winner</a> in SlotMania.<br/>"+
-			" The next Jackpot is waiting for you - hurry up and <a href=\"http://www.mocospace.com/games?source=inbox&gid=1252\">spin now</a> before somebody else wins! <br/><br/>The more you spin the more likely you win!";
+	// below does not work - XML errors on WAP in resulting inbox msg...
+	//	if (message==null) message = "Hi, we have a new <a href=\"http://www.mocospace.com/games?source=inbox&gid=1252&next=jackpots\">MocoGold Jackpot winner</a> in SlotMania.<br/>"+
+	//	" The next Jackpot is waiting for you - hurry up and <a href=\"http://www.mocospace.com/games?source=inbox&gid=1252\">spin now</a> before somebody else wins! <br/><br/>The more you spin the more likely you win!";
+	if (message==null) message = "We have a new MocoGold Jackpot winner in SlotMania - check the Jackpot Winners List.<br/>The Jackpot increases every day until somebody wins - hurry up and play NOW!<br/><br/>The more you spin the more likely you win!";
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
