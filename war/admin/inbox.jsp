@@ -20,7 +20,7 @@
 	//default values
 	int starthrs=24;
 	int endhrs=12;
-	int max=3000;
+	int max=10000;
 
 	String subject = request.getParameter("subject");
 	String message = request.getParameter("message");
@@ -83,20 +83,22 @@
 					recipientUserIds.add(currPlayer.getMocoId());
 					idx++; j++;
 					if (j==BATCHSIZE || idx == players.size() ) {
-						j=0;
 						if (j<BATCHSIZE) {
 							java.util.List<Integer> cpy = new java.util.ArrayList<Integer>(j);
 							for (int k=0;k<j;k++) cpy.add(recipientUserIds.get(k));
 							recipientUserIds=cpy;
 						}
+						j=0;
 						Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Inbox " + idx + " of " + players.size()+ " sending....","Background job");
 						OpenSocialService.getInstance().sendNotification(subject, message, recipientUserIds);
+
 						recipientUserIds.clear();
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 								"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
 					}
 				} catch (Exception e) {
-					Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error sending inbox "+idx+" to player: " + currPlayer, e);
+					Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error sending inbox "+idx+" to list: "+
+					recipientUserIds.toString(),e);
 					recipientUserIds.clear();
 					err++;
 				}
