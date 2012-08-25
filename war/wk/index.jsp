@@ -63,9 +63,26 @@
 					    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
 					    	</div> 
 					    <% } %>
+					    
+					    <div class="achievements">
+							<h1>CONGRATULATIONS!</h1>
+							You earned achievements and 30 coins!
+							<ul>
+								<li>Have 50 coins</li>
+							</ul>
+							<a class="close" href="<%= response.encodeURL("/wk/index.jsp") %>" ></a>
+						</div>
+						
+						<div class="overlay"></div>
+					    
 			    	</div>
+			    	
+			    	
+			    	
 			    	<% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
 						<div class="achievements">
+							<h1>CONGRATULATIONS!</h1>
+							
 							<%
 							int coinsEarned = 0;
 							for (Achievement achievement : earnedAchievements) { coinsEarned += achievement.getCoinsAwarded(); }
@@ -76,7 +93,11 @@
 								<li><%= achievement.getTitle() %></li>
 								<% } %>
 							</ul>
+							<a class="close" href="<%= response.encodeURL("/wk/index.jsp") %>" ></a>
 						</div>
+						
+						<div class="overlay"></div>
+						
 					<% } %>
 			    </div>
 			    
