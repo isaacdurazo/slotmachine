@@ -65,7 +65,7 @@
 					    <% } %>
 					    
 			    	</div>
-			    	
+
 			    	<% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
 						<div class="achievements">
 							<h1>CONGRATULATIONS!</h1>
@@ -74,13 +74,21 @@
 							int coinsEarned = 0;
 							for (Achievement achievement : earnedAchievements) { coinsEarned += achievement.getCoinsAwarded(); }
 							%>
-							You earned <%= earnedAchievements.size() > 1 ? "an achievement" : "achievements" %> and <%= coinsEarned %> coins!
-							<ul>
+							
+							<h2>You completed <%= earnedAchievements.size() > 1 ? "an achievement" : "achievements" %> and won <%= coinsEarned %> coins!</h2>
+							
+							<ul style="display: none">
 								<% for (Achievement achievement : earnedAchievements) { %>
 								<li><%= achievement.getTitle() %></li>
 								<% } %>
 							</ul>
-							<a class="close" href="<%= response.encodeURL("/wk/index.jsp") %>" ></a>
+							
+							<a class="close" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?"+cacheBuster, response) %>" ></a>
+							
+							<div class="play">
+								<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
+							</div>
+							
 						</div>
 						
 						<div class="overlay"></div>

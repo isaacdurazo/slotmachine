@@ -450,22 +450,22 @@ table {
 
 .achievements {
 	position: relative;
-	width: 90%;
-	height: 100px;
+	width: 75%;
 	z-index: 2;
 	margin: auto;
 	left: 0;
 	right: 0;
-	border: 3px solid #f7c85c;
+	border: 4px solid #f7c85c;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	padding: 5px;
+	padding: 25px;
 	background: #000000; /* Old browsers */
 	background: -moz-linear-gradient(top, #000000 0%, #303030 50%, #000000 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(50%,#303030), color-stop(100%,#000000)); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top, #000000 0%,#303030 50%,#000000 100%); /* Chrome10+,Safari5.1+ */
 	background: linear-gradient(to bottom, #000000 0%,#303030 50%,#000000 100%); /* W3C */
 	font-size: 16px;
+	top: -80px;
 }
 
 .achievements ul li{
@@ -476,6 +476,11 @@ table {
 	color:	#f7c85c;
 	text-shadow: 1px 1px 10px rgba(247, 200, 92, .6), -1px -1px 10px rgba(247, 200, 92, .6);
 	font-size: 24px;
+}
+
+.achievements h2 {
+	margin: 15px 0;
+	font-size: 20px;
 }
 
 .close {
