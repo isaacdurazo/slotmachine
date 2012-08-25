@@ -62,6 +62,7 @@ if (isWebkit) {
 				String ret=OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s,player.getAccessToken());
 				Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|"+ret);
 				player.setCoins(player.getCoins()+coin);
+				player.setGoldDebitted(player.getGoldDebitted()+gold);
 				PlayerManager.getInstance().storePlayer(player);
 				pageContext.forward("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
 				return;

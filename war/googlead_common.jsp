@@ -3,6 +3,7 @@
                  java.io.IOException,
                  java.io.UnsupportedEncodingException,
                  java.net.URL,
+                 java.net.HttpURLConnection,
                  java.net.URLEncoder,
                  java.util.ArrayList,
                  java.util.List" %> 

@@ -137,10 +137,11 @@ int key = 1;
 				</tr>
 			</table>
 			<% } %>
-<div id="ad">
-<%@ include file="/googlead_wap.jsp" %>
-
-</div>				
+			<% if (player.getGoldDebitted() == 0) { %>
+				<div id="ad">
+					<%@ include file="/googlead_wap.jsp" %>			
+				</div>				
+			<% } %>
 		    
 		     <div class="menu">
 		        <div><%= key %>. <a class="invite" accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>

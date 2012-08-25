@@ -31,6 +31,7 @@ if (isWebkit) {
 					break;
 			}
 			player.setCoins(player.getCoins()+coin);
+			player.setGoldDebitted(player.getGoldDebitted()+gold);
 			PlayerManager.getInstance().storePlayer(player);
 			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|webkit");
 			pageContext.forward("/wk/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));

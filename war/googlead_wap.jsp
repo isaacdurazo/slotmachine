@@ -3,11 +3,12 @@
 <%@ page import="com.solitude.slots.*,com.solitude.slots.service.*,com.solitude.slots.entities.*,com.solitude.slots.service.SlotMachineManager.InsufficientFundsException" %>
 
 <%
-
-if (true || !( ((Player)request.getAttribute("player")).getMocoId()%2==0)) {
+Player currPlayer = (Player)request.getAttribute("player");
+if (currPlayer != null && (currPlayer.getMocoId()%2==0 || currPlayer.hasAdminPriv())) {
 %>
 <!-- Ads on for this user-->
 <% 
+BufferedReader in = null;
 try {
 
 //for odd uid show ads
@@ -47,13 +48,20 @@ if (googleUserAgent == null || googleUserAgent.length() == 0) {
   Logger.getLogger(request.getRequestURI()).log(Level.INFO,"Attempting to get Adsense url="+googleAdUrlStr.toString());
 	
   URL googleAdUrl = new URL(googleAdUrlStr.toString());
-  BufferedReader reader = new BufferedReader(
-      new InputStreamReader(googleAdUrl.openStream()/*,"AUTO_DETECT"*/));
-  for (String line; (line = reader.readLine()) != null;) {
-    out.println(line);
+  HttpURLConnection c = (HttpURLConnection) googleAdUrl.openConnection();
+  c.setConnectTimeout(100);
+  c.setReadTimeout(100);
+  c.setRequestMethod("GET");
+  // Read the response
+  in = new BufferedReader(new InputStreamReader(c.getInputStream()));
+  String line;
+  while ((line = in.readLine()) != null) {
+	out.write(line);
   }
 } catch (Exception e) {
 	Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"Error showing ad",e);
+} finally {
+	if (in != null) try { in.close(); } catch (Exception e) {}
 }
 }
 
