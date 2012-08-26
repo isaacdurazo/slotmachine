@@ -229,10 +229,14 @@ if (action != null) {
 			    <table class="stats">
 			    	<tr>
 						<td>
-							<b>XP:</b> <span id="player_xp"><%= player.getXp() %></span>
+							<span class="stat xp">
+								<b>XP:</b> <span id="player_xp"><%= player.getXp() %></span>
+							</span>
 						</td>
 						<td>
-							<b>Coins:</b> <span id="player_coins" class="delay inline"><%= player.getCoins() %></span>
+							<span class="stat coins">
+								<b>Coins:</b> <span id="player_coins" class="delay inline"><%= player.getCoins() %></span>
+							</span>
 						</td>
 					</tr>
 				</table>
@@ -246,8 +250,7 @@ if (action != null) {
 					    <% } %>
 						<div id="achievements" class="achievements" style='display:none'>							
 							You earned <span id="achievement_title_text"></span> and <span id="achievement_title_coins"></span> coins!
-							<ul>
-							</ul>
+							
 						</div>
 						
 						<div id="jackpot" class="goldtext delay" style="display:none;">
@@ -258,60 +261,63 @@ if (action != null) {
 						<div id='won_result' class="wonspin delay" style="display:none;"></div>
 						
 						<div id='lost_result' class="lostspin delay" style="display:none;"></div>
+					</div>
 				</div>
 				
 				<div class="spin-container">
-					<div id="lights">
-						<div class="lights-off">
-							<div class="lights left"></div>
-							<div class="lights right"></div>
-							<div class="lights top"></div>
-							<div class="lights bottom"></div>
+					<div class="spin-content">
+						<div id="lights">
+							<div class="lights-off">
+								<div class="lights left"></div>
+								<div class="lights right"></div>
+								<div class="lights top"></div>
+								<div class="lights bottom"></div>
+							</div>
+							<div class="lights-off">
+								<div class="lights left"></div>
+								<div class="lights right"></div>
+								<div class="lights top"></div>
+								<div class="lights bottom"></div>
+							</div>
 						</div>
-						<div class="lights-off">
-							<div class="lights left"></div>
-							<div class="lights right"></div>
-							<div class="lights top"></div>
-							<div class="lights bottom"></div>
-						</div>
-					</div>
-					<table class="spins">
-						<tr>
-							<td>
-								<div>									
-									<span id="spin-animation-1" style="display: none; ">
-										<span class="shadows"></span>
-										<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249">
-									</span>
-									
-									<img width="70" height="102" src="/wk/images/comb--1.jpg">
-								</div>
-							</td>
-							<td>
-								<div>									
-									<span id="spin-animation-2" style="display: none; ">
-										<span class="shadows"></span>
-										<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249">
-									</span>
-									
-									<img width="70" height="102" src="/wk/images/comb--1.jpg">
-								</div>
-							</td>
-							<td>
-								<div>										
-									<span id="spin-animation-3" style="display: none; ">
-										<span class="shadows"></span>
-										<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249">
-									</span>
-									
-									<img width="70" height="102" src="/wk/images/comb--1.jpg">
-								</div>
-							</td>
-						</tr>
-					</table>					
+						<table class="spins">
+							<tr>
+								<td style="float: right;">
+									<div>									
+										<span id="spin-animation-1" style="display: none; ">
+											<span class="shadows"></span>
+											<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249">
+										</span>
+										
+										<img width="70" height="102" src="/wk/images/comb--1.jpg">
+									</div>
+								</td>
+								<td>
+									<div>									
+										<span id="spin-animation-2" style="display: none; ">
+											<span class="shadows"></span>
+											<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249">
+										</span>
+										
+										<img width="70" height="102" src="/wk/images/comb--1.jpg">
+									</div>
+								</td>
+								<td  style="float: left;">
+									<div>										
+										<span id="spin-animation-3" style="display: none; ">
+											<span class="shadows"></span>
+											<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249">
+										</span>
+										
+										<img width="70" height="102" src="/wk/images/comb--1.jpg">
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>					
 				</div>	
 				
-				<div class="controls">
+				<div class="spin-controls">
 										
 					<table class="bets" align="center" >
 						<tr>

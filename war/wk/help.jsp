@@ -13,7 +13,9 @@
 			   		<table class="stats">
 			   			<tr>
 			   				<td>
-			   					The best way to WIN <span class="goldtext">Moco Gold</span>
+								<span class="stat">
+			   						The best way to WIN <span class="goldtext">Moco Gold</span>
+			   					</span>
 			   				</td>
 			   			</tr>
 			   		</table>

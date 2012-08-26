@@ -77,19 +77,32 @@ table {
 
 .content {
 	border: 4px solid #c1c1c1;
+	padding: 9px;
 }
 
-.stats  {
+.spin-controls {
 	text-align: center;
-	background-color: #272727;
-	padding:4px;
+	display: block;
+	padding: 4px;
+   	-webkit-border-radius: 8px;
+   	border-radius: 5px;
+	background: rgb(71,71,71); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(71,71,71,1) 0%, rgba(239,239,239,1) 14%, rgba(96,96,96,1) 25%, rgba(239,239,239,1) 36%, rgba(71,71,71,1) 55%, rgba(239,239,239,1) 64%, rgba(96,96,96,1) 77%, rgba(239,239,239,1) 88%, rgba(71,71,71,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(71,71,71,1)), color-stop(14%,rgba(239,239,239,1)), color-stop(25%,rgba(96,96,96,1)), color-stop(36%,rgba(239,239,239,1)), color-stop(55%,rgba(71,71,71,1)), color-stop(64%,rgba(239,239,239,1)), color-stop(77%,rgba(96,96,96,1)), color-stop(88%,rgba(239,239,239,1)), color-stop(100%,rgba(71,71,71,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(71,71,71,1) 0%,rgba(239,239,239,1) 14%,rgba(96,96,96,1) 25%,rgba(239,239,239,1) 36%,rgba(71,71,71,1) 55%,rgba(239,239,239,1) 64%,rgba(96,96,96,1) 77%,rgba(239,239,239,1) 88%,rgba(71,71,71,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(71,71,71,1) 0%,rgba(239,239,239,1) 14%,rgba(96,96,96,1) 25%,rgba(239,239,239,1) 36%,rgba(71,71,71,1) 55%,rgba(239,239,239,1) 64%,rgba(96,96,96,1) 77%,rgba(239,239,239,1) 88%,rgba(71,71,71,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(71,71,71,1) 0%,rgba(239,239,239,1) 14%,rgba(96,96,96,1) 25%,rgba(239,239,239,1) 36%,rgba(71,71,71,1) 55%,rgba(239,239,239,1) 64%,rgba(96,96,96,1) 77%,rgba(239,239,239,1) 88%,rgba(71,71,71,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(71,71,71,1) 0%,rgba(239,239,239,1) 14%,rgba(96,96,96,1) 25%,rgba(239,239,239,1) 36%,rgba(71,71,71,1) 55%,rgba(239,239,239,1) 64%,rgba(96,96,96,1) 77%,rgba(239,239,239,1) 88%,rgba(71,71,71,1) 100%); /* W3C */
 }
 
-.stats a {
-	color: #FFF;	
+.controls {
+	text-align: center;
+	display: block;
+   	-webkit-border-radius: 8px;
+   	border-radius: 5px;
 }
 
-.controls, .buy-container {
+.buy-container {
 	text-align: center;
 	display: block;
 	background-color: #272727;
@@ -98,26 +111,56 @@ table {
 }
 
 .buy-container {
-	margin-bottom:5px;
+	margin-bottom: 5px;
+}
+
+.stats {
+	background: rgb(124,124,124); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(124,124,124,1) 0%, rgba(239,239,239,1) 26%, rgba(124,124,124,1) 56%, rgba(239,239,239,1) 79%, rgba(124,124,124,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(124,124,124,1)), color-stop(26%,rgba(239,239,239,1)), color-stop(56%,rgba(124,124,124,1)), color-stop(79%,rgba(239,239,239,1)), color-stop(100%,rgba(124,124,124,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(124,124,124,1) 0%,rgba(239,239,239,1) 26%,rgba(124,124,124,1) 56%,rgba(239,239,239,1) 79%,rgba(124,124,124,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(124,124,124,1) 0%,rgba(239,239,239,1) 26%,rgba(124,124,124,1) 56%,rgba(239,239,239,1) 79%,rgba(124,124,124,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(124,124,124,1) 0%,rgba(239,239,239,1) 26%,rgba(124,124,124,1) 56%,rgba(239,239,239,1) 79%,rgba(124,124,124,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(124,124,124,1) 0%,rgba(239,239,239,1) 26%,rgba(124,124,124,1) 56%,rgba(239,239,239,1) 79%,rgba(124,124,124,1) 100%); /* W3C */
+	text-align: center;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	padding: 3px;
+	font-family: 'Electrolize', sans-serif;
+	border-spacing: 0;
 }
 
 .stats td {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	background-color: #000;
-	margin: 0 1em;
     width: 50%;
-    border: 2px solid #959595;
-    padding: 4px 0;
     font-size: 1.2em;
 }
 
+.stats td .stat {
+	background: url(../images/stripped-bg.png) #000;
+	display: block;
+	border: 1px solid #000;
+	border-radius: 3px;
+	padding: 4px;
+}
 
-.results-container{
+.stats td .stat.xp {
+	margin-right:1px;
+}
+
+.stats td .stat.coins {
+	margin-left:1px;
+}
+
+.stats a {
+	color: #FFF;	
+}
+
+.results-container {
 	text-align: center;
-	background-color: #272727;
-	padding:0 4px 4px;
+	margin-bottom: 5px;
 }
 
 .results {
@@ -141,17 +184,37 @@ table {
 	padding-top:2px;
 }
 
-.spin-container, .list-container {
+.list-container {
 	border: 2px solid #646464;
 	background-color: #3e3e3e;
 	margin: 5px 0;
 	overflow:hidden;
 }
 
+.spin-container {
+	padding: 6px;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	background: rgb(124,124,124); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(124,124,124,1) 0%, rgba(239,239,239,1) 14%, rgba(96,96,96,1) 25%, rgba(239,239,239,1) 36%, rgba(71,71,71,1) 55%, rgba(239,239,239,1) 64%, rgba(96,96,96,1) 77%, rgba(239,239,239,1) 88%, rgba(124,124,124,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(124,124,124,1)), color-stop(14%,rgba(239,239,239,1)), color-stop(25%,rgba(96,96,96,1)), color-stop(36%,rgba(239,239,239,1)), color-stop(55%,rgba(71,71,71,1)), color-stop(64%,rgba(239,239,239,1)), color-stop(77%,rgba(96,96,96,1)), color-stop(88%,rgba(239,239,239,1)), color-stop(100%,rgba(124,124,124,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(124,124,124,1) 0%,rgba(239,239,239,1) 14%,rgba(96,96,96,1) 25%,rgba(239,239,239,1) 36%,rgba(71,71,71,1) 55%,rgba(239,239,239,1) 64%,rgba(96,96,96,1) 77%,rgba(239,239,239,1) 88%,rgba(124,124,124,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(124,124,124,1) 0%,rgba(239,239,239,1) 14%,rgba(96,96,96,1) 25%,rgba(239,239,239,1) 36%,rgba(71,71,71,1) 55%,rgba(239,239,239,1) 64%,rgba(96,96,96,1) 77%,rgba(239,239,239,1) 88%,rgba(124,124,124,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(124,124,124,1) 0%,rgba(239,239,239,1) 14%,rgba(96,96,96,1) 25%,rgba(239,239,239,1) 36%,rgba(71,71,71,1) 55%,rgba(239,239,239,1) 64%,rgba(96,96,96,1) 77%,rgba(239,239,239,1) 88%,rgba(124,124,124,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(124,124,124,1) 0%,rgba(239,239,239,1) 14%,rgba(96,96,96,1) 25%,rgba(239,239,239,1) 36%,rgba(71,71,71,1) 55%,rgba(239,239,239,1) 64%,rgba(96,96,96,1) 77%,rgba(239,239,239,1) 88%,rgba(124,124,124,1) 100%); /* W3C */
+}
+
+.spin-content {
+	overflow:hidden;
+	border-radius: 4px;
+	border: 3px solid #000;
+} 
+
 .spins {
 	height: 10em;
 	border-spacing: 10px;
 	border: 2px solid #3e3e3e;
+	background: #000;
 }
 
 .spins td {
@@ -194,7 +257,7 @@ table {
 }
 
 .bets td, .play {
-	border: 3px solid #181818;
+	border: 3px solid #212121;
 	text-align:center;
 	border-radius: 10px;
 	background-image: linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
@@ -208,7 +271,7 @@ table {
 }
 
 .menu td {
-	border: 3px solid #181818;
+	border: 3px solid #212121;
 	text-align:center;
 	width: 50%;
 	border-radius: 10px;
@@ -250,9 +313,8 @@ table {
 }
     
 .jackpotteaser-container{
-	background-color: #272727;
 	text-align: center;
-	padding: 0 4px 4px;
+	margin-bottom: 5px;
 }
 
 .jackpotteaser {
@@ -374,7 +436,7 @@ table {
 }
 
 .lights.bottom {
-    bottom: -128px;
+    bottom: -129px;
     left: 3px;
 }
 

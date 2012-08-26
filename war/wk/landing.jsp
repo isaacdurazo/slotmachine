@@ -20,7 +20,9 @@
 					<table class="stats">
 			   			<tr>
 			   				<td>
-								You must be logged in to MocoSpace to play this game!
+								<span class="stat">
+									You must be logged in to MocoSpace to play this game!
+								</span>
 							</td>
 						</tr>
 					</table>

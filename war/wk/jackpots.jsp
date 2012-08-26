@@ -15,7 +15,9 @@
 					<table class="stats">
 						<tr>
 							<td>
-								Jackpot Hall Of Fame
+								<span class="stat">
+									Jackpot Hall Of Fame
+								</span>
 							</td>
 						</tr>
 					</table>

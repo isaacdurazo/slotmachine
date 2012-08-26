@@ -21,7 +21,9 @@
 		    		<table class="stats">
 						<tr>
 							<td>
-								Achievements
+								<span class="stat">
+									Achievements
+								</span>
 							</td>
 						</tr>
 					</table>

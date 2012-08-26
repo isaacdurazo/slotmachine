@@ -138,7 +138,9 @@ if (isWebkit) {
 		    	<table class="stats">
 					<tr>
 						<td>
-							Increase your chance to win the Jackpot<br/>Buy Coins!
+							<span class="stat">
+								Increase your chance to win the Jackpot<br/>Buy Coins!
+							</span>	
 						</td>
 					</tr>
 				</table>

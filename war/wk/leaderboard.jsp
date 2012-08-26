@@ -34,8 +34,10 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 		    	<table class="stats">
 					<tr>
 						<td>
-							Weekly <%= type == (short)1 ? "Xp" : "Coins Won" %> Leaderboard
-			    			<div>(updated every 4 hrs)</div>
+							<span class="stat">
+								Weekly <%= type == (short)1 ? "Xp" : "Coins Won" %> Leaderboard
+			    				<div>(updated every 4 hrs)</div>
+			    			</span>
 						</td>
 					</tr>
 				</table>

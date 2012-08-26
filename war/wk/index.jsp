@@ -42,21 +42,38 @@
 		    </div>
 			<%@ include file="message.jsp" %>		    
 		    <div class="content">
-		    
-			    <table class="stats">
-					<tr>
-						<td>
-							<b>XP:</b> <%= player.getXp() %>
-						</td>
-						<td>
-							<b>Coins:</b> <%= player.getCoins() %></a></br>
-							<small>Next award: <%= readableUntilCoinAward %></small>
-						</td>
-					</tr>
-				</table>
-			
+		    	
+		    	<div class="stats">
+				    <table>
+						<tr>
+							<td> 
+								<span class="stat xp">
+									<b>XP:</b> <%= player.getXp() %>
+								</span>
+							</td>
+							<td>
+								<span class="stat coins">
+									<b>Coins:</b> <%= player.getCoins() %></a></br>
+								<span>
+							</td>
+						</tr>
+						
+					</table>
+
+					<table>
+						<tr >
+							<td>
+								<span class="stat award">
+									<small>Next award: <%= readableUntilCoinAward %></small>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+
 				<div class="results-container">
 					<div class="results">
+						
 					    <h3>Hello <%= player.getName() %>!</h3>    
 					    <% if (coinsAwarded > 0) { %>
 					    	<div class="bonus">
