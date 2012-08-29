@@ -652,6 +652,13 @@ a.close {
 
 .level-1 .header-logo, .level-1 .stats, .level-1 .spin-container, .level-1 .spin-controls{
 	background: #5d371f;
+	-moz-box-shadow: inset 0px 0px 5px #000;
+	-webkit-box-shadow: inset 0px 0px 5px black;
+	box-shadow: inset 0px 0px 5px black;
+}
+
+.level-1 .wrapper {
+	background: url(../images/level-1/level-1-bg.jpg);
 }
 
 

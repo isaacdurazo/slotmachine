@@ -48,6 +48,13 @@ if (action != null) {
 		return;
 	}
 }
+java.util.List<Achievement> earnedAchievements = null;
+	try {
+		earnedAchievements = AchievementService.getInstance().grantAchievements(player, 
+				AchievementService.Type.SESSION, AchievementService.Type.INVITE);	
+	} catch (Exception e) {
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
+	}
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
@@ -248,10 +255,36 @@ if (action != null) {
 					    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
 					    	</div> 
 					    <% } %>
-						<div id="achievements" class="achievements" style='display:none'>							
-							You earned <span id="achievement_title_text"></span> and <span id="achievement_title_coins"></span> coins!
-							<ul></ul>
-						</div>
+
+						<% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
+						
+							<div class="achievements">
+								<h1>CONGRATULATIONS!</h1>
+								
+								<%
+								int coinsEarned = 0;
+								for (Achievement achievement : earnedAchievements) { coinsEarned += achievement.getCoinsAwarded(); }
+								%>
+								
+								<h2>You completed <%= earnedAchievements.size() > 1 ? "an achievement" : "achievements" %> and won <%= coinsEarned %> coins!</h2>
+								
+								<ul style="display: none">
+									<% for (Achievement achievement : earnedAchievements) { %>
+									<li><%= achievement.getTitle() %></li>
+									<% } %>
+								</ul>
+								
+								<a class="close" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?"+cacheBuster, response) %>" ></a>
+								
+								<div class="play">
+									<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?"+cacheBuster, response) %>">Continue</a>
+								</div>
+								
+							</div>
+							
+							<div class="overlay"></div>
+						
+						<% } %>
 						
 						<div id="jackpot" class="goldtext delay" style="display:none;">
 							You WON the Moco Gold Jackpot<br />
