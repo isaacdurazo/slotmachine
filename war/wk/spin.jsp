@@ -316,16 +316,27 @@ if (action != null) {
 						</table>
 					</div>					
 				</div>	
-				<% if (player.hasAdminPriv() || (player.getGoldDebitted() == 0 && player.getMocoId() % 2 == 0)) { %>
-				<iframe id="ad" src="/wk/ad.jsp" height="59" width="320" scrolling="no" style="border:0;margin:-11px 0 0 -16px;"></iframe>
-				<script type="text/javascript">
-					var reloadAd = function() {
-						console.log('reloading ad');
-						document.getElementById('ad').contentWindow.location.reload();
+				<% if (player.hasAdminPriv() || player.getGoldDebitted() == 0) { %>
+					<% if (Boolean.getBoolean("wk.ad.use.iframe")) { %>
+					<iframe id="ad" src="/wk/ad.jsp" sandbox="allow-top-navigation" height="59" width="320" scrolling="no" style="border:0;margin:-11px 0 0 -16px;"></iframe>
+					<script type="text/javascript">
+						var reloadAd = function() {
+							console.log('reloading ad');
+							document.getElementById('ad').contentWindow.location.reload();
+							setTimeout(reloadAd,10000);
+						}
 						setTimeout(reloadAd,10000);
-					}
-					setTimeout(reloadAd,10000);
-				</script>					
+					</script>					
+					<% } else { %>
+					<script type="text/javascript">
+						google_ad_client = "ca-pub-1639537201849581";
+						/* wk spin */
+						google_ad_slot = "1288785559";
+						google_ad_width = 320;
+						google_ad_height = 50;
+					</script>
+					<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+					<% } %>
 				<% } %>
 				<div class="spin-controls">
 										
