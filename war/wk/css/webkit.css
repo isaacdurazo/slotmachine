@@ -643,3 +643,16 @@ a.close {
 .disable {
 	opacity: 0.4;
 }
+
+/*----------------------*/
+
+/*  Level 1 - Old West  */
+
+/*----------------------*/
+
+.level-1 .header-logo, .level-1 .stats, .level-1 .spin-container, .level-1 .spin-controls{
+	background: #5d371f;
+}
+
+
+
