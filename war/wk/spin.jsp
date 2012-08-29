@@ -316,17 +316,16 @@ if (action != null) {
 						</table>
 					</div>					
 				</div>	
-				<% if (player.hasAdminPriv()) { %>
+				<% if (player.hasAdminPriv() || (player.getGoldDebitted() == 0 && player.getMocoId() % 5 == 0)) { %>
+				<iframe id="ad" src="/wk/ad.jsp" height="59" width="320" scrolling="no" style="border:0"></iframe>
 				<script type="text/javascript">
-					<!--
-					google_ad_client = "ca-pub-1639537201849581";
-					/* webkit spin */
-					google_ad_slot = "2374867065";
-					google_ad_width = 728;
-					google_ad_height = 90;
-					//-->
-				</script>
-				<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+					var reloadAd = function() {
+						console.log('reloading ad');
+						document.getElementById('ad').contentWindow.location.reload();
+						setTimeout(reloadAd,10000);
+					}
+					setTimeout(reloadAd,10000);
+				</script>					
 				<% } %>
 				<div class="spin-controls">
 										
