@@ -316,8 +316,8 @@ if (action != null) {
 						</table>
 					</div>					
 				</div>	
-				<% if (player.hasAdminPriv() || (player.getGoldDebitted() == 0 && player.getMocoId() % 5 == 0)) { %>
-				<iframe id="ad" src="/wk/ad.jsp" height="59" width="320" scrolling="no" style="border:0"></iframe>
+				<% if (player.hasAdminPriv() || (player.getGoldDebitted() == 0 && player.getMocoId() % 2 == 0)) { %>
+				<iframe id="ad" src="/wk/ad.jsp" height="59" width="320" scrolling="no" style="border:0;margin:-11px 0 0 -16px;"></iframe>
 				<script type="text/javascript">
 					var reloadAd = function() {
 						console.log('reloading ad');
