@@ -6,9 +6,9 @@
 Player currPlayer = (Player)request.getAttribute("player");
 if (currPlayer != null && (currPlayer.getMocoId()%2==0 || currPlayer.hasAdminPriv())) {
 %>
-<!-- Ads on for this user-->
+<!-- Ads on for this user--> 
 <% 
-BufferedReader in = null;
+BufferedReader in = null;  
 try {
 
 //for odd uid show ads
@@ -49,8 +49,8 @@ if (googleUserAgent == null || googleUserAgent.length() == 0) {
 	
   URL googleAdUrl = new URL(googleAdUrlStr.toString());
   HttpURLConnection c = (HttpURLConnection) googleAdUrl.openConnection();
-  c.setConnectTimeout(100);
-  c.setReadTimeout(100);
+  c.setConnectTimeout(Integer.getInteger("wap.ad.timeout",200));
+  c.setReadTimeout(Integer.getInteger("wap.ad.timeout",200));
   c.setRequestMethod("GET");
   // Read the response
   in = new BufferedReader(new InputStreamReader(c.getInputStream()));

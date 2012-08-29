@@ -118,10 +118,10 @@ if (action != null) {
 								for (var i=0;i<achievements.length;i++) {
 									coinsEarned += achievements[i].coins;
 									currCoins += achievements[i].coins;;
-									achievementText += '<li>'+achievements[i].title+'</li>';
+									achievementText += '<li><small>'+achievements[i].title+'<small></li>';
 								}
 								document.getElementById('achievement_title_coins').innerHTML = coinsEarned;
-								document.querySelector('#achievements ul').innerHTML = achievementText;
+								document.querySelector("#achievements ul").innerHTML = achievementText;
 							}
 							
 							currCoins += coins;
@@ -219,7 +219,7 @@ if (action != null) {
 		}, false);
 	</script>
   <body>
-  	<div id="container" class="level-1">
+  	<div id="container"<%-- class="level-1" --%>>
 	  	<div class="wrapper">
 		    <div class="header-logo">
 		    	<img width="154" height="48" src="/wk/images/logo.png"/>
@@ -250,7 +250,7 @@ if (action != null) {
 					    <% } %>
 						<div id="achievements" class="achievements" style='display:none'>							
 							You earned <span id="achievement_title_text"></span> and <span id="achievement_title_coins"></span> coins!
-							
+							<ul></ul>
 						</div>
 						
 						<div id="jackpot" class="goldtext delay" style="display:none;">
@@ -316,7 +316,18 @@ if (action != null) {
 						</table>
 					</div>					
 				</div>	
-				
+				<% if (player.hasAdminPriv()) { %>
+				<script type="text/javascript">
+					<!--
+					google_ad_client = "ca-pub-1639537201849581";
+					/* webkit spin */
+					google_ad_slot = "2374867065";
+					google_ad_width = 728;
+					google_ad_height = 90;
+					//-->
+				</script>
+				<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+				<% } %>
 				<div class="spin-controls">
 										
 					<table class="bets" align="center" >
