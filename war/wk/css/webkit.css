@@ -74,11 +74,12 @@ table {
   	-webkit-box-shadow: inset 0px 0px 5px  #000;
   	box-shadow: inset 0px 0px 5px  #000;
 }
-
+/*
 .content {
-	border: 4px solid #c1c1c1;
+	 border: 4px solid #c1c1c1; 
 	padding: 9px;
 }
+*/
 
 .spin-controls {
 	text-align: center;
@@ -642,6 +643,20 @@ a.close {
 
 .disable {
 	opacity: 0.4;
+}
+
+
+.stats-container, .payout-table {
+	margin-top: 9px;
+}
+
+.stats-container, .results-container, .spin-container, .spin-controls, .jackpotteaser-container, .list-container, .payout-table, .payout-table {
+	margin-right: 9px;
+	margin-left: 9px;
+}
+
+iframe {
+	text-align: center;
 }
 
 /*----------------------*/

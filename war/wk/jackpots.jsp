@@ -11,17 +11,17 @@
 				</div>
 					
 				<div class="content">
-					
-					<table class="stats">
-						<tr>
-							<td>
-								<span class="stat">
-									Jackpot Hall Of Fame
-								</span>
-							</td>
-						</tr>
-					</table>
-					
+		    		<div class="stats-container">
+						<table class="stats">
+							<tr>
+								<td>
+									<span class="stat">
+										Jackpot Hall Of Fame
+									</span>
+								</td>
+							</tr>
+						</table>
+					</div>
 				    <div class="subheader">
 				    	Recent Moco Gold Jackpot winers
 				    </div>

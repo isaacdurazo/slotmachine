@@ -9,17 +9,17 @@
 			    </div>
 			    
 				<div class="content">
-			   		
-			   		<table class="stats">
-			   			<tr>
-			   				<td>
-								<span class="stat">
-			   						The best way to WIN <span class="goldtext">Moco Gold</span>
-			   					</span>
-			   				</td>
-			   			</tr>
-			   		</table>
-
+		    		<div class="stats-container">
+				   		<table class="stats">
+				   			<tr>
+				   				<td>
+									<span class="stat">
+				   						The best way to WIN <span class="goldtext">Moco Gold</span>
+				   					</span>
+				   				</td>
+				   			</tr>
+				   		</table>
+			   		</div>
 					<%@ include file="message.jsp" %>
 		    
 				    <div class="subheader">Play slots, have fun and win prizes:</div>

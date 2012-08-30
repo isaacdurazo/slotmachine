@@ -17,7 +17,7 @@
 		    	<img width="154" height="48" src="/wk/images/logo.png"/>
 		    </div>
 		    <div class="content">
-		    		
+		    	<div class="stats-container">
 		    		<table class="stats">
 						<tr>
 							<td>
@@ -27,7 +27,7 @@
 							</td>
 						</tr>
 					</table>
-					
+				</div>
 		  		<div class="achievement-container">
 		  			<% for (Pair<Achievement,Boolean> pair : AchievementService.getInstance().getAchievements(player)) { %>
 		  				<table id="achievement-entity" <%= pair.getElement2() ? "" : "class='disable'"%>>

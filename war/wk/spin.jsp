@@ -233,20 +233,22 @@ java.util.List<Achievement> earnedAchievements = null;
 		    </div>
 		    
 		    <div class="content">
-			    <table class="stats">
-			    	<tr>
-						<td>
-							<span class="stat xp">
-								<b>XP:</b> <span id="player_xp"><%= player.getXp() %></span>
-							</span>
-						</td>
-						<td>
-							<span class="stat coins">
-								<b>Coins:</b> <span id="player_coins" class="delay inline"><%= player.getCoins() %></span>
-							</span>
-						</td>
-					</tr>
-				</table>
+		    	<div class="stats-container">
+				    <table class="stats">
+				    	<tr>
+							<td>
+								<span class="stat xp">
+									<b>XP:</b> <span id="player_xp"><%= player.getXp() %></span>
+								</span>
+							</td>
+							<td>
+								<span class="stat coins">
+									<b>Coins:</b> <span id="player_coins" class="delay inline"><%= player.getCoins() %></span>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
 				
 				<div class="results-container">
 					<div class="results">

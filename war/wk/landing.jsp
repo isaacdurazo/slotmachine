@@ -16,17 +16,17 @@
 				</div>
 				
 				<div class="content">
-				
-					<table class="stats">
-			   			<tr>
-			   				<td>
-								<span class="stat">
-									You must be logged in to MocoSpace to play this game!
-								</span>
-							</td>
-						</tr>
-					</table>
-					
+		    		<div class="stats-container">
+						<table class="stats">
+				   			<tr>
+				   				<td>
+									<span class="stat">
+										You must be logged in to MocoSpace to play this game!
+									</span>
+								</td>
+							</tr>
+						</table>
+					</div>
 					<table class="menu">
 						<tr>
 							<td>

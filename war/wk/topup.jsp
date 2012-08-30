@@ -134,17 +134,17 @@ if (isWebkit) {
 			<%@ include file="message.jsp" %>		    
 		    
 		    <div class="content">
-		    
-		    	<table class="stats">
-					<tr>
-						<td>
-							<span class="stat">
-								Increase your chance to win the Jackpot<br/>Buy Coins!
-							</span>	
-						</td>
-					</tr>
-				</table>
-			    
+		    	<div class="stats-container">
+			    	<table class="stats">
+						<tr>
+							<td>
+								<span class="stat">
+									Increase your chance to win the Jackpot<br/>Buy Coins!
+								</span>	
+							</td>
+						</tr>
+					</table>
+			    </div>
 				<div class="buy-container">
 					<form action="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>" method="get">
 						<div>
