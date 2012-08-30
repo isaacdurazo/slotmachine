@@ -9,7 +9,7 @@
     <% 
     // @todo fix this hack - GAE will not compile the jsp if I just use isWebkit here...
     if (ServletUtils.isWebKitDevice(request)) {%>
-    <link rel="stylesheet" href="css/webkit.css" />
+    <link rel="stylesheet" href="/wk/css/webkit.css" />
     <script src="http://cdn-img.mocospace.com/wk/js/opensocial/opensocial.js"></script>
     <script type="text/javascript">
     	document.addEventListener('DOMContentLoaded', function(e) {
