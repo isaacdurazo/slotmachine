@@ -12,4 +12,10 @@
       <task-retry-limit>1</task-retry-limit>
     </retry-parameters>
   </queue>
+  <queue>
+  	<name>sessions</name>
+  	<rate>50/s</rate>
+  	<bucket-size>40</bucket-size>
+  	<max-concurrent-requests>10</max-concurrent-requests>
+  </queue>
 </queue-entries>
