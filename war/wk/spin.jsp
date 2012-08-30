@@ -120,7 +120,6 @@ java.util.List<Achievement> earnedAchievements = null;
 						'<div class="lights top"></div>'+
 						'<div class="lights bottom"></div>'+
 					'</div>';
-				
 				// make AJAX request
 				opensocial.ajax({
 					url:'/wk/spin.jsp',
@@ -170,22 +169,9 @@ java.util.List<Achievement> earnedAchievements = null;
 								document.getElementById('won_result').innerHTML = 
 									'<img width="13" height="11" src="images/animated-star.gif"/>WON '+coins+' coins! '+
 									'<img width="13" height="11" src="images/animated-star.gif"/>';								
-							}
-							document.getElementById('lights').innerHTML = 
-								'<div class="lights-'+(coins == 0 ? 'off' : 'win')+' delay" style="display:none;">'+
-									'<div class="lights left"></div>'+
-									'<div class="lights right"></div>'+
-									'<div class="lights top"></div>'+
-									'<div class="lights bottom"></div>'+
-								'</div>'+
-								'<div class="lights-'+(coins == 0 ? 'off' : 'win')+' delay" style="display:none;">'+
-									'<div class="lights left"></div>'+
-									'<div class="lights right"></div>'+
-									'<div class="lights top"></div>'+
-									'<div class="lights bottom"></div>'+
-								'</div>';
+							}							
 							document.querySelector('table.spins tr').innerHTML =
-								'<td>'+
+								'<td style="float: right;">'+
 									'<div>'+
 										'<span id="spin-animation-1">'+
 										'<span class="shadows"></span>'+
@@ -203,7 +189,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									'<img width="70" height="102" src="/wk/<%=imageLocation%>comb-'+symbol[1]+'.jpg"/>'+
 									'</div>'+
 								'</td>'+
-								'<d>'+
+								'<td style="float: left;">'+
 									'<div>'+
 										'<span id="spin-animation-3">'+
 										'<span class="shadows"></span>'+
@@ -234,6 +220,19 @@ java.util.List<Achievement> earnedAchievements = null;
 						  				elems[i].style.display = elems[i].className.indexOf('inline') == -1 ? 'block' : 'inline-block';
 						  			}
 						  		}
+						  		document.getElementById('lights').innerHTML = 
+									'<div class="lights-'+(coins == 0 ? 'off' : 'win')+'">'+
+										'<div class="lights left"></div>'+
+										'<div class="lights right"></div>'+
+										'<div class="lights top"></div>'+
+										'<div class="lights bottom"></div>'+
+									'</div>'+
+									'<div class="lights-'+(coins == 0 ? 'off' : 'win')+'">'+
+										'<div class="lights left"></div>'+
+										'<div class="lights right"></div>'+
+										'<div class="lights top"></div>'+
+										'<div class="lights bottom"></div>'+
+									'</div>';
 					  		}, 1800); 	
 						}
 					},
