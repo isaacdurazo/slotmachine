@@ -169,9 +169,9 @@ java.util.List<Achievement> earnedAchievements = null;
 								document.getElementById('won_result').innerHTML = 
 									'<img width="13" height="11" src="images/animated-star.gif"/>WON '+coins+' coins! '+
 									'<img width="13" height="11" src="images/animated-star.gif"/>';								
-							}							
-							document.querySelector('table.spins tr').innerHTML =
-								'<td style="float: right;">'+
+							}			
+							document.querySelector('table.spins').innerHTML =
+								'<tr><td style="float: right;">'+
 									'<div>'+
 										'<span id="spin-animation-1">'+
 										'<span class="shadows"></span>'+
@@ -197,7 +197,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									'</span>'+
 									'<img width="70" height="102" src="/wk/<%=imageLocation%>comb-'+symbol[2]+'.jpg"/>'+
 									'</div>'+
-								'</td>';
+								'</td></tr>';
 							
 							// show animations
 							setTimeout(function() {
