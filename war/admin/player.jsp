@@ -40,9 +40,16 @@ if ("awardCoins".equals(request.getParameter("action")) && coins > 0 && player !
 				</tr>
 				<tr>
 					<td><%= mocoId %></td>
-					<td><%= mocoPlayer %></td>
+					<td><%= mocoPlayer %></td>					
 				</tr>
 			</table>
+			<h3>Earned Achievements</h3>
+			<ul>
+			<% java.util.List<Pair<Achievement,Boolean>> achievements = AchievementService.getInstance().getAchievements(mocoPlayer); 
+			for (Pair<Achievement,Boolean> achievementPair : achievements) { if (!achievementPair.getElement2()) continue;%>
+				<li><%= achievementPair.getElement1().getTitle() %></li>
+			<% } %>
+			</ul>
 			<form action="/admin/player.jsp" method="GET">
 				<input type="hidden" name="mocoId" value="<%= mocoId %>"/>
 				<input type="hidden" name="action" value="awardCoins"/>

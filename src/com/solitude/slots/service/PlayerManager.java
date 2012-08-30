@@ -303,7 +303,6 @@ public class PlayerManager {
 						new OpenSocialService.ScoreUpdate((short)2, player.getCoinsWon(), false));
 			} catch (Exception ex) {
 				log.log(Level.WARNING,"error submitting synchronous score for player: "+player,ex);
-				throw new RuntimeException(ex);
 			}			
 		}
 	}
@@ -320,8 +319,8 @@ public class PlayerManager {
 					Player player = GAECacheManager.getInstance().get(info.player.getId(), Player.class);
 					if (player == null) player = info.player;
 					GAEDataManager.getInstance().store(player);
-					updatePlayerLeaderboards(player);
 					playerIDtoCoinXPMap.remove(player.getId());
+					updatePlayerLeaderboards(player);
 					log.log(Level.FINEST, "flushing player: "+player);
 				}
 			} catch (Exception e) {

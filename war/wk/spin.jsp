@@ -62,7 +62,18 @@ java.util.List<Achievement> earnedAchievements = null;
 		var xp = <%= player.getXp()%>;
 		var currCoins = <%= player.getCoins() %>;
 		var btnClicked = false;
+		var spinsRemaining = 10;
+		var accessToken = "<%=request.getParameter("accessToken")%>";
 		document.addEventListener('DOMContentLoaded', function() {
+			var closeBtns = document.querySelectorAll(".achievements .close, .achievements .play a");
+			for (var i=0;i<closeBtns.length;i++) {
+				closeBtns[i].addEventListener('click', function(e) {
+					document.querySelector('.achievements').style.display = 'none';	
+					document.querySelector('.overlay').style.display = 'none';
+					e.preventDefault();
+					return false;
+				},false);
+			}
 			document.querySelector('.max_spin_button').addEventListener('click', function(e) {
 				e.preventDefault();
 				spin(true);
@@ -71,8 +82,16 @@ java.util.List<Achievement> earnedAchievements = null;
 				e.preventDefault();
 				spin();
 			}, false);
+			<% if ("true".equals(request.getParameter("reload"))) { %>
+				spin(<%= "true".equals(request.getParameter("maxBet")) %>);
+			<% } %>
 			function spin(isMax) {
 				if (btnClicked) return;
+				if (spinsRemaining-- <= 0) {
+					window.location.href = "/wk/spin.jsp?accessToken="+encodeURIComponent(accessToken)+
+							"&reload=true&maxBet="+isMax;
+					return;
+				}
 				currCoins -= isMax ? 3 : 1;
 				btnClicked = true;
 				// reset set
@@ -86,7 +105,7 @@ java.util.List<Achievement> earnedAchievements = null;
 				document.getElementById('lost_result').className = '';
 				document.getElementById('won_result').style.display = 'none';
 				document.getElementById('won_result').className = '';
-				document.getElementById('achievements').style.display = 'none';		
+				document.querySelector('.achievements').style.display = 'none';		
 				document.getElementById('player_coins').style.display = 'none';
 				document.getElementById('lights').innerHTML = 
 					'<div class="lights-off">'+
@@ -118,7 +137,8 @@ java.util.List<Achievement> earnedAchievements = null;
 							document.getElementById('player_xp').innerHTML = ++xp;
 							
 							if (achievements) {
-								document.getElementById('achievements').style.display = 'block';
+								document.querySelector('.overlay').style.display = 'block';
+								document.querySelector('.achievements').style.display = 'block';
 								document.getElementById('achievement_title_text').innerHTML = 'achievement'+(achievements.length == 1 ? '' : 's');
 								var coinsEarned = 0;
 								var achievementText = '';
@@ -128,7 +148,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									achievementText += '<li><small>'+achievements[i].title+'<small></li>';
 								}
 								document.getElementById('achievement_title_coins').innerHTML = coinsEarned;
-								document.querySelector("#achievements ul").innerHTML = achievementText;
+								document.querySelector(".achievements ul").innerHTML = achievementText;
 							}
 							
 							currCoins += coins;
@@ -183,7 +203,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									'<img width="70" height="102" src="/wk/<%=imageLocation%>comb-'+symbol[1]+'.jpg"/>'+
 									'</div>'+
 								'</td>'+
-								'<td>'+
+								'<d>'+
 									'<div>'+
 										'<span id="spin-animation-3">'+
 										'<span class="shadows"></span>'+
@@ -257,37 +277,22 @@ java.util.List<Achievement> earnedAchievements = null;
 					    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
 					    	</div> 
 					    <% } %>
-
-						<% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
 						
-							<div class="achievements">
+							<div class="achievements" style="display:none">
 								<h1>CONGRATULATIONS!</h1>
 								
-								<%
-								int coinsEarned = 0;
-								for (Achievement achievement : earnedAchievements) { coinsEarned += achievement.getCoinsAwarded(); }
-								%>
+								<h2>You completed <span id="achievement_title_text"></span> and won <span id="achievement_title_coins"></span> coins!</h2>
 								
-								<h2>You completed <%= earnedAchievements.size() > 1 ? "an achievement" : "achievements" %> and won <%= coinsEarned %> coins!</h2>
+								<ul></ul>
 								
-								<ul style="display: none">
-									<% for (Achievement achievement : earnedAchievements) { %>
-									<li><%= achievement.getTitle() %></li>
-									<% } %>
-								</ul>
-								
-								<a class="close" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?"+cacheBuster, response) %>" ></a>
+								<a class="close" href="#" ></a>
 								
 								<div class="play">
-									<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?"+cacheBuster, response) %>">Continue</a>
+									<a href="#">Continue</a>
 								</div>
-								
 							</div>
-							
-							<div class="overlay"></div>
-						
-						<% } %>
-						
+							<div class="overlay" style="display:none"></div>															
+																			
 						<div id="jackpot" class="goldtext delay" style="display:none;">
 							You WON the Moco Gold Jackpot<br />
 							<img width="112" height="14" src="images/jackpot-winner.gif"/>
