@@ -245,7 +245,7 @@ java.util.List<Achievement> earnedAchievements = null;
 		}, false);
 	</script>
   <body>
-  	<div id="container"<%-- class="level-1" --%>>
+  	<div id="container">
 	  	<div class="wrapper">
 		    <div class="header-logo">
 		    	<img width="154" height="48" src="/wk/images/logo.png"/>
