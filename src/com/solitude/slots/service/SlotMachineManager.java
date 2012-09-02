@@ -137,8 +137,8 @@ public class SlotMachineManager {
 			if (!Boolean.getBoolean("jackpot.disabled") && spinResult != null && Arrays.equals(spinResult.getSymbols(), new int[]{0,0,0})) {
 				// get recent jackpot winners
 				List<JackpotWinner> winners = this.getRecentJackpotWinners();
-				if (winners == null || winners.isEmpty() || 
-						System.currentTimeMillis() - winners.get(0).getCreationtime() > TimeUnit.MILLISECONDS.convert(5, TimeUnit.DAYS)) {
+				if (player.getXp()>200 && (winners == null || winners.isEmpty() || 
+						System.currentTimeMillis() - winners.get(0).getCreationtime() > TimeUnit.MILLISECONDS.convert(5, TimeUnit.DAYS)) ) {
 					// create winner entry
 					JackpotWinner newWinner = new JackpotWinner();
 					newWinner.setPlayerId(player.getId());
@@ -167,7 +167,7 @@ public class SlotMachineManager {
 					try {
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
 								"Jackpot miss", 
-								"Jackpot candidate within 7days since last jackpot = miss. player id: "+player.getId()+", moco id: "+player.getMocoId()+ ", xp: "+player.getXp());
+								"Jackpot candidate within 7days since last jackpot or XP<200 = miss. player id: "+player.getId()+", moco id: "+player.getMocoId()+ ", xp: "+player.getXp());
 					} catch (Exception e) {
 						log.log(Level.SEVERE,"Error sending jackpot miss notification, player id: "+player.getId(),e);
 					}					
@@ -192,7 +192,7 @@ public class SlotMachineManager {
 		player.setXp(player.getXp()+1);
 		PlayerManager.getInstance().storePlayer(player, true);
 		
-		log.log(Level.INFO,"spin|random="+idx+", custom="+fCustomProbability+", bet="+coins+", "+spinResult+"|uid|"+player.getMocoId());
+		log.log(Level.INFO,"spin|random="+idx+", custom="+fCustomProbability+", bet="+coins+", "+spinResult+", coins_after="+player.getCoins()+" |uid|"+player.getMocoId());
 		return spinResult;
 	}
 
