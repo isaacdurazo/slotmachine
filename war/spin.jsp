@@ -139,7 +139,7 @@ int key = 1;
 			<% } %>
 			<% if (player.getGoldDebitted() == 0) { %>
 				<div id="ad">
-					<%@ include file="/googlead_wap.jsp" %>			
+					<%@ include file="/mmad_wap.jsp" %>			
 				</div>				
 			<% } %>
 		    
