@@ -137,9 +137,9 @@ public class SlotMachineManager {
 			if (!Boolean.getBoolean("jackpot.disabled") && spinResult != null && Arrays.equals(spinResult.getSymbols(), new int[]{0,0,0})) {
 				// get recent jackpot winners
 				List<JackpotWinner> winners = this.getRecentJackpotWinners();
-				if (player.getXp()>200 && (winners == null || winners.isEmpty() || 
+				if (player.getXp()>200  &&  (winners == null || winners.isEmpty() || 
 						System.currentTimeMillis() - winners.get(0).getCreationtime() > TimeUnit.MILLISECONDS.convert(5, TimeUnit.DAYS)) ) {
-					// create winner entry
+					// create winner entry only if XP>200 and >5days since last JP - otherwise respin					
 					JackpotWinner newWinner = new JackpotWinner();
 					newWinner.setPlayerId(player.getId());
 					newWinner.setGold(GameUtils.getGlobalProps().getMocoGoldPrize());
