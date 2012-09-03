@@ -169,7 +169,11 @@ java.util.List<Achievement> earnedAchievements = null;
 								document.getElementById('won_result').innerHTML = 
 									'<img width="13" height="11" src="images/animated-star.gif"/>WON '+coins+' coins! '+
 									'<img width="13" height="11" src="images/animated-star.gif"/>';								
-							}			
+							}
+							var s1="/wk/<%=imageLocation%>comb-"+symbol[0]+".jpg";
+							var s2="/wk/<%=imageLocation%>comb-"+symbol[1]+".jpg";
+							var s3="/wk/<%=imageLocation%>comb-"+symbol[2]+".jpg";
+							
 							document.querySelector('table.spins').innerHTML =
 								'<tr><td style="float: right;">'+
 									'<div>'+
@@ -177,7 +181,7 @@ java.util.List<Achievement> earnedAchievements = null;
 										'<span class="shadows"></span>'+
 										'<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249"/>'+
 									'</span>'+
-									'<img width="70" height="102" src="/wk/<%=imageLocation%>comb-'+symbol[0]+'.jpg"/>'+
+									'<img width="70" height="102" src="'+s1+'"/>'+
 									'</div>'+
 								'</td>'+
 								'<td>'+
@@ -186,7 +190,7 @@ java.util.List<Achievement> earnedAchievements = null;
 										'<span class="shadows"></span>'+
 										'<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249"/>'+
 									'</span>'+
-									'<img width="70" height="102" src="/wk/<%=imageLocation%>comb-'+symbol[1]+'.jpg"/>'+
+									'<img width="70" height="102" src="'+s2+'"/>'+
 									'</div>'+
 								'</td>'+
 								'<td style="float: left;">'+
@@ -195,7 +199,7 @@ java.util.List<Achievement> earnedAchievements = null;
 										'<span class="shadows"></span>'+
 										'<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249"/>'+
 									'</span>'+
-									'<img width="70" height="102" src="/wk/<%=imageLocation%>comb-'+symbol[2]+'.jpg"/>'+
+									'<img width="70" height="102" src="'+s2+'"/>'+
 									'</div>'+
 								'</td></tr>';
 							

@@ -192,7 +192,7 @@ public class SlotMachineManager {
 		player.setXp(player.getXp()+1);
 		PlayerManager.getInstance().storePlayer(player, true);
 		
-		log.log(Level.INFO,"spin|random="+idx+", custom="+fCustomProbability+", bet="+coins+", "+spinResult+", coins_after="+player.getCoins()+" |uid|"+player.getMocoId());
+		log.log(Level.INFO,"spin|rnd="+idx+", cust="+fCustomProbability+", bet="+coins+", "+spinResult+", coins="+player.getCoins()+" |uid|"+player.getMocoId());
 		return spinResult;
 	}
 

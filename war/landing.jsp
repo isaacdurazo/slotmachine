@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Slot Mania</title>
     <% if (isWebkit) {%>
-    <link rel="stylesheet" href="css/webkit.css" />    
+    <link rel="stylesheet" href="/wk/css/webkit.css" />    
 	<% } else { %>
     <link rel="stylesheet" href="css/wap.css" />    
 	<%} %>

@@ -18,9 +18,9 @@
 	}
 
 	//default values
-	int starthrs=24;
-	int endhrs=12;
-	int max=10000;
+	int starthrs=48;
+	int endhrs=24;
+	int max=15000;
 
 	String subject = request.getParameter("subject");
 	String message = request.getParameter("message");
@@ -116,7 +116,7 @@
 	// below does not work - XML errors on WAP in resulting inbox msg...
 	//	if (message==null) message = "Hi, we have a new <a href=\"http://www.mocospace.com/games?source=inbox&gid=1252&next=jackpots\">MocoGold Jackpot winner</a> in SlotMania.<br/>"+
 	//	" The next Jackpot is waiting for you - hurry up and <a href=\"http://www.mocospace.com/games?source=inbox&gid=1252\">spin now</a> before somebody else wins! <br/><br/>The more you spin the more likely you win!";
-	if (message==null) message = "We have a new MocoGold Jackpot winner in SlotMania - check the Jackpot Winners List.<br/>The Jackpot increases every day until somebody wins - hurry up and play NOW!<br/><br/>The more you spin the more likely you win!";
+	if (message==null) message = "Congratulations to our latest MocoGold Jackpot winner in SlotMania - check the Jackpot Winners List.<br/>The Jackpot is now 888 Gold - hurry up and Play Now to win the Jackpot before somebody else wins!<br/><br/>The more you spin the more likely you win!";
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -132,9 +132,9 @@
 			<label for="message">Message:</label><br/>
 			<textarea rows="3" cols="80" name="message"><%=message%></textarea><br/>
 			<small>(only plain text - no HTML!)</small><br/><br/>
-			<label for="key">Played in timeframe between:</label>
-			<input type="number" name="starthrsS" value="<%=starthrs%>"></input> and 
-			<input type="number" name="endhrsS" value="<%=endhrs%>"></input> <br/>
+			<label for="key">Played in timeframe from:</label>
+			<input type="number" name="starthrsS" value="<%=starthrs%>"></input> hrs ago to 
+			<input type="number" name="endhrsS" value="<%=endhrs%>"></input> hrs ago<br/>
 			<label for="key">Max # of recipients:</label>
 			<input type="number" name="maxS" value="<%=max%>"></input><br/>
 			<small>(max 20000 recipients)</small><br/>
