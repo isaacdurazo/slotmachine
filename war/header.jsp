@@ -10,7 +10,7 @@ Player player = (Player)request.getAttribute("player");
 // logic to do animated/static images based on browser support
 String imageLocation = "images/";
 if (!isWebkit) {
-	imageLocation="images/animated-2/";
+	imageLocation="images/animated/";
 	if (!hasAnimGifSupport) {
 		imageLocation="images/";
 	}
