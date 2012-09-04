@@ -63,7 +63,7 @@ java.util.List<Achievement> earnedAchievements = null;
 		var currCoins = <%= player.getCoins() %>;
 		var btnClicked = false;
 		var spinsRemaining = 10;
-		var accessToken = "<%=request.getParameter("accessToken")%>";
+		var accessToken = "<%= player.getAccessToken()%>";
 		document.addEventListener('DOMContentLoaded', function() {
 			var closeBtns = document.querySelectorAll(".achievements .close, .achievements .play a");
 			for (var i=0;i<closeBtns.length;i++) {
@@ -173,7 +173,7 @@ java.util.List<Achievement> earnedAchievements = null;
 							var s1="/wk/<%=imageLocation%>comb-"+symbol[0]+".jpg";
 							var s2="/wk/<%=imageLocation%>comb-"+symbol[1]+".jpg";
 							var s3="/wk/<%=imageLocation%>comb-"+symbol[2]+".jpg";
-							console.log("Spin AJAX symbol="+data.symbol+" s1="+s1+" s2="+s2+" s3="+s3);
+							console.log("Spin AJAX s1="+s1+" s2="+s2+" s3="+s3);
 							document.querySelector('table.spins').innerHTML =
 								'<tr><td style="float: right;">'+
 									'<div>'+
