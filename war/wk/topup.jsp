@@ -108,14 +108,19 @@ if (isWebkit) {
 							throw 'unknown option: '+desc;
 					}
 					// TODO: image
+					try {_gaq.push(['_trackEvent', 'Topup', 'start', desc, gold]);} catch (err) {console.error(err);}
 					var image;
 					MocoSpace.goldTransaction(gold,desc,{
 							onSuccess: function(id,timestamp,token) {
 								// redirect with those parameters
+								try {_gaq.push(['_trackEvent', 'Topup', 'success', desc, gold]);} catch (err) {console.error(err);}
 								window.location = '/wk/topup.jsp?accessToken=<%= player.getAccessToken() %>&action=widget&id='+id+'&timestamp='+timestamp+'&token='+token+'&gold='+gold;
 							},
 							onError: function(error) {
 								console.error(error);
+							},
+							onAbort: function() {
+								try {_gaq.push(['_trackEvent', 'Topup', 'cancel', desc, gold]);} catch (err) {console.error(err);}
 							}
 						},image);
 				};
@@ -184,5 +189,6 @@ if (isWebkit) {
 			</div>
 		</div>
 	</div>
+	<%@ include file="/wk/ga.jsp" %>
   </body>
 </html>

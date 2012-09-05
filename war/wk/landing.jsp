@@ -41,6 +41,6 @@
 				</div>
 			</div>
 		</div>
-		
+		<%@ include file="/wk/ga.jsp" %>
 	</body>
 </html>

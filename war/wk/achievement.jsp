@@ -49,5 +49,6 @@
 		</div>
 	</div>
 	<%@ include file="/wk/footer.jsp" %>
+	<%@ include file="/wk/ga.jsp" %>
   </body>
 </html>

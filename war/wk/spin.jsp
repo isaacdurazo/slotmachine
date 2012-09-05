@@ -62,7 +62,7 @@ java.util.List<Achievement> earnedAchievements = null;
 		var xp = <%= player.getXp()%>;
 		var currCoins = <%= player.getCoins() %>;
 		var btnClicked = false;
-		var spinsRemaining = 10;
+		var spinsRemaining = 5;
 		var accessToken = "<%= player.getAccessToken()%>";
 		document.addEventListener('DOMContentLoaded', function() {
 			var closeBtns = document.querySelectorAll(".achievements .close, .achievements .play a");
@@ -92,6 +92,7 @@ java.util.List<Achievement> earnedAchievements = null;
 							"&reload=true&maxBet="+isMax;
 					return;
 				}
+				try {_gaq.push(['_trackEvent', 'Spin', isMax ? 'Max' : 'Min']);} catch (err) {console.error(err);}
 				currCoins -= isMax ? 3 : 1;
 				btnClicked = true;
 				// reset set
@@ -127,6 +128,7 @@ java.util.List<Achievement> earnedAchievements = null;
 						action:(isMax ? "max" : "")+"spin"},
 					success: function(data) {
 						if (data.topup) {
+							try {_gaq.push(['_trackEvent', 'Spin', 'insufficient']);} catch (err) {console.error(err);}
 							// insufficient funds so redirect
 							window.location = data.topup;
 						} else {
@@ -134,6 +136,7 @@ java.util.List<Achievement> earnedAchievements = null;
 							var symbol = data.symbols;
 							var achievements = data.achievements;
 							document.getElementById('player_xp').innerHTML = ++xp;
+							try {_gaq.push(['_trackEvent', 'Spin', 'Result',coins ? 'Win' : 'Loss', coins]);} catch (err) {console.error(err);}
 							
 							if (achievements) {
 								document.querySelector('.overlay').style.display = 'block';
@@ -143,7 +146,8 @@ java.util.List<Achievement> earnedAchievements = null;
 								var achievementText = '';
 								for (var i=0;i<achievements.length;i++) {
 									coinsEarned += achievements[i].coins;
-									currCoins += achievements[i].coins;;
+									currCoins += achievements[i].coins;
+									try {_gaq.push(['_trackEvent', 'Achievement', achievements[i].title.substring(0,9), achievements[i].coins]);} catch (err) {console.error(err);}
 									achievementText += '<li><small>'+achievements[i].title+'<small></li>';
 								}
 								document.getElementById('achievement_title_coins').innerHTML = coinsEarned;
@@ -408,5 +412,6 @@ java.util.List<Achievement> earnedAchievements = null;
 			</div>
 		</div>
 	</div>
+	<%@ include file="/wk/ga.jsp" %>
   </body>
 </html>

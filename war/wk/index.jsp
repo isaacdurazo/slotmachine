@@ -109,7 +109,15 @@
 						</div>
 						
 						<div class="overlay"></div>
-						
+						<script>
+							document.addEventListener('DOMContentLoaded', function() {
+								<% for (Achievement achievement : earnedAchievements) { %> 
+								try {_gaq.push(['_trackEvent', 'Achievement', 
+								                "<%= achievement.getTitle().length() > 9 ? achievement.getTitle().substring(0,9) : achievement.getTitle() %>", 
+								               <%= achievement.getCoinsAwarded() %>);} catch (err) {console.error(err);}
+								<% } %>	
+							},false);
+						</script>
 					<% } %>
 
 			    </div>
@@ -197,5 +205,6 @@
 			
 	    </div>
 	</div>
+	<%@ include file="/wk/ga.jsp" %>
   </body>
 </html>
