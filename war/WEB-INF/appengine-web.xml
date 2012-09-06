@@ -35,6 +35,7 @@
     <property name="game.xp.leaderboard.synchronous" value="true"/>
 	<property name="player.delta.flush.ttl.min" value="2"/>
 	<property name="player.delta.flush.enabled" value="true"/>
+	<property name="player.delta.flush.task.queue.enabled" value="true"/>
 	<property name="achievements.enabled" value="true"/>
 	<property name="game.progressive.win.probability.enabled" value="true"/>
 

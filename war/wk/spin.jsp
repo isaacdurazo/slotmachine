@@ -6,13 +6,17 @@ request.setAttribute("hide_doctype",action);
 <%@ include file="/header.jsp" %>
 <%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException, java.util.Arrays, org.json.simple.*" %>
 <%
+int setPlayingLevel = ServletUtils.getInt(request, "playingLevel");
+if (setPlayingLevel > 0 && setPlayingLevel < 5) player.setPlayingLevel(setPlayingLevel);
+String reelImagePath = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
+int maxBet = 2+player.getPlayingLevel();
 if (action != null) {
 	try {
 		SpinResult spinResult = null;
 		if ("spin".equals(action)) {
-			spinResult = SlotMachineManager.getInstance().spin(player, 1);
+			spinResult = SlotMachineManager.getInstance().spin(player, false);
 		} else if ("maxspin".equals(action)) {
-			spinResult = SlotMachineManager.getInstance().spin(player, Integer.parseInt(System.getProperty("game.max.bet.coins")));
+			spinResult = SlotMachineManager.getInstance().spin(player, true);
 		}
 		JSONObject responseJSON = new JSONObject();
 		try {
@@ -93,7 +97,7 @@ java.util.List<Achievement> earnedAchievements = null;
 					return;
 				}
 				try {_gaq.push(['_trackEvent', 'Spin', isMax ? 'Max' : 'Min']);} catch (err) {console.error(err);}
-				currCoins -= isMax ? 3 : 1;
+				currCoins -= isMax ? <%= maxBet %> : 1;
 				btnClicked = true;
 				// reset set
 				var betButtons = document.querySelectorAll('.bets td');
@@ -174,9 +178,9 @@ java.util.List<Achievement> earnedAchievements = null;
 									'<img width="13" height="11" src="images/animated-star.gif"/>WON '+coins+' coins! '+
 									'<img width="13" height="11" src="images/animated-star.gif"/>';								
 							}
-							var s1="/wk/<%=imageLocation%>comb-"+symbol[0]+".jpg";
-							var s2="/wk/<%=imageLocation%>comb-"+symbol[1]+".jpg";
-							var s3="/wk/<%=imageLocation%>comb-"+symbol[2]+".jpg";
+							var s1="<%=reelImagePath%>comb-"+symbol[0]+".jpg";
+							var s2="<%=reelImagePath%>comb-"+symbol[1]+".jpg";
+							var s3="<%=reelImagePath%>comb-"+symbol[2]+".jpg";
 							console.log("Spin AJAX s1="+s1+" s2="+s2+" s3="+s3);
 							document.querySelector('table.spins').innerHTML =
 								'<tr><td style="float: right;">'+
@@ -254,7 +258,7 @@ java.util.List<Achievement> earnedAchievements = null;
 	</script>
   <body>
   	<div id="container">
-	  	<div class="wrapper">
+	  	<div class="wrapper level-<%= player.getPlayingLevel() %>">
 		    <div class="header-logo">
 		    	<img width="154" height="48" src="/wk/images/logo.png"/>
 		    </div>
@@ -393,7 +397,7 @@ java.util.List<Achievement> earnedAchievements = null;
 								<a class="bet spin_button" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?action=spin&"+cacheBuster, response) %>"> BET 1</a>
 							</td>
 							<td class="bet-2">
-								<a class="bet max_spin_button" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?action=maxspin&"+cacheBuster, response) %>"> BET 3</a>
+								<a class="bet max_spin_button" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?action=maxspin&"+cacheBuster, response) %>"> BET <%= maxBet %></a>
 							</td>
 						</tr>
 					</table>

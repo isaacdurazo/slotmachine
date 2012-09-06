@@ -53,6 +53,8 @@ public class Player extends AbstractGAEPersistent {
 	private int goldDebitted;
 	/** player's level */
 	private int level = 1;
+	/** level at which the player is currently playing */
+	private int playingLevel = 1;
 
 	/** NOTE this is only stored in memory and set/deleted by PlayerManager **/
 	private boolean isNewPlayer = false;
@@ -194,6 +196,10 @@ public class Player extends AbstractGAEPersistent {
 	public int getLevel() { return this.level; }
 	/** @param level to set for the user */
 	public void setLevel(int level) { this.level = level; }
+	/** @return level which the user is currently playing */
+	public int getPlayingLevel() { return this.playingLevel; }
+	/** @param playingLevel to set when a user changes playing levels */
+	public void setPlayingLevel(int playingLevel) { this.playingLevel = playingLevel; }
 	
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {
@@ -215,6 +221,7 @@ public class Player extends AbstractGAEPersistent {
 		this.maxSpins = deserializeInt("maxSpins", inputMap, 0);
 		this.goldDebitted = deserializeInt("goldDebitted", inputMap, 0);
 		this.level = deserializeInt("level", inputMap, 1);
+		this.playingLevel = deserializeInt("playingLevel", inputMap, 1);
 	}
 
 	@Override
@@ -237,6 +244,7 @@ public class Player extends AbstractGAEPersistent {
 		map.put("maxSpins", this.maxSpins);
 		map.put("goldDebitted", this.goldDebitted);
 		map.put("level", this.level);
+		map.put("playingLevel", this.playingLevel);
 		return map;
 	}
 

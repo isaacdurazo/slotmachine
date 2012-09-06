@@ -92,13 +92,14 @@ public class SlotMachineManager {
 	/**
 	 * 
 	 * @param player
-	 * @param coins
+	 * @param maxBet
 	 * @return
 	 * @throws InsufficientFundsException
 	 * @throws CacheStoreException 
 	 * @throws DataStoreException 
 	 */
-	public SpinResult spin(final Player player, int coins) throws InsufficientFundsException, DataStoreException, CacheStoreException {
+	public SpinResult spin(final Player player, boolean maxBet) throws InsufficientFundsException, DataStoreException, CacheStoreException {
+		int coins = maxBet ? (2+player.getPlayingLevel()) : 1;
 		if (player.getCoins() < coins) throw new InsufficientFundsException();
 		if (coins == Integer.getInteger("game.max.bet.coins", 3)) {
 			player.incrementMaxSpins();
@@ -179,9 +180,17 @@ public class SlotMachineManager {
 //		int c = spinResult.getCoins();
 //		if (fJackpot==true) {c=0;}
 		
-		if (coins == 3 && spinResult.getCoins() > 0 ) {
-			spinResult = new SpinResult(spinResult.getCoins()*Integer.parseInt(System.getProperty("game.max.bet.coin.multiplier")),
-					spinResult.getSymbols());
+		if (maxBet && spinResult.getCoins() > 0 ) {
+			int multiplier = 2;
+			switch (player.getPlayingLevel()) {
+			case 1: multiplier = 4; break;
+			case 2: multiplier = 6; break;
+			case 3: multiplier = 8; break;
+			case 4: multiplier = 9; break;
+			default:
+				throw new IllegalArgumentException("Invalid player playing level: "+player);
+			}
+			spinResult = new SpinResult(spinResult.getCoins()*multiplier,spinResult.getSymbols());
 		}
 		if (!fJackpot) {
 			player.setCoins(player.getCoins()-coins+spinResult.getCoins());

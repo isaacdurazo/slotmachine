@@ -6,6 +6,12 @@
     <rate>1/m</rate>
   </queue>
   <queue>
+  	<name>playerTaskFlush</name>
+  	<rate>50/s</rate>
+  	<bucket-size>40</bucket-size>
+  	<max-concurrent-requests>10</max-concurrent-requests>
+  </queue>
+  <queue>
     <name>inbox</name>
     <rate>1/m</rate>
     <retry-parameters>
