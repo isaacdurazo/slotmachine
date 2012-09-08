@@ -4,7 +4,7 @@
 
 <%
 Player currPlayer = (Player)request.getAttribute("player");
-if (currPlayer != null && currPlayer.hasAdminPriv()) {
+if (currPlayer != null) {
 %>
 <!-- Ads on for this user--> 
 <% 
