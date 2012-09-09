@@ -44,3 +44,24 @@
     <link rel="stylesheet" href="css/webkit.css" />    
 	<%} %>
   </head>
+  <body>
+    <div id="container">
+        <div class="wrapper">
+            <div class="header">
+
+                <a class="coins" accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>">
+                    <span class="icon-coin"></span>
+                    <span id="player_coins" class="delay inline"><%= player.getCoins() %></span>
+                    <span class="plus">+</span>
+                </a>   
+
+                <span class="logo">
+                    <img width="123" height="16" src="/wk/images/logo.gif"/>
+                </span>
+
+                <span class="level-xp">
+                    <span class="level"><b>Level:</b> 1</span>
+                    <span id="player_xp" class="xp"><b>XP:</b> <%= player.getXp() %></span>
+                </span>
+            </div>
+            

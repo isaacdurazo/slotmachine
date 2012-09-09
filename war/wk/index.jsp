@@ -34,54 +34,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!-- wk/index.jsp -->
 <%@ include file="header_html.jsp" %>
-  <body>
-  	<div id="container">
-	  	<div class="wrapper">
-		    <div class="header-logo">
-		    	<img width="154" height="48" src="/wk/images/logo.png"/>
-		    </div>
+  
 			<%@ include file="message.jsp" %>		    
 		    <div class="content">
-		    	<div class="stats-container">
-			    	<div class="stats">
-					    <table>
-							<tr>
-								<td> 
-									<span class="stat xp">
-										<b>XP:</b> <%= player.getXp() %>
-									</span>
-								</td>
-								<td>
-									<span class="stat coins">
-										<b>Coins:</b> <%= player.getCoins() %></a></br>
-									<span>
-								</td>
-							</tr>
-							
-						</table>
 
-						<table>
-							<tr >
-								<td>
-									<span class="stat award">
-										<small>Next award: <%= readableUntilCoinAward %></small>
-									</span>
-								</td>
-							</tr>
-						</table>
-					</div>
+				<div class="jackpotteaser">
+					<span class="jackpot">
+						JACKPOT
+					</span>
+
+					<span class="jackpot-text">
+						<img width="16" height="16" src="/wk/images/mocogold.png"/> <%=GameUtils.getGlobalProps().getMocoGoldPrize()%>  MocoGold!
+					</span>
+
 				</div>
-				<div class="results-container">
-					<div class="results">
-						
-					    <h3>Hello <%= player.getName() %>!</h3>    
-					    <% if (coinsAwarded > 0) { %>
-					    	<div class="bonus">
-					    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
-					    	</div> 
-					    <% } %>
-					    
-			    	</div>
+
+				<div class="intro-message">
+				    
+				    <% if (coinsAwarded > 0) { %>
+				    	<div class="bonus">
+				    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
+				    	</div> 
+				    <% } %>
+
+				    <p class="hello">Hello <%= player.getName() %>!</p> 
+
+					<p>Next award: <%= readableUntilCoinAward %></p>
 
 			    	<% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
 						<div class="achievements">
@@ -109,66 +87,61 @@
 						</div>
 						
 						<div class="overlay"></div>
-						
+						<script>
+							document.addEventListener('DOMContentLoaded', function() {
+								<% for (Achievement achievement : earnedAchievements) { %> 
+								try {_gaq.push(['_trackEvent', 'Achievement', 
+					                "<%= achievement.getTitle().length() > 9 ? achievement.getTitle().substring(0,9) : achievement.getTitle() %>", 
+					               <%= achievement.getCoinsAwarded() %>);} catch (err) {console.error(err);}
+								<% } %>	
+							},false);
+						</script>
 					<% } %>
 
 			    </div>
-			    
-				<div class="jackpotteaser-container">
-					<div class="jackpotteaser goldtext">
-						<span class="jackpot">
-							<img width="120" height="26" src="/wk/images/jackpot.png"/>
-						</span>
-						<span class="jackpot-text">
-							Now: <%=GameUtils.getGlobalProps().getMocoGoldPrize()%> <img width="16" height="16" src="/wk/images/mocogold.png"/> MocoGold!
-						</span>
-					</div>
+			    				
+				<div class="play">
+					<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
 				</div>
-				
-				<div class="controls">
-				
-					<div class="play">
-						<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
+				<div class="menu">
+
+					<div class="button-row">
+						<div class="block half-left">
+			        		<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
+						</div>
+						<div class="block half-right">
+			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/wk/jackpots.jsp", response) %>">Jackpot Winners</a>
+						</div>
 					</div>
 					
-					<table class="menu">
-						<tr>
-							<td>
-				        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>">Get Coins</a>
-							</td>
-							<td>
-				        		<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-				        		<a class="leaderboard" accessKey="4" href="<%= ServletUtils.buildUrl(player, "/wk/leaderboard.jsp", response) %>">Leaderboard</a>
-							</td>
-							<td>
-				        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/wk/jackpots.jsp", response) %>">Jackpot Winners</a>
-							</td>
-						</tr>
-					</table>
-					
-					<table class="menu">
+					<div class="button-row">
+
 						<% boolean achievementsEnabled = AchievementService.getInstance().isEnabled() || player.hasAdminPriv(); %>
-						<tr>
-							<td <% if (!achievementsEnabled) { %>align="center"<% } %>>
-				        		<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>">Payout Table</a>
-							</td>
-							<% if (achievementsEnabled) { %>
-							<td>
+						<% if (achievementsEnabled) { %>
+							<div class="block half-left">
 								<a accessKey="7" href="<%= ServletUtils.buildUrl(player, "/wk/achievement.jsp", response) %>">Achievements</a>
-							</td>
-							<% } %>
-						</tr>
-					</table>
+							</div>
+						<% } %>
+
+						<div class="block half-right" <% if (!achievementsEnabled) { %>align="center"<% } %>>
+				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/wk/locations.jsp", response) %>">Locations</a>
+						</div>
+
+					</div>
+
+					<div class="button-row">
+
+						<div class="half-center" <% if (!achievementsEnabled) { %>align="center"<% } %>>
+				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>">Help</a>
+						</div>
+
+					</div>
 
 					<%
 						if (player.hasAdminPriv()) {
 					%>
-					<br/>Admin Tools<br/>
-					<table class="menu">
+					<div>Admin Tools</div>
+					<table>
 				    	<tr>   
 				        	<td>
 				        		<a href="<%=ServletUtils.buildUrl(player, "/wk/index.jsp?action=credit", response)%>">Credit 10 coins</a>
@@ -176,26 +149,30 @@
 				        	<td>
 				       			<a href="<%=ServletUtils.buildUrl(player, "/wk/index.jsp?action=debit", response)%>">Set Coins=0</a>
 				        	</td>
-				        	<td>
+				        </tr>
+						<tr>
+							<td>
 				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/cache.jsp", response)%>">Cache Manager</a>
 				        	</td>
 				        	<td>
 				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/properties.jsp", response)%>">System Properties Manager</a>
 				        	</td>
+						</tr>
+						<tr>			        	
 				        	<td>
 				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/inbox.jsp", response)%>">Inbox Utility</a>
 				        	</td>
-				        </tr>
+						</tr>
+
 					</table>
 					<%
 						}
 					%>
-				
 				</div>
-			
 			</div>
 			
 	    </div>
 	</div>
+	<%@ include file="/wk/ga.jsp" %>
   </body>
 </html>

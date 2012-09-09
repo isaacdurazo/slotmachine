@@ -2,26 +2,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<%@ include file="header_html.jsp" %>
-	  <body>
-	  	<div id="container">
-		  	<div class="wrapper">
-				
-				<div class="header-logo">
-		    		<img width="154" height="48" src="/wk/images/logo.png"/>
-				</div>
 					
 				<div class="content">
-		    		<div class="stats-container">
-						<table class="stats">
-							<tr>
-								<td>
-									<span class="stat">
-										Jackpot Hall Of Fame
-									</span>
-								</td>
-							</tr>
-						</table>
+					<div class="title-wrapper">
+			    		<div class="title-container">
+							<span class="title">
+					   			Jackpot Hall Of Fame
+							</span>
+						</div>
 					</div>
+
 				    <div class="subheader">
 				    	Recent Moco Gold Jackpot winers
 				    </div>
@@ -50,18 +40,19 @@
 					    </div>
 				    </div>
 				    
-				    <table class="menu">
-				    	<tr>
-				    		<td>
-				        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
-				    		</td>
-				    		<td>
-				        		<a accessKey="1" class="invite" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
-				    		</td>
-				    	</tr>
-				    </table>
+				    <div class="menu" style="margin-right: 16px;">
+				    	<div class="button-row">
+				    		<div class="block half-left">
+	  							<a href="<%= ServletUtils.buildUrl(player, "/", response) %>">Main</a>
+	  						</div>
+	  						<div class="block half-right">
+	  							<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
+	  						</div>
+	  					</div>
+	  				</div>
 			    </div>
 			</div>
 		</div>
+		<%@ include file="/wk/ga.jsp" %>
 	</body>
 </html>

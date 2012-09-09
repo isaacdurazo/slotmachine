@@ -283,6 +283,16 @@ public class PlayerManager {
 		if (!delay || !Boolean.getBoolean("player.delta.flush.enabled")) {
 			GAEDataManager.getInstance().store(player);
 			updatePlayerLeaderboards(player);
+		} else if (Boolean.getBoolean("player.delta.flush.task.queue.enabled")) { 
+			// see if we already added by checking cache
+			if (GAECacheManager.getInstance().getCustom("playerFlush", Long.toString(player.getId())) == null) {
+				// not in cache so put and add to task queue
+				GAECacheManager.getInstance().putCustom("playerFlush", Long.toString(player.getId()), "1", 2*60*1000);
+				TaskOptions task = TaskOptions.Builder.withUrl("/admin/queue.jsp?queue=flushPlayer&playerId="+player.getId()+"&accessToken="+System.getProperty("queue.token"));
+				task.method(Method.GET);
+				task.countdownMillis(2*60*1000);
+				QueueFactory.getQueue("playerTaskFlush").add(task);				
+			}
 		} else {
 			PlayerDeltaInfo info = playerIDtoCoinXPMap.get(player.getId());
 			if (info == null) {

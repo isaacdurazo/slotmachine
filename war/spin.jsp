@@ -7,12 +7,13 @@ String action = request.getParameter("action");
 SpinResult spinResult = new SpinResult(-1,new int[]{-1,-1,-1});
 int symbol[];
 boolean fSpinOK = false;
+String reelImagePath = "/images/"+(player.getLevel() > 1 ? ("level-"+player.getLevel()+"/") : "");
 
 try {
 	if ("spin".equals(action)) {
-		spinResult = SlotMachineManager.getInstance().spin(player, 1);
+		spinResult = SlotMachineManager.getInstance().spin(player, false);
 	} else if ("maxspin".equals(action)) {
-		spinResult = SlotMachineManager.getInstance().spin(player, Integer.parseInt(System.getProperty("game.max.bet.coins")));
+		spinResult = SlotMachineManager.getInstance().spin(player, true);
 	}
 	
 	fSpinOK=true;
@@ -112,13 +113,13 @@ int key = 1;
 				<table align="center" >
 					<tr align="center" >
 						<td>
-							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[0] %>.gif"/>
+							<img width="38" height="64" src="<%=reelImagePath+"comb-"+symbol[0] %>.gif"/>
 						</td>
 						<td>
-							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[1] %>.gif"/>
+							<img width="38" height="64" src="<%=reelImagePath+"comb-"+symbol[1] %>.gif"/>
 						</td>
 						<td>
-							<img width="38" height="64" src="<%=imageLocation+"comb-"+symbol[2] %>.gif"/>
+							<img width="38" height="64" src="<%=reelImagePath+"comb-"+symbol[2] %>.gif"/>
 						</td>
 					</tr>
 				</table>

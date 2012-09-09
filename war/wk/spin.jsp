@@ -6,13 +6,17 @@ request.setAttribute("hide_doctype",action);
 <%@ include file="/header.jsp" %>
 <%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException, java.util.Arrays, org.json.simple.*" %>
 <%
+int setPlayingLevel = ServletUtils.getInt(request, "playingLevel");
+if (setPlayingLevel > 0 && setPlayingLevel < 5) player.setPlayingLevel(setPlayingLevel);
+String reelImagePath = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
+int maxBet = 2+player.getPlayingLevel();
 if (action != null) {
 	try {
 		SpinResult spinResult = null;
 		if ("spin".equals(action)) {
-			spinResult = SlotMachineManager.getInstance().spin(player, 1);
+			spinResult = SlotMachineManager.getInstance().spin(player, false);
 		} else if ("maxspin".equals(action)) {
-			spinResult = SlotMachineManager.getInstance().spin(player, Integer.parseInt(System.getProperty("game.max.bet.coins")));
+			spinResult = SlotMachineManager.getInstance().spin(player, true);
 		}
 		JSONObject responseJSON = new JSONObject();
 		try {
@@ -62,14 +66,13 @@ java.util.List<Achievement> earnedAchievements = null;
 		var xp = <%= player.getXp()%>;
 		var currCoins = <%= player.getCoins() %>;
 		var btnClicked = false;
-		var spinsRemaining = 10;
+		var spinsRemaining = 5;
 		var accessToken = "<%= player.getAccessToken()%>";
 		document.addEventListener('DOMContentLoaded', function() {
 			var closeBtns = document.querySelectorAll(".achievements .close, .achievements .play a");
 			for (var i=0;i<closeBtns.length;i++) {
 				closeBtns[i].addEventListener('click', function(e) {
 					document.querySelector('.achievements').style.display = 'none';	
-					document.querySelector('.overlay').style.display = 'none';
 					e.preventDefault();
 					return false;
 				},false);
@@ -92,7 +95,8 @@ java.util.List<Achievement> earnedAchievements = null;
 							"&reload=true&maxBet="+isMax;
 					return;
 				}
-				currCoins -= isMax ? 3 : 1;
+				try {_gaq.push(['_trackEvent', 'Spin', isMax ? 'Max' : 'Min']);} catch (err) {console.error(err);}
+				currCoins -= isMax ? <%= maxBet %> : 1;
 				btnClicked = true;
 				// reset set
 				var betButtons = document.querySelectorAll('.bets td');
@@ -127,6 +131,7 @@ java.util.List<Achievement> earnedAchievements = null;
 						action:(isMax ? "max" : "")+"spin"},
 					success: function(data) {
 						if (data.topup) {
+							try {_gaq.push(['_trackEvent', 'Spin', 'insufficient']);} catch (err) {console.error(err);}
 							// insufficient funds so redirect
 							window.location = data.topup;
 						} else {
@@ -134,16 +139,17 @@ java.util.List<Achievement> earnedAchievements = null;
 							var symbol = data.symbols;
 							var achievements = data.achievements;
 							document.getElementById('player_xp').innerHTML = ++xp;
+							try {_gaq.push(['_trackEvent', 'Spin', 'Result',coins ? 'Win' : 'Loss', coins]);} catch (err) {console.error(err);}
 							
 							if (achievements) {
-								document.querySelector('.overlay').style.display = 'block';
 								document.querySelector('.achievements').style.display = 'block';
 								document.getElementById('achievement_title_text').innerHTML = 'achievement'+(achievements.length == 1 ? '' : 's');
 								var coinsEarned = 0;
 								var achievementText = '';
 								for (var i=0;i<achievements.length;i++) {
 									coinsEarned += achievements[i].coins;
-									currCoins += achievements[i].coins;;
+									currCoins += achievements[i].coins;
+									try {_gaq.push(['_trackEvent', 'Achievement', achievements[i].title.substring(0,9), achievements[i].coins]);} catch (err) {console.error(err);}
 									achievementText += '<li><small>'+achievements[i].title+'<small></li>';
 								}
 								document.getElementById('achievement_title_coins').innerHTML = coinsEarned;
@@ -160,19 +166,19 @@ java.util.List<Achievement> earnedAchievements = null;
 								document.getElementById('lost_result').className = "lostspin delay";
 								var lossText = 'Spin Again';
 								if (symbol[0] == 6 && symbol[1] == 6 && symbol[2] == 6) {
-									lossText = "When you get all lemons make lemonade :).<br/> Check the "+
+									lossText = "Make lemonade :).<br/> Check the "+
 										"<a href='<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>'>payout table</a> !";
 								}
 								document.getElementById('lost_result').innerHTML = lossText;
 							} else {
 								document.getElementById('won_result').className = "wonspin delay";
 								document.getElementById('won_result').innerHTML = 
-									'<img width="13" height="11" src="images/animated-star.gif"/>WON '+coins+' coins! '+
+									'<img width="13" height="11" src="images/animated-star.gif"/> WON '+coins+' coins! '+
 									'<img width="13" height="11" src="images/animated-star.gif"/>';								
 							}
-							var s1="/wk/<%=imageLocation%>comb-"+symbol[0]+".jpg";
-							var s2="/wk/<%=imageLocation%>comb-"+symbol[1]+".jpg";
-							var s3="/wk/<%=imageLocation%>comb-"+symbol[2]+".jpg";
+							var s1="<%=reelImagePath%>comb-"+symbol[0]+".jpg";
+							var s2="<%=reelImagePath%>comb-"+symbol[1]+".jpg";
+							var s3="<%=reelImagePath%>comb-"+symbol[2]+".jpg";
 							console.log("Spin AJAX s1="+s1+" s2="+s2+" s3="+s3);
 							document.querySelector('table.spins').innerHTML =
 								'<tr><td style="float: right;">'+
@@ -248,60 +254,63 @@ java.util.List<Achievement> earnedAchievements = null;
 			}
 		}, false);
 	</script>
-  <body>
-  	<div id="container">
-	  	<div class="wrapper">
-		    <div class="header-logo">
-		    	<img width="154" height="48" src="/wk/images/logo.png"/>
-		    </div>
-		    
+   
 		    <div class="content">
-		    	<div class="stats-container">
-				    <table class="stats">
-				    	<tr>
-							<td>
-								<span class="stat xp">
-									<b>XP:</b> <span id="player_xp"><%= player.getXp() %></span>
-								</span>
-							</td>
-							<td>
-								<span class="stat coins">
-									<b>Coins:</b> <span id="player_coins" class="delay inline"><%= player.getCoins() %></span>
-								</span>
-							</td>
-						</tr>
-					</table>
+		    
+			    <div class="achievements" style="display:none">
+			    	<div class="dialog-container">
+						<h1>CONGRATULATIONS!</h1>
+						
+						<h2>You completed <span id="achievement_title_text"></span> and won <span id="achievement_title_coins"></span> coins!</h2>
+						
+						<ul></ul>
+						
+						<a class="close" href="#" ></a>
+						
+						<div class="play">
+							<a href="#">Continue</a>
+						</div>
+					</div>
+					<div class="overlay"></div>	
+				</div>
+
+		    	<div class="level-up" style="display:none">
+					<div class="dialog-container">
+						<a class="close" href="#" ></a>
+
+						<h1>LEVEL UP!</h1>
+						
+						<h3>You unlocked a new slotmachine</h3>
+						<h2>Under the Sea</h2>
+						
+						<h3>Jackpot bonus 10%</h3>
+
+						<div class="play">
+							<a href="#">Play Now</a>
+						</div>
+					</div>
+					<div class="overlay"></div>
 				</div>
 				
-				<div class="results-container">
+				<% if (coinsAwarded > 0) { %>
+			    	<div class="bonus">
+			    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
+			    	</div> 
+			    <% } %>
+
+				<div class="spin-results">
+					
+					
+					<div class="location">
+						<span>Under the Sea</span>
+						<a href="<%= ServletUtils.buildUrl(player, "/wk/locations.jsp", response) %>">change</a>
+					</div>
 					<div class="results">
-						<% if (coinsAwarded > 0) { %>
-					    	<div class="bonus">
-					    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
-					    	</div> 
-					    <% } %>
-						
-							<div class="achievements" style="display:none">
-								<h1>CONGRATULATIONS!</h1>
-								
-								<h2>You completed <span id="achievement_title_text"></span> and won <span id="achievement_title_coins"></span> coins!</h2>
-								
-								<ul></ul>
-								
-								<a class="close" href="#" ></a>
-								
-								<div class="play">
-									<a href="#">Continue</a>
-								</div>
-							</div>
-							<div class="overlay" style="display:none"></div>															
-																			
 						<div id="jackpot" class="goldtext delay" style="display:none;">
-							You WON the Moco Gold Jackpot<br />
-							<img width="112" height="14" src="images/jackpot-winner.gif"/>
+							You WON the Moco Gold Jackpot
 						</div>		
 						
-						<div id='won_result' class="wonspin delay" style="display:none;"></div>
+						<div id='won_result' class="wonspin delay" ></div>
 						
 						<div id='lost_result' class="lostspin delay" style="display:none;"></div>
 					</div>
@@ -310,12 +319,6 @@ java.util.List<Achievement> earnedAchievements = null;
 				<div class="spin-container">
 					<div class="spin-content">
 						<div id="lights">
-							<div class="lights-off">
-								<div class="lights left"></div>
-								<div class="lights right"></div>
-								<div class="lights top"></div>
-								<div class="lights bottom"></div>
-							</div>
 							<div class="lights-off">
 								<div class="lights left"></div>
 								<div class="lights right"></div>
@@ -382,31 +385,30 @@ java.util.List<Achievement> earnedAchievements = null;
 					<% } %>
 				<% } %>
 				<div class="spin-controls">
-										
-					<table class="bets" align="center" >
-						<tr>
-							<td class="bet-1">
+					<div class="controls">
+						<div class="button-row bets">
+							<div class="block half-left">
 								<a class="bet spin_button" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?action=spin&"+cacheBuster, response) %>"> BET 1</a>
-							</td>
-							<td class="bet-2">
-								<a class="bet max_spin_button" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?action=maxspin&"+cacheBuster, response) %>"> BET 3</a>
-							</td>
-						</tr>
-					</table>
-	
-				     <table class="menu">
-				        <tr>
-				        	<td>
+							</div>
+							<div class="block half-right">
+								<a class="bet max_spin_button" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp?action=maxspin&"+cacheBuster, response) %>"> BET <%= maxBet %></a>
+							</div>
+						</div>
+					</div>
+					<div class="menu">
+						<div class="button-row">
+							<div class="block half-left">
 				        		<a href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
-				        	</td>
-				        	<td>
+				        	</div>
+							<div class="block half-right">
 				        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>">Buy Coins</a>
-				        	</td>
-				        </tr>
-				    </table>
+				        	</div>
+				        </div>
+				    </div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<%@ include file="/wk/ga.jsp" %>
   </body>
 </html>

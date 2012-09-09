@@ -10,23 +10,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!-- index.jsp -->
  <%@ include file="/wk/header_html.jsp" %>
-  <body>
-  	<div id="container">
-	  	<div class="wrapper">
-	  		<div class="header-logo">
-		    	<img width="154" height="48" src="/wk/images/logo.png"/>
-		    </div>
+  
 		    <div class="content">
-		    	<div class="stats-container">
-		    		<table class="stats">
-						<tr>
-							<td>
-								<span class="stat">
-									Achievements
-								</span>
-							</td>
-						</tr>
-					</table>
+		    	<div class="title-wrapper">
+		    		<div class="title-container">
+						<span class="title">
+							Achievements
+						</span>
+					</div>
 				</div>
 		  		<div class="achievement-container">
 		  			<% for (Pair<Achievement,Boolean> pair : AchievementService.getInstance().getAchievements(player)) { %>
@@ -41,13 +32,11 @@
 		  		</div>
 		  		
 	  		</div>		   
-	  		<table class="menu">
-	  			<tr>
-	  				<td><a href="<%= ServletUtils.buildUrl(player, "/", response) %>">Main</a></td>
-	  			</tr>
-	  		</table>
+	  		<div class="menu" style="margin-right: 16px;">
+	  			<a href="<%= ServletUtils.buildUrl(player, "/", response) %>">Main</a>
+	  		</div>
 		</div>
 	</div>
-	<%@ include file="/wk/footer.jsp" %>
+	<%@ include file="/wk/ga.jsp" %>
   </body>
 </html>
