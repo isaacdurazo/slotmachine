@@ -130,26 +130,18 @@ if (isWebkit) {
 			}, false);
 		</script>
 	<% } %>
-  <body>
-  	<div id="container">
-	  	<div class="wrapper">
-		    <div class="header-logo">
-		    	<img width="154" height="48" src="/wk/images/logo.png"/>
-		    </div>
+
 			<%@ include file="message.jsp" %>		    
 		    
 		    <div class="content">
-		    	<div class="stats-container">
-			    	<table class="stats">
-						<tr>
-							<td>
-								<span class="stat">
-									Increase your chance to win the Jackpot<br/>Buy Coins!
-								</span>	
-							</td>
-						</tr>
-					</table>
-			    </div>
+			    <div class="title-wrapper">
+		    		<div class="title-container">
+						<span class="title">
+				   			Increase your chance to win the Jackpot<br/>Buy Coins!
+						</span>
+					</div>
+				</div>
+
 				<div class="buy-container">
 					<form action="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>" method="get">
 						<div>
@@ -169,21 +161,8 @@ if (isWebkit) {
 					</form>
 				</div>
 				
-				<div class="controls">
-					<table class="menu">
-						<% if (AchievementService.getInstance().isEnabled() || player.hasAdminPriv()) { %>
-						<tr>
-							<td align="center">
-					        	<a href="<%= ServletUtils.buildUrl(player, "/wk/achievement.jsp", response) %>">Get coins from Achievements!</a>
-							</td>
-						</tr>
-						<% } %>
-						<tr>
-							<td align="center">
-					        	<a href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
-							</td>
-						</tr>
-					</table>
+				<div class="menu" style="margin-right: 16px;">
+					<a href="<%= ServletUtils.buildUrl(player, "/", response) %>">Main</a>
 				</div>
 				
 			</div>
