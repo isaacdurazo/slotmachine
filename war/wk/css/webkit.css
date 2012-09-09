@@ -987,6 +987,10 @@ a.close {
 
 /*----------------------*/
 
+.wrapper.level-2 {
+	background: url(../images/level-2/level-2-bg.jpg);
+}
+
 .level-2 .header-logo, .level-2 .title, .level-2 .spin-container, .level-2 .spin-controls{
 	background: #5d371f;
 	-moz-box-shadow: inset 0px 0px 5px #000;
@@ -994,10 +998,9 @@ a.close {
 	box-shadow: inset 0px 0px 5px black;
 }
 
-.level-2 .wrapper {
-	background: url(../images/level-2/level-2-bg.jpg);
+.level-2 .spin-results {
+	border-color: #5d371f;
 }
-
 
 
 /*-------------------------*/
@@ -1006,6 +1009,10 @@ a.close {
 
 /*-------------------------*/
 
+.wrapper.level-3 {
+	background: url(../images/level-3/level-3-bg.jpg);
+}
+
 .level-3 .header-logo, .level-3 .title, .level-3 .spin-container, .level-3 .spin-controls{
 	background: #004b80;
 	-moz-box-shadow: inset 0px 0px 5px #000;
@@ -1013,10 +1020,9 @@ a.close {
 	box-shadow: inset 0px 0px 5px black;
 }
 
-.level-3 .wrapper {
-	background: url(../images/level-3/level-3-bg.jpg);
+.level-3 .spin-results {
+	border-color: #004b80;
 }
-
 
 
 /*-----------------------------*/
@@ -1025,6 +1031,10 @@ a.close {
 
 /*-----------------------------*/
 
+.wrapper.level-4 {
+	background: url(../images/level-4/level-4-bg.jpg);
+}
+
 .level-4 .header-logo, .level-4 .title, .level-4 .spin-container, .level-4 .spin-controls{
 	background: #805a00;
 	-moz-box-shadow: inset 0px 0px 5px #000;
@@ -1032,8 +1042,7 @@ a.close {
 	box-shadow: inset 0px 0px 5px black;
 }
 
-.level-4 .wrapper {
-	background: url(../images/level-4/level-4-bg.jpg);
+.level-4 .spin-results {
+	border-color: #805a00;
 }
-
 
