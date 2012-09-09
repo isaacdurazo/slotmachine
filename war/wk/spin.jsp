@@ -62,7 +62,7 @@ java.util.List<Achievement> earnedAchievements = null;
 		var xp = <%= player.getXp()%>;
 		var currCoins = <%= player.getCoins() %>;
 		var btnClicked = false;
-		var spinsRemaining = 5;
+		var spinsRemaining = 10;
 		var accessToken = "<%= player.getAccessToken()%>";
 		document.addEventListener('DOMContentLoaded', function() {
 			var closeBtns = document.querySelectorAll(".achievements .close, .achievements .play a");

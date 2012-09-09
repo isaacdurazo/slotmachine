@@ -123,7 +123,11 @@ int key = 1;
 					</tr>
 				</table>
 			</div>	
-				
+			<% if (player.getGoldDebitted() == 0) { %>
+				<div id="ad">
+					<%@ include file="/mmad_wap.jsp" %>			
+				</div>				
+			<% } %>
 			<% if (fSpinOK==true) { %>
 			
 			<table class="bets" align="center" >
@@ -137,12 +141,6 @@ int key = 1;
 				</tr>
 			</table>
 			<% } %>
-			<% if (player.getGoldDebitted() == 0) { %>
-				<div id="ad">
-					<%@ include file="/mmad_wap.jsp" %>			
-				</div>				
-			<% } %>
-		    
 		     <div class="menu">
 		        <div><%= key %>. <a class="invite" accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>
 		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
