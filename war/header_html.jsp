@@ -3,8 +3,6 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 	<meta name="keywords" content="slotmachine,casino,prize,chat,android games,iphone games,mobile games,games,free,pics,photos,myspace"/>
 	<meta name="description" content="Play Casino Games on your mobile phone. FREE game with prizes and millions of people online."/>
-
-    
     <title>Slot Mania</title>
     <% 
     // @todo fix this hack - GAE will not compile the jsp if I just use isWebkit here...
@@ -38,3 +36,28 @@
     <link rel="stylesheet" href="css/wap.css" />    
 	<%} %>
   </head>
+  <body>
+    <div id="container">
+        <div class="wrapper">
+            <div class="header-logo">
+                <table align="center">
+                    <tr><td><img width="112" height="18" src="images/logosmall.gif"/></td></tr>
+                </table>
+                <table class="subheader">
+                    <tr>
+                        <td class="coins">
+                            <b>Coins:</b><%= player.getCoins() %>
+                        </td>
+                        
+                        <td class="xp" style="red">
+                            <b>XP:</b><%= player.getXp() %>
+                        </td>
+
+                        <td class="level">
+                            <b>Level:</b> 1
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            

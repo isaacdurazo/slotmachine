@@ -39,26 +39,13 @@ int key = 1;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
-  <body>
-  	<div id="container">
-	  	<div class="wrapper">
-		    <div class="header-logo"><img width="112" height="18" src="images/logosmall.gif"/></div>
-		    
-		    <table class="subheader">
-				<tr>
-					<td class="xp" style="red">
-						<b>XP:</b><%= player.getXp() %>
-					</td>
-					<td class="coins">
-						<b>Coins:</b><%= player.getCoins() %>
-					</td>
-				</tr>
-			</table>
+
 		    <% if (coinsAwarded > 0) { %>
 		    	<div class="bonus">
 		    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
 		    	</div> 
 		    <% } %>
+
 		    <% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
 				<div class="achievements">
 					<%
@@ -73,40 +60,52 @@ int key = 1;
 					</ul>
 				</div>
 			<% } %>
-			
+
+			<div class="level-up" style="display:none">
+				<div class="goldtext">LEVEL UP!</div>
+				<small>You unlocked a new slotmachin</small> <br/>
+				Under the Sea <br/>
+				<div class="goldtext">Jackpot bonus 10%</div>
+			</div>
+	
+			<div class="location">
+				<span>Under the Sea</span>
+				<a href="<%= ServletUtils.buildUrl(player, "/locations.jsp", response) %>">Change</a>
+			</div>
+
 			<div class="results">
 			
-			<% if (fSpinOK==true) {
-				
-				//only for maxspin give ability to win Moco Gold
-				if ("maxspin".equals(action) && symbol[0]==0 && symbol[1]==0 && symbol[2]==0) {
-			%>
-				<div class="goldtext">
-					You WON the Moco Gold<br />
-					<img width="112" height="14" src="images/jackpot-winner.gif"/>
-				</div>		
-			<%		
-				} else if (spinResult.getCoins()>0) {
-			%>
-				<div class="wonspin">
-					<img width="13" height="11" src="images/animated-star.gif"/>WON <%=spinResult.getCoins() %> coins! <img width="13" height="11" src="images/animated-star.gif"/>
-				</div>
+				<% if (fSpinOK==true) {
 					
-			<%		} else if (spinResult.getCoins()==0) {
-			String s = "Spin again!";	
-			if (Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
-				s="When you get lemons make lemonade :). Check the <a href=\"help.jsp\">payout table</a> for winnings!";
-			}
-			%>
-				<div class="lostspin">
-					<%=s %>
-				</div>
-			<% 		}
-				} else  { %>
-				<div class="nofunds">
-				You have no coins!
-				</div>
-			<% } %>
+					//only for maxspin give ability to win Moco Gold
+					if ("maxspin".equals(action) && symbol[0]==0 && symbol[1]==0 && symbol[2]==0) {
+				%>
+					<div class="goldtext">
+						You WON the Moco Gold<br />
+						<img width="112" height="14" src="images/jackpot-winner.gif"/>
+					</div>		
+				<%		
+					} else if (spinResult.getCoins()>0) {
+				%>
+					<div class="wonspin">
+						<img width="13" height="11" src="images/animated-star.gif"/>WON <%=spinResult.getCoins() %> coins! <img width="13" height="11" src="images/animated-star.gif"/>
+					</div>
+						
+				<%		} else if (spinResult.getCoins()==0) {
+				String s = "Spin again!";	
+				if (Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
+					s="Make lemonade :). Check the <a href=\"help.jsp\">payout table</a> for winnings!";
+				}
+				%>
+					<div class="lostspin">
+						<%=s %>
+					</div>
+				<% 		}
+					} else  { %>
+					<div class="nofunds">
+					You have no coins!
+					</div>
+				<% } %>
 			</div>
 			
 			<div class="spin-container">

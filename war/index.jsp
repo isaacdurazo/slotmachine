@@ -35,29 +35,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!-- index.jsp -->
  <%@ include file="header_html.jsp" %>
-  <body>
-  	<div id="container">
-	  	<div class="wrapper">
-		    <div class="header-logo"><img width="112" height="34" src="images/logo.gif"/></div>
-		    
-		    <table class="subheader">
-				<tr>
-					<td class="xp" style="red">
-						<b>XP:</b><%= player.getXp() %>
-					</td>
-					<td class="coins">
-						<b>Coins:</b><%= player.getCoins() %>
-					</td>
-				</tr>
-			</table>
-		    <h3>Hello <%= player.getName() %>!</h3>
-		    <small>Next award: <%= readableUntilCoinAward %></small>
-			<%@ include file="message.jsp" %>		    
-		    <% if (coinsAwarded > 0) { %>
+
+ 			<% if (coinsAwarded > 0) { %>
 		    	<div class="bonus">
 		    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
 		    	</div> 
 		    <% } %>
+
 		    <% if (earnedAchievements != null && !earnedAchievements.isEmpty()) { %>
 				<div class="achievements">
 					<%
@@ -72,10 +56,17 @@
 					</ul>
 				</div>
 			<% } %>
-			<div class="jackpotteaser">
+
+ 			<div class="jackpotteaser">
 				<img width="112" height="14" src="images/jackpot.gif"/><br />
 				<img class="icon" width="16" height="16" src="images/mocogold.png"/> <%=GameUtils.getGlobalProps().getMocoGoldPrize()%> MocoGold!
 			</div>
+
+		    <h3>Hello <%= player.getName() %>!</h3>
+		    <small>Next award: <%= readableUntilCoinAward %></small>
+			<%@ include file="message.jsp" %>		    
+		    
+			
 			<div class="play">
 				<%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
 			</div>
@@ -88,6 +79,7 @@
 		        <% if (AchievementService.getInstance().isEnabled() || player.hasAdminPriv()) { %>
 		        	<div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/achievement.jsp", response) %>">Achievements</a></div>
 		        <% } %>
+		        <div><%= key %>. <a accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/locations.jsp", response) %>">Locations</a></div>
 		    </div>
 		    <br/>
 			<div class="menu">

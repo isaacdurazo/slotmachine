@@ -19,14 +19,16 @@ if (!"success".equals(action)) {
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
-<body>
-    <h1>Invite Friends</h1>
-	<div>
-		<%=res%>
+
+		    <h1>Invite Friends</h1>
+			<div>
+				<%=res%>
+			</div>
+		    <div class="menu">
+		        <div><a href="<%= ServletUtils.buildUrl(player, "/invite.jsp" ,response) %>">Invite More Friends</a></div>
+		        <div><a href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
+		    </div>
+	    </div>
 	</div>
-    <div class="menu">
-        <div><a href="<%= ServletUtils.buildUrl(player, "/invite.jsp" ,response) %>">Invite More Friends</a></div>
-        <div><a href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
-    </div>
 </body>
 </html>

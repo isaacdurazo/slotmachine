@@ -58,7 +58,7 @@ table {
 }
 
 .secondary-header {
-	background-color: #950405;
+	background-color: #545454;
 	font-size: 0.8em;
 	padding-top:2px;
 }
@@ -94,7 +94,7 @@ table {
     color: #000000;}
 
 
-.coins {
+.xp, .level {
 	padding-left:5px;
 }
 
@@ -195,6 +195,7 @@ a.bet {
 
 .results {
 	height: 20px;
+	background: black;
 }
 
 .lostspin {
@@ -242,4 +243,103 @@ a.bet {
 
 .achievement-container tr.disable {
 	background-color: #8d8d8d;
+}
+
+.location a {
+	background-color: #07A107;
+    padding: 0px 5px;
+    color: #FFF;
+}
+
+.location-wrapper {
+	width: 100%;
+}
+
+.location-container {
+	text-align: left;
+	width: 100%;
+	border-bottom: 1px solid white;
+}
+
+.location-container .icon-lock, .location-container.locked .icon-location, .location-container.locked .button-go, .location-container .button-go-disable {
+	display: none;
+}
+
+.location-container.locked .icon-lock, .location-container.locked .button-go-disable{
+	display: table-cell;
+}
+
+.location-container .button-go a{
+	background-color: #07A107;
+	color: #FFF;
+	padding: 2px 6px;
+}
+
+.location-container.locked .button-go-disable {
+	color: #4f504f;
+}
+
+.icon-lock, .icon-location {
+	width: 40px;
+}
+
+
+.level-up {
+	border-bottom: 1px solid #FFF;
+	margin-bottom: 5px;
+}
+
+/*----------------------*/
+
+/*  Level 2 - Old West  */
+
+/*----------------------*/
+
+.wrapper.level-2 {
+	background: #b08453;
+}
+
+.level-2 .spin-container{
+	background: #5d371f;
+}
+
+.level-2 .spin-container {
+    border: 2px solid #b08453;
+}
+
+/*-------------------------*/
+
+/*  Level 3 - Under Water  */
+
+/*-------------------------*/
+
+.wrapper.level-3 {
+	background: #9bced7;
+}
+
+.level-3 .spin-container{
+	background: #46abbd;
+}
+
+.level-3 .spin-container {
+    border: 2px solid #9bced7;
+}
+
+
+/*-----------------------------*/
+
+/*  Level 4 - Jungle Treasure  */
+
+/*-----------------------------*/
+
+.wrapper.level-4 {
+	background: #98b045;
+}
+
+.level-4 .spin-container{
+	background: #718627;
+}
+
+.level-4 .spin-container {
+    border: 2px solid #98b045;
 }

@@ -34,8 +34,7 @@
 						<div class="location">
 							<div class="location-name">Old West</div>
 							<div>
-								<span class="icon-star-small"></span> 
-								<span>2 required</span>
+								<span>200 XP required</span>
 							</div>
 						</div>
 					</a>
@@ -50,8 +49,7 @@
 						<div class="location">
 							<div class="location-name">Under the Sea</div>
 							<div>
-								<span class="icon-star-small"></span> 
-								<span>3 required</span>
+								<span>300 XP required</span>
 							</div>
 						</div>
 					</a>
@@ -66,8 +64,7 @@
 						<div class="location">
 							<div class="location-name">Wild Jungle</div>
 							<div>
-								<span class="icon-star-small"></span> 
-								<span>4 required</span>
+								<span>400 XP required</span>
 							</div>
 						</div>
 					</a>

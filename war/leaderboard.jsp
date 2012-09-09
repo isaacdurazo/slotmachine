@@ -21,10 +21,6 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
 
-  <body>
-  	<div id="container">
-	  	<div class="wrapper">
-		    <div class="header-logo"><img width="112" height="34" src="images/logo.gif"/></div>
 		    <h3>Weekly <%= type == (short)1 ? "Xp" : "Coins Won" %> Leaderboard</h3>
 		    <h6>(updated every 4 hrs)</h6>
 		    

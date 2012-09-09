@@ -125,10 +125,7 @@ if (isWebkit) {
 			}, false);
 		</script>
 	<% } %>
-  <body>
-  	<div id="container">
-	  	<div class="wrapper">
-		    <div class="header-logo"><img width="112" height="34" src="images/logo.gif"/></div>
+
 			<%@ include file="message.jsp" %>		    
 		    <div>
 		    Buy Coins:
