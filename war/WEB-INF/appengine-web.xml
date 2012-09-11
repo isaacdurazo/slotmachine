@@ -38,6 +38,7 @@
 	<property name="player.delta.flush.task.queue.enabled" value="true"/>
 	<property name="achievements.enabled" value="true"/>
 	<property name="game.progressive.win.probability.enabled" value="true"/>
+	<property name="jackpot.miss.notification.enabled" value="false"/>
 	
 	<!-- player levels -->
 	<property name="max.player.level" value="4"/>	

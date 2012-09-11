@@ -79,7 +79,7 @@ public class SlotMachineManager {
 				index++;
 			}
 		} catch (IOException e) {
-			log.log(Level.SEVERE,"Unable to load pay out table!");
+			log.log(Level.SEVER,"Unable to load pay out table!");
 		}
 	}
 	
@@ -164,13 +164,15 @@ public class SlotMachineManager {
 					}
 				} else {
 					spinResult = null;
-					try {
-						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
-								"Jackpot miss", 
-								"Jackpot candidate within 7days since last jackpot or XP<200 = miss. player id: "+player.getId()+", moco id: "+player.getMocoId()+ ", xp: "+player.getXp());
-					} catch (Exception e) {
-						log.log(Level.SEVERE,"Error sending jackpot miss notification, player id: "+player.getId(),e);
-					}					
+					if (Boolean.getBoolean("jackpot.miss.notification.enabled")) {
+						try {
+							OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
+									"Jackpot miss", 
+									"Jackpot candidate within 7days since last jackpot or XP<200 = miss. player id: "+player.getId()+", moco id: "+player.getMocoId()+ ", xp: "+player.getXp());
+						} catch (Exception e) {
+							log.log(Level.SEVERE,"Error sending jackpot miss notification, player id: "+player.getId(),e);
+						}					
+					}
 				}
 			}
 		} while (spinResult==null && attempts++<10);
