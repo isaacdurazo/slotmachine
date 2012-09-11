@@ -45,7 +45,7 @@
 	<property name="level.xp.min.1" value="0"/>
 	<property name="level.max.bet.1" value="3"/>
 	<property name="level.max.bet.multiplier.1" value="4"/>
-	<property name="level.name.1" value="Location 1"/>
+	<property name="level.name.1" value="Fruit Garden"/>
 	
 	<property name="level.xp.min.2" value="50"/>
 	<property name="level.max.bet.2" value="4"/>
