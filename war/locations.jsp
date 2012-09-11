@@ -22,7 +22,7 @@
 				    				<% if (xpRequired > 0) { %><small><%= xpRequired %> XP required</small><% } %>
 				    			</td>
 				    			<td class="button-go"><a href="<%= ServletUtils.buildUrl(player, "/spin.jsp?playingLevel="+i, response) %>">Go</a></td>
-				    			<td class="button-go-disable"><a href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Go</a></td>
+				    			<td class="button-go-disable"><a href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Buy</a></td>
 				    		</tr>
 				    	<% } %>
 			    	</table>
