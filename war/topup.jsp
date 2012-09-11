@@ -43,6 +43,7 @@ if (isWebkit) {
 } else {
 	// load random uuid
 	int coin = 0, gold = 0;
+	boolean levelUp = false;
 	if ("30 Coins: 99 Gold".equals(topupAction)) {
 		coin = 30;
 		gold = 99;
@@ -52,19 +53,34 @@ if (isWebkit) {
 	} else if ("MysteryBox: 499 Gold".equals(topupAction)) {
 		coin = 250+(new Random()).nextInt(150);
 		gold = 499;
+	} else if ("Unlock Next Level: 499 Gold".equals(topupAction)) {
+		gold = 499;
+		levelUp = true;
 	}
-	if (coin > 0 && gold > 0) {
+	if ((coin > 0 || levelUp) && gold > 0) {
 		if (formValidation.equals((String)request.getSession().getAttribute("topUpValidation"))) {
 			try {
 				String s = topupAction.substring(0, topupAction.indexOf(':'));
 				// valid transaction so debit and go back to main page
-				Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Request buy "+coin+" coins.|uid|"+player.getMocoId());
-				String ret=OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s,player.getAccessToken());
-				Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|"+ret);
-				player.setCoins(player.getCoins()+coin);
-				player.setGoldDebitted(player.getGoldDebitted()+gold);
-				PlayerManager.getInstance().storePlayer(player);
-				pageContext.forward("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
+				if (levelUp) {
+					Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Request level up.|uid|"+player.getMocoId());
+					String ret=OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s,player.getAccessToken());
+					Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed level up.|uid|"+player.getMocoId()+"|trxid|"+ret);
+					player.setGoldDebitted(player.getGoldDebitted()+gold);
+					player.setLevel(player.getLevel()+1);
+					player.setPlayingLevel(player.getLevel());
+					PlayerManager.getInstance().storePlayer(player);
+					pageContext.forward("/index.jsp?confirmmsg="+URLEncoder.encode("You levelled up! Play to win!","UTF-8"));
+
+				} else {
+					Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Request buy "+coin+" coins.|uid|"+player.getMocoId());
+					String ret=OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s,player.getAccessToken());
+					Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|"+ret);
+					player.setCoins(player.getCoins()+coin);
+					player.setGoldDebitted(player.getGoldDebitted()+gold);
+					PlayerManager.getInstance().storePlayer(player);
+					pageContext.forward("/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
+				}
 				return;
 			} catch (OpenSocialService.GoldTopupRequiredException e) {
 				// redirect 
@@ -143,8 +159,12 @@ if (isWebkit) {
 				<div>
 					<input class="input" type="submit" name="topup" value="MysteryBox: 499 Gold"/>
 				</div>
-				
 				<div class="subheader">(MysteryBox buys 200 - 400 Coins)</div>
+				<% if (player.getLevel() < Integer.getInteger("max.player.level")) { %>
+				<div>
+					<input class="input gold" type="submit" name="topup" value="Unlock Next Level: 499 Gold"/>
+				</div>
+				<% } %>
 			</form>
 			
 			<div class="menu">

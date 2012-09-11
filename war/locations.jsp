@@ -11,49 +11,20 @@
 			    	</div>
 
 			    	<table class="location-wrapper">
-			    		<tr class="location-container">
-			    			<td class="icon-location"><img width="24" height="24" src="images/icon-level1.gif"/></td>
-			    			<td class="icon-lock"><img width="24" height="24" src="images/icon-lock.gif"/></td>
-			    			<td>
-			    				<div>Location 1</div>
-			    				<small>20 XP required</small>
-			    			</td>
-			    			<td class="button-go"><a href="#">Go</a></td>
-			    			<td class="button-go-disable">Go</td>
-			    		</tr>
-
-			    		<tr class="location-container locked">
-			    			<td class="icon-location"><img width="24" height="24" src="images/icon-level2.gif"/></td>
-			    			<td class="icon-lock"><img width="24" height="24" src="images/icon-lock.gif"/></td>
-			    			<td>
-			    				<div>Old West</div>
-			    				<small>20 XP required</small>
-			    			</td>
-			    			<td class="button-go"><a href="#">Go</a></td>
-			    			<td class="button-go-disable">Go</td>
-			    		</tr>
-
-			    		<tr class="location-container locked">
-			    			<td class="icon-location"><img width="24" height="24" src="images/icon-level3.gif"/></td>
-			    			<td class="icon-lock"><img width="24" height="24" src="images/icon-lock.gif"/></td>
-			    			<td>
-			    				<div>Under the Sea</div>
-			    				<small>20 XP required</small>
-			    			</td>
-			    			<td class="button-go"><a href="#">Go</a></td>
-			    			<td class="button-go-disable">Go</td>
-			    		</tr>
-
-			    		<tr class="location-container locked">
-			    			<td class="icon-location"><img width="24" height="24" src="images/icon-level4.gif"/></td>
-			    			<td class="icon-lock"><img width="24" height="24" src="images/icon-lock.gif"/></td>
-			    			<td>
-			    				<div>Wild Jungle</div>
-			    				<small>20 XP required</small>
-			    			</td>
-			    			<td class="button-go"><a href="#">Go</a></td>
-			    			<td class="button-go-disable">Go</td>
-			    		</tr>
+				    	<% for (int i=1;i<=Integer.getInteger("max.player.level");i++) { 
+							boolean locked = i > player.getLevel();	
+							int xpRequired = Integer.getInteger("level.xp.min."+i);%>
+				    		<tr class="location-container<%= locked ? " locked" : ""%>">
+				    			<td class="icon-location"><img width="24" height="24" src="images/icon-level<%=i%>.gif"/></td>
+				    			<td class="icon-lock"><img width="24" height="24" src="images/icon-lock.gif"/></td>
+				    			<td>
+				    				<div><%= System.getProperty("level.name."+i) %></div>
+				    				<% if (xpRequired > 0) { %><small><%= xpRequired %> XP required</small><% } %>
+				    			</td>
+				    			<td class="button-go"><a href="<%= ServletUtils.buildUrl(player, "/spin.jsp?playingLevel="+i, response) %>">Go</a></td>
+				    			<td class="button-go-disable"><a href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Go</a></td>
+				    		</tr>
+				    	<% } %>
 			    	</table>
 
 			  		<div class="menu">

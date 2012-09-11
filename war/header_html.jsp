@@ -54,7 +54,7 @@
                         </td>
 
                         <td class="level">
-                            <b>Level:</b> 1
+                            <b>Level:</b> <%= player.getLevel() %>
                         </td>
                     </tr>
                 </table>

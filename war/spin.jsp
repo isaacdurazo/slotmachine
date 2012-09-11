@@ -7,7 +7,12 @@ String action = request.getParameter("action");
 SpinResult spinResult = new SpinResult(-1,new int[]{-1,-1,-1});
 int symbol[];
 boolean fSpinOK = false;
-String reelImagePath = "/images/"+(player.getLevel() > 1 ? ("level-"+player.getLevel()+"/") : "");
+int setPlayingLevel = ServletUtils.getInt(request, "playingLevel");
+if (setPlayingLevel > 0 && setPlayingLevel <= Integer.getInteger("max.player.level") && player.getLevel() >= setPlayingLevel) {
+	player.setPlayingLevel(setPlayingLevel);
+	PlayerManager.getInstance().storePlayer(player, true);
+}
+String reelImagePath = "/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
 
 try {
 	if ("spin".equals(action)) {
@@ -69,7 +74,7 @@ int key = 1;
 			</div>
 	
 			<div class="location">
-				<span>Under the Sea</span>
+				<span><%= System.getProperty("level.name."+player.getPlayingLevel()) %></span>
 				<a href="<%= ServletUtils.buildUrl(player, "/locations.jsp", response) %>">Change</a>
 			</div>
 

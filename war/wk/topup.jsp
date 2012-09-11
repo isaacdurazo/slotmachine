@@ -10,6 +10,7 @@ if (formValidation == null && topupAction == null) {
 if (isWebkit) {
 	if ("widget".equals(request.getParameter("action"))) {
 		int gold = ServletUtils.getInt(request, "gold");
+		boolean levelUnlock = "true".equals(request.getParameter("level"));
 		String id = request.getParameter("id"), timestamp = request.getParameter("timestamp"), token = request.getParameter("token");
 		// validate token
 		String expectedToken = org.apache.commons.codec.digest.DigestUtils.md5Hex(
@@ -27,14 +28,20 @@ if (isWebkit) {
 					coin = 70;
 					break;
 				case 499:
-					coin = 250+(new Random()).nextInt(150);
+					if (levelUnlock) {
+						player.setLevel(player.getLevel()+1);
+						player.setPlayingLevel(player.getLevel());
+						PlayerManager.getInstance().storePlayer(player);
+						pageContext.forward("/wk/spin.jsp?accessToken="+java.net.URLEncoder.encode(player.getAccessToken(),"UTF-8")+"&levelUp=true");
+						return;
+					} else coin = 250+(new Random()).nextInt(150);
 					break;
 			}
 			player.setCoins(player.getCoins()+coin);
 			player.setGoldDebitted(player.getGoldDebitted()+gold);
 			PlayerManager.getInstance().storePlayer(player);
 			Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|webkit");
-			pageContext.forward("/wk/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
+			pageContext.forward("/wk/index.jsp?accessToken="+java.net.URLEncoder.encode(player.getAccessToken(),"UTF-8")+"&confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
 			return;
 		} else {
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"topup: error attempting to topup for player: "+player);
@@ -94,6 +101,7 @@ if (isWebkit) {
 					e.preventDefault();
 					var desc = this.value;
 					var gold = 0;
+					var level = false;
 					switch (desc) {
 						case "30 Coins: 99 Gold":
 							gold = 99;
@@ -101,6 +109,8 @@ if (isWebkit) {
 						case "70 Coins: 199 Gold":
 							gold = 199;
 							break;
+						case "Unlock Next Level: 499 Gold":
+							level = true;
 						case "MysteryBox: 499 Gold":
 							gold = 499;
 							break;
@@ -114,7 +124,7 @@ if (isWebkit) {
 							onSuccess: function(id,timestamp,token) {
 								// redirect with those parameters
 								try {_gaq.push(['_trackEvent', 'Topup', 'success', desc, gold]);} catch (err) {console.error(err);}
-								window.location = '/wk/topup.jsp?accessToken=<%= player.getAccessToken() %>&action=widget&id='+id+'&timestamp='+timestamp+'&token='+token+'&gold='+gold;
+								window.location = '/wk/topup.jsp?accessToken=<%= player.getAccessToken() %>&level='+level+'action=widget&id='+id+'&timestamp='+timestamp+'&token='+token+'&gold='+gold;
 							},
 							onError: function(error) {
 								console.error(error);
@@ -156,6 +166,11 @@ if (isWebkit) {
 						<div>
 							<input class="input gold" type="submit" name="topup" value="70 Coins: 199 Gold"/>
 						</div>
+						<% if (player.getLevel() < Integer.getInteger("max.player.level")) { %>
+						<div>
+							<input class="input gold" type="submit" name="topup" value="Unlock Next Level: 499 Gold"/>
+						</div>
+						<% } %>
 						
 						<div class="subheader">(MysteryBox buys 200 - 400 Coins)</div>
 					</form>
