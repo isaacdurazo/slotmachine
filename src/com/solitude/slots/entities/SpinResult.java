@@ -11,6 +11,8 @@ public class SpinResult {
 	private final int coins;
 	/** symbols shown */
 	private final int[] symbols;
+	/** if spin resulted level up */
+	private boolean levelUp = false;
 	
 	/**
 	 * @param coins awarded
@@ -25,6 +27,10 @@ public class SpinResult {
 	public int getCoins() { return coins; }
 	/** @return int array of symbols to appear */
 	public int[] getSymbols() { return symbols;	}
+	/** set level up to true */
+	public void setLevelUp() { this.levelUp = true; }
+	/** @return if level up occurred */
+	public boolean getLevelUp() { return this.levelUp; }
 	
 	@Override
 	public String toString() {

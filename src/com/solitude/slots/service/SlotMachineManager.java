@@ -126,7 +126,6 @@ public class SlotMachineManager {
 			}
 			
 			idx=random.nextInt(maxRnd);
-
 			if (idx>= spinResults.length) {
 				//for spin result >=10000 map to payout table for idx between 0 and 4998 (=no payout)
 				idx -= spinResults.length;
@@ -181,15 +180,7 @@ public class SlotMachineManager {
 //		if (fJackpot==true) {c=0;}
 		
 		if (maxBet && spinResult.getCoins() > 0 ) {
-			int multiplier = 2;
-			switch (player.getPlayingLevel()) {
-			case 1: multiplier = 4; break;
-			case 2: multiplier = 6; break;
-			case 3: multiplier = 8; break;
-			case 4: multiplier = 9; break;
-			default:
-				throw new IllegalArgumentException("Invalid player playing level: "+player);
-			}
+			int multiplier = Integer.getInteger("level.max.bet.multiplier."+player.getPlayingLevel());		
 			spinResult = new SpinResult(spinResult.getCoins()*multiplier,spinResult.getSymbols());
 		}
 		if (!fJackpot) {
@@ -198,11 +189,19 @@ public class SlotMachineManager {
 		}
 		
 		// increment xp with spins and update leaderboard (do this with batching later?)
-		player.setXp(player.getXp()+1);
+		if (PlayerManager.getInstance().incrementXp(player)) {
+			log.log(Level.INFO,"player|level_up|"+player.getLevel());
+			spinResult.setLevelUp();
+		}
 		PlayerManager.getInstance().storePlayer(player, true);
 		
 		log.log(Level.INFO,"spin|rnd="+idx+", cust="+fCustomProbability+", bet="+coins+", "+spinResult+", coins="+player.getCoins()+" |uid|"+player.getMocoId());
 		return spinResult;
+	}
+	
+	/** @return max bet for playing level */
+	public int getMaxBet(Player player) {
+		return Integer.getInteger("level.max.bet."+player.getPlayingLevel());
 	}
 
 	/**

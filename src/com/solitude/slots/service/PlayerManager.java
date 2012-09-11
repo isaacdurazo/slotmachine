@@ -96,6 +96,14 @@ public class PlayerManager {
 			log.log(Level.INFO,"sessionstart|returning user|uid|"+player.getMocoId()+", Player="+player.toString());
 		}
 		
+		// see if users xp does not match their level
+		int newLevel = player.getLevel()+1;
+		while (newLevel <= Integer.getInteger("max.player.level",4) && 
+				player.getXp() > Integer.getInteger("level.xp.min."+newLevel)) {
+			player.setLevel(newLevel);
+			player.setPlayingLevel(newLevel);
+		}
+		
 		// store player to update last access time
 		GAEDataManager.getInstance().store(player);
 
@@ -303,6 +311,17 @@ public class PlayerManager {
 			info.lastAccess = System.currentTimeMillis();
 		}
 		GAECacheManager.getInstance().put(player);
+	}
+	
+	/**
+	 * Increases users xp by 1 and returns if player has levelled up
+	 * @param player to increment
+	 * @return if level up occurred
+	 */
+	protected boolean incrementXp(Player player) {
+		player.setXp(player.getXp()+1);
+		return player.getLevel() != Integer.getInteger("max.player.level",4) && 
+				player.getXp() == Integer.getInteger("level.xp.min."+(player.getLevel()+1));
 	}
 	
 	private void updatePlayerLeaderboards(Player player) {

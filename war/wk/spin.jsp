@@ -7,9 +7,12 @@ request.setAttribute("hide_doctype",action);
 <%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException, java.util.Arrays, org.json.simple.*" %>
 <%
 int setPlayingLevel = ServletUtils.getInt(request, "playingLevel");
-if (setPlayingLevel > 0 && setPlayingLevel < 5) player.setPlayingLevel(setPlayingLevel);
+if (setPlayingLevel > 0 && setPlayingLevel <= Integer.getInteger("max.player.level") && player.getLevel() >= setPlayingLevel) {
+	player.setPlayingLevel(setPlayingLevel);
+	PlayerManager.getInstance().storePlayer(player, true);
+}
 String reelImagePath = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
-int maxBet = 2+player.getPlayingLevel();
+int maxBet = SlotMachineManager.getInstance().getMaxBet(player);
 if (action != null) {
 	try {
 		SpinResult spinResult = null;
@@ -36,6 +39,7 @@ if (action != null) {
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
 		}
 		responseJSON.put("coins", spinResult.getCoins());
+		responseJSON.put("levelUp", spinResult.getLevelUp());
 		JSONArray symbolsArray = new JSONArray();
 		for (int i=0;i<spinResult.getSymbols().length;i++) {
 			symbolsArray.add(spinResult.getSymbols()[i]);
@@ -111,6 +115,7 @@ java.util.List<Achievement> earnedAchievements = null;
 				document.getElementById('won_result').className = '';
 				document.querySelector('.achievements').style.display = 'none';		
 				document.getElementById('player_coins').style.display = 'none';
+				document.querySelector('.level-up').style.display = 'none';
 				document.getElementById('lights').innerHTML = 
 					'<div class="lights-off">'+
 						'<div class="lights left"></div>'+
@@ -298,11 +303,10 @@ java.util.List<Achievement> earnedAchievements = null;
 			    	</div> 
 			    <% } %>
 
-				<div class="spin-results">
-					
+				<div class="spin-results">		
 					
 					<div class="location">
-						<span>Under the Sea</span>
+						<span><%= System.getProperty("level.name."+player.getPlayingLevel()) %></span>
 						<a href="<%= ServletUtils.buildUrl(player, "/wk/locations.jsp", response) %>">change</a>
 					</div>
 					<div class="results">

@@ -62,7 +62,7 @@
                 </span>
 
                 <span class="level-xp">
-                    <span class="level"><b>Level:</b> 1</span>
+                    <span class="level"><b>Level:</b> <%= player.getLevel() %></span>
                     <span id="player_xp" class="xp"><b>XP:</b> <%= player.getXp() %></span>
                 </span>
             </div>
