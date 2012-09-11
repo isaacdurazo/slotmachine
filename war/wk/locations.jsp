@@ -22,7 +22,10 @@
 								<span class="icon-lock"></span>
 							</div>
 							<div class="location">
-								<div class="location-name"><%= System.getProperty("level.name."+i) %></div>
+								<span class="location-name"><%= System.getProperty("level.name."+i) %></span>
+								<span class="location-play">Play</span>
+								<span class="location-buy">Buy</span>
+								<div class="location-xp">200 XP required</div>
 							</div>
 						</a>
 					</div>

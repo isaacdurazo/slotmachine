@@ -614,20 +614,35 @@ a.location-container {
 }
 
 .location-container .icon-lock {
-	background: url(../images/icon-lock.png);
-	width: 32px;
-	height: 38px;
+	background: url(../images/icon-lock.png) no-repeat 14px 9px;
+	width: 29px;
+	height: 28px;
 	position: absolute;
-	bottom: -2px;
-	left: 45px;
+	bottom: 9px;
+	left: 9px;
+	padding: 15px;
+	border-radius: 50px;
 }
+
+.location-container.level-2 .icon-lock {
+	background-color: rgba(109, 79, 47, .9);
+}
+
+.location-container.level-3 .icon-lock {
+	background-color: rgba(26, 192, 221, .9);
+}
+
+.location-container.level-4 .icon-lock {
+	background-color: rgba(152, 176, 69, .9);
+}
+
 
 .location-container .location {
 	float: left;
 	height: 45px;
 	margin-top: 13px;
-	width: 180px;
-	padding: 0 0 0 25px;
+	width: 190px;
+	padding: 0 0 0 15px;
 	border: 3px solid #f8b52e;
 	-webkit-border-radius: 0 10px 10px 0;
 	-moz-border-radius: 0 10px 10px 0;
@@ -654,6 +669,7 @@ a.location-container {
 	margin-top: 4px;
 	font-size: 18px;
 	font-weight: 600;
+	display: inline-block;
 }
 
 .location-container .icon-star-small{
@@ -664,16 +680,33 @@ a.location-container {
 	vertical-align: top;
 }
 
-.location-wrapper .icon-lock{
+.location-wrapper .location-play, .location-buy {
+	float: right;
+	text-align:center;
+	font-size: 16px;
+	font-weight: bold;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	background-image: linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(37,130,0)), color-stop(0.5, rgb(43,156,2)), color-stop(1, rgb(96,248,36)));
+	padding: 8px 11px;
+	margin: 5px 5px 0 0;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 1);
+}
+
+.location-wrapper.locked .location-play, .location-wrapper .location-buy, .location-wrapper .icon-lock{
 	display: none;
 }
 
-.location-wrapper.locked .icon-lock{
-	display: block;
+.location-wrapper.locked .icon-lock, .location-wrapper.locked .location-buy{
+	display: inline-block;
 }
 
 .location-wrapper.locked .location {
-	opacity: .5;
+	opacity: 1;
 }
 
 .location-wrapper.locked .level-2 .location-name {
