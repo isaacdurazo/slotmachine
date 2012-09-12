@@ -48,7 +48,7 @@
   </head>
   <body>
     <div id="container">
-        <div class="wrapper">
+        <div class="wrapper <%= request.getAttribute("wrapperClass") != null ? request.getAttribute("wrapperClass") : ""%>">
             <div class="header">
 
                 <a class="coins" accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>">

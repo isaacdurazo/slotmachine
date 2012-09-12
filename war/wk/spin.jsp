@@ -7,10 +7,11 @@ request.setAttribute("hide_doctype",action);
 <%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException, java.util.Arrays, org.json.simple.*" %>
 <%
 int setPlayingLevel = ServletUtils.getInt(request, "playingLevel");
-if (setPlayingLevel > 0 && setPlayingLevel <= Integer.getInteger("max.player.level") && player.getLevel() >= setPlayingLevel) {
+if (setPlayingLevel > 0 && (player.hasAdminPriv() || (setPlayingLevel <= Integer.getInteger("max.player.level") && player.getLevel() >= setPlayingLevel))) {
 	player.setPlayingLevel(setPlayingLevel);
 	PlayerManager.getInstance().storePlayer(player, true);
 }
+request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
 int maxBet = SlotMachineManager.getInstance().getMaxBet(player);
 if (action != null) {
@@ -39,7 +40,13 @@ if (action != null) {
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
 		}
 		responseJSON.put("coins", spinResult.getCoins());
-		responseJSON.put("levelUp", spinResult.getLevelUp());
+		if (spinResult.getLevelUp()) {
+			JSONObject levelInfo = new JSONObject();
+			levelInfo.put("name", System.getProperty("level.name."+player.getLevel()));
+			levelInfo.put("maxBet", Integer.getInteger("level.max.bet."+player.getLevel()));
+			levelInfo.put("num", player.getLevel());
+			responseJSON.put("level",levelInfo);
+		}
 		JSONArray symbolsArray = new JSONArray();
 		for (int i=0;i<spinResult.getSymbols().length;i++) {
 			symbolsArray.add(spinResult.getSymbols()[i]);
@@ -73,10 +80,11 @@ java.util.List<Achievement> earnedAchievements = null;
 		var spinsRemaining = 10;
 		var accessToken = "<%= player.getAccessToken()%>";
 		document.addEventListener('DOMContentLoaded', function() {
-			var closeBtns = document.querySelectorAll(".achievements .close, .achievements .play a");
+			var closeBtns = document.querySelectorAll(".achievements .close, .achievements .play a, .level-up a.close");
 			for (var i=0;i<closeBtns.length;i++) {
 				closeBtns[i].addEventListener('click', function(e) {
 					document.querySelector('.achievements').style.display = 'none';	
+					document.querySelector('.level-up').style.display = 'none';
 					e.preventDefault();
 					return false;
 				},false);
@@ -143,10 +151,16 @@ java.util.List<Achievement> earnedAchievements = null;
 							var coins = data.coins;
 							var symbol = data.symbols;
 							var achievements = data.achievements;
+							var levelUp = data.level;
 							document.getElementById('player_xp').innerHTML = ++xp;
 							try {_gaq.push(['_trackEvent', 'Spin', 'Result',coins ? 'Win' : 'Loss', coins]);} catch (err) {console.error(err);}
 							
-							if (achievements) {
+							if (levelUp) { 
+								document.querySelector('.level-up').style.display = 'block';
+								document.querySelector('.level-name').innerHTML = levelUp.name;
+								document.querySelector('.level-up .play a').href = '<%= ServletUtils.buildUrl(player, "/wk/spin.jsp",response)%>&playingLevel='+levelUp.num;
+								try {_gaq.push(['_trackEvent', 'Spin', isMax ? 'Max' : 'Min']);} catch (err) {console.error(err);}
+							} else if (achievements) {
 								document.querySelector('.achievements').style.display = 'block';
 								document.getElementById('achievement_title_text').innerHTML = 'achievement'+(achievements.length == 1 ? '' : 's');
 								var coinsEarned = 0;
@@ -286,7 +300,7 @@ java.util.List<Achievement> earnedAchievements = null;
 						<h1>LEVEL UP!</h1>
 						
 						<h3>You unlocked a new slotmachine</h3>
-						<h2>Under the Sea</h2>
+						<h2 class='level-name'>Under the Sea</h2>
 						
 						<h3>Jackpot bonus 10%</h3>
 

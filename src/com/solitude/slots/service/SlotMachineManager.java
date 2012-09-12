@@ -79,7 +79,7 @@ public class SlotMachineManager {
 				index++;
 			}
 		} catch (IOException e) {
-			log.log(Level.SEVER,"Unable to load pay out table!");
+			log.log(Level.SEVERE,"Unable to load pay out table!");
 		}
 	}
 	
