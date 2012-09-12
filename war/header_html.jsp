@@ -38,26 +38,28 @@
   </head>
   <body>
     <div id="container">
-        <div class="wrapper">
+        <div class="wrapper <%= request.getAttribute("wrapperClass") != null ? request.getAttribute("wrapperClass") : ""%>">
             <div class="header-logo">
                 <table align="center">
                     <tr><td><img width="112" height="18" src="images/logosmall.gif"/></td></tr>
                 </table>
+                <% if (((com.solitude.slots.entities.Player)request.getAttribute("player")) != null) { %>
                 <table class="subheader">
                     <tr>
                         <td class="coins">
-                            <b>Coins:</b><%= player.getCoins() %>
+                            <b>Coins:</b><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getCoins() %>
                         </td>
                         
                         <td class="xp" style="red">
-                            <b>XP:</b><%= player.getXp() %>
+                            <b>XP:</b><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getXp() %>
                         </td>
 
                         <td class="level">
-                            <b>Level:</b> <%= player.getLevel() %>
+                            <b>Level:</b> <%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getLevel() %>
                         </td>
                     </tr>
                 </table>
+                <% } %>
             </div>
             
             

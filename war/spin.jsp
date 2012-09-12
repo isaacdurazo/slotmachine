@@ -12,6 +12,7 @@ if (setPlayingLevel > 0 && setPlayingLevel <= Integer.getInteger("max.player.lev
 	player.setPlayingLevel(setPlayingLevel);
 	PlayerManager.getInstance().storePlayer(player, true);
 }
+request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
 
 try {
@@ -71,7 +72,7 @@ int key = 1;
 					<div class="goldtext">LEVEL UP!</div>
 					<small>You unlocked a new slotmachine</small> <br/>
 					<%= System.getProperty("level.name."+player.getLevel()) %> <br/>
-					<div class="goldtext">Jackpot bonus 10%</div>
+					<div class="goldtext">Jackpot bonus <%= 100*(Integer.getInteger("level.jackpot.multiplier."+player.getLevel())-1) %>%</div>
 				</div>
 			<% } %>
 	
@@ -143,7 +144,7 @@ int key = 1;
 						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= ServletUtils.buildUrl(player, "/spin.jsp?action=spin&"+cacheBuster, response) %>"> Bet 1</a>
 					</td>
 					<td class="bet-2">
-						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= ServletUtils.buildUrl(player, "/spin.jsp?action=maxspin&"+cacheBuster, response) %>"> Bet 3</a>
+						<%= key %>.<a accessKey="<%= key++ %>" class="bet" href="<%= ServletUtils.buildUrl(player, "/spin.jsp?action=maxspin&"+cacheBuster, response) %>"> Bet <%= SlotMachineManager.getInstance().getMaxBet(player) %></a>
 					</td>
 				</tr>
 			</table>

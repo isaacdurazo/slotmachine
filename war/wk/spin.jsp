@@ -43,7 +43,7 @@ if (action != null) {
 		if (spinResult.getLevelUp()) {
 			JSONObject levelInfo = new JSONObject();
 			levelInfo.put("name", System.getProperty("level.name."+player.getLevel()));
-			levelInfo.put("maxBet", Integer.getInteger("level.max.bet."+player.getLevel()));
+			levelInfo.put("jackpotMultiplier", 100*(Integer.getInteger("level.jackpot.multiplier."+player.getLevel())-1));
 			levelInfo.put("num", player.getLevel());
 			responseJSON.put("level",levelInfo);
 		}
@@ -158,8 +158,9 @@ java.util.List<Achievement> earnedAchievements = null;
 							if (levelUp) { 
 								document.querySelector('.level-up').style.display = 'block';
 								document.querySelector('.level-name').innerHTML = levelUp.name;
+								document.querySelector('.level-bonus').innerHTML = levelUp.jackpotMultiplier;
 								document.querySelector('.level-up .play a').href = '<%= ServletUtils.buildUrl(player, "/wk/spin.jsp",response)%>&playingLevel='+levelUp.num;
-								try {_gaq.push(['_trackEvent', 'Spin', isMax ? 'Max' : 'Min']);} catch (err) {console.error(err);}
+								try {_gaq.push(['_trackEvent', 'Player', 'levelUp',undefined,levelUp.num]);} catch (err) {console.error(err);}
 							} else if (achievements) {
 								document.querySelector('.achievements').style.display = 'block';
 								document.getElementById('achievement_title_text').innerHTML = 'achievement'+(achievements.length == 1 ? '' : 's');
@@ -302,7 +303,7 @@ java.util.List<Achievement> earnedAchievements = null;
 						<h3>You unlocked a new slotmachine</h3>
 						<h2 class='level-name'>Under the Sea</h2>
 						
-						<h3>Jackpot bonus 10%</h3>
+						<h3>Jackpot bonus <span class='level-bonus'></span>%</h3>
 
 						<div class="play">
 							<a href="#">Play Now</a>

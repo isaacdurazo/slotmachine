@@ -51,9 +51,9 @@
         <div class="wrapper <%= request.getAttribute("wrapperClass") != null ? request.getAttribute("wrapperClass") : ""%>">
             <div class="header">
 
-                <a class="coins" accessKey="2" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp", response) %>">
+                <a class="coins" accessKey="2" href="<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")), "/wk/topup.jsp", response) %>">
                     <span class="icon-coin"></span>
-                    <span id="player_coins" class="delay inline"><%= player.getCoins() %></span>
+                    <span id="player_coins" class="delay inline"><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getCoins() %></span>
                     <span class="plus">+</span>
                 </a>   
 
@@ -62,8 +62,8 @@
                 </span>
 
                 <span class="level-xp">
-                    <span class="level"><b>Level:</b> <%= player.getLevel() %></span>
-                    <span id="player_xp" class="xp"><b>XP:</b> <%= player.getXp() %></span>
+                    <span class="level"><b>Level:</b> <%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getLevel() %></span>
+                    <span id="player_xp" class="xp"><b>XP:</b> <%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getXp() %></span>
                 </span>
             </div>
             
