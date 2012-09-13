@@ -54,9 +54,9 @@
                             <b>XP:</b><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getXp() %>
                         </td>
 
-                        <td class="level">
+                        <%--<td class="level">
                             <b>Level:</b> <%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getLevel() %>
-                        </td>
+                        </td>--%>
                     </tr>
                 </table>
                 <% } %>

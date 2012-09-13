@@ -62,7 +62,7 @@
                 </span>
 
                 <span class="level-xp">
-                    <span class="level"><b>Level:</b> <span id='level'><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getLevel() %></span></span>
+                    <%--<span class="level"><b>Level:</b> <span id='level'><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getLevel() %></span></span>--%>
                     <span class="xp"><b>XP:</b> <span id="player_xp"><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getXp() %></span></span>
                 </span>
             </div>
