@@ -19,7 +19,10 @@
 				    			<td class="icon-lock"><img width="24" height="24" src="images/icon-lock.gif"/></td>
 				    			<td>
 				    				<div><%= System.getProperty("level.name."+i) %></div>
-				    				<% if (xpRequired > 0) { %><small><%= xpRequired %> XP required</small><% } %>
+				    				<small>
+				    					<% if (locked) { %><%= Integer.getInteger("level.xp.min."+i)%> XP required
+										<% } else { %><%= (int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+i))*GameUtils.getGlobalProps().getMocoGoldPrize())%> Gold Jackpot<% } %>				    				
+				    				</small>
 				    			</td>
 				    			<td class="button-go"><a href="<%= ServletUtils.buildUrl(player, "/spin.jsp?playingLevel="+i, response) %>">Go</a></td>
 				    			<td class="button-go-disable"><a href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Buy</a></td>

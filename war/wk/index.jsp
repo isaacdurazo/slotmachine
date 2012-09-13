@@ -44,7 +44,7 @@
 					</span>
 
 					<span class="jackpot-text">
-						<img width="16" height="16" src="/wk/images/mocogold.png"/> <%=Integer.getInteger("level.jackpot.multiplier."+player.getLevel())*GameUtils.getGlobalProps().getMocoGoldPrize()%>  MocoGold!
+						<img width="16" height="16" src="/wk/images/mocogold.png"/> <%=(int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))*GameUtils.getGlobalProps().getMocoGoldPrize())%>  MocoGold!
 					</span>
 
 				</div>

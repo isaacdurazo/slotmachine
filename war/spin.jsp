@@ -69,10 +69,10 @@ int key = 1;
 
 			<% if (spinResult.getLevelUp()) { %>
 				<div class="level-up">
-					<div class="goldtext">LEVEL UP!</div>
+					<!--div class="goldtext">LEVEL UP!</div-->
 					<small>You unlocked a new slotmachine</small> <br/>
 					<%= System.getProperty("level.name."+player.getLevel()) %> <br/>
-					<div class="goldtext">Jackpot bonus <%= 100*(Integer.getInteger("level.jackpot.multiplier."+player.getLevel())-1) %>%</div>
+					<div class="goldtext">Jackpot bonus <%= 100*(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))-1) %>%</div>
 				</div>
 			<% } %>
 	

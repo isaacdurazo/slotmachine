@@ -43,7 +43,7 @@ if (action != null) {
 		if (spinResult.getLevelUp()) {
 			JSONObject levelInfo = new JSONObject();
 			levelInfo.put("name", System.getProperty("level.name."+player.getLevel()));
-			levelInfo.put("jackpotMultiplier", 100*(Integer.getInteger("level.jackpot.multiplier."+player.getLevel())-1));
+			levelInfo.put("jackpot", Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))*GameUtils.getGlobalProps().getMocoGoldPrize());
 			levelInfo.put("num", player.getLevel());
 			responseJSON.put("level",levelInfo);
 		}
@@ -158,8 +158,9 @@ java.util.List<Achievement> earnedAchievements = null;
 							if (levelUp) { 
 								document.querySelector('.level-up').style.display = 'block';
 								document.querySelector('.level-name').innerHTML = levelUp.name;
-								document.querySelector('.level-bonus').innerHTML = levelUp.jackpotMultiplier;
+								document.querySelector('.level-bonus').innerHTML = levelUp.jackpot;
 								document.querySelector('.level-up .play a').href = '<%= ServletUtils.buildUrl(player, "/wk/spin.jsp",response)%>&playingLevel='+levelUp.num;
+								if (document.getElementById('level')) document.getElementById('level').innerHTML = levelUp.num;
 								try {_gaq.push(['_trackEvent', 'Player', 'levelUp',undefined,levelUp.num]);} catch (err) {console.error(err);}
 							} else if (achievements) {
 								document.querySelector('.achievements').style.display = 'block';
@@ -298,12 +299,12 @@ java.util.List<Achievement> earnedAchievements = null;
 					<div class="dialog-container">
 						<a class="close" href="#" ></a>
 
-						<h1>LEVEL UP!</h1>
+						<!--h1>LEVEL UP!</h1-->
 						
 						<h3>You unlocked a new slotmachine</h3>
 						<h2 class='level-name'>Under the Sea</h2>
 						
-						<h3>Jackpot bonus <span class='level-bonus'></span>%</h3>
+						<h3>Jackpot <span class='level-bonus'></span> Gold</h3>
 
 						<div class="play">
 							<a href="#">Play Now</a>
