@@ -128,8 +128,8 @@ table {
 	-moz-box-shadow: inset 0px 0px 5px  #000;
   	-webkit-box-shadow: inset 0px 0px 5px  #000;
   	box-shadow: inset 0px 0px 5px  #000;
-  	line-height: 24px;
-	padding-top: 5px;
+  	line-height: 23px;
+	padding-top: 15px;
 }
 
 .header .coins {
@@ -144,6 +144,10 @@ table {
 
 .header a.coins {
 	color: #FFF;
+	font-size: 15px;
+	position: relative;
+	top: -7px;
+	font-family: 'Electrolize', sans-serif;
 }
 
 .header .coins .icon-coin {
@@ -169,7 +173,7 @@ table {
 }
 
 .header .logo {
-	margin: 0 10px;
+	margin: 0 7px;
 	display: inline-block;
 	position: relative;
 	top: -4px;
@@ -181,6 +185,8 @@ table {
 
 .header .level-xp {
 	display: inline-block;
+	position: relative;
+	top: -7px;
 }
 
 .header .level, .header .xp {
@@ -194,6 +200,7 @@ table {
 	height: 16px;
 	line-height: 17px;
 	padding: 0 4px;
+	font-family: 'Electrolize', sans-serif;
 }
 
 .header .level {
@@ -282,7 +289,6 @@ table {
 	-webkit-box-shadow: inset 0 3px 0px rgba(17,102,12,1), inset 0 -3px 0px rgba(17,102,12,1), inset 3px 0 0px rgba(17,102,12,1), inset -3px 0 0px rgba(17,102,12,1);
 	-moz-box-shadow: inset 0 3px 0px rgba(17,102,12,1), inset 0 -3px 0px rgba(17,102,12,1), inset 3px 0 0px rgba(17,102,12,1), inset -3px 0 0px rgba(17,102,12,1);
 	box-shadow: inset 0 3px 0px rgba(17,102,12,1), inset 0 -3px 0px rgba(17,102,12,1), inset 3px 0 0px rgba(17,102,12,1), inset -3px 0 0px rgba(17,102,12,1);
-	padding: 13px 0;
 	font-size: 1.5em;
 }
 
@@ -290,6 +296,8 @@ table {
 	font-weight: 600;
 	color: #FFF;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, 1);
+	display: block;
+	padding: 13px 0;
 }
 
 .menu a{
@@ -349,7 +357,7 @@ table {
 	border: 4px solid #908f8f;
 	border-bottom: 0;
 	margin: 10px 20px 0;
-	height: 55px;
+	height: 70px;
 	text-align: center;
 	background-color: #1D1C1C;
 }
@@ -357,6 +365,7 @@ table {
 .spin-results .location {
 	margin: 7px 0;
 	font-size: 16px;
+	position: relative;
 }
 
 .spin-results .location a {
@@ -368,12 +377,19 @@ table {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	padding: 3px 10px;
+	padding: 3px 8px;
+	position: absolute;
+	right: 3px;
+	top: -3px;
 }
 
- .spin-results .results {
+.spin-results .results {
  	border-top: 1px solid #4b4b4b;
  	padding-top: 4px;
+ }
+
+ .spin-results .results a { 
+ 	color: green;
  }
 
 /* ----------------------------- */
@@ -696,6 +712,15 @@ a.location-container {
 	margin: 5px 5px 0 0;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, 1);
 }
+.location-wrapper .location-play {
+	background: rgb(199,3,4);
+	background: -moz-linear-gradient(top, rgba(199,3,4,1) 0%, rgba(155,3,3,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(199,3,4,1)), color-stop(100%,rgba(155,3,3,1)));
+	background: -webkit-linear-gradient(top, rgba(199,3,4,1) 0%,rgba(155,3,3,1) 100%);
+	background: -o-linear-gradient(top, rgba(199,3,4,1) 0%,rgba(155,3,3,1) 100%); 
+	background: -ms-linear-gradient(top, rgba(199,3,4,1) 0%,rgba(155,3,3,1) 100%);
+	background: linear-gradient(to bottom, rgba(199,3,4,1) 0%,rgba(155,3,3,1) 100%);
+}
 
 .location-wrapper.locked .location-play, .location-wrapper .location-buy, .location-wrapper .icon-lock{
 	display: none;
@@ -709,17 +734,7 @@ a.location-container {
 	opacity: 1;
 }
 
-.location-wrapper.locked .level-2 .location-name {
-	color: #45321d;
-}
 
-.location-wrapper.locked .level-3 .location-name {
-	color: #1499b0;
-}
-
-.location-wrapper.locked .level-4 .location-name {
-	color: #7a8d36;
-}
 
 
 /* ----------------------------- */

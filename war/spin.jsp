@@ -102,7 +102,7 @@ int key = 1;
 				<%		} else if (spinResult.getCoins()==0) {
 				String s = "Spin again!";	
 				if (Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
-					s="Make lemonade :). Check the <a href=\"help.jsp\">payout table</a> for winnings!";
+					s="When you get all lemons make lemonade :). Check the <a href=\"help.jsp\">payout table</a> for winnings!";
 				}
 				%>
 					<div class="lostspin">

@@ -187,7 +187,7 @@ java.util.List<Achievement> earnedAchievements = null;
 								document.getElementById('lost_result').className = "lostspin delay";
 								var lossText = 'Spin Again';
 								if (symbol[0] == 6 && symbol[1] == 6 && symbol[2] == 6) {
-									lossText = "Make lemonade :).<br/> Check the "+
+									lossText = "When you get all lemons make lemonade :).<br/> Check the "+
 										"<a href='<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>'>payout table</a> !";
 								}
 								document.getElementById('lost_result').innerHTML = lossText;
