@@ -359,13 +359,26 @@ table {
 	margin: 10px 20px 0;
 	height: 70px;
 	text-align: center;
-	background-color: #1D1C1C;
+	border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	background: rgba(0, 0, 0, .3);
 }
 
 .spin-results .location {
 	margin: 7px 0;
 	font-size: 16px;
 	position: relative;
+}
+
+.spin-results .location span{
+	background: black;
+	font-weight: bold;
+	padding: 4px 8px 5px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	text-shadow: 0 2px 0 black;
 }
 
 .spin-results .location a {
@@ -386,6 +399,8 @@ table {
 .spin-results .results {
  	border-top: 1px solid #4b4b4b;
  	padding-top: 4px;
+ 	height: 33px;
+ 	background: black;
  }
 
  .spin-results .results a { 
@@ -1050,6 +1065,9 @@ a.close {
 	border-color: #5d371f;
 }
 
+.level-2 .spin-results .location span{
+	background: #5D371F;
+}
 
 /*-------------------------*/
 
@@ -1063,13 +1081,14 @@ a.close {
 
 .level-3 .header-logo, .level-3 .title, .level-3 .spin-container, .level-3 .spin-controls{
 	background: #004b80;
-	-moz-box-shadow: inset 0px 0px 5px #000;
-	-webkit-box-shadow: inset 0px 0px 5px black;
-	box-shadow: inset 0px 0px 5px black;
 }
 
 .level-3 .spin-results {
 	border-color: #004b80;
+}
+
+.level-3 .spin-results .location span{
+	background: #004b80
 }
 
 
@@ -1092,5 +1111,9 @@ a.close {
 
 .level-4 .spin-results {
 	border-color: #805a00;
+}
+
+.level-4 .spin-results .location span{
+	background: #805a00;
 }
 
