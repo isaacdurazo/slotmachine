@@ -220,12 +220,16 @@ table {
 	background-color: #1d1c1c;
 	line-height: 2em;
 	text-align: center;
-	margin: 0 40px 10px;
-	font-size: 16px;
+	margin: 0 26px 10px;
+	font-size: 18px;
+	background: url('/wk/images/jackpot-bg.gif');
+	width: 260px;
+	box-shadow: inset 1px 0px 10px rgba(0,0,0,.6);
+	-webkit-box-shadow: inset 1px 0px 10px rgba(0,0,0,.6);
 }
 
 .jackpot {
-	background: -webkit-gradient(linear, left top, left bottom, from(#fbb22d), to(#fbe930));
+	background: -webkit-gradient(linear, left top, left bottom, from(#c70304), to(#750102));
   	-webkit-background-clip: text;
   	-webkit-text-fill-color: transparent;
     font-weight:bold;
@@ -233,6 +237,10 @@ table {
 
 .jackpot-text img {
 	vertical-align: middle;
+}
+
+.jackpot-text {
+	color:black;
 }
 
 
