@@ -13,6 +13,7 @@ if (setPlayingLevel > 0 && (player.hasAdminPriv() || (setPlayingLevel <= Integer
 }
 request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
+String reelAnimation = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()) : "")+"/spin-static-animation.jpg";
 int maxBet = SlotMachineManager.getInstance().getMaxBet(player);
 if (action != null) {
 	try {
@@ -206,7 +207,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									'<div>'+
 										'<span id="spin-animation-1">'+
 										'<span class="shadows"></span>'+
-										'<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249"/>'+
+										'<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249"/>'+
 									'</span>'+
 									'<img width="70" height="102" src="'+s1+'"/>'+
 									'</div>'+
@@ -215,7 +216,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									'<div>'+
 										'<span id="spin-animation-2">'+
 										'<span class="shadows"></span>'+
-										'<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249"/>'+
+										'<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249"/>'+
 									'</span>'+
 									'<img width="70" height="102" src="'+s2+'"/>'+
 									'</div>'+
@@ -224,7 +225,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									'<div>'+
 										'<span id="spin-animation-3">'+
 										'<span class="shadows"></span>'+
-										'<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249"/>'+
+										'<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249"/>'+
 									'</span>'+
 									'<img width="70" height="102" src="'+s3+'"/>'+
 									'</div>'+
@@ -352,7 +353,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									<div>									
 										<span id="spin-animation-1" style="display: none; ">
 											<span class="shadows"></span>
-											<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249">
+											<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249">
 										</span>
 										
 										<img width="70" height="102" src="/wk/images/comb--1.jpg">
@@ -362,7 +363,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									<div>									
 										<span id="spin-animation-2" style="display: none; ">
 											<span class="shadows"></span>
-											<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249">
+											<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249">
 										</span>
 										
 										<img width="70" height="102" src="/wk/images/comb--1.jpg">
@@ -372,7 +373,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									<div>										
 										<span id="spin-animation-3" style="display: none; ">
 											<span class="shadows"></span>
-											<img src="/wk/images/spin-static-animation.jpg" alt="animacion" width="70" height="249">
+											<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249">
 										</span>
 										
 										<img width="70" height="102" src="/wk/images/comb--1.jpg">
