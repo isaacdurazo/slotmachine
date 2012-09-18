@@ -322,6 +322,7 @@ public class PlayerManager {
 		player.setXp(player.getXp()+1);
 		boolean levelUp = player.getLevel() != Integer.getInteger("max.player.level",4) && 
 				player.getXp() == Integer.getInteger("level.xp.min."+(player.getLevel()+1)).intValue();
+		
 		if (levelUp) player.setLevel(player.getLevel()+1);
 		return levelUp;
 	}
