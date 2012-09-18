@@ -87,7 +87,7 @@
     		{ 500,150,50,20,15,10,5,2},
     		{ 3000,900,300,120,90,60,30,12},
     		{ 4000,1200,400,160,120,80,40,16},
-    		{ 4500,1350,450,180,135,90,45,182}
+    		{ 4500,1350,450,180,135,90,45,18}
     };  		
     %>
 </head>
@@ -137,30 +137,30 @@
 			<table>
 				<tr>
 					<td>
-						3x <img width="16" height="16" src="images/individual/diamond.gif"/>: <img class="icon"  alt="gold" src="/images/mocogold.gif"> <span class="goldtext">*Jackpot*</span><br/>
+						3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][0] %>"/>: <%=winmax[0][0] %> <br/>
 					</td>
 					<td>
-						3x <img width="16" height="16" src="images/individual/seven.gif"/>: 600 <br/>
+						3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][1] %>"/>:  <%=winmax[0][1] %> <br/>
 					</td>
 					<td>
-						3x <img width="16" height="16" src="images/individual/bar.gif"/>: 200 <br/> 
+						3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][2] %>"/>:  <%=winmax[0][2] %> <br/> 
 					</td>
 					<td>
-						3x <img width="16" height="16" src="images/individual/bell.gif"/>: 80 <br/>
+						3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][3] %>"/>:  <%=winmax[0][3] %> <br/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						3x <img width="16" height="16" src="images/individual/watermelon.gif"/>: 60 <br/>
+						3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][4] %>"/>:  <%=winmax[0][4] %> <br/>
 					</td>
 					<td>
-						3x <img width="16" height="16" src="images/individual/cherry.gif"/>: 40 <br/>
+						3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>:  <%=winmax[0][5] %> <br/>
 					</td>
 					<td>
-						2x <img width="16" height="16" src="images/individual/cherry.gif"/>: 20 <br/>
+						2x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>:  <%=winmax[0][6] %> <br/>
 					</td>
 					<td>
-						1x <img width="16" height="16" src="images/individual/cherry.gif"/>: 8 <br/> 
+						1x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>:  <%=winmax[0][7] %> <br/> 
 					</td>
 				</tr>
 			</table>
@@ -175,7 +175,7 @@
 				<table>
 					<tr>
 						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][0] %>"/>: <%=winmax[player.getPlayingLevel()-1][0] %> <br/>
+							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][0] %>"/>: <img class="icon"  alt="gold" src="/images/mocogold.gif"> <span class="goldtext">*Jackpot*</span> <br/>
 						</td>
 						<td>
 							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][1] %>"/>: <%=winmax[player.getPlayingLevel()-1][1] %>  <br/>
@@ -195,10 +195,10 @@
 							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[player.getPlayingLevel()-1][5] %>  <br/>
 						</td>
 						<td>
-							2x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[player.getPlayingLevel()-1][5] %>  <br/>
+							2x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[player.getPlayingLevel()-1][6] %>  <br/>
 						</td>
 						<td>
-							1x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[player.getPlayingLevel()-1][5] %>  <br/> 
+							1x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[player.getPlayingLevel()-1][7] %>  <br/> 
 						</td>
 					</tr>
 				</table>
