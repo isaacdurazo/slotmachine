@@ -67,7 +67,7 @@ int key = 1;
 				</div>
 			<% } %>
 
-			<% if (spinResult.getLevelUp()) { %>
+			<% if (spinResult.getLevelUp() && player.getXp() == Integer.getInteger("level.xp.min."+player.getLevel()).intValue()) { %>
 				<div class="level-up">
 					<!--div class="goldtext">LEVEL UP!</div-->
 					<small>You unlocked a new slotmachine</small> <br/>

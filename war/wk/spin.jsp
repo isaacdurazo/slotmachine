@@ -41,7 +41,7 @@ if (action != null) {
 			Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
 		}
 		responseJSON.put("coins", spinResult.getCoins());
-		if (spinResult.getLevelUp()) {
+		if (spinResult.getLevelUp() && player.getXp() == Integer.getInteger("level.xp.min."+player.getLevel()).intValue()) {
 			JSONObject levelInfo = new JSONObject();
 			levelInfo.put("name", System.getProperty("level.name."+player.getLevel()));
 			levelInfo.put("jackpot", Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))*GameUtils.getGlobalProps().getMocoGoldPrize());
