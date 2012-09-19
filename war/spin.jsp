@@ -14,6 +14,7 @@ if (setPlayingLevel > 0 && setPlayingLevel <= Integer.getInteger("max.player.lev
 }
 request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
+if (ServletUtils.hasAnimGifSupport(request)) reelImagePath += "animated/";
 
 try {
 	if ("spin".equals(action)) {

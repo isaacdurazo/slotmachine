@@ -55,9 +55,10 @@ public class Player extends AbstractGAEPersistent {
 	private int level = 1;
 	/** level at which the player is currently playing */
 	private int playingLevel = 1;
-
 	/** NOTE this is only stored in memory and set/deleted by PlayerManager **/
 	private boolean isNewPlayer = false;
+	/** whether user has seen the new level interstitial */
+	private boolean seenLevelIntersistial;
 	
 	/** @return moco access token */
 	public String getAccessToken() { return accessToken; }
@@ -200,6 +201,10 @@ public class Player extends AbstractGAEPersistent {
 	public int getPlayingLevel() { return this.playingLevel; }
 	/** @param playingLevel to set when a user changes playing levels */
 	public void setPlayingLevel(int playingLevel) { this.playingLevel = playingLevel; }
+	/** @return if user has seen the level intersitial */
+	public boolean seenLevelIntersistial() { return this.seenLevelIntersistial; }
+	/** indicate user has seen the level interstitial */
+	public void markSeenLevelIntersistial() { this.seenLevelIntersistial = true; }
 	
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {
@@ -222,6 +227,7 @@ public class Player extends AbstractGAEPersistent {
 		this.goldDebitted = deserializeInt("goldDebitted", inputMap, 0);
 		this.level = deserializeInt("level", inputMap, 1);
 		this.playingLevel = deserializeInt("playingLevel", inputMap, 1);
+		this.seenLevelIntersistial = inputMap.get("seenLvlInter") != null && (Boolean)inputMap.get("seenLvlInter");
 	}
 
 	@Override
@@ -245,6 +251,7 @@ public class Player extends AbstractGAEPersistent {
 		map.put("goldDebitted", this.goldDebitted);
 		map.put("level", this.level);
 		map.put("playingLevel", this.playingLevel);
+		map.put("seenLvlInter", this.seenLevelIntersistial);
 		return map;
 	}
 

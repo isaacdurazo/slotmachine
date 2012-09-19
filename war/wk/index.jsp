@@ -1,5 +1,12 @@
 <%@ include file="/header.jsp" %>
 <%
+	if (!player.seenLevelIntersistial()) {
+		player.markSeenLevelIntersistial();
+		PlayerManager.getInstance().storePlayer(player);
+		pageContext.forward("/wk/new_level_interstitial.jsp");
+		return;
+	}
+
 	String action = request.getParameter("action");
 	SpinResult spinResult = null;
 
