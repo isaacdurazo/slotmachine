@@ -84,11 +84,14 @@
     		}
     };
     int winmax[][] = {
-    		{ 500,150,50,20,15,10,5,2},
+    		{ 500,150,50,20,15,10,5,2}
+    };
+    /*,
     		{ 3000,900,300,120,90,60,30,12},
     		{ 4000,1200,400,160,120,80,40,16},
     		{ 4500,1350,450,180,135,90,45,18}
-    };  		
+    };*/
+    int multiplier = Integer.getInteger("level.max.bet.multiplier."+player.getPlayingLevel());
     %>
 </head>
 
@@ -122,7 +125,7 @@
 				<ul  class="list">
 					<li><b>Weekly</b> <span class="goldtext">Gold Jackpot.</span> Now: <span class="goldtext"><%=(int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))*GameUtils.getGlobalProps().getMocoGoldPrize())%> Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
 					<li><b>Mega Coin Prize:</b> Gain XP with every spin and compete to be #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("game.weekly.coin.prize") %> coins.</li><br />
-					<li><b>Daily free coins:</b> FREE coins on your <b>first</b> login each calendar day.</li><br />
+					<li><b>Daily free coins:</b> FREE coins award when you play daily.</li><br />
 					<li><b>Payout:</b> Check the payout table for spin payouts.</li>
 				</ul>
 			</div>
@@ -178,27 +181,27 @@
 							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][0] %>"/>: <img class="icon"  alt="gold" src="/images/mocogold.gif"> <span class="goldtext">*Jackpot*</span> <br/>
 						</td>
 						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][1] %>"/>: <%=winmax[player.getPlayingLevel()-1][1] %>  <br/>
+							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][1] %>"/>: <%=winmax[0][1]*multiplier %>  <br/>
 						</td>
 						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][2] %>"/>: <%=winmax[player.getPlayingLevel()-1][2] %>  <br/> 
+							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][2] %>"/>: <%=winmax[0][2]*multiplier %>  <br/> 
 						</td>
 						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][3] %>"/>: <%=winmax[player.getPlayingLevel()-1][3] %>  <br/>
+							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][3] %>"/>: <%=winmax[0][3]*multiplier %>  <br/>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][4] %>"/>: <%=winmax[player.getPlayingLevel()-1][4] %>  <br/>
+							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][4] %>"/>: <%=winmax[0][4]*multiplier %>  <br/>
 						</td>
 						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[player.getPlayingLevel()-1][5] %>  <br/>
+							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[0][5]*multiplier %>  <br/>
 						</td>
 						<td>
-							2x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[player.getPlayingLevel()-1][6] %>  <br/>
+							2x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[0][6]*multiplier %>  <br/>
 						</td>
 						<td>
-							1x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[player.getPlayingLevel()-1][7] %>  <br/> 
+							1x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[0][7]*multiplier %>  <br/> 
 						</td>
 					</tr>
 				</table>
