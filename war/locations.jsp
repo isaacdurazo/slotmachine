@@ -28,6 +28,12 @@
 				    			<td class="button-go-disable"><a href="<%= ServletUtils.buildUrl(player, "/topup.jsp", response) %>">Buy</a></td>
 				    		</tr>
 				    	<% } %>
+				    	<tr class="location-container">
+			    			<td></td>
+			    			<td>
+			    				New Location Coming soon!
+			    			</td>
+			    		</tr>
 			    	</table>
 
 			  		<div class="menu">
