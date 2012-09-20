@@ -27,7 +27,9 @@ try {
 } catch (InsufficientFundsException ife) {
 	//use redirect to ensure the logging works for topup impressions
 	
-	response.sendRedirect("/topup.jsp?notifymsg="+java.net.URLEncoder.encode("You need more coins to spin!","UTF-8"));
+//NPB	response.sendRedirect("/topup.jsp?notifymsg="+java.net.URLEncoder.encode("You need more coins to spin!","UTF-8"));
+	response.sendRedirect(ServletUtils.buildUrl(player, 
+			"/topup.jsp?notifymsg="+java.net.URLEncoder.encode("You need more coins to spin!","UTF-8"), response));
 	return;
 }
 symbol= spinResult.getSymbols(); //always initialize so if fSpinOK flase still get valid symbols to display
