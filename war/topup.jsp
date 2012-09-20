@@ -53,7 +53,7 @@ if (isWebkit) {
 	} else if ("MysteryBox: 499 Gold".equals(topupAction)) {
 		coin = 250+(new Random()).nextInt(150);
 		gold = 499;
-	} else if ("Unlock Next Level: 499 Gold".equals(topupAction)) {
+	} else if ("Unlock: 499 Gold".equals(topupAction)) {
 		gold = 499;
 		levelUp = true;
 	}
@@ -161,8 +161,11 @@ if (isWebkit) {
 				</div>
 				<div class="subheader">(MysteryBox buys 200 - 400 Coins)</div>
 				<% if (player.getLevel() < Integer.getInteger("max.player.level")) { %>
+		    <div>
+		    Unlock Next Location:
+		    </div>
 				<div>
-					<input class="input gold" type="submit" name="topup" value="Unlock Next Level: 499 Gold"/>
+					<input class="input gold" type="submit" name="topup" value="Unlock: 499 Gold"/>
 				</div>
 				<% } %>
 			</form>

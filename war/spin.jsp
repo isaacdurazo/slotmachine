@@ -73,7 +73,9 @@ int key = 1;
 					<!--div class="goldtext">LEVEL UP!</div-->
 					<small>You unlocked a new slotmachine</small> <br/>
 					<%= System.getProperty("level.name."+player.getLevel()) %> <br/>
-					<div class="goldtext">Jackpot bonus <%= 100*(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))-1) %>%</div>
+					<div class="goldtext">Jackpot 
+					<%= Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))*GameUtils.getGlobalProps().getMocoGoldPrize()%>
+					</div>
 				</div>
 			<% } %>
 	

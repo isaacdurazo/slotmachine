@@ -6,6 +6,14 @@ request.setAttribute("hide_doctype",action);
 <%@ include file="/header.jsp" %>
 <%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException, java.util.Arrays, org.json.simple.*" %>
 <%
+
+boolean fMillenialAds=false;
+int spinsPerAd=10;
+if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 2 == 0) {
+	fMillenialAds=true;
+	spinsPerAd=5;
+	}
+
 int setPlayingLevel = ServletUtils.getInt(request, "playingLevel");
 if (setPlayingLevel > 0 && (player.hasAdminPriv() || (setPlayingLevel <= Integer.getInteger("max.player.level") && player.getLevel() >= setPlayingLevel))) {
 	player.setPlayingLevel(setPlayingLevel);
@@ -78,7 +86,7 @@ java.util.List<Achievement> earnedAchievements = null;
 		var xp = <%= player.getXp()%>;
 		var currCoins = <%= player.getCoins() %>;
 		var btnClicked = false;
-		var spinsRemaining = 10;
+		var spinsRemaining = <%= spinsPerAd %>;
 		var accessToken = "<%= player.getAccessToken()%>";
 		document.addEventListener('DOMContentLoaded', function() {
 			var closeBtns = document.querySelectorAll(".achievements .close, .achievements .play a, .level-up a.close");
@@ -384,7 +392,7 @@ java.util.List<Achievement> earnedAchievements = null;
 					</div>					
 				</div>	
 				<% if (player.hasAdminPriv() || player.getGoldDebitted() == 0) { %>
-					<% if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 2 == 0) { %>
+					<% if (fMillenialAds) { %>
 					<%@ include file="/wk/mm_wk_ad.jsp" %>
 					<% } else { %>
 					<script type="text/javascript">

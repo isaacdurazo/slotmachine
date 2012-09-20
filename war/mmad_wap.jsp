@@ -25,6 +25,7 @@ try {
 } catch( Exception e ) { }
 
 String mm_url = "http://" + mm_adserver + "/getAd.php5" + "?apid=" + mm_placementid+ "&auid=" + mm_id + "&ua=" + mm_ua + "&uip=" + mm_ip;
+Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"WAP ad URL="+mm_url);
 
 StringBuilder contents = new StringBuilder();
 try {

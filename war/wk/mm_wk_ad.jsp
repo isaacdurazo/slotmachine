@@ -15,12 +15,14 @@
 <%@ page import="java.net.URL" %>
 <%@ page import="java.net.URLConnection" %>
 <%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.util.logging.*" %>
+
 
 <!------------------------------------------------------------------>
 <!-- Publisher Specific Section.                                  -->
 <!------------------------------------------------------------------>
 <%
-String mm_placementid      = "|||apid|||";
+String mm_placementid      = "97324";
 String mm_adserver         = "ads.mp.mydas.mobi";
 String mm_default_response = "";
 %>
@@ -46,6 +48,7 @@ try {
 } catch( Exception e ) { }
 
 String mm_url = "http://" + mm_adserver + "/getAd.php5" + "?apid=" + mm_placementid+ "&auid=" + mm_id + "&ua=" + mm_ua + "&uip=" + mm_ip;
+//Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"url="+mm_url);
 
 StringBuilder contents = new StringBuilder();
 try {
