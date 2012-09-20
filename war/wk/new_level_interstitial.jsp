@@ -18,7 +18,7 @@
 			<a href="<%= ServletUtils.buildUrl(player, "/wk/locations.jsp?"+cacheBuster, response) %>">Next</a>
 		</div>
 		<% if (player.getXp() > Integer.getInteger("level.xp.min.2")) { %>
-			<small>Based on your current XP you might already have unlocked >1 location</small>
+			<small>Based on your current XP you might already have unlocked more than 1 location</small>
 		<% } %>
 	</div>
   </body>

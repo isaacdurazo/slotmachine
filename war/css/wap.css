@@ -289,6 +289,24 @@ a.bet {
 	margin-bottom: 5px;
 }
 
+
+.instertitial-container {
+	margin: auto;
+	border: 2px solid #f7c85c;
+	padding: 5px;
+	font-size: 16px;
+	text-align: left;
+	margin-top: 10px;
+}
+
+.instertitial-container li{
+	font-size: 14px;
+}
+
+.instertitial-container ul {
+	padding: 0 0 0 17px
+}
+
 /*----------------------*/
 
 /*  Level 2 - Old West  */
