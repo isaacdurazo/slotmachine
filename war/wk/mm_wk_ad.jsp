@@ -69,7 +69,9 @@ try {
   while((line = br.readLine()) != null) {
     contents.append(line).append("\n");
   }
-} catch( Exception e ) { contents.append(mm_default_response); }
-
+} catch( Exception e ) { 
+	contents.append(mm_default_response); 
+	Logger.getLogger(request.getRequestURI()).log(Level.SEVERE,"Error showing MM webkit ad",e);
+}
 out.println( contents );
 %>

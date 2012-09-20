@@ -52,7 +52,7 @@
 	  		</div>		
 
 	  		<div class="menu" style="margin-right: 16px;">
-	  			<a href="<%= ServletUtils.buildUrl(player, "/", response) %>">Main</a>
+	  			<a href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
 	  		</div>
 		</div>
 	</div>

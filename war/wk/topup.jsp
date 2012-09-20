@@ -124,7 +124,7 @@ if (isWebkit) {
 							onSuccess: function(id,timestamp,token) {
 								// redirect with those parameters
 								try {_gaq.push(['_trackEvent', 'Topup', 'success', desc, gold]);} catch (err) {console.error(err);}
-								window.location = '/wk/topup.jsp?accessToken=<%= player.getAccessToken() %>&level='+level+'action=widget&id='+id+'&timestamp='+timestamp+'&token='+token+'&gold='+gold;
+								window.location = '/wk/topup.jsp?accessToken=<%= player.getAccessToken() %>&level='+level+'&action=widget&id='+id+'&timestamp='+timestamp+'&token='+token+'&gold='+gold;
 							},
 							onError: function(error) {
 								console.error(error);
@@ -177,7 +177,7 @@ if (isWebkit) {
 				</div>
 				
 				<div class="menu" style="margin-right: 16px;">
-					<a href="<%= ServletUtils.buildUrl(player, "/", response) %>">Main</a>
+					<a href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
 				</div>
 				
 			</div>

@@ -43,7 +43,7 @@
 				    <div class="menu" style="margin-right: 16px;">
 				    	<div class="button-row">
 				    		<div class="block half-left">
-	  							<a href="<%= ServletUtils.buildUrl(player, "/", response) %>">Main</a>
+	  							<a href="<%= ServletUtils.buildUrl(player, "/wk/index.jsp", response) %>">Main</a>
 	  						</div>
 	  						<div class="block half-right">
 	  							<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>

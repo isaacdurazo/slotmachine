@@ -102,6 +102,7 @@ public class PlayerManager {
 				player.getXp() > Integer.getInteger("level.xp.min."+newLevel)) {
 			player.setLevel(newLevel);
 			player.setPlayingLevel(newLevel);
+			newLevel++;
 		}
 		
 		// store player to update last access time

@@ -9,7 +9,7 @@ request.setAttribute("hide_doctype",action);
 
 boolean fMillenialAds=false;
 int spinsPerAd=10;
-if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 2 == 0) {
+if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 5 == 0) {
 	fMillenialAds=true;
 	spinsPerAd=5;
 	}
@@ -19,9 +19,20 @@ if (setPlayingLevel > 0 && (player.hasAdminPriv() || (setPlayingLevel <= Integer
 	player.setPlayingLevel(setPlayingLevel);
 	PlayerManager.getInstance().storePlayer(player, true);
 }
+
+String lemonText="";
+switch (player.getPlayingLevel()) {
+	case 2: lemonText = "A whole bunch of needles for you :).<br/>";break;
+	case 3: lemonText = "Don't you wish you went fishing instead :)<br/>";break;
+	case 4: lemonText = "Playing in Wild Jungle is no monkey business :).<br/>";break;
+	default: lemonText = "When life gives you lemons make lemonade :)<br/>";break;	
+}
+
+
+
 request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
-String reelAnimation = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()) : "")+"/spin-static-animation.jpg";
+String reelAnimation = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "")+"spin-static-animation.jpg";
 int maxBet = SlotMachineManager.getInstance().getMaxBet(player);
 if (action != null) {
 	try {
@@ -196,7 +207,7 @@ java.util.List<Achievement> earnedAchievements = null;
 								document.getElementById('lost_result').className = "lostspin delay";
 								var lossText = 'Spin Again';
 								if (symbol[0] == 6 && symbol[1] == 6 && symbol[2] == 6) {
-									lossText = "When you get all lemons make lemonade :).<br/> Check the "+
+									lossText = "<%=lemonText%>"+ "Check the "+
 										"<a href='<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>'>payout table</a> !";
 								}
 								document.getElementById('lost_result').innerHTML = lossText;
