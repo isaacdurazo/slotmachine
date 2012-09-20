@@ -757,7 +757,26 @@ a.location-container {
 	opacity: 1;
 }
 
+.location-wrapper.coming-soon .icon-location{
+	background-color: #999;
+	border: 3px solid #f8b52e;
+	border-radius: 40px;
+	width: 60px;
+	height: 60px;
+}
 
+.location-wrapper.coming-soon .location-container .location-icons {
+	top: 5px;
+	left: 22px;
+}
+
+.location-wrapper.coming-soon .location {
+	background-color: #999;
+	width: 200px;
+}
+.location-wrapper.coming-soon .location-container .location-name {
+	margin: 12px 0 0 30px;
+}
 
 
 /* ----------------------------- */

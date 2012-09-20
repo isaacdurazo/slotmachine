@@ -30,9 +30,24 @@
 									<% } else { %><%= (int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+i))*GameUtils.getGlobalProps().getMocoGoldPrize())%> Gold Jackpot<% } %>
 								</div>
 							</div>
+							
 						</a>
+
+						
 					</div>
 				<% } %>
+				
+				<div class="location-wrapper coming-soon">
+					<div href="#" class="location-container">
+						<div class="location-icons">
+							<span class="icon-location"></span>
+							<span class="icon-lock"></span>
+						</div>
+						<div class="location">
+							<span class="location-name">Coming Soon!</span>
+						</div>
+					</div>
+				</div>
 
 	  		</div>		
 
