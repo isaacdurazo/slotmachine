@@ -384,16 +384,8 @@ java.util.List<Achievement> earnedAchievements = null;
 					</div>					
 				</div>	
 				<% if (player.hasAdminPriv() || player.getGoldDebitted() == 0) { %>
-					<% if (Boolean.getBoolean("wk.ad.use.iframe")) { %>
-					<iframe id="ad" src="/wk/ad.jsp" sandbox="allow-top-navigation" height="59" width="320" scrolling="no" style="border:0;margin:-11px 0 0 -16px;"></iframe>
-					<script type="text/javascript">
-						var reloadAd = function() {
-							console.log('reloading ad');
-							document.getElementById('ad').contentWindow.location.reload();
-							setTimeout(reloadAd,10000);
-						}
-						setTimeout(reloadAd,10000);
-					</script>					
+					<% if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 2 == 0) { %>
+					<%@ include file="/wk/mm_wk_ad.jsp" %>
 					<% } else { %>
 					<script type="text/javascript">
 						google_ad_client = "ca-pub-1639537201849581";

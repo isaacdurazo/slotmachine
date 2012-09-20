@@ -39,6 +39,7 @@
 	<property name="achievements.enabled" value="true"/>
 	<property name="game.progressive.win.probability.enabled" value="true"/>
 	<property name="jackpot.miss.notification.enabled" value="false"/>
+	<property name="millenial.wk.ad.enabled" value="false"/>
 	
 	<!-- player levels -->
 	<property name="max.player.level" value="4"/>	
