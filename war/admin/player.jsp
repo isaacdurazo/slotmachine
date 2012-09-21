@@ -46,7 +46,7 @@ if ("awardCoins".equals(request.getParameter("action")) && coins > 0 && mocoPlay
 					<td><%= mocoId %></td>
 					<td><%= mocoPlayer %></td>					
 				</tr>
-			</table>
+			</table> 
 			<h3>Earned Achievements</h3>
 			<ul>
 			<% java.util.List<Pair<Achievement,Boolean>> achievements = AchievementService.getInstance().getAchievements(mocoPlayer); 
