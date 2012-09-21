@@ -28,8 +28,6 @@ switch (player.getPlayingLevel()) {
 	default: lemonText = "When life gives you lemons make lemonade :)<br/>";break;	
 }
 
-
-
 request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
 String reelAnimation = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "")+"spin-static-animation.jpg";

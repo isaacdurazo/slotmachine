@@ -10,15 +10,19 @@ if (playerId == null || (player = PlayerManager.getInstance().getPlayer(playerId
 
 int mocoId = ServletUtils.getInt(request, "mocoId");
 int coins = ServletUtils.getInt(request, "coins");
+int level = ServletUtils.getInt(request, "level");
 Player mocoPlayer = null;
 if (mocoId > 0) {
 	mocoPlayer = PlayerManager.getInstance().getPlayerByMocoId(mocoId);
 }
-if ("awardCoins".equals(request.getParameter("action")) && coins > 0 && player != null) {
+if ("awardCoins".equals(request.getParameter("action")) && coins > 0 && mocoPlayer != null) {
 	mocoPlayer.setCoins(mocoPlayer.getCoins()+coins);
 	PlayerManager.getInstance().storePlayer(mocoPlayer);
 } else if ("forceFlush".equals(request.getParameter("action"))) {
 	PlayerManager.getInstance().setForceFlush(!PlayerManager.getInstance().isForceFlush());
+} else if ("setLevel".equals(request.getParameter("action")) && level > 0 && level < Integer.getInteger("max.player.level") && mocoPlayer != null) {
+	mocoPlayer.setLevel(level);
+	PlayerManager.getInstance().storePlayer(mocoPlayer);
 }
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -55,6 +59,13 @@ if ("awardCoins".equals(request.getParameter("action")) && coins > 0 && player !
 				<input type="hidden" name="action" value="awardCoins"/>
 				<label for="coins">Coins to grant</label>
 				<input type="text" name="coins" id="coins"></input>
+				<input type="submit"></input>
+			</form>
+			<form action="/admin/player.jsp" method="GET">
+				<input type="hidden" name="mocoId" value="<%= mocoId %>"/>
+				<input type="hidden" name="action" value="setLevel"/>
+				<label for="level">Level to set</label>
+				<input type="text" name="level" id="level"></input>
 				<input type="submit"></input>
 			</form>
 		<% } %>
