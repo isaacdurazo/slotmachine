@@ -9,7 +9,7 @@ request.setAttribute("hide_doctype",action);
 
 boolean fMillenialAds=false;
 int spinsPerAd=10;
-if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 5 == 0) {
+if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 10 == 0) {
 	fMillenialAds=true;
 	spinsPerAd=5;
 	}
