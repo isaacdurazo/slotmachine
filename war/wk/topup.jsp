@@ -32,7 +32,7 @@ if (isWebkit) {
 						player.setLevel(player.getLevel()+1);
 						player.setPlayingLevel(player.getLevel());
 						PlayerManager.getInstance().storePlayer(player);
-						pageContext.forward("/wk/spin.jsp?accessToken="+java.net.URLEncoder.encode(player.getAccessToken(),"UTF-8")+"&levelUp=true");
+						response.sendRedirect(ServletUtils.buildUrl(player, "/wk/spin.jsp", response));
 						return;
 					} else coin = 250+(new Random()).nextInt(150);
 					break;
