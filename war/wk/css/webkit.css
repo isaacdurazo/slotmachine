@@ -332,6 +332,11 @@ table {
 	text-align: center;
 }
 
+.wonspin {
+	color: #07a107;
+	font-size: 1.0em;
+ }
+
 .block {
 	float: left;
 	position: relative;

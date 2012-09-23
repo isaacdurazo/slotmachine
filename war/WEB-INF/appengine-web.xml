@@ -40,6 +40,8 @@
 	<property name="game.progressive.win.probability.enabled" value="true"/>
 	<property name="jackpot.miss.notification.enabled" value="false"/>
 	<property name="millenial.wk.ad.enabled" value="true"/>
+	<property name="wk.interstitial.ad.enable" value="true"/>
+	<property name="wk.interstitial.ad.frequency.hours" value="4"/>
 	
 	<!-- player levels -->
 	<property name="max.player.level" value="4"/>	
