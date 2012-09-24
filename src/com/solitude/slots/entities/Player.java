@@ -61,6 +61,8 @@ public class Player extends AbstractGAEPersistent {
 	private boolean isNewPlayer = false;
 	/** whether user has seen the new level interstitial */
 	private boolean seenLevelIntersistial;
+	/** timestamp of last interstitial ad */
+	private long interstitialAdTimestamp = 0L;
 	
 	/** @return moco access token */
 	public String getAccessToken() { return accessToken; }
@@ -166,6 +168,18 @@ public class Player extends AbstractGAEPersistent {
 		return setToMidnight;
 	}
 	
+	/**
+	 * @return whether interstitial ad should be shown to the player
+	 */
+	public boolean showInterstitialAd() {
+		boolean showAd = Boolean.getBoolean("wk.interstitial.ad.enable") && 
+				System.currentTimeMillis() - this.interstitialAdTimestamp > Integer.getInteger("wk.interstitial.ad.frequency.hours",4)*3600*1000;
+		if (showAd) {
+			this.interstitialAdTimestamp = System.currentTimeMillis();
+		}
+		return showAd;
+	}
+	
 	/** @return consecutive days of game play (0 indicating user did not play yesterday, 1 meaning they did...) */
 	public int getConsecutiveDays() { return consecutiveDays; }
 	/** @return timestamp of consecutive days */
@@ -238,6 +252,7 @@ public class Player extends AbstractGAEPersistent {
 		this.level = deserializeInt("level", inputMap, 1);
 		this.playingLevel = deserializeInt("playingLevel", inputMap, 1);
 		this.seenLevelIntersistial = inputMap.get("seenLvlInter") != null && (Boolean)inputMap.get("seenLvlInter");
+		this.interstitialAdTimestamp = inputMap.get("intestitialAd") == null ? 0L : (Long)inputMap.get("intestitialAd");
 	}
 
 	@Override
@@ -262,6 +277,7 @@ public class Player extends AbstractGAEPersistent {
 		map.put("level", this.level);
 		map.put("playingLevel", this.playingLevel);
 		map.put("seenLvlInter", this.seenLevelIntersistial);
+		map.put("intestitialAd", this.interstitialAdTimestamp);
 		return map;
 	}
 

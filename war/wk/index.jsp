@@ -113,33 +113,41 @@
 				<div class="menu">
 
 					<div class="button-row">
-						<div class="block half-left">
-			        		<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
-						</div>
-						<div class="block half-right">
-			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/wk/jackpots.jsp", response) %>">Jackpot Winners</a>
-						</div>
-					</div>
-					
-					<div class="button-row">
 
 						<% boolean achievementsEnabled = AchievementService.getInstance().isEnabled() || player.hasAdminPriv(); %>
+
+						<div class="block half-left" <% if (!achievementsEnabled) { %>align="center"<% } %>>
+				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/wk/locations.jsp", response) %>">SlotMachines</a>
+						</div>
+
 						<% if (achievementsEnabled) { %>
-							<div class="block half-left">
+							<div class="block half-right">
 								<a accessKey="7" href="<%= ServletUtils.buildUrl(player, "/wk/achievement.jsp", response) %>">Achievements</a>
 							</div>
 						<% } %>
 
-						<div class="block half-right" <% if (!achievementsEnabled) { %>align="center"<% } %>>
-				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/wk/locations.jsp", response) %>">Locations</a>
+					</div>
+
+					<div class="button-row">
+
+						<div class="block half-left">
+				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")), "/wk/topup.jsp", response) %>">Buy Coins</a>
+						</div>
+						
+						<div class="block half-right">
+			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
 						</div>
 
 					</div>
 
 					<div class="button-row">
 
-						<div class="half-center" <% if (!achievementsEnabled) { %>align="center"<% } %>>
-				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>">Help</a>
+						<div class="block half-left" <% if (!achievementsEnabled) { %>align="center"<% } %>>
+				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>">PayoutTable </a>
+						</div>
+						
+						<div class="block half-right">
+			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/wk/jackpots.jsp", response) %>">Jackpot Winners</a>
 						</div>
 
 					</div>
