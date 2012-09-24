@@ -35,11 +35,15 @@
 			out.write("Message, subject,x starthrs and max recipients required!");
 			return;
 		} else if (request.getParameter("test")!=null) {
-			out.write("<div style='color:red'>TEST: Not sending inbox - only counting recipients..: ");
+			out.write("<div style='color:red'>TEST: Not sending inbox - only counting recipients. Parameters:<br/>");
 			starthrs = Integer.parseInt(starthrsS);
 			endhrs = Integer.parseInt(endhrsS);
 			max = Integer.parseInt(maxS);
 			java.util.List<Player> players = PlayerManager.getInstance().getActiveHoursPlayers(starthrs, endhrs,max);
+			out.write("starthrsS="+starthrsS+"<br/>");
+			out.write("endhrsS="+endhrsS+"<br/>");
+			out.write("maxS="+maxS+"<br/>");
+			
 			out.write(players.size()+ " players match the inbox criteria.</div><br/>");
 		} else {
 
@@ -133,8 +137,8 @@
 			<textarea rows="3" cols="80" name="message"><%=message%></textarea><br/>
 			<small>(only plain text - no HTML!)</small><br/><br/>
 			<label for="key">Played in timeframe from:</label>
-			<input type="number" name="starthrsS" value="<%=starthrs%>"></input> hrs ago to 
-			<input type="number" name="endhrsS" value="<%=endhrs%>"></input> hrs ago<br/>
+			start: <input type="number" name="starthrsS" value="<%=starthrs%>"></input> hrs ago to 
+			end: <input type="number" name="endhrsS" value="<%=endhrs%>"></input> hrs ago<br/>
 			<label for="key">Max # of recipients:</label>
 			<input type="number" name="maxS" value="<%=max%>"></input><br/>
 			<small>(max 20000 recipients)</small><br/>

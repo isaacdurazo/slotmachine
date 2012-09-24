@@ -95,7 +95,7 @@
 				<%@ include file="message.jsp" %>		    
 			    <div>Play slots, have fun and win prizes:</div><br />
 				<ul  class="list">
-					<li><b>Weekly</b> <span class="goldtext">Gold Jackpot.</span> Now: <span class="goldtext"><%=(int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))*GameUtils.getGlobalProps().getMocoGoldPrize())%> Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
+					<li><b>Weekly</b> <span class="goldtext">Gold Jackpot.</span> Now: <span class="goldtext"><%=player.getMocoGoldPrize()%> Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
 					<li><b>Mega Coin Prize:</b> Gain XP with every spin and compete to be #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("game.weekly.coin.prize") %> coins.</li><br />
 					<li><b>Daily free coins:</b> FREE coins award when you play daily.</li><br />
 					<li><b>Payout:</b> Check the payout table for spin payouts.</li>

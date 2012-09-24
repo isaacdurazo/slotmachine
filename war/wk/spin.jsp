@@ -8,7 +8,7 @@ request.setAttribute("hide_doctype",action);
 <%
 
 boolean fMillenialAds=false;
-int spinsPerAd=10;
+int spinsPerAd=9;
 if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 10 == 0) {
 	fMillenialAds=true;
 	spinsPerAd=5;
@@ -23,7 +23,7 @@ if (setPlayingLevel > 0 && (player.hasAdminPriv() || (setPlayingLevel <= Integer
 String lemonText="";
 switch (player.getPlayingLevel()) {
 	case 2: lemonText = "A whole bunch of needles for you :).<br/>";break;
-	case 3: lemonText = "Don't you wish you went fishing instead :)<br/>";break;
+	case 3: lemonText = "Don't you wish you went fishing instead ? :)<br/>";break;
 	case 4: lemonText = "Playing in Wild Jungle is no monkey business :).<br/>";break;
 	default: lemonText = "When life gives you lemons make lemonade :)<br/>";break;	
 }
@@ -61,7 +61,7 @@ if (action != null) {
 		if (spinResult.getLevelUp() && player.getXp() == Integer.getInteger("level.xp.min."+player.getLevel()).intValue()) {
 			JSONObject levelInfo = new JSONObject();
 			levelInfo.put("name", System.getProperty("level.name."+player.getLevel()));
-			levelInfo.put("jackpot", Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))*GameUtils.getGlobalProps().getMocoGoldPrize());
+			levelInfo.put("jackpot", player.getMocoGoldPrize());
 			levelInfo.put("num", player.getLevel());
 			responseJSON.put("level",levelInfo);
 		}
@@ -205,7 +205,7 @@ java.util.List<Achievement> earnedAchievements = null;
 								document.getElementById('lost_result').className = "lostspin delay";
 								var lossText = 'Spin Again';
 								if (symbol[0] == 6 && symbol[1] == 6 && symbol[2] == 6) {
-									lossText = "<%=lemonText%>"+ "Check the "+
+									lossText = "<%=lemonText%>"+ "How to win check "+
 										"<a href='<%= ServletUtils.buildUrl(player, "/wk/help.jsp", response) %>'>payout table</a> !";
 								}
 								document.getElementById('lost_result').innerHTML = lossText;

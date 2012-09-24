@@ -7,6 +7,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import com.solitude.slots.service.GameUtils;
+
 /**
  * Player of the game
  * @author kwright
@@ -205,6 +207,14 @@ public class Player extends AbstractGAEPersistent {
 	public boolean seenLevelIntersistial() { return this.seenLevelIntersistial; }
 	/** indicate user has seen the level interstitial */
 	public void markSeenLevelIntersistial() { this.seenLevelIntersistial = true; }
+	
+	
+	/** Get the players personalized MocoGold prize depending on max level,etc */
+	public int getMocoGoldPrize() {
+		int p = (int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+this.getPlayingLevel()))
+				*GameUtils.getGlobalProps().getMocoGoldPrize());
+		return (p);
+	}
 	
 	@Override
 	public void deserialize(Map<String, Object> inputMap) {

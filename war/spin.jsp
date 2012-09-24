@@ -76,7 +76,7 @@ int key = 1;
 					<small>You unlocked a new slotmachine</small> <br/>
 					<%= System.getProperty("level.name."+player.getLevel()) %> <br/>
 					<div class="goldtext">Jackpot 
-					<%= Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))*GameUtils.getGlobalProps().getMocoGoldPrize()%>
+					<%= player.getMocoGoldPrize()%>
 					</div>
 				</div>
 			<% } %>

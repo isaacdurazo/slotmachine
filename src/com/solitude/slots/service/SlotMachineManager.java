@@ -142,7 +142,7 @@ public class SlotMachineManager {
 					// create winner entry only if XP>200 and >5days since last JP - otherwise respin					
 					JackpotWinner newWinner = new JackpotWinner();
 					newWinner.setPlayerId(player.getId());
-					newWinner.setGold(GameUtils.getGlobalProps().getMocoGoldPrize());
+					newWinner.setGold(player.getMocoGoldPrize());
 					GAEDataManager.getInstance().store(newWinner);
 					fJackpot=true;
 					
@@ -152,11 +152,11 @@ public class SlotMachineManager {
 					winnerIds.add(0, newWinner.getId());
 					GAECacheManager.getInstance().putIds(CACHE_REGION, cacheKey, winnerIds);
 					// we have a legit jackpot!!! send notifications to user and admin account
-					String subject = "SlotMania Jackpot!", body = "Congratulations - you won the Moco Gold jackpot in Slot Mania! You will be credited "+GameUtils.getGlobalProps().getMocoGoldPrize() +" Gold within next 24hrs. You will receive a inbox message once Gold has been credited.";
+					String subject = "SlotMania Jackpot!", body = "Congratulations - you won the Moco Gold jackpot in Slot Mania! You will be credited "+player.getMocoGoldPrize()+" Gold within next 24hrs. You will receive an inbox message once Gold has been credited.";
 					try {
 						OpenSocialService.getInstance().sendNotification(player.getMocoId(), subject, body);
 						body += " winner: player id: "+player.getId()+", moco id: "+player.getMocoId()+ 
-								",  gold: "+(Integer.getInteger("level.jackpot.multiplier."+player.getPlayingLevel())*GameUtils.getGlobalProps().getMocoGoldPrize()) +", xp: "+player.getXp();
+								",  gold: "+player.getMocoGoldPrize() +", xp: "+player.getXp();
 						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), subject, body);
 						OpenSocialService.getInstance().sendNotification(12534729, subject, body); 
 					} catch (Exception e) {

@@ -66,7 +66,7 @@
 
  			<div class="jackpotteaser">
 				<img width="112" height="14" src="images/jackpot.gif"/><br />
-				<img class="icon" width="16" height="16" src="images/mocogold.png"/> <%=(int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+player.getLevel()))*GameUtils.getGlobalProps().getMocoGoldPrize())%> MocoGold!
+				<img class="icon" width="16" height="16" src="images/mocogold.png"/> <%=player.getMocoGoldPrize()%> MocoGold!
 			</div>
 
 		    <h3>Hello <%= player.getName() %>!</h3>
