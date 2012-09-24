@@ -9,7 +9,7 @@ request.setAttribute("hide_doctype",action);
 
 boolean fMillenialAds=false;
 int spinsPerAd=10;
-if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 5 == 0) {
+if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 10 == 0) {
 	fMillenialAds=true;
 	spinsPerAd=5;
 	}
@@ -32,7 +32,7 @@ request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
 String reelAnimation = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "")+"spin-static-animation.jpg";
 int maxBet = SlotMachineManager.getInstance().getMaxBet(player);
-if ("true".equals(request.getParameter("reload")) && player.showInterstitialAd()) {
+if ("true".equals(request.getParameter("reload")) && player.getGoldDebitted() == 0 && player.showInterstitialAd()) {
 	// store player to save interstital ad state
 	PlayerManager.getInstance().storePlayer(player,true);
 	// redirect to interstitial page
