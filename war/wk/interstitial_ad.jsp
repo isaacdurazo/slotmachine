@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div class="wrapper">
-			<div class="button-row">		
+			<div class="button-row" style="margin-top:25px;">		
 				<script type="text/javascript">
 					<!--
 					google_ad_client = "ca-pub-1639537201849581";
@@ -20,7 +20,7 @@
 			</div>
 			<div class="menu">
 				<div class="button-row">
-					<a href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response) %>">
+					<a style="padding: 3px;margin-top: 15px;width: 30%;" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response) %>">
 						Continue
 					</a>
 				</div>
