@@ -59,6 +59,11 @@
 				<div class="intro-message">
 				    
 				    <% if (coinsAwarded > 0) { %>
+				    	<script>
+				    		document.addEventListener('DOMContentLoaded', function() {
+								try {_gaq.push(['_trackEvent', 'Player','coinAward','<%= java.util.concurrent.TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis()-player.getCreationtime()) %> days',<%= player.getCoins() %>]); } catch (err) {console.log(err);}
+				    		},false);
+				    	</script>
 				    	<div class="bonus">
 				    		Your daily bonus: <%= coinsAwarded %> coins <% if (player.getConsecutiveDays() > 0) { %> for <%= player.getConsecutiveDays() %> consecutive day<%= player.getConsecutiveDays() == 1 ? "" : "s" %> play<% } %>!
 				    	</div> 

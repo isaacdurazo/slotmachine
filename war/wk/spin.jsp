@@ -136,7 +136,7 @@ java.util.List<Achievement> earnedAchievements = null;
 				currCoins -= isMax ? <%= maxBet %> : 1;
 				btnClicked = true;
 				// reset set
-				var betButtons = document.querySelectorAll('.bets td');
+				var betButtons = document.querySelectorAll('.bets a');
 				for (var i=0; i<betButtons.length;i++) {
 					betButtons[i].style.opacity = '0.5';
 				}
