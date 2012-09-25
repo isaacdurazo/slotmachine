@@ -136,7 +136,9 @@ int key = 1;
 					</tr>
 				</table>
 			</div>	
-			<% if (player.getGoldDebitted() == 0) { %>
+			<% 
+			boolean swapAd = false;
+			if (player.getGoldDebitted() == 0 && !(swapAd = player.swapAds())) { %>
 				<div id="ad">
 					<%@ include file="/mmad_wap.jsp" %>			
 				</div>				
@@ -153,6 +155,11 @@ int key = 1;
 					</td>
 				</tr>
 			</table>
+			<% } %>
+			<% if (swapAd) { PlayerManager.getInstance().storePlayer(player,true); %>
+				<div id="ad">
+					<%@ include file="/mmad_wap.jsp" %>			
+				</div>				
 			<% } %>
 		     <div class="menu">
 		        <div><%= key %>. <a class="invite" accessKey="<%= key++ %>" href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite Friends</a></div>

@@ -63,6 +63,8 @@ public class Player extends AbstractGAEPersistent {
 	private boolean seenLevelIntersistial;
 	/** timestamp of last interstitial ad */
 	private long interstitialAdTimestamp = 0L;
+	/** timestamp of last ad swap */
+	private long adSwapTimestamp = 0L;
 	
 	/** @return moco access token */
 	public String getAccessToken() { return accessToken; }
@@ -221,7 +223,15 @@ public class Player extends AbstractGAEPersistent {
 	public boolean seenLevelIntersistial() { return this.seenLevelIntersistial; }
 	/** indicate user has seen the level interstitial */
 	public void markSeenLevelIntersistial() { this.seenLevelIntersistial = true; }
-	
+	/** @return if ad should swap */
+	public boolean swapAds() {
+		boolean swapAd = Boolean.getBoolean("ad.swap.enabled") && 
+				System.currentTimeMillis() - this.adSwapTimestamp > Integer.getInteger("ad.swap.frequency.hours",12)*3600*1000;
+		if (swapAd) {
+			this.adSwapTimestamp = System.currentTimeMillis();
+		}
+		return swapAd;
+	}
 	
 	/** Get the players personalized MocoGold prize depending on max level,etc */
 	public int getMocoGoldPrize() {
@@ -253,6 +263,7 @@ public class Player extends AbstractGAEPersistent {
 		this.playingLevel = deserializeInt("playingLevel", inputMap, 1);
 		this.seenLevelIntersistial = inputMap.get("seenLvlInter") != null && (Boolean)inputMap.get("seenLvlInter");
 		this.interstitialAdTimestamp = inputMap.get("intestitialAd") == null ? 0L : (Long)inputMap.get("intestitialAd");
+		this.adSwapTimestamp = inputMap.get("adSwapTimestamp") == null ? 0L : (Long)inputMap.get("adSwapTimestamp");
 	}
 
 	@Override
@@ -278,6 +289,7 @@ public class Player extends AbstractGAEPersistent {
 		map.put("playingLevel", this.playingLevel);
 		map.put("seenLvlInter", this.seenLevelIntersistial);
 		map.put("intestitialAd", this.interstitialAdTimestamp);
+		map.put("adSwapTimestamp", this.adSwapTimestamp);
 		return map;
 	}
 

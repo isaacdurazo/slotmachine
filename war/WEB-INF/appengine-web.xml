@@ -42,6 +42,8 @@
 	<property name="millenial.wk.ad.enabled" value="true"/>
 	<property name="wk.interstitial.ad.enable" value="true"/>
 	<property name="wk.interstitial.ad.frequency.hours" value="4"/>
+	<property name="ad.swap.enabled" value="true"/>
+	<property name="ad.swap.frequency.hours" value="12"/>
 	
 	<!-- player levels -->
 	<property name="max.player.level" value="4"/>	
