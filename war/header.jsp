@@ -107,6 +107,23 @@ if (isWebkit) {
 		pageContext.forward("/wk/index.jsp");
 		return;
 	}
+} else {
+	// figure out if we're html or wap
+	String device, sessionDevice = (String)request.getSession().getAttribute("device");
+	if ((device=request.getParameter("device")) == null && (device=sessionDevice) == null) {
+		// we don't know!  likely a session timeout so redirect to moco
+		response.sendRedirect(GameUtils.getVisitorHome());
+		return;
+	} else {
+		// set in session
+		if (!device.equals(sessionDevice)) request.getSession().setAttribute("device", device);
+		// we do know so redirect to html if not wap
+		if ("web".equals(device) && !request.getRequestURI().startsWith("/html/") && (Boolean.getBoolean("html.enabled") || player.hasAdminPriv())) {
+			System.out.println("Redirect to HTML");
+			response.sendRedirect(ServletUtils.buildUrl(player, "/html/index.jsp", response));
+			return;
+		}
+	}	
 }
 	
 %>
