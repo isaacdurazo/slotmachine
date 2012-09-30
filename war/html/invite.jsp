@@ -24,7 +24,7 @@ if (!"success".equals(action)) {
 	<div>
 		<%=res%>
 	</div>
-    <div class="menu">
+    <div id="footer" class="menu">
         <div><a href="<%= ServletUtils.buildUrl(player, "/invite.jsp", response) %>">Invite More Friends</a></div>
         <div><a href="<%= ServletUtils.buildUrl(player, "/index.jsp", response) %>">Main</a></div>
     </div>

@@ -154,20 +154,20 @@ if (isWebkit) {
 
 				<div class="buy-container">
 					<form action="<%= ServletUtils.buildUrl(player, "/html/topup.jsp", response) %>" method="get">
-						<div>
+						<div class="buy-gold-btn">
 							<input class="input gold" type="hidden" name="verify" value="<%= formValidation %>"/>
 						</div>
-						<div>
+						<div class="buy-gold-btn">
 							<input class="input gold" type="submit" name="topup" value="MysteryBox: 499 Gold"/>
 						</div>
-						<div>
+						<div class="buy-gold-btn">
 							<input class="input gold" type="submit" name="topup" value="30 Coins: 99 Gold"/>
 						</div>
-						<div>
+						<div class="buy-gold-btn">
 							<input class="input gold" type="submit" name="topup" value="70 Coins: 199 Gold"/>
 						</div>
 						<% if (player.getLevel() < Integer.getInteger("max.player.level")) { %>
-						<div>
+						<div class="buy-gold-btn">
 							<input class="input gold" type="submit" name="topup" value="Unlock Next Level: 499 Gold"/>
 						</div>
 						<% } %>
@@ -176,8 +176,13 @@ if (isWebkit) {
 					</form>
 				</div>
 				
-				<div class="menu" style="margin-right: 16px;">
-					<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+				<div id="footer" class="menu" style="margin-right: 16px;">
+					<div class="block half-left">
+		        		<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+		        	</div>
+					<div class="block half-right">
+	  					<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/html/invite.jsp", response) %>">Invite Friends</a>
+		        	</div>
 				</div>
 				
 			</div>

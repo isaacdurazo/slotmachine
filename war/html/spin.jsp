@@ -219,39 +219,39 @@ java.util.List<Achievement> earnedAchievements = null;
 							} else {
 								document.getElementById('won_result').className = "wonspin delay";
 								document.getElementById('won_result').innerHTML = 
-									'<img width="13" height="11" src="images/animated-star.gif"/> WON '+coins+' coins! '+
-									'<img width="13" height="11" src="images/animated-star.gif"/>';								
+									'<img width="13" height="13" src="images/animated-star.gif"/> WON '+coins+' coins! '+
+									'<img width="13" height="13" src="images/animated-star.gif"/>';								
 							}
 							var s1="<%=reelImagePath%>comb-"+symbol[0]+".jpg";
 							var s2="<%=reelImagePath%>comb-"+symbol[1]+".jpg";
 							var s3="<%=reelImagePath%>comb-"+symbol[2]+".jpg";
 							console.log("Spin AJAX s1="+s1+" s2="+s2+" s3="+s3);
 							document.querySelector('table.spins').innerHTML =
-								'<tr><td style="float: right;">'+
+								'<tr><td>'+
 									'<div>'+
 										'<span id="spin-animation-1">'+
 										'<span class="shadows"></span>'+
-										'<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249"/>'+
+										'<img src="<%=reelAnimation%>" alt="animacion" width="161" height="573"/>'+
 									'</span>'+
-									'<img width="70" height="102" src="'+s1+'"/>'+
+									'<img width="161" height="230" src="'+s1+'"/>'+
 									'</div>'+
 								'</td>'+
 								'<td>'+
 									'<div>'+
 										'<span id="spin-animation-2">'+
 										'<span class="shadows"></span>'+
-										'<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249"/>'+
+										'<img src="<%=reelAnimation%>" alt="animacion" width="161" height="573"/>'+
 									'</span>'+
-									'<img width="70" height="102" src="'+s2+'"/>'+
+									'<img width="161" height="230" src="'+s2+'"/>'+
 									'</div>'+
 								'</td>'+
-								'<td style="float: left;">'+
+								'<td>'+
 									'<div>'+
 										'<span id="spin-animation-3">'+
 										'<span class="shadows"></span>'+
-										'<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249"/>'+
+										'<img src="<%=reelAnimation%>" alt="animacion" width="161" height="573"/>'+
 									'</span>'+
-									'<img width="70" height="102" src="'+s3+'"/>'+
+									'<img width="161" height="230" src="'+s3+'"/>'+
 									'</div>'+
 								'</td></tr>';
 							
@@ -373,56 +373,58 @@ java.util.List<Achievement> earnedAchievements = null;
 						</div>
 						<table class="spins">
 							<tr>
-								<td style="float: right;">
+								<td>
 									<div>									
 										<span id="spin-animation-1" style="display: none; ">
 											<span class="shadows"></span>
-											<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249">
+											<img src="<%=reelAnimation%>" alt="animacion" width="161" height="573">
 										</span>
 										
-										<img width="70" height="102" src="/html/images/comb--1.jpg">
+										<img width="161" height="230" src="/html/images/comb--1.jpg">
 									</div>
 								</td>
 								<td>
 									<div>									
 										<span id="spin-animation-2" style="display: none; ">
 											<span class="shadows"></span>
-											<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249">
+											<img src="<%=reelAnimation%>" alt="animacion" width="161" height="573">
 										</span>
 										
-										<img width="70" height="102" src="/html/images/comb--1.jpg">
+										<img width="161" height="230" src="/html/images/comb--1.jpg">
 									</div>
 								</td>
-								<td  style="float: left;">
+								<td>
 									<div>										
 										<span id="spin-animation-3" style="display: none; ">
 											<span class="shadows"></span>
-											<img src="<%=reelAnimation%>" alt="animacion" width="70" height="249">
+											<img src="<%=reelAnimation%>" alt="animacion" width="161" height="573">
 										</span>
 										
-										<img width="70" height="102" src="/html/images/comb--1.jpg">
+										<img width="161" height="230" src="/html/images/comb--1.jpg">
 									</div>
 								</td>
 							</tr>
 						</table>
 					</div>					
 				</div>	
-				<% 
-				boolean swapAd = false;
-				if (player.getGoldDebitted() == 0 && !(swapAd = player.swapAds())) { %>
-					<% if (fMillenialAds) { %>
-					<%@ include file="/html/mm_wk_ad.jsp" %>
-					<% } else { %>
-					<script type="text/javascript">
-						google_ad_client = "ca-pub-1639537201849581";
-						/* html spin */
-						google_ad_slot = "1288785559";
-						google_ad_width = 320;
-						google_ad_height = 50;
-					</script>
-					<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+				<div class="ad">
+					<% 
+					boolean swapAd = false;
+					if (player.getGoldDebitted() == 0 && !(swapAd = player.swapAds())) { %>
+						<% if (fMillenialAds) { %>
+						<%@ include file="/html/mm_wk_ad.jsp" %>
+						<% } else { %>
+						<script type="text/javascript">
+							google_ad_client = "ca-pub-1639537201849581";
+							/* html spin */
+							google_ad_slot = "1288785559";
+							google_ad_width = 320;
+							google_ad_height = 50;
+						</script>
+						<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+						<% } %>
 					<% } %>
-				<% } %>
+				</div>
 				<div class="spin-controls">
 					<div class="controls">
 						<div class="button-row bets">
@@ -448,20 +450,19 @@ java.util.List<Achievement> earnedAchievements = null;
 						<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 						<% } %>
 					<% } %>
-					<div class="menu">
-						<div class="button-row">
-							<div class="block half-left">
-				        		<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
-				        	</div>
-							<div class="block half-right">
-				        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/html/topup.jsp", response) %>">Buy Coins</a>
-				        	</div>
-				        </div>
-				    </div>
 				</div>
+				<div id="footer" class="menu">
+					<div class="block half-left">
+		        		<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+		        	</div>
+					<div class="block half-right">
+		        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/html/topup.jsp", response) %>">Buy Coins</a>
+		        	</div>
+			    </div>
 			</div>
 		</div>
 	</div>
+
 	<%@ include file="/html/ga.jsp" %>
   </body>
 </html>

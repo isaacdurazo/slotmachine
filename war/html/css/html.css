@@ -67,10 +67,12 @@ table {
 	background: -ms-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(79,79,79,1) 50%,rgba(0,0,0,1) 100%); /* IE10+ */
 	background: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(79,79,79,1) 50%,rgba(0,0,0,1) 100%); /* W3C */
 	overflow: scroll;
+	position: relative;
 }
 
 .wrapper {
 	width: 100%;
+	height: 100%;
 	display: inline-block;
 	background-image: url(../images/main-bg.png);
 }
@@ -119,6 +121,14 @@ table {
 
 .title a {
 	color: #FFF;	
+}
+
+.ad {
+	text-align: center;
+	width: 468px; 
+	height: 60px;
+	margin: auto;
+	margin-bottom: 5px;	
 }
 
 /* ----------------------------- */
@@ -215,7 +225,24 @@ table {
 	margin-bottom: 2px;
 }
 
+/* ----------------------------- */
+/*            FOOTER             */
+/* ----------------------------- */
 
+#footer {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	margin:0;
+	background: #C70304;
+	-moz-box-shadow: inset 0px 0px 5px #000;
+	-webkit-box-shadow: inset 0px 0px 5px black;
+	box-shadow: inset 0px 0px 5px black;
+}
+
+#footer div {
+	margin: 7px;
+}
 
 /* ----------------------------- */
 /*           JACKPOT             */
@@ -354,7 +381,7 @@ table {
 }
 
 .half-left, .half-right, .half-center {
-	max-width: 48%;
+	max-width: 47.2%;
 	width: 50%;
 }
 
@@ -380,7 +407,7 @@ table {
 	border: 4px solid #908f8f;
 	border-bottom: 0;
 	margin: 10px 20px 0;
-	height: 70px;
+	height: 90px;
 	text-align: center;
 	border-radius: 5px 5px 0 0;
 	-webkit-border-radius: 5px 5px 0 0;
@@ -422,13 +449,19 @@ table {
 .spin-results .results {
  	border-top: 1px solid #4b4b4b;
  	padding-top: 4px;
- 	height: 33px;
+ 	height: 53px;
  	background: black;
  }
 
  .spin-results .results a { 
  	color: green;
  }
+
+.spin-results #lost_result {
+	font-size: 18px;
+	margin-top: 4px;
+}
+
 
 /* ----------------------------- */
 /*        SPIN Container         */
@@ -463,14 +496,14 @@ table {
 
 .lights-off .lights.left, .lights-off .lights.right {
 	background: url('/html/images/side-lights-off.gif');
-	height: 137px;
+	height: 256px;
 	width: 10px;
 	position:absolute;
 }
 
 .lights-win .lights.left, .lights-win .lights.right{
 	background: url('/html/images/side-lights.gif');
-	height: 137px;
+	height: 256px;
 	width: 10px;
 	position:absolute;
 	z-index:2;
@@ -507,12 +540,12 @@ table {
 }
 
 .lights.bottom {
-    bottom: -129px;
+    bottom: -259px;
     left: 3px;
 }
 
 .spins {
-	height: 10em;
+	height: 20em;
 	border-spacing: 10px;
 	border: 2px solid #3e3e3e;
 	background: #000;
@@ -529,8 +562,8 @@ table {
 
 
 #spin-animation-1, #spin-animation-2, #spin-animation-3 {
-	width: 70px;
-	height: 102px;
+	width: 161px;
+	height: 230px;
 	overflow: hidden;
 	position: absolute;
 	right: 0;
@@ -551,8 +584,8 @@ table {
 }
 
 .shadows {
-	width: 70px;
-	height: 102px;
+	width: 161px;
+	height: 230px;
 	position: absolute;
 	z-index: 1;
 	right:0;
@@ -587,7 +620,7 @@ table {
 }
 
 .spin-controls .button-row {
-	margin-bottom: 5px !important; 
+	margin: 3px 5px 0 5px !important;
 }
 
 .spin-controls .bet {
@@ -601,7 +634,7 @@ table {
 	-webkit-box-shadow: inset 0 3px 0px rgba(17,102,12,1), inset 0 -3px 0px rgba(17,102,12,1), inset 3px 0 0px rgba(17,102,12,1), inset -3px 0 0px rgba(17,102,12,1);
 	-moz-box-shadow: inset 0 3px 0px rgba(17,102,12,1), inset 0 -3px 0px rgba(17,102,12,1), inset 3px 0 0px rgba(17,102,12,1), inset -3px 0 0px rgba(17,102,12,1);
 	box-shadow: inset 0 3px 0px rgba(17,102,12,1), inset 0 -3px 0px rgba(17,102,12,1), inset 3px 0 0px rgba(17,102,12,1), inset -3px 0 0px rgba(17,102,12,1);
-	padding: 10px 0;
+	padding: 12px 0;
 	font-size: 1.5em;
 	display: inline-block;
 	width: 100%;
@@ -622,8 +655,10 @@ table {
 /* ----------------------------- */
 
 .location-wrapper {
-	width: 100%;
+	width: 50%;
 	text-align: center;
+	float: left;
+	margin: 20px 0;
 }
 
 .location-container {
@@ -841,6 +876,11 @@ a.location-container {
 	font-size: 24px;
 }
 
+.dialog-container .play {
+	margin-top: 20px;
+}
+
+
 .achievements .dialog-container h2 {
 	font-size: 20px;
 }
@@ -926,28 +966,44 @@ a.close {
 
 
 
-
-
-
-
-
-
+/* ----------------------------- */
+/*             TopUp             */
+/* ----------------------------- */
 
 
 .buy-container {
 	text-align: center;
 	display: block;
-	background-color: #272727;
 	padding: 2px 4px;
-   	border: 2px solid #000;
-}
-
-.buy-container {
 	margin-bottom: 5px;
 }
 
+.buy-gold-btn {
+	float: left;
+	width: 50%;
+}
+
+.buy-container .input {
+	margin: 15px 0;
+	height: 50px;
+	border: none;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	width: 90%;
+	font-size: 16px;
+	background: #FAA22C;
+	font-weight: bold;
+	border: 4px solid #DC7900;
+}
+
+
+
+
+
 .wonspin {
-	font-size: 1.2em;
+	font-size: 2em;
+	color: white;
  }
 
 .secondary-header {
@@ -1014,17 +1070,6 @@ a.close {
 	border-bottom:2px solid #646464;
 }
 
-.buy-container .input {
-	margin: 5px 0;
-	height: 30px;
-	border: none;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	width: 100%;
-	font-size: 16px;
-}
-
 .icon {
 	vertical-align: top;
 }
@@ -1070,6 +1115,8 @@ a.close {
 
 .achievement-container {
 	padding: 5px;	
+	height: 450px;
+	overflow: scroll;
 }
 
 #achievement-entity {

@@ -52,7 +52,7 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 					</tr>
 				</table>
 				
-				<div class="menu" style="margin-right: 16px;">
+				<div id="footer" class="menu" style="margin-right: 16px;">
 					<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
 				</div>
 			</div>
