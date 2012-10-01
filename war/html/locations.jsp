@@ -23,11 +23,15 @@
 							</div>
 							<div class="location">
 								<span class="location-name"><%= System.getProperty("level.name."+i) %></span>
-								<span class="location-play">Play</span>
-								<span class="location-buy">Buy</span>
+								
 								<div class="location-xp">
 									<% if (locked) { %><%= Integer.getInteger("level.xp.min."+i)%> XP required
 									<% } else { %><%= (int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+i))*GameUtils.getGlobalProps().getMocoGoldPrize())%> Gold Jackpot<% } %>
+								</div>
+
+								<div>
+									<span class="location-play">Play</span>
+									<span class="location-buy">Buy</span>
 								</div>
 							</div>
 							
@@ -41,7 +45,6 @@
 					<div href="#" class="location-container">
 						<div class="location-icons">
 							<span class="icon-location"></span>
-							<span class="icon-lock"></span>
 						</div>
 						<div class="location">
 							<span class="location-name">Coming Soon!</span>
@@ -53,7 +56,6 @@
 					<div href="#" class="location-container">
 						<div class="location-icons">
 							<span class="icon-location"></span>
-							<span class="icon-lock"></span>
 						</div>
 						<div class="location">
 							<span class="location-name">Coming Soon!</span>
