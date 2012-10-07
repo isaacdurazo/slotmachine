@@ -436,21 +436,21 @@ java.util.List<Achievement> earnedAchievements = null;
 							</div>
 						</div>
 					</div>
-					<% if (swapAd) { PlayerManager.getInstance().storePlayer(player,true); %>
-						<% if (fMillenialAds) { %>
-						<%@ include file="/html/mm_wk_ad.jsp" %>
-						<% } else { %>
-						<script type="text/javascript">
-						google_ad_client = "ca-pub-1639537201849581";
-						/* HTMLBetButton */ 
-						google_ad_slot = "0207515525"; 
-						google_ad_width = 468;
-						google_ad_height = 60;
-						</script>
-						<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-						<% } %>
-					<% } %>
 				</div>
+				<% if (swapAd) { PlayerManager.getInstance().storePlayer(player,true); %>
+					<% if (fMillenialAds) { %>
+					<%@ include file="/html/mm_wk_ad.jsp" %>
+					<% } else { %>
+					<script type="text/javascript">
+					google_ad_client = "ca-pub-1639537201849581";
+					/* HTMLBetButton */ 
+					google_ad_slot = "0207515525"; 
+					google_ad_width = 468;
+					google_ad_height = 60;
+					</script>
+					<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+					<% } %>
+				<% } %>
 				<div id="footer" class="menu">
 					<div class="block half-left">
 		        		<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
@@ -462,7 +462,7 @@ java.util.List<Achievement> earnedAchievements = null;
 			</div>
 		</div>
 	</div>
-
+	</div>
 	<%@ include file="/html/ga.jsp" %>
   </body>
 </html>

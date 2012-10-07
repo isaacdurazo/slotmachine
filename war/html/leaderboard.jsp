@@ -58,5 +58,6 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 			</div>
 		</div>
 	</div>
+	</div>
   </body>
 </html>

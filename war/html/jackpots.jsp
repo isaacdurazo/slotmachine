@@ -51,6 +51,7 @@
 			    </div>
 			</div>
 		</div>
+		</div>
 		<%@ include file="/html/ga.jsp" %>
 	</body>
 </html>

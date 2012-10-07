@@ -56,7 +56,29 @@ table {
 	width:100%;
 }
 
+.game-wrapper {
+	background: white;
+	border: 1px solid #EEE;
+	border-radius: 10px;
+	box-shadow: 1px 1px 1px #EEE;
+	clear: both;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 10px;
+	width: 1120px;
+}
+
+.adds_container.right {
+	float: right;
+}
+
+.adds_container.left {
+	float: left;
+}
+
 #container {
+	margin-left: 10px;
+	display: inline-block;
     width: 640px;
     height: 633px;
     background: rgb(0,0,0); /* Old browsers */

@@ -96,137 +96,170 @@
 </head>
 
 <body>
-	<div id="container">
-		<div class="wrapper">
-			<div class="header">
-
-                <a class="coins" accessKey="2" href="<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")), "/html/topup.jsp", response) %>">
-                    <span class="icon-coin"></span>
-                    <span id="player_coins" class="delay inline"><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getCoins() %></span>
-                    <span class="plus">+</span>
-                </a>   
-
-                <span class="logo">
-                    <img width="123" height="16" src="/html/images/logo.gif"/>
-                </span>
-
-                <span class="level-xp">
-                    <%--<span class="level"><b>Level:</b> <span id='level'><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getLevel() %></span></span>--%>
-                    <span class="xp"><b>XP:</b> <span id="player_xp"><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getXp() %></span></span>
-                </span>
+	<div class="game-wrapper">
+        <div class="adds_container left">
+            <div>
+                <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-1639537201849581";
+                /* HTMLSkyScraper */
+                google_ad_slot = "5681691463";
+                google_ad_width = 160;
+                google_ad_height = 600;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
             </div>
+        </div>
 
-			<div class="content">
-	    		<div class="stats-container">
-			   		<table class="stats">
-			   			<tr>
-			   				<td>
-								<span class="stat">
-			   						The best way to WIN <span class="goldtext">Moco Gold</span>
-			   					</span>
-			   				</td>
-			   			</tr>
-			   		</table>
-		   		</div>
-				<%@ include file="message.jsp" %>
+        <div class="adds_container right">
+            <div> 
+                <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-1639537201849581";
+                /* HTMLBoxUpperRight */
+                google_ad_slot = "4127225148";
+                google_ad_width = 300;
+                google_ad_height = 250;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
+            </div>
+        </div>
+    
+		<div id="container">
+			<div class="wrapper">
+				<div class="header">
 
-			    <div class="subheader">Play slots, have fun and win prizes:</div>
+	                <a class="coins" accessKey="2" href="<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")), "/html/topup.jsp", response) %>">
+	                    <span class="icon-coin"></span>
+	                    <span id="player_coins" class="delay inline"><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getCoins() %></span>
+	                    <span class="plus">+</span>
+	                </a>   
 
-				<div class="list-container">
-					<ul  class="list">
-						<li><b>Weekly</b> <span class="goldtext">Gold Jackpot.</span> Now: <span class="goldtext"><%=player.getMocoGoldPrize()%> Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
-						<li><b>Mega Coin Prize:</b> Gain XP with every spin and compete to be #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("game.weekly.coin.prize") %> coins.</li><br />
-						<li><b>Daily free coins:</b> FREE coins award when you play daily.</li><br />
-						<li><b>Payout:</b> Check the payout table for spin payouts.</li>
-					</ul>
-				</div>
+	                <span class="logo">
+	                    <img width="123" height="16" src="/html/images/logo.gif"/>
+	                </span>
 
-				<div class="play">
-			       	<a accessKey="1" href="<%= response.encodeURL("/html/spin.jsp") %>">Start Playing</a>
-			    </div>
-				Location: <%= System.getProperty("level.name."+player.getPlayingLevel()) %>
+	                <span class="level-xp">
+	                    <%--<span class="level"><b>Level:</b> <span id='level'><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getLevel() %></span></span>--%>
+	                    <span class="xp"><b>XP:</b> <span id="player_xp"><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getXp() %></span></span>
+	                </span>
+	            </div>
 
-				<div class="payout-table">
-					<div style="text-align: center">Payout Table Bet 1 Coin:</div>
-				<table>
-					<tr>
-						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][0] %>"/>: <%=winmax[0][0] %> <br/>
-						</td>
-						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][1] %>"/>:  <%=winmax[0][1] %> <br/>
-						</td>
-						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][2] %>"/>:  <%=winmax[0][2] %> <br/> 
-						</td>
-						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][3] %>"/>:  <%=winmax[0][3] %> <br/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][4] %>"/>:  <%=winmax[0][4] %> <br/>
-						</td>
-						<td>
-							3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>:  <%=winmax[0][5] %> <br/>
-						</td>
-						<td>
-							2x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>:  <%=winmax[0][6] %> <br/>
-						</td>
-						<td>
-							1x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>:  <%=winmax[0][7] %> <br/> 
-						</td>
-					</tr>
-				</table>
+				<div class="content">
+		    		<div class="stats-container">
+				   		<table class="stats">
+				   			<tr>
+				   				<td>
+									<span class="stat">
+				   						The best way to WIN <span class="goldtext">Moco Gold</span>
+				   					</span>
+				   				</td>
+				   			</tr>
+				   		</table>
+			   		</div>
+					<%@ include file="message.jsp" %>
 
+				    <div class="subheader">Play slots, have fun and win prizes:</div>
 
-				</div>
-			</div>
+					<div class="list-container">
+						<ul  class="list">
+							<li><b>Weekly</b> <span class="goldtext">Gold Jackpot.</span> Now: <span class="goldtext"><%=player.getMocoGoldPrize()%> Gold</span> <img class="icon" alt="gold" src="/images/mocogold.gif"></li><br />
+							<li><b>Mega Coin Prize:</b> Gain XP with every spin and compete to be #1 on leaderboard. Every sunday midnight #1 wins <%=System.getProperty("game.weekly.coin.prize") %> coins.</li><br />
+							<li><b>Daily free coins:</b> FREE coins award when you play daily.</li><br />
+							<li><b>Payout:</b> Check the payout table for spin payouts.</li>
+						</ul>
+					</div>
 
-			<div class="payout-table border-bottom">
+					<div class="play">
+				       	<a accessKey="1" href="<%= response.encodeURL("/html/spin.jsp") %>">Start Playing</a>
+				    </div>
+					Location: <%= System.getProperty("level.name."+player.getPlayingLevel()) %>
 
-				<div style="text-align: center">Payout Table Bet Max Coins:</div>
+					<div class="payout-table">
+						<div style="text-align: center">Payout Table Bet 1 Coin:</div>
 					<table>
 						<tr>
 							<td>
-								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][0] %>"/>: <img class="icon"  alt="gold" src="/images/mocogold.gif"> <span class="goldtext">*Jackpot*</span> <br/>
+								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][0] %>"/>: <%=winmax[0][0] %> <br/>
 							</td>
 							<td>
-								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][1] %>"/>: <%=winmax[0][1]*multiplier %>  <br/>
+								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][1] %>"/>:  <%=winmax[0][1] %> <br/>
 							</td>
 							<td>
-								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][2] %>"/>: <%=winmax[0][2]*multiplier %>  <br/> 
+								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][2] %>"/>:  <%=winmax[0][2] %> <br/> 
 							</td>
 							<td>
-								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][3] %>"/>: <%=winmax[0][3]*multiplier %>  <br/>
+								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][3] %>"/>:  <%=winmax[0][3] %> <br/>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][4] %>"/>: <%=winmax[0][4]*multiplier %>  <br/>
+								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][4] %>"/>:  <%=winmax[0][4] %> <br/>
 							</td>
 							<td>
-								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[0][5]*multiplier %>  <br/>
+								3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>:  <%=winmax[0][5] %> <br/>
 							</td>
 							<td>
-								2x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[0][6]*multiplier %>  <br/>
+								2x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>:  <%=winmax[0][6] %> <br/>
 							</td>
 							<td>
-								1x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[0][7]*multiplier %>  <br/> 
+								1x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>:  <%=winmax[0][7] %> <br/> 
 							</td>
 						</tr>
 					</table>
 
-			</div>
+
+					</div>
+				</div>
+
+				<div class="payout-table border-bottom">
+
+					<div style="text-align: center">Payout Table Bet Max Coins:</div>
+						<table>
+							<tr>
+								<td>
+									3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][0] %>"/>: <img class="icon"  alt="gold" src="/images/mocogold.gif"> <span class="goldtext">*Jackpot*</span> <br/>
+								</td>
+								<td>
+									3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][1] %>"/>: <%=winmax[0][1]*multiplier %>  <br/>
+								</td>
+								<td>
+									3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][2] %>"/>: <%=winmax[0][2]*multiplier %>  <br/> 
+								</td>
+								<td>
+									3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][3] %>"/>: <%=winmax[0][3]*multiplier %>  <br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][4] %>"/>: <%=winmax[0][4]*multiplier %>  <br/>
+								</td>
+								<td>
+									3x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[0][5]*multiplier %>  <br/>
+								</td>
+								<td>
+									2x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[0][6]*multiplier %>  <br/>
+								</td>
+								<td>
+									1x <img width="16" height="16" src="<%=icon[player.getPlayingLevel()-1][5] %>"/>: <%=winmax[0][7]*multiplier %>  <br/> 
+								</td>
+							</tr>
+						</table>
+
+				</div>
 
 
-		    <div id="footer" class="menu" style="margin-right: 16px;">
-		       	<a href="<%= response.encodeURL("/html/index.jsp") %>">Main</a>
-	  		</div>
-	  	</div>
+			    <div id="footer" class="menu" style="margin-right: 16px;">
+			       	<a href="<%= response.encodeURL("/html/index.jsp") %>">Main</a>
+		  		</div>
+		  	</div>
 
+		</div>
 	</div>
-
 
 	<%@ include file="/html/ga.jsp" %>
 </body>
