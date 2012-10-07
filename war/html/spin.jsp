@@ -415,11 +415,11 @@ java.util.List<Achievement> earnedAchievements = null;
 						<%@ include file="/html/mm_wk_ad.jsp" %>
 						<% } else { %>
 						<script type="text/javascript">
-							google_ad_client = "ca-pub-1639537201849581";
-							/* html spin */
-							google_ad_slot = "1288785559";
-							google_ad_width = 320;
-							google_ad_height = 50;
+						google_ad_client = "ca-pub-1639537201849581";
+						/* HTMLBetButton */ 
+						google_ad_slot = "0207515525"; 
+						google_ad_width = 468;
+						google_ad_height = 60;
 						</script>
 						<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 						<% } %>
@@ -441,11 +441,11 @@ java.util.List<Achievement> earnedAchievements = null;
 						<%@ include file="/html/mm_wk_ad.jsp" %>
 						<% } else { %>
 						<script type="text/javascript">
-							google_ad_client = "ca-pub-1639537201849581";
-							/* wk spin */
-							google_ad_slot = "1288785559";
-							google_ad_width = 320;
-							google_ad_height = 50;
+						google_ad_client = "ca-pub-1639537201849581";
+						/* HTMLBetButton */ 
+						google_ad_slot = "0207515525"; 
+						google_ad_width = 468;
+						google_ad_height = 60;
 						</script>
 						<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 						<% } %>
