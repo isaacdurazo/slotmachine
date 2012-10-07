@@ -9,15 +9,15 @@
   </head>
   <body>
     <div class="game-wrapper">
-        
-        <div class="adds_container left">
-            <div>
+
+        <div class="adds_container right" >
+            <div> 
                 <script type="text/javascript"><!--
                 google_ad_client = "ca-pub-1639537201849581";
-                /* HTMLSkyScraper */
-                google_ad_slot = "5681691463";
-                google_ad_width = 160;
-                google_ad_height = 600;
+                /* HTMLBoxUpperRight */
+                google_ad_slot = "4127225148";
+                google_ad_width = 300;
+                google_ad_height = 250;
                 //-->
                 </script>
                 <script type="text/javascript"
@@ -26,14 +26,14 @@
             </div>
         </div>
 
-        <div class="adds_container right">
-            <div> 
+        <div class="adds_container right" style="margin-right:10px">
+            <div>
                 <script type="text/javascript"><!--
                 google_ad_client = "ca-pub-1639537201849581";
-                /* HTMLBoxUpperRight */
-                google_ad_slot = "4127225148";
-                google_ad_width = 300;
-                google_ad_height = 250;
+                /* HTMLSkyScraper */
+                google_ad_slot = "5681691463";
+                google_ad_width = 160;
+                google_ad_height = 600;
                 //-->
                 </script>
                 <script type="text/javascript"
