@@ -11,7 +11,7 @@
     <div class="game-wrapper">
 
         <div class="adds_container right" >
-            <div> 
+            <div class="square-ad"> 
                 <script type="text/javascript"><!--
                 google_ad_client = "ca-pub-1639537201849581";
                 /* HTMLBoxUpperRight */
@@ -24,10 +24,22 @@
                 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
                 </script>
             </div>
-        </div>
 
-        <div class="adds_container right" style="margin-right:10px">
-            <div>
+            <div class="skyscraper left">
+                <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-1639537201849581";
+                /* HTMLSkyScraper */
+                google_ad_slot = "5681691463";
+                google_ad_width = 160;
+                google_ad_height = 600;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
+            </div>
+
+            <div class="skyscraper" style="display:none">
                 <script type="text/javascript"><!--
                 google_ad_client = "ca-pub-1639537201849581";
                 /* HTMLSkyScraper */

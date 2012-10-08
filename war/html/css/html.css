@@ -65,7 +65,7 @@ table {
 	margin: 0 auto;
 	overflow: hidden;
 	padding: 10px;
-	width: 1120px;
+	width: 950px;
 }
 
 .adds_container.right {
@@ -74,6 +74,18 @@ table {
 
 .adds_container.left {
 	float: left;
+}
+
+.square-ad {
+	margin-bottom: 10px;
+}
+
+.skyscraper {
+	float: left;
+}
+
+.skyscraper.left {
+	margin-right: 10px;
 }
 
 #container {
