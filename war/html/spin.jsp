@@ -98,30 +98,28 @@ java.util.List<Achievement> earnedAchievements = null;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script>
 		var xp = <%= player.getXp()%>;
 		var currCoins = <%= player.getCoins() %>;
 		var btnClicked = false;
 		var spinsRemaining = <%= spinsPerAd %>;
 		var accessToken = "<%= player.getAccessToken()%>";
-		document.addEventListener('DOMContentLoaded', function() {
-			var closeBtns = document.querySelectorAll(".achievements .close, .achievements .play a, .level-up a.close");
-			for (var i=0;i<closeBtns.length;i++) {
-				closeBtns[i].addEventListener('click', function(e) {
+		$(document).ready(function() {
+			$(".achievements .close, .achievements .play a, .level-up a.close").click(function(e) {
 					document.querySelector('.achievements').style.display = 'none';	
 					document.querySelector('.level-up').style.display = 'none';
 					e.preventDefault();
 					return false;
-				},false);
-			}
-			document.querySelector('.max_spin_button').addEventListener('click', function(e) {
+				});
+			$('.max_spin_button').click(function(e) {
 				e.preventDefault();
 				spin(true);
-			}, false);
-			document.querySelector('.spin_button').addEventListener('click', function(e) {
+			});
+			$('.spin_button').click(function(e) {
 				e.preventDefault();
 				spin();
-			}, false);
+			});
 			<% if ("true".equals(request.getParameter("reload"))) { %>
 				spin(<%= "true".equals(request.getParameter("maxBet")) %>);
 			<% } %>
@@ -132,25 +130,22 @@ java.util.List<Achievement> earnedAchievements = null;
 							"&reload=true&maxBet="+isMax;
 					return;
 				}
-				try {_gaq.push(['_trackEvent', 'Spin', isMax ? 'Max' : 'Min']);} catch (err) {console.error(err);}
+				
+				try {_gaq.push(['_trackEvent', 'Spin', isMax ? 'Max' : 'Min']);} catch (err) {if (console && console.err) {console.error(err);}}
 				currCoins -= isMax ? <%= maxBet %> : 1;
 				btnClicked = true;
 				// reset set
-				var betButtons = document.querySelectorAll('.bets a');
-				for (var i=0; i<betButtons.length;i++) {
-					betButtons[i].style.opacity = '0.5';
-				}
-				document.getElementById('jackpot').style.display = 'none';
-				document.getElementById('jackpot').className = '';
-				document.getElementById('lost_result').style.display = 'none';
-				document.getElementById('lost_result').className = '';
-				document.getElementById('won_result').style.display = 'none';
-				document.getElementById('won_result').className = '';
-				document.querySelector('.achievements').style.display = 'none';		
-				document.getElementById('player_coins').style.display = 'none';
-				document.querySelector('.level-up').style.display = 'none';
-				document.getElementById('lights').innerHTML = 
-					'<div class="lights-off">'+
+				$('.bets a').css({opacity:'0.5'});
+				$('#jackpot').css({display:'none'});
+				$('#jackpot').removeClass('goldtext').removeClass('delay');
+				$('#lost_result').css({display:'none'});
+				$('#lost_result').removeClass('lostspin').removeClass('delay');
+				$('#won_result').css({display:'none'});
+				$('#won_result').removeClass('wonspin').removeClass('delay');
+				$('.achievements').css({display:'none'});		
+				$('#player_coins').css({display:'none'});
+				$('.level-up').css({display:'none'});
+				$('lights').html('<div class="lights-off">'+
 						'<div class="lights left"></div>'+
 						'<div class="lights right"></div>'+
 						'<div class="lights top"></div>'+
@@ -161,15 +156,15 @@ java.util.List<Achievement> earnedAchievements = null;
 						'<div class="lights right"></div>'+
 						'<div class="lights top"></div>'+
 						'<div class="lights bottom"></div>'+
-					'</div>';
+					'</div>');
 				// make AJAX request
-				opensocial.ajax({
+				$.ajax({
 					url:'/html/spin.jsp',
-					data: {accessToken:"<%= player.getAccessToken() %>",
-						action:(isMax ? "max" : "")+"spin"},
+					data: {accessToken:"<%= player.getAccessToken() %>",action:(isMax ? "max" : "")+"spin"},
+					dataType:'json',
 					success: function(data) {
 						if (data.topup) {
-							try {_gaq.push(['_trackEvent', 'Spin', 'insufficient']);} catch (err) {console.error(err);}
+							try {_gaq.push(['_trackEvent', 'Spin', 'insufficient']);} catch (err) {if (console && console.error) { console.error(err);} }
 							// insufficient funds so redirect
 							window.location = data.topup;
 						} else {
@@ -177,19 +172,19 @@ java.util.List<Achievement> earnedAchievements = null;
 							var symbol = data.symbols;
 							var achievements = data.achievements;
 							var levelUp = data.level;
-							document.getElementById('player_xp').innerHTML = ++xp;
-							try {_gaq.push(['_trackEvent', 'Spin', 'Result',coins ? 'Win' : 'Loss', coins]);} catch (err) {console.error(err);}
+							$('#player_xp').html(++xp);
+							try {_gaq.push(['_trackEvent', 'Spin', 'Result',coins ? 'Win' : 'Loss', coins]);} catch (err) {if (console && console.error) { console.error(err);} }
 							
-							if (levelUp) { 
-								document.querySelector('.level-up').style.display = 'block';
-								document.querySelector('.level-name').innerHTML = levelUp.name;
-								document.querySelector('.level-bonus').innerHTML = levelUp.jackpot;
-								document.querySelector('.level-up .play a').href = '<%= ServletUtils.buildUrl(player, "/html/spin.jsp",response)%>&playingLevel='+levelUp.num;
-								if (document.getElementById('level')) document.getElementById('level').innerHTML = levelUp.num;
-								try {_gaq.push(['_trackEvent', 'Player', 'levelUp',undefined,levelUp.num]);} catch (err) {console.error(err);}
+							if (levelUp) {
+								$('.level-up').css({display:'block'});
+								$('.level-name').html(levelUp.name);
+								$('.level-bonus').html(levelUp.jackpot);
+								$('.level-up .play a').attr('href','<%= ServletUtils.buildUrl(player, "/html/spin.jsp",response)%>&playingLevel='+levelUp.num);
+								$('#level').html(levelUp.num);
+								try {_gaq.push(['_trackEvent', 'Player', 'levelUp',undefined,levelUp.num]);} catch (err) {if (console && console.error) { console.error(err);}}
 							} else if (achievements) {
-								document.querySelector('.achievements').style.display = 'block';
-								document.getElementById('achievement_title_text').innerHTML = 'achievement'+(achievements.length == 1 ? '' : 's');
+								$('.achievements').css({display:'block'});
+								$('#achievement_title_text').html('achievement'+(achievements.length == 1 ? '' : 's'));
 								var coinsEarned = 0;
 								var achievementText = '';
 								for (var i=0;i<achievements.length;i++) {
@@ -198,35 +193,34 @@ java.util.List<Achievement> earnedAchievements = null;
 									try {_gaq.push(['_trackEvent', 'Achievement', achievements[i].title.substring(0,9), achievements[i].coins]);} catch (err) {console.error(err);}
 									achievementText += '<li><small>'+achievements[i].title+'<small></li>';
 								}
-								document.getElementById('achievement_title_coins').innerHTML = coinsEarned;
-								document.querySelector(".achievements ul").innerHTML = achievementText;
+								$('#achievement_title_coins').html(coinsEarned);
+								$(".achievements ul").html(achievementText);
 							}
 							
 							currCoins += coins;
-							document.getElementById('player_coins').innerHTML = currCoins;		
+							$('#player_coins').html(currCoins);		
 							
 							if (isMax && symbol[0]==0 && symbol[1]==0 && symbol[2]==0) {
 								// JACKPOT!
-								document.getElementById('jackpot').className = "goldtext delay";
+								$('#jackpot').addClass("goldtext").addClass("delay");
 							} else if (coins == 0) {
-								document.getElementById('lost_result').className = "lostspin delay";
+								$('#lost_result').addClass("lostspin").addClass("delay");
 								var lossText = 'Spin Again';
 								if (symbol[0] == 6 && symbol[1] == 6 && symbol[2] == 6) {
 									lossText = "<%=lemonText%>"+ "How to win check "+
 										"<a href='<%= ServletUtils.buildUrl(player, "/html/help.jsp", response) %>'>payout table</a> !";
 								}
-								document.getElementById('lost_result').innerHTML = lossText;
+								$('#lost_result').html(lossText);
 							} else {
-								document.getElementById('won_result').className = "wonspin delay";
-								document.getElementById('won_result').innerHTML = 
+								$('#won_result').addClass("wonspin").addClass("delay");
+								$('#won_result').html( 
 									'<img width="13" height="13" src="images/animated-star.gif"/> WON '+coins+' coins! '+
-									'<img width="13" height="13" src="images/animated-star.gif"/>';								
+									'<img width="13" height="13" src="images/animated-star.gif"/>');								
 							}
 							var s1="<%=reelImagePath%>comb-"+symbol[0]+".jpg";
 							var s2="<%=reelImagePath%>comb-"+symbol[1]+".jpg";
 							var s3="<%=reelImagePath%>comb-"+symbol[2]+".jpg";
-							console.log("Spin AJAX s1="+s1+" s2="+s2+" s3="+s3);
-							document.querySelector('table.spins').innerHTML =
+							$('table.spins').html(
 								'<tr><td>'+
 									'<div>'+
 										'<span id="spin-animation-1">'+
@@ -253,30 +247,23 @@ java.util.List<Achievement> earnedAchievements = null;
 									'</span>'+
 									'<img width="161" height="230" src="'+s3+'"/>'+
 									'</div>'+
-								'</td></tr>';
+								'</td></tr>');
 							
 							// show animations
 							setTimeout(function() {
-						  		document.getElementById('spin-animation-1').style.display = 'none';
+						  		$('#spin-animation-1').css({display:'none'});
 						  	}, 750);  					  	
 						  	setTimeout(function() {
-						 	   	document.getElementById('spin-animation-2').style.display = 'none';
+						 	   	$('#spin-animation-2').css({display:'none'});
 						  	}, 1250);  					  	
 						  	setTimeout(function() {
-						 	   	document.getElementById('spin-animation-3').style.display = 'none';
+						 	   	$('#spin-animation-3').css({display:'none'});
 							 	btnClicked = false;
-								for (var i=0; i<betButtons.length;i++) {
-									betButtons[i].style.opacity = '1';
-								}
+							 	$('.bets a').css({opacity:'1'});
 						  	}, 1500);
 						  	setTimeout(function() {
-						  		var elems = document.querySelectorAll('.delay');
-						  		if (elems) {
-						  			for (var i=0;i<elems.length;i++) {
-						  				elems[i].style.display = elems[i].className.indexOf('inline') == -1 ? 'block' : 'inline-block';
-						  			}
-						  		}
-						  		document.getElementById('lights').innerHTML = 
+						  		$('.delay').css({display:'inline-block'});
+						  		$('#lights').html( 
 									'<div class="lights-'+(coins == 0 ? 'off' : 'win')+'">'+
 										'<div class="lights left"></div>'+
 										'<div class="lights right"></div>'+
@@ -288,7 +275,7 @@ java.util.List<Achievement> earnedAchievements = null;
 										'<div class="lights right"></div>'+
 										'<div class="lights top"></div>'+
 										'<div class="lights bottom"></div>'+
-									'</div>';
+									'</div>');
 					  		}, 1800); 	
 						}
 					},
@@ -298,7 +285,7 @@ java.util.List<Achievement> earnedAchievements = null;
 					}
 				});
 			}
-		}, false);
+		});
 	</script>
    
 		    <div class="content">

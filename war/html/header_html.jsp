@@ -5,7 +5,6 @@
     <meta name="description" content="Play Casino Games on your mobile phone. FREE game with prizes and millions of people online."/>
     <title>Slot Mania</title>  
    	<link rel="stylesheet" href="/html/css/html.css" />
-   	<script src="http://cdn-img.mocospace.com/wk/js/opensocial/opensocial.js"></script>    
   </head>
   <body>
     <div class="game-wrapper">
