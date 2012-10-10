@@ -140,7 +140,7 @@
 						</div>
 						
 						<div class="block half-right">
-			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/html/invite.jsp", response) %>">Invite Friends</a>
+			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/html/jackpots.jsp", response) %>">Jackpot Winners</a>
 						</div>
 
 					</div>
@@ -148,12 +148,12 @@
 					<div class="button-row">
 
 						<div class="block half-left" <% if (!achievementsEnabled) { %>align="center"<% } %>>
-				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/html/help.jsp", response) %>">PayoutTable </a>
+				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/html/help.jsp", response) %>">Payout Table </a>
 						</div>
 						
-						<div class="block half-right">
-			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/html/jackpots.jsp", response) %>">Jackpot Winners</a>
-						</div>
+						<%--div class="block half-right">
+			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/html/invite.jsp", response) %>">Invite Friends</a>
+						</div--%>
 
 					</div>
 
