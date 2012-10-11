@@ -31,7 +31,7 @@
     <property name="game.max.bet.coin.multiplier" value="4"/> 
     <property name="game.xp.leaderboard.enabled" value="true"/>
     <property name="game.weekly.coin.prize" value="500"/>
-    <property name="game.weekly.mocogold.min.prize" value="1000"/>
+    <property name="game.weekly.mocogold.min.prize" value="1200"/>
     <property name="game.xp.leaderboard.synchronous" value="true"/>
 	<property name="player.delta.flush.ttl.min" value="2"/>
 	<property name="player.delta.flush.enabled" value="true"/>
@@ -39,7 +39,7 @@
 	<property name="achievements.enabled" value="true"/>
 	<property name="game.progressive.win.probability.enabled" value="true"/>
 	<property name="jackpot.miss.notification.enabled" value="false"/>
-	<property name="millenial.wk.ad.enabled" value="true"/>
+	<property name="millenial.wk.ad.enabled" value="false"/>
 	<property name="wk.interstitial.ad.enable" value="true"/>
 	<property name="wk.interstitial.ad.frequency.hours" value="4"/>
 	<property name="ad.swap.enabled" value="true"/>

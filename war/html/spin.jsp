@@ -8,7 +8,7 @@ request.setAttribute("hide_doctype",action);
 <%
 
 boolean fMillenialAds=false;
-int spinsPerAd=9;
+int spinsPerAd=8;
 if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 10 == 0) {
 	fMillenialAds=true;
 	spinsPerAd=5;
@@ -397,10 +397,7 @@ java.util.List<Achievement> earnedAchievements = null;
 				<div class="ad">
 					<% 
 					boolean swapAd = false;
-					if (player.getGoldDebitted() == 0 && !(swapAd = player.swapAds())) { %>
-						<% if (fMillenialAds) { %>
-						<%@ include file="/html/mm_wk_ad.jsp" %>
-						<% } else { %>
+					if (!(swapAd = player.swapAds())) { %>
 						<script type="text/javascript">
 						google_ad_client = "ca-pub-1639537201849581";
 						/* HTMLBetButton */ 
@@ -410,7 +407,6 @@ java.util.List<Achievement> earnedAchievements = null;
 						</script>
 						<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 						<% } %>
-					<% } %>
 				</div>
 				<div class="spin-controls">
 					<div class="controls">
@@ -425,9 +421,6 @@ java.util.List<Achievement> earnedAchievements = null;
 					</div>
 				</div>
 				<% if (swapAd) { PlayerManager.getInstance().storePlayer(player,true); %>
-					<% if (fMillenialAds) { %>
-					<%@ include file="/html/mm_wk_ad.jsp" %>
-					<% } else { %>
 					<script type="text/javascript">
 					google_ad_client = "ca-pub-1639537201849581";
 					/* HTMLBetButton */ 
@@ -436,7 +429,6 @@ java.util.List<Achievement> earnedAchievements = null;
 					google_ad_height = 60;
 					</script>
 					<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-					<% } %>
 				<% } %>
 				<div id="footer" class="menu">
 					<div class="block half-left">

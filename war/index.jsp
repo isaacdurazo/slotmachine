@@ -99,9 +99,10 @@
 			<div class="menu">
 		        <div><a href="<%=ServletUtils.buildUrl(player, "/?action=credit", response)%>">Credit 10 coins</a></div>
 		        <div><a href="<%=ServletUtils.buildUrl(player, "/?action=debit", response)%>">Set Coins=0</a></div>
+				<div><a href="<%=ServletUtils.buildUrl(player, "/admin/inbox.jsp", response)%>">Inbox Utility</a></div>				       			
+				<div><a href="<%=ServletUtils.buildUrl(player, "/admin/player.jsp", response)%>">Player Utility</a></div>				       			
 		        <div><a href="<%=ServletUtils.buildUrl(player, "/admin/cache.jsp", response)%>">Cache Manager</a></div>
 		        <div><a href="<%=ServletUtils.buildUrl(player, "/admin/properties.jsp", response)%>">System Properties Manager</a></div>
-				<div><a href="<%=ServletUtils.buildUrl(player, "/admin/inbox.jsp", response)%>">Inbox Utility</a></div>				       			
 			</div>
 			<%
 				}

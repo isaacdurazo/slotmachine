@@ -20,8 +20,11 @@
 			</div>
 			<div class="menu">
 				<div class="button-row">
-					<a style="padding: 3px;margin-top: 15px;width: 30%;" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response) %>">
+					<a style="padding: 3px;margin-top: 100px;width: 30%;" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response) %>">
 						Continue
+					</a>
+					<a style="padding: 3px;margin-top: 100px;width: 30%;" href="<%= ServletUtils.buildUrl(player, "/wk/topup.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response) %>">
+						Block Ads
 					</a>
 				</div>
 			</div>
