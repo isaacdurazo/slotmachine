@@ -107,9 +107,9 @@ java.util.List<Achievement> earnedAchievements = null;
 		var accessToken = "<%= player.getAccessToken()%>";
 		$(document).ready(function() {
 			$(".achievements .close, .achievements .play a, .level-up a.close").click(function(e) {
-					document.querySelector('.achievements').style.display = 'none';	
-					document.querySelector('.level-up').style.display = 'none';
 					e.preventDefault();
+					$('.achievements').css({display:'none'});	
+					$('.level-up').css({style:'none'});					
 					return false;
 				});
 			$('.max_spin_button').click(function(e) {
