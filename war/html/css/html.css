@@ -77,11 +77,9 @@ table {
 }
 
 .skyscraper {
-	float: right;
 }
 
 #container {
-	display: inline-block;
     width: 570px;
     height: 633px;
     background: rgb(0,0,0); /* Old browsers */
@@ -352,6 +350,7 @@ table {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	background: rgb(43,156,2);
 	background-image: linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
 	background-image: -moz-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
 	background-image: -webkit-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
@@ -379,6 +378,7 @@ table {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	background: rgb(220,121,0);
 	background-image: linear-gradient(bottom, rgb(255,140,0) 0%, rgb(220,121,0) 50%, rgb(254,219,115) 100%);
 	background-image: -moz-linear-gradient(bottom, rgb(255,140,0) 0%, rgb(220,121,0) 50%, rgb(254,219,115) 100%);
 	background-image: -webkit-linear-gradient(bottom, rgb(255,140,0) 0%, rgb(220,121,0) 50%, rgb(254,219,115) 100%);
@@ -652,6 +652,7 @@ table {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	background: rgb(43,156,2);
 	background-image: linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
 	background-image: -moz-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
 	background-image: -webkit-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
@@ -750,7 +751,7 @@ a.location-container {
 
 
 .location-container .location {
-	float: left;
+	overflow: hidden;
 	height: 63px;
 	width: 140px;
 	margin-top: 10px;
@@ -800,6 +801,7 @@ a.location-container {
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
+	background: rgb(43,156,2);
 	background-image: linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
 	background-image: -moz-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
 	background-image: -webkit-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
@@ -840,7 +842,7 @@ a.location-container {
 }
 
 .location-wrapper.coming-soon .location-container .location-icons {
-	top: 3px;
+	top: -8px;
 	left: 22px;
 }
 
@@ -848,6 +850,7 @@ a.location-container {
 	background-color: #999;
 	width: 134px;
 }
+
 .location-wrapper.coming-soon .location-container .location-name {
 	margin-top: 30px;
 }
