@@ -57,15 +57,11 @@ table {
 }
 
 .game-wrapper {
-	background: white;
-	border: 1px solid #EEE;
-	border-radius: 10px;
-	box-shadow: 1px 1px 1px #EEE;
 	clear: both;
 	margin: 0 auto;
 	overflow: hidden;
-	padding: 10px;
-	width: 950px;
+	width: 740px;
+	height: 633px;
 }
 
 .adds_container.right {
@@ -81,16 +77,12 @@ table {
 }
 
 .skyscraper {
-	float: left;
-}
-
-.skyscraper.left {
-	margin-right: 10px;
+	float: right;
 }
 
 #container {
 	display: inline-block;
-    width: 640px;
+    width: 570px;
     height: 633px;
     background: rgb(0,0,0); /* Old browsers */
 	background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(79,79,79,1) 50%, rgba(0,0,0,1) 100%); /* FF3.6+ */

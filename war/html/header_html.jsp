@@ -9,8 +9,8 @@
   <body>
     <div class="game-wrapper">
 
-        <div class="adds_container right" >
-            <div class="square-ad"> 
+        <div class="adds_container right">
+            <div class="square-ad" style="display:none"> 
                 <script type="text/javascript"><!--
                 google_ad_client = "ca-pub-1639537201849581";
                 /* HTMLBoxUpperRight */
@@ -24,7 +24,7 @@
                 </script>
             </div>
 
-            <div class="skyscraper left">
+            <div class="skyscraper">
                 <script type="text/javascript"><!--
                 google_ad_client = "ca-pub-1639537201849581";
                 /* HTMLSkyScraper */
