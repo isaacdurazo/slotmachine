@@ -683,7 +683,7 @@ table {
 	width: 50%;
 	text-align: center;
 	float: left;
-	margin: 10px 0;
+	margin: 20px 0;
 }
 
 .location-container {
@@ -704,8 +704,8 @@ a.location-container {
 }
 
 .location-container .icon-location {
-	width: 124px;
-	height: 123px;	
+	width: 100px;
+	height: 99px;	
 	display: block;
 }
 
@@ -726,9 +726,9 @@ a.location-container {
 }
 
 .location-container .icon-lock {
-	background: url(../images/icon-lock.png) no-repeat 25px 15px;
-	width: 85px;
-	height: 85px;
+	background: url(../images/icon-lock.png) no-repeat 14px 4px;
+	width: 62px;
+	height: 62px;
 	position: absolute;
 	bottom: 4px;
 	left: 4px;
@@ -751,9 +751,9 @@ a.location-container {
 
 .location-container .location {
 	float: left;
-	height: 75px;
+	height: 63px;
 	width: 140px;
-	margin-top: 16px;
+	margin-top: 10px;
 	padding: 0 0 10px 30px;
 	border: 3px solid #f8b52e;
 	-webkit-border-radius: 0 10px 10px 0;
@@ -779,7 +779,7 @@ a.location-container {
 
 .location-container .location-name {
 	margin-top: 4px;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 600;
 	display: inline-block;
 }
@@ -804,7 +804,7 @@ a.location-container {
 	background-image: -moz-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
 	background-image: -webkit-linear-gradient(bottom, rgb(37,130,0) 0%, rgb(43,156,2) 50%, rgb(96,248,36) 100%);
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(37,130,0)), color-stop(0.5, rgb(43,156,2)), color-stop(1, rgb(96,248,36)));
-	padding: 8px 11px;
+	padding: 4px 11px;
 	margin: 5px 5px 0 0;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, 1);
 }
@@ -835,8 +835,8 @@ a.location-container {
 	background-color: #999;
 	border: 3px solid #f8b52e;
 	border-radius: 80px;
-	width: 114px;
-	height: 113px;
+	width: 90px;
+	height: 90px;
 }
 
 .location-wrapper.coming-soon .location-container .location-icons {
@@ -846,7 +846,7 @@ a.location-container {
 
 .location-wrapper.coming-soon .location {
 	background-color: #999;
-	width: 144px;
+	width: 134px;
 }
 .location-wrapper.coming-soon .location-container .location-name {
 	margin-top: 30px;
