@@ -16,7 +16,7 @@
 				    	Recent Moco Gold Jackpot winers
 				    </div>
 				    
-					<div class="list-container">
+					<div class="list-container-winners">
 				    
 					    <div class="list">
 					    	<%

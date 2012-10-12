@@ -1081,6 +1081,11 @@ a.close {
 	padding: 5px;
 }
 
+.list-container-winners {
+	overflow: scroll;
+	height: 430px;
+}
+
 .list {
 	margin: 10px 0;
 }
