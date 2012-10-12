@@ -32,13 +32,13 @@ request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/html/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
 String reelAnimation = "/html/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "")+"spin-static-animation.jpg";
 int maxBet = SlotMachineManager.getInstance().getMaxBet(player);
-if ("true".equals(request.getParameter("reload")) && player.getGoldDebitted() == 0 && player.showInterstitialAd()) {
+/*if ("true".equals(request.getParameter("reload")) && player.getGoldDebitted() == 0 && player.showInterstitialAd()) {
 	// store player to save interstital ad state
 	PlayerManager.getInstance().storePlayer(player,true);
 	// redirect to interstitial page
 	response.sendRedirect(ServletUtils.buildUrl(player, "/html/interstitial_ad.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response));
 	return;
-}
+}*/
 if (action != null) {
 	try {
 		SpinResult spinResult = null;
