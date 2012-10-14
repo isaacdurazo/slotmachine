@@ -182,6 +182,9 @@
 				        	<td>
 				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/inbox.jsp", response)%>">Inbox Utility</a>
 				        	</td>
+				        	<td>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/player.jsp", response)%>">Player Utility</a>
+				        	</td>
 						</tr>
 
 					</table>
