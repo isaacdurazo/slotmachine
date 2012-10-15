@@ -51,6 +51,7 @@ if (isWebkit) {
 } else {
 	// load random uuid
 	int coin = 0, gold = 0;
+	boolean levelUp = false;
 	if ("30 Coins: 99 Gold".equals(topupAction)) {
 		coin = 30;
 		gold = 99;
@@ -60,18 +61,27 @@ if (isWebkit) {
 	} else if ("MysteryBox: 499 Gold".equals(topupAction)) {
 		coin = 250+(new Random()).nextInt(150);
 		gold = 499;
+	} else if ("Unlock Next Level: 499 Gold".equals(topupAction)) {
+		levelUp = true;
+		gold = 499;
 	}
-	if (coin > 0 && gold > 0) {
+	if (levelUp || (coin > 0 && gold > 0)) {
 		if (formValidation.equals((String)request.getSession().getAttribute("topUpValidation"))) {
 			try {
+				String successMsg = "You bought "+coin+" coins. Play to win!";
 				String s = topupAction.substring(0, topupAction.indexOf(':'));
 				// valid transaction so debit and go back to main page
 				Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Request buy "+coin+" coins.|uid|"+player.getMocoId());
 				String ret=OpenSocialService.getInstance().doDirectDebit(player.getMocoId(),gold,s,player.getAccessToken());
 				Logger.getLogger(request.getRequestURI()).log(Level.INFO,"topup|Completed buy "+coin+" coins.|uid|"+player.getMocoId()+"|trxid|"+ret);
 				player.setCoins(player.getCoins()+coin);
+				if (levelUp) {
+					successMsg = "You have leveled up!";
+					player.setLevel(player.getLevel()+1);
+					player.setPlayingLevel(player.getLevel());
+				}
 				PlayerManager.getInstance().storePlayer(player);
-				pageContext.forward("/html/index.jsp?confirmmsg="+URLEncoder.encode("You bought "+coin+" coins. Play to win!","UTF-8"));
+				pageContext.forward("/html/index.jsp?confirmmsg="+URLEncoder.encode(successMsg,"UTF-8"));
 				return;
 			} catch (OpenSocialService.GoldTopupRequiredException e) {
 				// redirect 
@@ -180,9 +190,9 @@ if (isWebkit) {
 					<div class="block half-left">
 		        		<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
 		        	</div>
-					<div class="block half-right">
+					<%-- div class="block half-right">
 	  					<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/html/invite.jsp", response) %>">Invite Friends</a>
-		        	</div>
+		        	</div --%>
 				</div>
 				
 			</div>

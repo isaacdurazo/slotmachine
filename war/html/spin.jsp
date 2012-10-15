@@ -6,7 +6,6 @@ request.setAttribute("hide_doctype",action);
 <%@ include file="/header.jsp" %>
 <%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException, java.util.Arrays, org.json.simple.*" %>
 <%
-
 boolean fMillenialAds=false;
 int spinsPerAd=8;
 if (Boolean.getBoolean("millenial.wk.ad.enabled") && System.currentTimeMillis() % 10 == 0) {
@@ -279,8 +278,8 @@ java.util.List<Achievement> earnedAchievements = null;
 					  		}, 1800); 	
 						}
 					},
-					error: function(errorMsg) {
-						alert('Reload page, error: '+errorMsg);
+					error: function(request, textStatus, errorThrown) {
+						alert('Reload page, error: '+textStatus+', '+errorThrown);
 						window.location.reload();
 					}
 				});
