@@ -239,8 +239,10 @@
 
 
 			    <div id="footer" class="menu" style="margin-right: 16px;">
-			       	<a href="<%= response.encodeURL("/html/index.jsp") %>">Main</a>
-		  		</div>
+                    <div class="block half-left">
+                        <a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+                    </div>
+                </div>
 		  	</div>
 
 		</div>

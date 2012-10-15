@@ -44,9 +44,6 @@
 			    		<div class="block half-left">
   							<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
   						</div>
-  						<div class="block half-right">
-  							<a class="invite" accessKey="3" href="<%= ServletUtils.buildUrl(player, "/html/invite.jsp", response) %>">Invite Friends</a>
-  						</div>
 	  				</div>
 			    </div>
 			</div>

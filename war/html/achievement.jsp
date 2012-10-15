@@ -33,13 +33,10 @@
 		  		
 	  		</div>		   
 	  		<div id="footer" class="menu" style="margin-right: 16px;">
-	  			<div class="block half-left">
-	        		<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
-	        	</div>
-				<div class="block half-right">
-	        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/html/topup.jsp", response) %>">Buy Coins</a>
-	        	</div>
-	  		</div>
+    			<div class="block half-left">
+					<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+				</div>
+			</div>
 		</div>
 	</div>
 	</div>
