@@ -97,7 +97,8 @@ java.util.List<Achievement> earnedAchievements = null;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header_html.jsp" %>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="http://cdn-img.mocospace.com/html/js/json_parse.js"></script>
 	<script>
 		var xp = <%= player.getXp()%>;
 		var currCoins = <%= player.getCoins() %>;
