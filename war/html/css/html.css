@@ -601,11 +601,12 @@ table {
 	right: 0;
 	-webkit-animation: spinning .15s  infinite;
 }
-				
+	/*			
 @-webkit-keyframes spinning {
 	0% { top: -148px }
 	100% { top: 0px }
 }
+*/
 
 .shadows {
 	width: 161px;

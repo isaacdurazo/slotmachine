@@ -29,7 +29,7 @@ switch (player.getPlayingLevel()) {
 
 request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/html/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
-String reelAnimation = "/html/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "")+"spin-static-animation.jpg";
+String reelAnimation = "/html/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "")+"animation.gif";
 int maxBet = SlotMachineManager.getInstance().getMaxBet(player);
 /*if ("true".equals(request.getParameter("reload")) && player.getGoldDebitted() == 0 && player.showInterstitialAd()) {
 	// store player to save interstital ad state
@@ -225,7 +225,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									'<div>'+
 										'<span id="spin-animation-1">'+
 										'<span class="shadows"></span>'+
-										'<img src="<%=reelAnimation%>" alt="animacion" width="161" height="573"/>'+
+										'<img src="<%=reelAnimation%>" alt="animacion" width="161" height="230"/>'+
 									'</span>'+
 									'<img width="161" height="230" src="'+s1+'"/>'+
 									'</div>'+
@@ -234,7 +234,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									'<div>'+
 										'<span id="spin-animation-2">'+
 										'<span class="shadows"></span>'+
-										'<img src="<%=reelAnimation%>" alt="animacion" width="161" height="573"/>'+
+										'<img src="<%=reelAnimation%>" alt="animacion" width="161" height="230"/>'+
 									'</span>'+
 									'<img width="161" height="230" src="'+s2+'"/>'+
 									'</div>'+
@@ -243,7 +243,7 @@ java.util.List<Achievement> earnedAchievements = null;
 									'<div>'+
 										'<span id="spin-animation-3">'+
 										'<span class="shadows"></span>'+
-										'<img src="<%=reelAnimation%>" alt="animacion" width="161" height="573"/>'+
+										'<img src="<%=reelAnimation%>" alt="animacion" width="161" height="230"/>'+
 									'</span>'+
 									'<img width="161" height="230" src="'+s3+'"/>'+
 									'</div>'+
