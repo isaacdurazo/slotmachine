@@ -16,7 +16,7 @@
 				<% for (int i=1;i<=Integer.getInteger("max.player.level");i++) { 
 					boolean locked = i > player.getLevel();%>
 					<div class="location-wrapper<%= locked ? " locked" : ""%>">
-						<a href="<%= ServletUtils.buildUrl(player, locked ? "/html/topup.jsp" : ("/html/spin.jsp?playingLevel="+i), response) %>" class="location-container level-<%=i%>">
+						<a href="<%= ServletUtils.buildUrl(player, locked ? "/html/topup.jsp" : ("/html/spin.jsp?playingLevel="+i), response, request) %>" class="location-container level-<%=i%>">
 							<div class="location-icons">
 								<span class="icon-location"></span>
 								<span class="icon-lock"></span>
@@ -67,7 +67,7 @@
 
 	  		<div id="footer" class="menu" style="margin-right: 16px;">
     			<div class="block half-left">
-					<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+					<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response, request) %>">Main</a>
 				</div>
 			</div>
 		</div>

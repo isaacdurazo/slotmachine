@@ -42,7 +42,7 @@
 				    
 				    <div id="footer" class="menu" style="margin-right: 16px;">
 			    		<div class="block half-left">
-  							<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+  							<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response, request) %>">Main</a>
   						</div>
 	  				</div>
 			    </div>

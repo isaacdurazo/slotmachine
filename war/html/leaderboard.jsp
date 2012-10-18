@@ -44,16 +44,16 @@ org.json.simple.JSONArray jsonArray = restfulCollection.getEntries();
 				<table class="menu">
 					<tr>
 						<td>
-							<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/html/leaderboard.jsp?type="+(type == (short)1 ? 2 : 1), response) %>"><%= type == (short)1 ? "Coins Won" : "XP" %> Leaderboard</a>
+							<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/html/leaderboard.jsp?type="+(type == (short)1 ? 2 : 1), response, request) %>"><%= type == (short)1 ? "Coins Won" : "XP" %> Leaderboard</a>
 						</td>
 						<td>
-							<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/html/invite.jsp", response) %>">Invite Friends</a>
+							<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/html/invite.jsp", response, request) %>">Invite Friends</a>
 						</td>
 					</tr>
 				</table>
 				
 				<div id="footer" class="menu" style="margin-right: 16px;">
-					<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+					<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response, request) %>">Main</a>
 				</div>
 			</div>
 		</div>

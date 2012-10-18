@@ -179,7 +179,7 @@ java.util.List<Achievement> earnedAchievements = null;
 								$('.level-up').css({display:'block'});
 								$('.level-name').html(levelUp.name);
 								$('.level-bonus').html(levelUp.jackpot);
-								$('.level-up .play a').attr('href','<%= ServletUtils.buildUrl(player, "/html/spin.jsp",response)%>&playingLevel='+levelUp.num);
+								$('.level-up .play a').attr('href','<%= ServletUtils.buildUrl(player, "/html/spin.jsp",response, request)%>&playingLevel='+levelUp.num);
 								$('#level').html(levelUp.num);
 								try {_gaq.push(['_trackEvent', 'Player', 'levelUp',undefined,levelUp.num]);} catch (err) {if (console && console.error) { console.error(err);}}
 							} else if (achievements) {
@@ -208,7 +208,7 @@ java.util.List<Achievement> earnedAchievements = null;
 								var lossText = 'Spin Again';
 								if (symbol[0] == 6 && symbol[1] == 6 && symbol[2] == 6) {
 									lossText = "<%=lemonText%>"+ "How to win check "+
-										"<a href='<%= ServletUtils.buildUrl(player, "/html/help.jsp", response) %>'>payout table</a> !";
+										"<a href='<%= ServletUtils.buildUrl(player, "/html/help.jsp", response, request) %>'>payout table</a> !";
 								}
 								$('#lost_result').html(lossText);
 							} else {
@@ -280,8 +280,8 @@ java.util.List<Achievement> earnedAchievements = null;
 						}
 					},
 					error: function(request, textStatus, errorThrown) {
-						alert('Reload page, error: '+textStatus+', '+errorThrown);
-						window.location.reload();
+						console.log('Reload page, error: '+textStatus+', '+errorThrown);
+						//window.location.reload();
 					}
 				});
 			}
@@ -335,7 +335,7 @@ java.util.List<Achievement> earnedAchievements = null;
 					
 					<div class="location">
 						<span><%= System.getProperty("level.name."+player.getPlayingLevel()) %></span>
-						<a href="<%= ServletUtils.buildUrl(player, "/html/locations.jsp", response) %>">change</a>
+						<a href="<%= ServletUtils.buildUrl(player, "/html/locations.jsp", response, request) %>">change</a>
 					</div>
 					<div class="results">
 						<div id="jackpot" class="goldtext delay" style="display:none;">
@@ -412,10 +412,10 @@ java.util.List<Achievement> earnedAchievements = null;
 					<div class="controls">
 						<div class="button-row bets">
 							<div class="block half-left">
-								<a class="bet spin_button" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?action=spin&"+cacheBuster, response) %>"> BET 1</a>
+								<a class="bet spin_button" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?action=spin&"+cacheBuster, response, request) %>"> BET 1</a>
 							</div>
 							<div class="block half-right">
-								<a class="bet max_spin_button" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?action=maxspin&"+cacheBuster, response) %>"> BET <%= maxBet %></a>
+								<a class="bet max_spin_button" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?action=maxspin&"+cacheBuster, response, request) %>"> BET <%= maxBet %></a>
 							</div>
 						</div>
 					</div>
@@ -432,10 +432,10 @@ java.util.List<Achievement> earnedAchievements = null;
 				<% } %>
 				<div id="footer" class="menu">
 					<div class="block half-left">
-		        		<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+		        		<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response, request) %>">Main</a>
 		        	</div>
 					<div class="block half-right">
-		        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/html/topup.jsp", response) %>">Buy Coins</a>
+		        		<a accessKey="2" href="<%= ServletUtils.buildUrl(player, "/html/topup.jsp", response, request) %>">Buy Coins</a>
 		        	</div>
 			    </div>
 			</div>

@@ -118,7 +118,7 @@
 			<div class="wrapper">
 				<div class="header">
 
-	                <a class="coins" accessKey="2" href="<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")), "/html/topup.jsp", response) %>">
+	                <a class="coins" accessKey="2" href="<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")), "/html/topup.jsp", response, request) %>">
 	                    <span class="icon-coin"></span>
 	                    <span id="player_coins" class="delay inline"><%= ((com.solitude.slots.entities.Player)request.getAttribute("player")).getCoins() %></span>
 	                    <span class="plus">+</span>
@@ -240,7 +240,7 @@
 
 			    <div id="footer" class="menu" style="margin-right: 16px;">
                     <div class="block half-left">
-                        <a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+                        <a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response, request) %>">Main</a>
                     </div>
                 </div>
 		  	</div>

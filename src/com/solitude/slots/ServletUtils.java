@@ -65,14 +65,14 @@ public class ServletUtils {
 	 * @return device ("web", "wk", or "feature") or null if it cannot be determined
 	 */
 	public static String getDevice(HttpServletRequest request) {
-		if (request == null) return "wk";
+		if (request == null) return null;
 		// parameter takes precedence
 		String device = request.getParameter("device"), sessionDevice = (String)request.getSession().getAttribute("device");
 		// we don't have parameter so take from session
 		if (device == null) device = sessionDevice;
 		if (device == null && internalWkCheck(request)) device = "wk";
 		if (device != null && !device.equals(sessionDevice)) request.getSession().setAttribute("device",device);
-		return device == null ? "wk" : device;
+		return device;
 	}
 	
 	/**
@@ -131,13 +131,13 @@ public class ServletUtils {
 		String userAgent = null;
 		try { userAgent = request.getHeader("User-Agent"); }
 		catch (Throwable t) {}
-
 		if (userAgent != null && (userAgent.indexOf("Novarra-Vision") > -1))
 				return (false);
 
 		return(true);
 		
 	}
+	
 	/**
 	 * Build url with player's access token always included
 	 * @param player playing game
@@ -149,6 +149,22 @@ public class ServletUtils {
 		if (url == null) url = "/";
 		if (player != null) {
 			url += (url.contains("?") ? "&" : "?") + "accessToken="+player.getAccessToken();
+		}
+		return response.encodeURL(url);
+	}
+	
+	/**
+	 * Build url with player's access token always included
+	 * @param player playing game
+	 * @param url to build
+	 * @param response to encode properly
+	 * @param request to attach device
+	 * @return url
+	 */
+	public static String buildUrl(Player player, String url, HttpServletResponse response, HttpServletRequest request) {
+		if (url == null) url = "/";
+		if (player != null) {
+			url += (url.contains("?") ? "&" : "?") + "accessToken="+player.getAccessToken()+"&device="+getDevice(request);
 		}
 		return response.encodeURL(url);
 	}

@@ -32,7 +32,7 @@ if (isWebkit) {
 						player.setLevel(player.getLevel()+1);
 						player.setPlayingLevel(player.getLevel());
 						PlayerManager.getInstance().storePlayer(player);
-						response.sendRedirect(ServletUtils.buildUrl(player, "/html/spin.jsp", response));
+						response.sendRedirect(ServletUtils.buildUrl(player, "/html/spin.jsp", response,request));
 						return;
 					} else coin = 250+(new Random()).nextInt(150);
 					break;
@@ -163,7 +163,7 @@ if (isWebkit) {
 				</div>
 
 				<div class="buy-container">
-					<form action="<%= ServletUtils.buildUrl(player, "/html/topup.jsp", response) %>" method="get">
+					<form action="<%= ServletUtils.buildUrl(player, "/html/topup.jsp", response, request) %>" method="get">
 						<div class="buy-gold-btn">
 							<input class="input gold" type="hidden" name="verify" value="<%= formValidation %>"/>
 						</div>
@@ -188,7 +188,7 @@ if (isWebkit) {
 				
 				<div id="footer" class="menu" style="margin-right: 16px;">
 		    		<div class="block half-left">
-						<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response) %>">Main</a>
+						<a href="<%= ServletUtils.buildUrl(player, "/html/index.jsp", response, request) %>">Main</a>
 					</div>
   				</div>
 				

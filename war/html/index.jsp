@@ -90,10 +90,10 @@
 								<% } %>
 							</ul>
 							
-							<a class="close" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?"+cacheBuster, response) %>" ></a>
+							<a class="close" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?"+cacheBuster, response, request) %>" ></a>
 							
 							<div class="play">
-								<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
+								<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?"+cacheBuster, response, request) %>">Play Now</a>
 							</div>
 							
 						</div>
@@ -113,7 +113,7 @@
 			    </div>
 			    				
 				<div class="play">
-					<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?"+cacheBuster, response) %>">Play Now</a>
+					<a accessKey="1" href="<%= ServletUtils.buildUrl(player, "/html/spin.jsp?"+cacheBuster, response, request) %>">Play Now</a>
 				</div>
 				<div class="menu">
 
@@ -122,12 +122,12 @@
 						<% boolean achievementsEnabled = AchievementService.getInstance().isEnabled() || player.hasAdminPriv(); %>
 
 						<div class="block half-left" <% if (!achievementsEnabled) { %>align="center"<% } %>>
-				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/html/locations.jsp", response) %>">SlotMachines</a>
+				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/html/locations.jsp", response, request) %>">SlotMachines</a>
 						</div>
 
 						<% if (achievementsEnabled) { %>
 							<div class="block half-right">
-								<a accessKey="7" href="<%= ServletUtils.buildUrl(player, "/html/achievement.jsp", response) %>">Achievements</a>
+								<a accessKey="7" href="<%= ServletUtils.buildUrl(player, "/html/achievement.jsp", response, request) %>">Achievements</a>
 							</div>
 						<% } %>
 
@@ -136,11 +136,11 @@
 					<div class="button-row">
 
 						<div class="block half-left">
-				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")), "/html/topup.jsp", response) %>">Buy Coins</a>
+				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")), "/html/topup.jsp", response, request) %>">Buy Coins</a>
 						</div>
 						
 						<div class="block half-right">
-			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/html/jackpots.jsp", response) %>">Jackpot Winners</a>
+			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/html/jackpots.jsp", response, request) %>">Jackpot Winners</a>
 						</div>
 
 					</div>
@@ -148,11 +148,11 @@
 					<div class="button-row">
 
 						<div class="block half-left" <% if (!achievementsEnabled) { %>align="center"<% } %>>
-				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/html/help.jsp", response) %>">Payout Table </a>
+				        	<a accessKey="6" href="<%= ServletUtils.buildUrl(player, "/html/help.jsp", response, request) %>">Payout Table </a>
 						</div>
 						
 						<%--div class="block half-right">
-			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/html/invite.jsp", response) %>">Invite Friends</a>
+			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/html/invite.jsp", response, request) %>">Invite Friends</a>
 						</div--%>
 
 					</div>
@@ -164,23 +164,23 @@
 					<table>
 				    	<tr>   
 				        	<td>
-				        		<a href="<%=ServletUtils.buildUrl(player, "/html/index.jsp?action=credit", response)%>">Credit 10 coins</a>
+				        		<a href="<%=ServletUtils.buildUrl(player, "/html/index.jsp?action=credit", response, request)%>">Credit 10 coins</a>
 				        	</td>
 				        	<td>
-				       			<a href="<%=ServletUtils.buildUrl(player, "/html/index.jsp?action=debit", response)%>">Set Coins=0</a>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/html/index.jsp?action=debit", response, request)%>">Set Coins=0</a>
 				        	</td>
 				        </tr>
 						<tr>
 							<td>
-				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/cache.jsp", response)%>">Cache Manager</a>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/cache.jsp", response, request)%>">Cache Manager</a>
 				        	</td>
 				        	<td>
-				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/properties.jsp", response)%>">System Properties Manager</a>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/properties.jsp", response, request)%>">System Properties Manager</a>
 				        	</td>
 						</tr>
 						<tr>			        	
 				        	<td>
-				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/inbox.jsp", response)%>">Inbox Utility</a>
+				       			<a href="<%=ServletUtils.buildUrl(player, "/admin/inbox.jsp", response, request)%>">Inbox Utility</a>
 				        	</td>
 						</tr>
 
