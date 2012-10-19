@@ -11,6 +11,7 @@ if (playerId == null || (player = PlayerManager.getInstance().getPlayer(playerId
 int mocoId = ServletUtils.getInt(request, "mocoId");
 int coins = ServletUtils.getInt(request, "coins");
 int level = ServletUtils.getInt(request, "level");
+System.out.println(request.getParameter("forceFlush"));
 Player mocoPlayer = null;
 if (mocoId > 0) {
 	mocoPlayer = PlayerManager.getInstance().getPlayerByMocoId(mocoId);
@@ -20,8 +21,11 @@ if ("awardCoins".equals(request.getParameter("action")) && coins > 0 && mocoPlay
 	PlayerManager.getInstance().storePlayer(mocoPlayer);
 } else if ("forceFlush".equals(request.getParameter("action"))) {
 	PlayerManager.getInstance().setForceFlush(!PlayerManager.getInstance().isForceFlush());
-} else if ("setLevel".equals(request.getParameter("action")) && level > 0 && level < Integer.getInteger("max.player.level") && mocoPlayer != null) {
-	mocoPlayer.setLevel(level);
+} else if ("setLevel".equals(request.getParameter("action"))) {
+	if (level > 0 && level < Integer.getInteger("max.player.level") && mocoPlayer != null) {
+		mocoPlayer.setLevel(level);
+	}
+	mocoPlayer.setForceFlushDeltas("on".equals(request.getParameter("forceFlush")));
 	PlayerManager.getInstance().storePlayer(mocoPlayer);
 }
 %>
@@ -54,18 +58,20 @@ if ("awardCoins".equals(request.getParameter("action")) && coins > 0 && mocoPlay
 				<li><%= achievementPair.getElement1().getTitle() %></li>
 			<% } %>
 			</ul>
-			<form action="/admin/player.jsp" method="GET">
+			<form action="/admin/player.jsp" method="GET" style="border:solid 2px;padding:5px;margin:5px;">
 				<input type="hidden" name="mocoId" value="<%= mocoId %>"/>
 				<input type="hidden" name="action" value="awardCoins"/>
 				<label for="coins">Coins to grant</label>
 				<input type="text" name="coins" id="coins"></input>
 				<input type="submit"></input>
 			</form>
-			<form action="/admin/player.jsp" method="GET">
+			<form action="/admin/player.jsp" method="GET" style="border:solid 2px;padding:5px;margin:5px;">
 				<input type="hidden" name="mocoId" value="<%= mocoId %>"/>
 				<input type="hidden" name="action" value="setLevel"/>
 				<label for="level">Level to set</label>
-				<input type="text" name="level" id="level"></input>
+				<input type="text" name="level" id="level"></input><br/>
+				<label for="level">Force flush deltas:</label>
+				<input type="checkbox" name="forceFlush" <%= mocoPlayer.isForceFlushDeltas() ? "checked" : "" %>></input>
 				<input type="submit"></input>
 			</form>
 		<% } %>

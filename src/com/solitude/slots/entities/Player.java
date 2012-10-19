@@ -65,6 +65,8 @@ public class Player extends AbstractGAEPersistent {
 	private long interstitialAdTimestamp = 0L;
 	/** timestamp of last ad swap */
 	private long adSwapTimestamp = 0L;
+	/** if player should bypass delayed caching mechanism and force flush any changes */
+	private boolean forceFlushDeltas = false;
 	
 	/** @return moco access token */
 	public String getAccessToken() { return accessToken; }
@@ -130,6 +132,10 @@ public class Player extends AbstractGAEPersistent {
 	public int getMaxSpins() { return this.maxSpins; }
 	/** increment number of max spins by 1 */
 	public void incrementMaxSpins() { this.maxSpins++; }
+	/** @return if player should bypass delayed caching mechanism and force flush any changes */
+	public boolean isForceFlushDeltas() { return this.forceFlushDeltas; }
+	/** @param forceFlushDeltas if player should bypass delayed caching mechanism and force flush any changes */
+	public void setForceFlushDeltas(boolean forceFlushDeltas) { this.forceFlushDeltas = forceFlushDeltas; }
 
 	public boolean hasAdminPriv() {
 		String[] mocoIds = ((String)System.getProperty("game.adminpriv.ids")).split(",");
@@ -264,6 +270,7 @@ public class Player extends AbstractGAEPersistent {
 		this.seenLevelIntersistial = inputMap.get("seenLvlInter") != null && (Boolean)inputMap.get("seenLvlInter");
 		this.interstitialAdTimestamp = inputMap.get("intestitialAd") == null ? 0L : (Long)inputMap.get("intestitialAd");
 		this.adSwapTimestamp = inputMap.get("adSwapTimestamp") == null ? 0L : (Long)inputMap.get("adSwapTimestamp");
+		this.forceFlushDeltas = inputMap.get("forceFlushDeltas") != null && (Boolean)inputMap.get("forceFlushDeltas");
 	}
 
 	@Override
@@ -290,6 +297,7 @@ public class Player extends AbstractGAEPersistent {
 		map.put("seenLvlInter", this.seenLevelIntersistial);
 		map.put("intestitialAd", this.interstitialAdTimestamp);
 		map.put("adSwapTimestamp", this.adSwapTimestamp);
+		map.put("forceFlushDeltas", this.forceFlushDeltas);
 		return map;
 	}
 

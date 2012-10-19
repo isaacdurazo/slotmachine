@@ -289,7 +289,7 @@ public class PlayerManager {
 	 * @throws CacheStoreException for cache issues
 	 */
 	public void storePlayer(Player player, boolean delay) throws DataStoreException, CacheStoreException {
-		if (!delay || !Boolean.getBoolean("player.delta.flush.enabled")) {
+		if (!delay || !Boolean.getBoolean("player.delta.flush.enabled") || player.isForceFlushDeltas()) {
 			GAEDataManager.getInstance().store(player);
 			updatePlayerLeaderboards(player);
 		} else if (Boolean.getBoolean("player.delta.flush.task.queue.enabled")) { 
