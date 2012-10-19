@@ -159,7 +159,7 @@ java.util.List<Achievement> earnedAchievements = null;
 					'</div>');
 				// make AJAX request
 				$.ajax({
-					url:'/html/spin.jsp',
+					url:'<%= ServletUtils.buildUrl(player, "/html/spin.jsp", response, request) %>',
 					data: {accessToken:"<%= player.getAccessToken() %>",action:(isMax ? "max" : "")+"spin"},
 					dataType:'json',
 					success: function(data) {
@@ -281,7 +281,8 @@ java.util.List<Achievement> earnedAchievements = null;
 					},
 					error: function(request, textStatus, errorThrown) {
 						console.log('Reload page, error: '+textStatus+', '+errorThrown);
-						//window.location.reload();
+						alert("Oops... we had a problem!  Click to retry! (error: "+textStatus+","+errorThrown+")");
+						window.location.reload();
 					}
 				});
 			}
