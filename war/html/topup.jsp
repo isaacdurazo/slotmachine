@@ -66,7 +66,8 @@ if (isWebkit) {
 		gold = 499;
 	}
 	if (levelUp || (coin > 0 && gold > 0)) {
-		if (formValidation.equals((String)request.getSession().getAttribute("topUpValidation"))) {
+		// due to session issues with IE, do not validate
+		if (true || formValidation.equals((String)request.getSession().getAttribute("topUpValidation"))) {
 			try {
 				String successMsg = "You bought "+coin+" coins. Play to win!";
 				String s = topupAction.substring(0, topupAction.indexOf(':'));
