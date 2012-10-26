@@ -361,3 +361,21 @@ a.bet {
 .level-4 .spin-container {
     border: 2px solid #98b045;
 }
+
+/*-----------------------------*/
+
+/*  Level 5 - Jungle Treasure  */
+
+/*-----------------------------*/
+
+.wrapper.level-5 {
+	background: #fb8501;
+}
+
+.level-5 .spin-container{
+	background: #d67101;
+}
+
+.level-5 .spin-container {
+    border: 2px solid #fb8501;
+}
