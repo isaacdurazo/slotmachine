@@ -46,7 +46,7 @@
 	<property name="ad.swap.frequency.hours" value="12"/>
 	
 	<!-- player levels -->
-	<property name="max.player.level" value="4"/>	
+	<property name="max.player.level" value="5"/>	
 
 	<property name="level.xp.min.1" value="0"/>
 	<property name="level.max.bet.1" value="3"/>
@@ -74,6 +74,13 @@
 	<property name="level.max.bet.multiplier.4" value="8"/>
 	<property name="level.jackpot.multiplier.4" value="2.5"/>
 	<property name="level.name.4" value="Wild Jungle"/>
+	
+	<!-- PROD XP=10000 = Level 5 ; new halloween level -->	
+	<property name="level.xp.min.5" value="15000"/>
+	<property name="level.max.bet.5" value="8"/>
+	<property name="level.max.bet.multiplier.5" value="10"/>
+	<property name="level.jackpot.multiplier.5" value="3"/>
+	<property name="level.name.5" value="Halloween"/>
 
   </system-properties>
 
