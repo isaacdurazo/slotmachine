@@ -50,22 +50,32 @@ if ("inviteSent".equals(request.getParameter("action"))) {
 	</head>
 	<body>
 		<div class="wrapper">
-			<div>
-				<% if (message == null) { %>
-					Get 50coins NOW by inviting 5 friends to SlotMania!
-					<small>This limited offer only valid next 1min. You must invite friends to get coins</small>
-				<% } else { out.write(message); } %>
-			</div>
-			<div class="menu">
-				<div class="button-row">
-					<% if (!inviteSuccessful) { %>
-					<a style="padding: 3px;margin-top: 100px;width: 30%;" href="#" id="invite">
-						Invite Friends
-					</a>
-					<% } %>
-					<a style="padding: 3px;margin-top: 100px;width: 30%;" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response) %>">
-						Continue
-					</a>
+			<div class="dialog-container" style="padding: 25px 10px 5px;">
+				
+					<% if (message == null) { %>
+						<h2>Get <span class="goldtext">50 coins</span> NOW by inviting 5 friends to SlotMania!</h2>
+						<p>This limited offer is only valid for the next 1 min. You must invite friends to get coins.</p>
+					<% } else { out.write(message); } %>
+				
+				<div class="menu">
+					<div class="button-row">
+						
+						<table>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>	
+						</table>
+
+						<% if (!inviteSuccessful) { %>
+						<a style="width: 45%; font-size: 1em;" href="#" id="invite">
+							Invite Friends
+						</a>
+						<% } %>
+						<a style="width: 45%; font-size: 1em;" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response) %>">
+							Continue
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
