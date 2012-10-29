@@ -23,13 +23,13 @@
     					message:"Join me playing the new slot machine game on MocoSpace. I gave you 20 FREE coins to get started. Spin to win prices including Moco Gold!",
     					url_link:"if=<%= request.getSession().getAttribute("playerId") %>",
     					onSuccess: function(ids) {
-    						<% String inviteToken = (String)request.getAttribute("invite_token");
+    						<% String inviteToken = (String)request.getSession().getAttribute("invite_token");
     						if (inviteToken == null) {
     							inviteToken = java.util.UUID.randomUUID().toString();
-    							request.setAttribute("invite_token",inviteToken);
+    							request.getSession().setAttribute("invite_token",inviteToken);
     						}
     						%>
-    						window.location = "/wk/index.jsp?action=inviteSent&count="+ids.length+"&token=<%= java.net.URLEncoder.encode(inviteToken,"UTF-8") %>"+ids.length;
+    						window.location = '<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")),"/wk/index.jsp?action=inviteSent&token="+java.net.URLEncoder.encode(inviteToken,"UTF-8"),response)%>&count='+ids.length;
     					}
     				});
     			}, false);
