@@ -30,6 +30,7 @@ if ("inviteSent".equals(request.getParameter("action"))) {
 	<head>
 		<link rel="stylesheet" href="/wk/css/webkit.css" />
     	<link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
+    	<script src="http://cdn-img.mocospace.com/wk/js/opensocial/opensocial.js"></script>
     	<script type="text/javascript">
 	    	document.addEventListener('DOMContentLoaded', function(e) {
 	    		document.getElementById('invite').addEventListener('click', function(e) {
@@ -40,10 +41,13 @@ if ("inviteSent".equals(request.getParameter("action"))) {
     					message:"Join me playing the new slot machine game on MocoSpace. I gave you 20 FREE coins to get started. Spin to win prices including Moco Gold!",
     					url_link:"if=<%= request.getSession().getAttribute("playerId") %>",
     					onSuccess: function(ids) { 
-    	    				try {_gaq.push(['_trackEvent', 'InviteInter', 'sent', ids.length > 5 ? 'success' : 'failure', ids.length]);} catch (err) {console.error(err);}
+    	    				try {
+    	    					_gaq.push(['_trackEvent', 'InviteInter', 'sent', ids.length > 5 ? 'success' : 'failure', ids.length]);
+    	    					console.error("InviteInter len="+ids.length+" ids="+ids);
+    	    					} catch (err) {console.error(err);}
     						window.location = '<%=ServletUtils.buildUrl(player,"/wk/force_invite.jsp?action=inviteSent&token="+java.net.URLEncoder.encode(validationToken,"UTF-8"),response)%>&count='+ids.length;
-    					}
-    				});
+    					},
+    					uninstalledOnly : true});
     			}, false);
 	    	});
     	</script>
