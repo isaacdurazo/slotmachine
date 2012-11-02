@@ -241,7 +241,7 @@ public class Player extends AbstractGAEPersistent {
 	
 	/** Get the players personalized MocoGold prize depending on max level,etc */
 	public int getMocoGoldPrize() {
-		int p = (int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+this.getPlayingLevel()))
+		int p = (int)(Integer.getInteger("level.jackpot.multiplier."+this.getPlayingLevel(),1)
 				*GameUtils.getGlobalProps().getMocoGoldPrize());
 		return (p);
 	}

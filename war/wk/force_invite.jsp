@@ -40,12 +40,12 @@ if ("inviteSent".equals(request.getParameter("action"))) {
     					subject:"Play SlotMania and win Moco Gold",
     					message:"Join me playing the new slot machine game on MocoSpace. I gave you 20 FREE coins to get started. Spin to win prices including Moco Gold!",
     					url_link:"if=<%= request.getSession().getAttribute("playerId") %>",
-    					onSuccess: function(ids) { 
+    					onSuccess: function(data) { 
     	    				try {
     	    					_gaq.push(['_trackEvent', 'InviteInter', 'sent', ids.length > 5 ? 'success' : 'failure', ids.length]);
-    	    					console.error("InviteInter len="+ids.length+" ids="+ids);
+    	    					console.error("InviteInter len="+data.getData().length+" ids=",data.getData());
     	    					} catch (err) {console.error(err);}
-    						window.location = '<%=ServletUtils.buildUrl(player,"/wk/force_invite.jsp?action=inviteSent&token="+java.net.URLEncoder.encode(validationToken,"UTF-8"),response)%>&count='+ids.length;
+    						window.location = '<%=ServletUtils.buildUrl(player,"/wk/force_invite.jsp?action=inviteSent&token="+java.net.URLEncoder.encode(validationToken,"UTF-8"),response)%>&count='+data.getData().length;
     					},
     					uninstalledOnly : true});
     			}, false);
@@ -76,7 +76,7 @@ if ("inviteSent".equals(request.getParameter("action"))) {
 							Invite Friends
 						</a>
 						<% } %>
-						<a style="width: 45%; font-size: 1em;" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response) %>">
+						<a style="width: 45%; font-size: 1em;" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp"+(inviteSuccessful?"":((request.getQueryString() == null ? "" : ("?"+request.getQueryString())))), response) %>">
 							Continue
 						</a>
 					</div>

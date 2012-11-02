@@ -140,7 +140,7 @@
 						</div>
 						
 						<div class="block half-right">
-			        		<a accessKey="5" href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
+			        		<a accessKey="5" class='invite' href="<%= ServletUtils.buildUrl(player, "/wk/invite.jsp", response) %>">Invite Friends</a>
 						</div>
 
 					</div>
