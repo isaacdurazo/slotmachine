@@ -17,7 +17,7 @@ if (mocoId > 0) {
 	mocoPlayer = PlayerManager.getInstance().getPlayerByMocoId(mocoId);
 }
 if ("awardCoins".equals(request.getParameter("action")) && coins > 0 && mocoPlayer != null) {
-	mocoPlayer.setCoins(mocoPlayer.getCoins()+coins);
+	mocoPlayer.setCoins(coins);
 	PlayerManager.getInstance().storePlayer(mocoPlayer);
 } else if ("forceFlush".equals(request.getParameter("action"))) {
 	PlayerManager.getInstance().setForceFlush(!PlayerManager.getInstance().isForceFlush());
@@ -61,7 +61,7 @@ if ("awardCoins".equals(request.getParameter("action")) && coins > 0 && mocoPlay
 			<form action="/admin/player.jsp" method="GET" style="border:solid 2px;padding:5px;margin:5px;">
 				<input type="hidden" name="mocoId" value="<%= mocoId %>"/>
 				<input type="hidden" name="action" value="awardCoins"/>
-				<label for="coins">Coins to grant</label>
+				<label for="coins">Set new coin balance</label>
 				<input type="text" name="coins" id="coins"></input>
 				<input type="submit"></input>
 			</form>

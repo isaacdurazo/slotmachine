@@ -42,7 +42,7 @@ if ("inviteSent".equals(request.getParameter("action"))) {
     					url_link:"if=<%= request.getSession().getAttribute("playerId") %>",
     					onSuccess: function(data) { 
     	    				try {
-    	    					_gaq.push(['_trackEvent', 'InviteInter', 'sent', ids.length > 5 ? 'success' : 'failure', ids.length]);
+    	    					_gaq.push(['_trackEvent', 'InviteInter', 'sent', data.getData().length > 5 ? 'success' : 'failure', data.getData().length]);
     	    					console.error("InviteInter len="+data.getData().length+" ids=",data.getData());
     	    					} catch (err) {console.error(err);}
     						window.location = '<%=ServletUtils.buildUrl(player,"/wk/force_invite.jsp?action=inviteSent&token="+java.net.URLEncoder.encode(validationToken,"UTF-8"),response)%>&count='+data.getData().length;
