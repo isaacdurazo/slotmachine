@@ -97,8 +97,8 @@
 						OpenSocialService.getInstance().sendNotification(subject, message, recipientUserIds);
 
 						recipientUserIds.clear();
-						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
-								"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
+//						OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()),
+//								"Inbox " + idx + " of " + players.size()+ " sent.","Background job");
 					}
 				} catch (Exception e) {
 					Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error sending inbox "+idx+" to list: "+

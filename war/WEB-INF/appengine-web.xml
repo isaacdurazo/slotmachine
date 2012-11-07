@@ -59,9 +59,9 @@
 	<property name="level.xp.min.2" value="100"/>
 	<property name="level.max.bet.2" value="4"/>
 	<property name="level.max.bet.multiplier.2" value="5"/>
-	<property name="level.jackpot.multiplier.2" value="2"/>
-	<property name="level.name.2" value="Halloween"/>
-	
+	<property name="level.jackpot.multiplier.2" value="1.33"/>
+	<property name="level.name.2" value="Old West"/>
+		
 	<!-- PROD XP=2000 = Level 3 ; top 9K users have reached this -->	
 	<property name="level.xp.min.3" value="2000"/>
 	<property name="level.max.bet.3" value="5"/>

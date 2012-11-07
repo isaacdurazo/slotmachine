@@ -32,9 +32,12 @@ request.setAttribute("wrapperClass","level-"+player.getPlayingLevel());
 String reelImagePath = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "");
 String reelAnimation = "/wk/images/"+(player.getPlayingLevel() > 1 ? ("level-"+player.getPlayingLevel()+"/") : "")+"spin-static-animation.jpg";
 int maxBet = SlotMachineManager.getInstance().getMaxBet(player);
+
+
+
 if ("true".equals(request.getParameter("reload")) && player.getGoldDebitted() == 0) {
 	if (Boolean.getBoolean("wk.invite.interstitial.enabled") && request.getSession().getAttribute("seenInvite") == null && 
-			((player.getXp() > 100 && player.getNumSessions() % 5 == 0 && player.getCoins() < 20) || player.hasAdminPriv())) {
+			( (player.getXp() > 100 && player.getNumSessions() % 5 == 0 && player.getCoins() < 1000) || player.hasAdminPriv()) ) {
 		request.getSession().setAttribute("seenInvite",true);
 		String inviteToken = java.util.UUID.randomUUID().toString();
 		request.getSession().setAttribute("force-invite-token",inviteToken);

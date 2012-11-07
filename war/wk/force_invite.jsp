@@ -38,7 +38,7 @@ if ("inviteSent".equals(request.getParameter("action"))) {
     				try {_gaq.push(['_trackEvent', 'InviteInter', 'start']);} catch (err) {console.error(err);}
     				MocoSpace.inviteFriends({
     					subject:"Play SlotMania and win Moco Gold",
-    					message:"Join me playing the new slot machine game on MocoSpace. I gave you 20 FREE coins to get started. Spin to win prices including Moco Gold!",
+    					message:"I am playing the new slot machine game on MocoSpace. Join me NOW and get 20 FREE coins to spin and win prices including Moco Gold!",
     					url_link:"if=<%= request.getSession().getAttribute("playerId") %>",
     					onSuccess: function(data) { 
     	    				try {
@@ -57,8 +57,8 @@ if ("inviteSent".equals(request.getParameter("action"))) {
 			<div class="dialog-container" style="padding: 25px 10px 5px;">
 				
 					<% if (message == null) { %>
-						<h2>Get <span class="goldtext">50 coins</span> NOW by inviting 5 friends to SlotMania!</h2>
-						<p>This limited offer is only valid for the next 1 min. You must invite friends to get coins.</p>
+						<h2>Earn <span class="goldtext">50 coins</span> NOW by inviting 5 friends to SlotMania!</h2>
+						<p>You only get this offer ONCE and you must invite friends now to get your 50 coins.</p>
 					<% } else { out.write(message); } %>
 				
 				<div class="menu">
@@ -73,12 +73,13 @@ if ("inviteSent".equals(request.getParameter("action"))) {
 
 						<% if (!inviteSuccessful) { %>
 						<a style="width: 45%; font-size: 1em;" href="#" id="invite">
-							Invite Friends
+							Get 50 coins
 						</a>
-						<% } %>
+						<% } else { %>
 						<a style="width: 45%; font-size: 1em;" href="<%= ServletUtils.buildUrl(player, "/wk/spin.jsp"+(inviteSuccessful?"":((request.getQueryString() == null ? "" : ("?"+request.getQueryString())))), response) %>">
 							Continue
 						</a>
+						<% } %>
 					</div>
 				</div>
 			</div>
