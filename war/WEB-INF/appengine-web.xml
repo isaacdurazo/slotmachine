@@ -45,6 +45,7 @@
 	<property name="ad.swap.enabled" value="true"/>
 	<property name="ad.swap.frequency.hours" value="12"/>
 	<property name="wk.invite.interstitial.enabled" value="true"/>
+	<property name="wap.invite.interstitial.enabled" value="true"/>
 	
 	<!-- player levels -->
 	<property name="max.player.level" value="4"/>	

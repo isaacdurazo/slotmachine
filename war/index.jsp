@@ -22,20 +22,30 @@
 	
 	int key = 1;
 	
-	
-	if ("Invites Sent!".equals(request.getParameter("confirmmsg")) && "true".equals(request.getSession().getAttribute("invite"))) {
-		request.getSession().removeAttribute("invite");
-		player.incrementNumInvitesSent(1);
-		PlayerManager.getInstance().storePlayer(player);
-	}
-	
 	java.util.List<Achievement> earnedAchievements = null;
-	try {
-		earnedAchievements = AchievementService.getInstance().grantAchievements(player, 
-				AchievementService.Type.SESSION, AchievementService.Type.INVITE);	
-	} catch (Exception e) {
-		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
+	if ("Invites Sent!".equals(request.getParameter("confirmmsg"))) {
+		int invitesSent = 0;
+		String token = request.getParameter("token");
+		if ("true".equals(request.getSession().getAttribute("invite"))) {
+			request.getSession().removeAttribute("invite");
+			invitesSent = 1;		
+		} else if (token != null && token.equals(request.getSession().getAttribute("force-invite-token"))) {
+			request.getSession().removeAttribute("force-invite-token");
+			invitesSent = 1;
+			player.setCoins(player.getCoins()+20);
+		}
+		if (invitesSent > 0) {
+			player.incrementNumInvitesSent(invitesSent);
+			PlayerManager.getInstance().storePlayer(player);
+			try {
+				earnedAchievements = AchievementService.getInstance().grantAchievements(player, 
+						AchievementService.Type.SESSION, AchievementService.Type.INVITE);	
+			} catch (Exception e) {
+				Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"Error granting achievements for "+player,e);
+			}
+		}
 	}
+
 	//@TODO add logic for 1) process/log invite requests using if=<mocoid> as senderID and 2) new users redirect to help
 %>
  

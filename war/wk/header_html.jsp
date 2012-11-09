@@ -29,7 +29,7 @@
     							request.getSession().setAttribute("invite_token",inviteToken);
     						}
     						%>
-    						window.location = '<%= ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")),"/wk/index.jsp?action=inviteSent&token="+java.net.URLEncoder.encode(inviteToken,"UTF-8"),response)%>&count='+ids.length;
+    						window.location = '<%=ServletUtils.buildUrl(((com.solitude.slots.entities.Player)request.getAttribute("player")),"/wk/invite.jsp?action=inviteSent&token="+java.net.URLEncoder.encode(inviteToken,"UTF-8"),response)%>&count='+data.getData().length;
     					}
     				});
     			}, false);

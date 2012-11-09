@@ -3,6 +3,15 @@
 <%@ page import="com.solitude.slots.service.SlotMachineManager.InsufficientFundsException, java.util.Arrays" %>
 
 <%
+if (Boolean.getBoolean("wap.invite.interstitial.enabled") && request.getSession().getAttribute("seenInvite") == null && 
+		((player.getXp() > 100 && player.getNumSessions() % 5 == 0 && player.getCoins() < 1000) || player.hasAdminPriv()) ) {
+	request.getSession().setAttribute("seenInvite",true);
+	String inviteToken = java.util.UUID.randomUUID().toString();
+	request.getSession().setAttribute("force-invite-token",inviteToken);
+	String forceInviteUrl = "/force_invite.jsp?token="+java.net.URLEncoder.encode(inviteToken,"UTF-8")+(request.getQueryString() == null ? "" : ("&"+request.getQueryString()));
+	response.sendRedirect(ServletUtils.buildUrl(player, forceInviteUrl, response));
+	return;
+} 
 String action = request.getParameter("action");
 SpinResult spinResult = new SpinResult(-1,new int[]{-1,-1,-1});
 int symbol[];

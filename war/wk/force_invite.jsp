@@ -22,6 +22,7 @@ if ("inviteSent".equals(request.getParameter("action"))) {
 		inviteSuccessful = true;
 		message = "You have been awarded 50 coins!  Click continue to spin";
 		player.setCoins(player.getCoins()+50);
+		player.incrementNumInvitesSent(invitedCount);
 		PlayerManager.getInstance().storePlayer(player);
 	}
 }
