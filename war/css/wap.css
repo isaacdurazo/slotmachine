@@ -364,7 +364,7 @@ a.bet {
 
 /*-----------------------------*/
 
-/*  Level 5 - Jungle Treasure  */
+/*       Level 5 - Prayes      */
 
 /*-----------------------------*/
 
@@ -378,4 +378,23 @@ a.bet {
 
 .level-5 .spin-container {
     border: 2px solid #5d371f;
+}
+
+
+/*-----------------------------*/
+
+/*    Level 6 - Sexy Theme     */
+
+/*-----------------------------*/
+
+.wrapper.level-6 {
+	background: #C70304;
+}
+
+.level-6 .spin-container{
+	background: #980203;
+}
+
+.level-6 .spin-container {
+    border: 2px solid #C70304;
 }

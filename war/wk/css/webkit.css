@@ -657,6 +657,14 @@ a.location-container {
 	background: url(../images/icon-level4.png);
 }
 
+.location-container.level-5 .icon-location{
+	background: url(../images/icon-level5.png);
+}
+
+.location-container.level-6 .icon-location{
+	background: url(../images/icon-level6.png);
+}
+
 .location-container .icon-lock {
 	background: url(../images/icon-lock.png) no-repeat 14px 9px;
 	width: 29px;
@@ -680,6 +688,13 @@ a.location-container {
 	background-color: rgba(152, 176, 69, .9);
 }
 
+.location-container.level-5 .icon-lock {
+	background-color: rgba(109, 79, 47, .9);
+}
+
+.location-container.level-6 .icon-lock {
+	background-color: rgba(26, 192, 221, .9);
+}
 
 .location-container .location {
 	float: left;
@@ -707,6 +722,14 @@ a.location-container {
 
 .location-container.level-4 .location {
 	background: #98b045;
+}
+
+.location-container.level-5 .location {
+	background: #5d371f;
+}
+
+.location-container.level-6 .location {
+	background: #9e8659;
 }
 
 .location-container .location-name {
@@ -1169,10 +1192,9 @@ a.close {
 }
 
 
-
 /*-----------------------------*/
 
-/*  Level 5 - Jungle Treasure  */
+/*      Level 5 - Pirates      */
 
 /*-----------------------------*/
 
@@ -1194,4 +1216,28 @@ a.close {
 .level-5 .spin-results .location span{
 	background: #5D371F;
 }
+
+
+/*-------------------------*/
+
+/*  Level 6 - Sexy Theme  */
+
+/*-------------------------*/
+
+.wrapper.level-6 {
+	background: url(../images/level-6/level-6-bg.jpg);
+}
+
+.level-6 .header-logo, .level-6 .title, .level-6 .spin-container, .level-6 .spin-controls{
+	background: #C70304;
+}
+
+.level-6 .spin-results {
+	border-color: #C70304;
+}
+
+.level-6 .spin-results .location span{
+	background: #C70304;
+}
+
 
