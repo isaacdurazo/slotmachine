@@ -1269,17 +1269,16 @@ a.close {
 }
 
 .level-5 .header-logo, .level-5 .title, .level-5 .spin-container, .level-5 .spin-controls{
-	background: #805a00;
+	background: #5d371f;
 	-moz-box-shadow: inset 0px 0px 5px #000;
 	-webkit-box-shadow: inset 0px 0px 5px black;
 	box-shadow: inset 0px 0px 5px black;
 }
 
 .level-5 .spin-results {
-	border-color: #805a00;
+	border-color: #5d371f;
 }
 
 .level-5 .spin-results .location span{
-	background: #805a00;
+	background: #5D371F;
 }
-
