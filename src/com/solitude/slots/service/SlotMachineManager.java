@@ -99,7 +99,7 @@ public class SlotMachineManager {
 	 * @throws DataStoreException 
 	 */
 	public SpinResult spin(final Player player, boolean maxBet) throws InsufficientFundsException, DataStoreException, CacheStoreException {
-		int coins = maxBet ? (2+player.getPlayingLevel()) : 1;
+		int coins = maxBet ? (this.getMaxBet(player)) : 1;
 		if (player.getCoins() < coins) throw new InsufficientFundsException();
 		if (coins == Integer.getInteger("game.max.bet.coins", 3)) {
 			player.incrementMaxSpins();

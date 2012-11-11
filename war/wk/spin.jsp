@@ -25,6 +25,8 @@ switch (player.getPlayingLevel()) {
 	case 2: lemonText = "A whole bunch of needles for you :).<br/>";break;
 	case 3: lemonText = "Don't you wish you went fishing instead ? :)<br/>";break;
 	case 4: lemonText = "Playing in Wild Jungle is no monkey business :).<br/>";break;
+	case 5: lemonText = "Alrite matie - no coins so smoke a cigAARRRRRGGGGG :).<br/>";break;
+	case 6: lemonText = "3-on-1 banasplit is better than coins :).<br/>";break;
 	default: lemonText = "When life gives you lemons make lemonade :)<br/>";break;	
 }
 
@@ -37,7 +39,7 @@ int maxBet = SlotMachineManager.getInstance().getMaxBet(player);
 
 if ("true".equals(request.getParameter("reload")) && player.getGoldDebitted() == 0) {
 	if (Boolean.getBoolean("wk.invite.interstitial.enabled") && request.getSession().getAttribute("seenInvite") == null && 
-			( (player.getXp() > 100 && player.getNumSessions() % 5 == 0 && player.getCoins() < 1000) || player.hasAdminPriv()) ) {
+			( (player.getXp() > 100 && player.getNumSessions() % 5 == 0 && player.getCoins() < 000) || player.hasAdminPriv()) ) {
 		request.getSession().setAttribute("seenInvite",true);
 		String inviteToken = java.util.UUID.randomUUID().toString();
 		request.getSession().setAttribute("force-invite-token",inviteToken);

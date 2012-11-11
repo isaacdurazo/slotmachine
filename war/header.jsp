@@ -112,6 +112,7 @@ if (isWebkit) {
 	String device, sessionDevice = (String)request.getSession().getAttribute("device");
 	if ((device=request.getParameter("device")) == null && (device=sessionDevice) == null) {
 		// we don't know!  likely a session timeout so redirect to moco
+		Logger.getLogger(request.getRequestURI()).log(Level.WARNING,"WAP url missing device=wap redirect. params: "+request.getQueryString());
 		response.sendRedirect(GameUtils.getVisitorHome());
 		return;
 	} else {

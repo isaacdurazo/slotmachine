@@ -20,8 +20,8 @@ if (validationToken == null && player.hasAdminPriv()) {
 		<div class="wrapper">
 			<div class="dialog-container" style="padding: 25px 10px 5px;">
 				
-				<h2>Earn <span class="goldtext">20 coins</span> NOW by inviting friends to SlotMania!</h2>
-				<p>You only get this offer ONCE and you must invite friends now to get your 20 coins.</p>
+				<h2>SlotMania offer: Get <span class="goldtext">20 coins</span> NOW!</h2>
+				<p>You must invite 5 or more friends *now* to get your 20 coins.</p>
 				
 				<div class="menu">
 					<div class="button-row">
@@ -35,9 +35,9 @@ if (validationToken == null && player.hasAdminPriv()) {
 
 						1. <a accessKey="1" style="width: 45%; font-size: 1em;" href="<%= OpenSocialService.getInstance().getInviteRedirectUrl("confirmmsg=Invites%20Sent!",
 								"Play SlotMania and win Moco Gold",
-								"Join me playing the new slot machine game on MocoSpace. I gave you 20 FREE coins to get started. Spin to win prices including Moco Gold!", null,
-								"if="+player.getMocoId()+"&token="+java.net.URLEncoder.encode(validationToken,"UTF-8"), null) %>" id="invite">
-							Get 50 coins
+								"I gave you 20 FREE coins to get started. Claim then NOW and join me to win prices including Moco Gold!", null,
+								java.net.URLEncoder.encode("if="+player.getMocoId()+"&token="+java.net.URLEncoder.encode(validationToken,"UTF-8"),"UTF-8"), null) %>" id="invite">
+							Get coins
 						</a><br/>
 						2. <a accessKey="2" style="width: 45%; font-size: 1em;" href="<%= ServletUtils.buildUrl(player, "/spin.jsp"+(request.getQueryString() == null ? "" : ("?"+request.getQueryString())), response) %>">
 							Continue

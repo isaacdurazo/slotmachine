@@ -53,6 +53,17 @@ if (action != null) {
 	}
 }
 int key = 1;
+				
+String lemonText="";
+switch (player.getPlayingLevel()) {
+	case 2: lemonText = "A whole bunch of needles for you :).<br/>";break;
+	case 3: lemonText = "Don't you wish you went fishing instead ? :)<br/>";break;
+	case 4: lemonText = "Playing in Wild Jungle is no monkey business :).<br/>";break;
+	case 5: lemonText = "Alrite matie - no coins so smoke a cigAARRRRRGGGGG :).<br/>";break;
+	case 6: lemonText = "3-on-1 banasplit is better than coins :).<br/>";break;
+	default: lemonText = "When life gives you lemons make lemonade :)<br/>";break;	
+}
+
 
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -116,7 +127,7 @@ int key = 1;
 				<%		} else if (spinResult.getCoins()==0) {
 				String s = "Spin again!";	
 				if (Arrays.equals(spinResult.getSymbols(), new int[]{6,6,6})) {
-					s="When you get all lemons make lemonade :). Check the <a href=\"help.jsp\">payout table</a> for winnings!";
+					s=lemonText+" Check the <a href=\"help.jsp\">payout table</a> for winnings!";
 				}
 				%>
 					<div class="lostspin">
