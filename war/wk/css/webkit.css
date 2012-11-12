@@ -689,11 +689,11 @@ a.location-container {
 }
 
 .location-container.level-5 .icon-lock {
-	background-color: rgba(109, 79, 47, .9);
+	background-color: rgba(0, 0, 0, .9);
 }
 
 .location-container.level-6 .icon-lock {
-	background-color: rgba(26, 192, 221, .9);
+	background-color: rgba(158, 134, 89, .9);
 }
 
 .location-container .location {
@@ -725,7 +725,7 @@ a.location-container {
 }
 
 .location-container.level-5 .location {
-	background: #5d371f;
+	background: #000;
 }
 
 .location-container.level-6 .location {
