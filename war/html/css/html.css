@@ -734,6 +734,10 @@ a.location-container {
 	background: url(../images/icon-level6.png);
 }
 
+.location-container.level-7 .icon-location{
+	background: url(../images/icon-level7.png);
+}
+
 .location-container .icon-lock {
 	background: url(../images/icon-lock.png) no-repeat 14px 4px;
 	width: 62px;
@@ -763,6 +767,10 @@ a.location-container {
 
 .location-container.level-6 .icon-lock {
 	background-color: rgba(158, 134, 89, .9);
+}
+
+.location-container.level-7 .icon-lock {
+	background-color: rgba(109, 79, 47, .9);
 }
 
 .location-container .location {
@@ -806,6 +814,10 @@ a.location-container {
 	font-size: 16px;
 	font-weight: 600;
 	display: inline-block;
+}
+
+.location-container.level-7 .location {
+	background: #6d4f2f;
 }
 
 .location-container .icon-star-small{
@@ -1328,3 +1340,30 @@ a.close {
 .level-6 .spin-results .location span{
 	background: #C70304;
 }
+
+
+/*--------------------------*/
+
+/*  Level 7 - Thanksgiving  */
+
+/*--------------------------*/
+
+.wrapper.level-7 {
+	background: url(../images/level-7/level-7-bg.jpg);
+}
+
+.level-7 .header-logo, .level-7 .title, .level-7 .spin-container, .level-7 .spin-controls{
+	background: #5d371f;
+	-moz-box-shadow: inset 0px 0px 5px #000;
+	-webkit-box-shadow: inset 0px 0px 5px black;
+	box-shadow: inset 0px 0px 5px black;
+}
+
+.level-7 .spin-results {
+	border-color: #5d371f;
+}
+
+.level-7 .spin-results .location span{
+	background: #5D371F;
+}
+
