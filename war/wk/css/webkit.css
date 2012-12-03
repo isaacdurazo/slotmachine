@@ -646,7 +646,7 @@ a.location-container {
 }
 
 .location-container.level-2 .icon-location{
-	background: url(../images/icon-level2.png);
+	background: url(../images/icon-level7.png);
 }
 
 .location-container.level-3 .icon-location{
@@ -681,7 +681,7 @@ a.location-container {
 }
 
 .location-container.level-2 .icon-lock {
-	background-color: rgba(109, 79, 47, .9);
+	background-color: rgba(92, 194, 81, .9);
 }
 
 .location-container.level-3 .icon-lock {
@@ -721,7 +721,7 @@ a.location-container {
 }
 
 .location-container.level-2 .location {
-	background: #6d4f2f;
+	background: #5cc251;
 }
 
 .location-container.level-3 .location {
@@ -1136,6 +1136,7 @@ a.close {
 
 /*----------------------*/
 
+/*
 .wrapper.level-2 {
 	background: url(../images/level-2/level-2-bg.jpg);
 }
@@ -1153,6 +1154,27 @@ a.close {
 
 .level-2 .spin-results .location span{
 	background: #5D371F;
+}
+
+*/
+
+.wrapper.level-2 {
+	background: url(../images/level-2/level-7-bg.jpg);
+}
+
+.level-2 .header-logo, .level-2 .title, .level-2 .spin-container, .level-2 .spin-controls{
+	background: #b90e15;
+	-moz-box-shadow: inset 0px 0px 5px #000;
+	-webkit-box-shadow: inset 0px 0px 5px black;
+	box-shadow: inset 0px 0px 5px black;
+}
+
+.level-2 .spin-results {
+	border-color: #b90e15;
+}
+
+.level-2 .spin-results .location span{
+	background: #b90e15;
 }
 
 /*-------------------------*/

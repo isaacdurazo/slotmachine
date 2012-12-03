@@ -313,6 +313,7 @@ a.bet {
 
 /*----------------------*/
 
+/*
 .wrapper.level-2 {
 	background: #b08453;
 }
@@ -323,6 +324,19 @@ a.bet {
 
 .level-2 .spin-container {
     border: 2px solid #b08453;
+}
+*/
+
+.wrapper.level-2 {
+	background: #5cc251;
+}
+
+.level-2 .spin-container{
+	background: #5cc251;
+}
+
+.level-2 .spin-container {
+    border: 2px solid #5cc251;
 }
 
 /*-------------------------*/
