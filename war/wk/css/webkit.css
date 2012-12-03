@@ -701,7 +701,7 @@ a.location-container {
 }
 
 .location-container.level-7 .icon-lock {
-	background-color: rgba(109, 79, 47, .9);
+	background-color: rgba(92, 194, 81, .9);
 }
 
 .location-container .location {
@@ -741,7 +741,7 @@ a.location-container {
 }
 
 .location-container.level-7 .location {
-	background: #6d4f2f;
+	background: #5cc251;
 }
 
 .location-container .location-name {
@@ -1264,16 +1264,16 @@ a.close {
 }
 
 .level-7 .header-logo, .level-7 .title, .level-7 .spin-container, .level-7 .spin-controls{
-	background: #5d371f;
+	background: #b90e15;
 	-moz-box-shadow: inset 0px 0px 5px #000;
 	-webkit-box-shadow: inset 0px 0px 5px black;
 	box-shadow: inset 0px 0px 5px black;
 }
 
 .level-7 .spin-results {
-	border-color: #5d371f;
+	border-color: #b90e15;
 }
 
 .level-7 .spin-results .location span{
-	background: #5D371F;
+	background: #b90e15;
 }
