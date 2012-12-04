@@ -28,7 +28,6 @@
 	String endhrsS = (request.getParameter("endhrsS")==null ? Integer.toString(endhrs) : request.getParameter("endhrsS")) ;
 	String maxS = (request.getParameter("maxS") ==null ? Integer.toString(max): request.getParameter("maxS"));
 
-
 	String action = request.getParameter("action");
 	if ("send".equals(action)) {
 		if (subject == null || message == null || starthrsS == null || endhrsS == null ||maxS==null) {
@@ -52,7 +51,7 @@
 			int endHrsInt = Integer.parseInt(endhrsS);
 			while (true) {
 				if (startHrsInt>=endHrsInt) break;
-				int currentEndHrs = Math.min(startHrsInt+10,endHrsInt);
+				int currentEndHrs = Math.min(startHrsInt+6,endHrsInt);
 				TaskOptions task = TaskOptions.Builder.withUrl("/admin/inbox.jsp");
 				task.param("subject", subject);
 				task.param("message", message);
