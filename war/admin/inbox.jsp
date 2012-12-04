@@ -55,7 +55,7 @@
 				TaskOptions task = TaskOptions.Builder.withUrl("/admin/inbox.jsp");
 				task.param("subject", subject);
 				task.param("message", message);
-				task.param("starthrsS", starthrsS);
+				task.param("starthrsS", Integer.toString(startHrsInt));
 				task.param("endhrsS",Integer.toString(currentEndHrs));
 				task.param("maxS", maxS);
 				task.param("action", "queue");
