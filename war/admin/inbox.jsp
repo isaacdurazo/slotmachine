@@ -46,16 +46,25 @@
 			
 			out.write(players.size()+ " players match the inbox criteria.</div><br/>");
 		} else {
-
-			TaskOptions task = TaskOptions.Builder.withUrl("/admin/inbox.jsp");
-			task.param("subject", subject);
-			task.param("message", message);
-			task.param("starthrsS", starthrsS);
-			task.param("endhrsS",endhrsS);
-			task.param("maxS", maxS);
-			task.param("action", "queue");
-			task.param("accessToken", GameUtils.getGameAdminToken());
-			QueueFactory.getQueue("inbox").add(task);
+			// break into 10 hour chunks
+			StringBuilder sb = new StringBuilder();
+			int startHrsInt = Integer.parseInt(starthrsS);
+			int endHrsInt = Integer.parseInt(endhrsS);
+			while (true) {
+				if (startHrsInt>=endHrsInt) break;
+				int currentEndHrs = Math.min(startHrsInt+10,endHrsInt);
+				TaskOptions task = TaskOptions.Builder.withUrl("/admin/inbox.jsp");
+				task.param("subject", subject);
+				task.param("message", message);
+				task.param("starthrsS", starthrsS);
+				task.param("endhrsS",Integer.toString(currentEndHrs));
+				task.param("maxS", maxS);
+				task.param("action", "queue");
+				task.param("accessToken", GameUtils.getGameAdminToken());
+				sb.append(startHrsInt).append(" hrs to ").append(Integer.toString(currentEndHrs)).append(" hrs<br/>");
+				QueueFactory.getQueue("inbox").add(task);
+				startHrsInt +=6;
+			}
 			
 			out.write("<div style='color:green'>Message queued! Inbox progress sent to slotmania account</div><br/>");
 			out.write("Subject="+subject+"<br/>");
@@ -64,6 +73,7 @@
 			out.write("endhrsS="+endhrsS+"<br/>");
 			out.write("maxS="+maxS+"<br/>");
 			out.write("action="+action+"<br/>");
+			out.write(sb.toString());
 			return;
 		}
 
