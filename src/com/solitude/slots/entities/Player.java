@@ -243,6 +243,12 @@ public class Player extends AbstractGAEPersistent {
 	public int getMocoGoldPrize() {
 		int p = (int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+this.getPlayingLevel()))*
 						GameUtils.getGlobalProps().getMocoGoldPrize());
+		System.out.println(System.currentTimeMillis()+","+new GregorianCalendar(2012,Calendar.DECEMBER,24).getTimeInMillis());
+		if (Boolean.getBoolean("xmas.promotion.enabled") && this.consecutiveDays > 1 && 
+				System.currentTimeMillis() < new GregorianCalendar(2012,Calendar.DECEMBER,24).getTimeInMillis()) {
+			// xmas multiplier!
+			p *= Math.max(.25*this.consecutiveDays,Integer.getInteger("xmas.promotion.max.multiplier",5));
+		}
 		return (p);
 	}
 	

@@ -46,6 +46,8 @@
 	<property name="ad.swap.frequency.hours" value="2"/>
 	<property name="wk.invite.interstitial.enabled" value="true"/>
 	<property name="wap.invite.interstitial.enabled" value="true"/>
+	<property name="xmas.promotion.enabled" value="true"/>
+	<property name="xmas.promotion.max.multiplier" value="5"/>
 	
 	<!-- player levels -->
 	<property name="max.player.level" value="6"/>	
