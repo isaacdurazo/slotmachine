@@ -50,19 +50,19 @@
 			int startHrsInt = Integer.parseInt(starthrsS);
 			int endHrsInt = Integer.parseInt(endhrsS);
 			while (true) {
-				if (startHrsInt>=endHrsInt) break;
-				int currentEndHrs = Math.min(startHrsInt+6,endHrsInt);
+				if (endHrsInt>=startHrsInt) break;
+				int currentStartHrsInt = Math.min(startHrsInt,endHrsInt+6);
 				TaskOptions task = TaskOptions.Builder.withUrl("/admin/inbox.jsp");
 				task.param("subject", subject);
 				task.param("message", message);
-				task.param("starthrsS", Integer.toString(startHrsInt));
-				task.param("endhrsS",Integer.toString(currentEndHrs));
+				task.param("starthrsS", Integer.toString(currentStartHrsInt));
+				task.param("endhrsS",Integer.toString(endHrsInt));
 				task.param("maxS", maxS);
 				task.param("action", "queue");
 				task.param("accessToken", GameUtils.getGameAdminToken());
-				sb.append(startHrsInt).append(" hrs to ").append(Integer.toString(currentEndHrs)).append(" hrs<br/>");
+				sb.append(endHrsInt).append(" hrs to ").append(Integer.toString(currentStartHrsInt)).append(" hrs<br/>");
 				QueueFactory.getQueue("inbox").add(task);
-				startHrsInt +=6;
+				endHrsInt +=6;
 			}
 			
 			out.write("<div style='color:green'>Message queued! Inbox progress sent to slotmania account</div><br/>");

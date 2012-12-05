@@ -10,20 +10,19 @@ int startHrsInt = 20;
 int endHrsInt = 48;
 StringBuilder sb = new StringBuilder();
 while (true) {
-	if (startHrsInt>=endHrsInt) break;
-	int currentEndHrs = Math.min(startHrsInt+6,endHrsInt);
+	if (endHrsInt>=startHrsInt) break;
+	int currentStartHrsInt = Math.min(startHrsInt,endHrsInt+6);
 	TaskOptions task = TaskOptions.Builder.withUrl("/admin/inbox.jsp");
 	task.param("subject", "Play now to increase your Moco Gold Jackpot");
 	task.param("message", "Remember to play Slotmania EVERY day to increase your progressive Jackpot. You your personal Gold Jackpot increase by 500 Gold every consecutive day you play!  Hurry up and Play Now to win the Jackpot before somebody else wins!");
-	task.param("starthrsS", Integer.toString(startHrsInt));
-	task.param("endhrsS",Integer.toString(currentEndHrs));
+	task.param("starthrsS", Integer.toString(currentStartHrsInt));
+	task.param("endhrsS",Integer.toString(endHrsInt));
 	task.param("maxS", "10000");
 	task.param("action", "queue");
 	task.param("accessToken", GameUtils.getGameAdminToken());
+	sb.append(endHrsInt).append(" hrs to ").append(Integer.toString(currentStartHrsInt)).append(" hrs<br/>");
 	QueueFactory.getQueue("inbox").add(task);
-	Logger.getLogger(request.getRequestURI()).log(Level.INFO,"sending xmas promotion for hours "+startHrsInt+" to "+currentEndHrs);
-	sb.append(startHrsInt).append(" hrs to ").append(Integer.toString(currentEndHrs)).append(" hrs<br/>");
-	startHrsInt +=6;
+	endHrsInt +=6;
 }
 OpenSocialService.getInstance().sendNotification(Integer.parseInt(GameUtils.getGameAdminMocoId()), "Xmas message sent", sb.toString());
 %>
