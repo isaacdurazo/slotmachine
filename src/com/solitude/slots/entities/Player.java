@@ -239,7 +239,10 @@ public class Player extends AbstractGAEPersistent {
 		return swapAd;
 	}
 	
-	/** Get the players personalized MocoGold prize depending on max level,etc */
+	/** Get the players personalized MocoGold prize depending on max level,etc 
+	 * 
+	 * @return Prize in Gold
+	 * */
 	public int getMocoGoldPrize() {
 		int p = (int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+this.getPlayingLevel()))*
 						GameUtils.getGlobalProps().getMocoGoldPrize());
@@ -247,7 +250,10 @@ public class Player extends AbstractGAEPersistent {
 		if (Boolean.getBoolean("xmas.promotion.enabled") && this.consecutiveDays > 1 && 
 				System.currentTimeMillis() < new GregorianCalendar(2012,Calendar.DECEMBER,24).getTimeInMillis()) {
 			// xmas multiplier!
-			p *= Math.max(.25*this.consecutiveDays,Integer.getInteger("xmas.promotion.max.multiplier",5));
+			Calendar cal = Calendar.getInstance();
+			int consecDaysInDec = Math.min(this.consecutiveDays, cal.get(Calendar.DAY_OF_MONTH)); 
+			p *= (1+ Math.min(0.25*consecDaysInDec,Integer.getInteger("xmas.promotion.max.multiplier",5)));
+
 		}
 		return (p);
 	}
