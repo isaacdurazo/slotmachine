@@ -21,7 +21,7 @@
 				    				<div><%= System.getProperty("level.name."+i) %></div>
 				    				<small>
 				    					<% if (locked) { %><%= Integer.getInteger("level.xp.min."+i)%> XP required
-										<% } else { %><%= (int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+i))*GameUtils.getGlobalProps().getMocoGoldPrize())%> Gold Jackpot<% } %>				    				
+										<% } else { %><%= player.getMocoGoldPrize(i) %> Gold Jackpot<% } %>				    				
 				    				</small>
 				    			</td>
 				    			<td class="button-go"><a href="<%= ServletUtils.buildUrl(player, "/spin.jsp?playingLevel="+i, response) %>">Go</a></td>
