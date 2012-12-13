@@ -13,8 +13,9 @@ while (true) {
 	if (endHrsInt>=startHrsInt) break;
 	int currentStartHrsInt = Math.min(startHrsInt,endHrsInt+6);
 	TaskOptions task = TaskOptions.Builder.withUrl("/admin/inbox.jsp");
-	task.param("subject", "Play now to increase your Moco Gold Jackpot");
-	task.param("message", "Remember to play Slotmania EVERY day to increase your progressive Jackpot. You your personal Gold Jackpot increase by 500 Gold every consecutive day you play!  Hurry up and Play Now to win the Jackpot before somebody else wins!");
+	task.param("subject", "Win more Moco Gold");
+//	task.param("message", "Remember to play Slotmania EVERY day to increase your progressive Jackpot. You your personal Gold Jackpot increase by 500 Gold every consecutive day you play!  Hurry up and Play Now to win the Jackpot before somebody else wins!");
+	task.param("message", "Play before midnight ET to increase your Moco Gold Jackpot. Play EVERY day to win increase your Jackpot to $150 in MocoGold!  Hurry up and Play Now to win the Jackpot before somebody else wins!");
 	task.param("starthrsS", Integer.toString(currentStartHrsInt));
 	task.param("endhrsS",Integer.toString(endHrsInt));
 	task.param("maxS", "10000");
