@@ -22,7 +22,7 @@
     					subject:"Play SlotMania and win Moco Gold",
     					message:"Join me playing the new slot machine game on MocoSpace. I gave you 20 FREE coins to get started. Spin to win prices including Moco Gold!",
     					url_link:"if=<%= request.getSession().getAttribute("playerId") %>",
-    					onSuccess: function(ids) {
+    					onSuccess: function(data) {
     						<% String inviteToken = (String)request.getAttribute("invite_token");
     						if (inviteToken == null) {
     							inviteToken = java.util.UUID.randomUUID().toString();

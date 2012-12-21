@@ -27,7 +27,7 @@
 								<span class="location-buy">Buy</span>
 								<div class="location-xp">
 									<% if (locked) { %><%= Integer.getInteger("level.xp.min."+i)%> XP required
-									<% } else { %><%= (int)(Double.parseDouble(System.getProperty("level.jackpot.multiplier."+i))*GameUtils.getGlobalProps().getMocoGoldPrize())%> Gold Jackpot<% } %>
+									<% } else { %><%= player.getMocoGoldPrize(i) %> Gold Jackpot<% } %>
 								</div>
 							</div>
 							
