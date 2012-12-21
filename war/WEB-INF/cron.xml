@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
   <cron>
-    <url>/cron/xmas_promotion.jsp</url>
-    <description>Xmas promotion</description>
-    <schedule>every day 20:00</schedule>
+    <url>/cron/lbupdate.jsp</url>
+    <description>Update leaderboard entries</description>
+    <schedule>every 4 hours</schedule>
+  </cron>
+  <cron>
+    <url>/cron/weeklywinners.jsp</url>
+    <description>Mail out a list of weekly winners</description>
+    <schedule>every sunday 23:00</schedule>
     <timezone>America/New_York</timezone>
   </cron>
 </cronentries>
